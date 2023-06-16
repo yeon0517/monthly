@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{ 
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+body{
+  font-family: 'SUIT-Regular';
+} 
+li{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+
+.header-menu{
+  background-color: #1e4a53;
+}
+
+.header-container{
+  width: 80%;
+  height: 100%;
+  margin: 0px auto;
+}
+
+.header-wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.nav-right{
+  justify-content: flex-end;
+}
+.header-nav-item {
+  margin: 10px;
+  font-size: 15px;
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 5px;
+  text-decoration: none;
+  word-break: keep-all;
+}
+.header-nav-item>a{
+  color: white;
+
+}
+
+.header-nav-item:hover{
+  background-color: #dce8ee;
+  cursor: pointer;
+}
+.header-nav-item>a:hover{
+  color: #1e4a53;
+}
+.header-nav-item>.header-active{
+ color: #fbabe4;
+}

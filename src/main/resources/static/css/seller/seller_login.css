@@ -1,0 +1,140 @@
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+*{
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+body{
+  font-family:  'SUIT-Regular';
+  font-size: 14px;
+}
+button{
+  font-family: 'SUIT-Regular';
+  cursor: pointer;
+}
+li{
+  list-style: none;
+}
+div{
+  box-sizing: border-box;
+}
+a{
+  text-decoration: none;
+  cursor: pointer;
+}
+a:visited{
+  text-decoration: none;
+  color: black;
+}
+
+
+.login-wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* 로고 */
+.login-header{
+  text-align: center;
+  padding: 100px 0 30px;
+
+}
+.login-header a>img{
+width: 200px;
+}
+
+/* 로그인 */
+.login-container{
+  margin: 0 auto;
+}
+/* 판매자/관리자 선택탭 */
+.login-container-top{
+  border: 1px solid #dce8ee;
+  border-bottom: white;
+}
+.login-tab{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.login-tab>li{
+  width: 50%;
+  text-align: center;
+  background-color: #8eb4cb;
+  cursor: pointer;
+}
+
+.login-tab>li>span{
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  line-height: 50px;
+  color: white;
+  transition: all .3s ease-in-out;
+}
+
+.login-tab>.selected{
+  background-color: white;
+}
+.login-tab>.selected>span{
+  font-weight: 700;
+  color: #1e4a53;
+}
+/* 아이디 비밀번호입력 */
+.login-contents{
+  margin-top: 20px;
+}
+.login-input-wrap{
+  margin-top: 20px;
+}
+input{
+  width: 400px;
+  border: 1px solid #dce8ee;
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 3px;
+  padding-left: 10px;
+  caret-color: #8eb4cb;
+}
+input:focus{
+  outline: none;
+  background-color: #dce8ee;
+}
+/* 로그인버튼 */
+.login-btn{
+  width: 100%;
+  height: 50px;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #1e4a53;
+  color: white;
+  border-radius: 3px;
+  margin-top: 10px;
+  transition: all .3s ease-in-out;
+}
+.login-btn:hover{
+  background-color: #8eb4cb;
+}
+/* 판매자신청, 아이디비밀번호찾기 */
+.login-bottom{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 유효성검사 & 정규표현식*/
+.input-check{
+  margin-top: 5px;
+  font-size: 12px;
+  color: #c88e8e;
+}
+.none{
+  display: none;
+}

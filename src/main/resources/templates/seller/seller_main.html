@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메인 | 주문관리</title>
+  <link rel="stylesheet" th:href="@{/css/seller/seller_main.css}">
+  <link rel="stylesheet" th:href="@{/css/admin/admin_header.css}">
+</head>
+<body>
+<header class="header" th:replace="fragment/seller_header :: admin_header"></header>
+  <!-- 판매자 메인 주문관리 목록 검색창 -->
+  <section class="main-section main-section1">
+    <div class="main-container main-container1">
+      <!-- 판매자 브랜드이름띄우기 -->
+      <h2><span class="brand-name">미하이삭스</span> 주문검색</h2>
+      <!-- 검색 조건 form태그 -->
+      <form action="">
+      <table class="main-section1-table">
+        <tr>
+          <th class="main-section1-th period">기간</th>
+          <td class="period-input">
+            <label><input type="radio" name="period" value="today" checked><span>오늘</span></label>
+            <label><input type="radio" name="period" value="yesterday"><span>어제</span></label>
+            <label><input type="radio" name="period" value="1month"><span>1개월</span></label>
+            <label><input type="radio" name="period" value="3month"><span>3개월</span></label>
+            <label><input type="radio" name="period" value="all"><span>전체</span></label>
+          </td>
+        </tr>
+        <tr>
+          <th class="main-section1-th search">검색</th>
+          <td>
+            <select name="search-select" id="" class="search-dropdown">
+              <option value="parcel-number">주문번호</option>
+              <option value="user-name">회원이름</option>
+              <option value="product-name">상품명</option>
+            </select>
+            <input type="text" placeholder="입력" class="search-input">
+          </td>
+        </tr>
+      </table>
+      <!-- 검색버튼 누르면 주문관리리스트테이블 비동기로 띄움 -->
+      <div class="btn-box"><button type="submit" class="search-btn">검색</button></div>
+    </form>
+    </div>
+  </section>
+  <!-- 판매자 주문관리 리스트테이블 -->
+  <section class="main-section main-section2">
+    <div class="main-container main-container2">
+      <!-- 검색 기간 조건에 따라 오늘/어제/1개월/3개월/전체로 span안에 텍스트변경 -->
+      <h2><span class="selected-period">오늘</span> 주문관리</h2>
+      <!-- 검색 결과가 없는 경우 table 태그에 none class를 주고 empty div를 보여준다 -->
+      <div class="empty none">
+        <p>주문이 없습니다.</p>
+      </div>
+      <table class="">
+        <thead class="order-list-head">
+          <tr>
+            <th>주문번호</th>
+            <th>날짜</th>
+            <th>처리상태</th>
+            <th>상품명</th>
+            <th>결제가격</th>
+            <th>결제상태</th>
+            <th>회원이름</th>
+            <th>전화번호</th>
+            <th>배송지주소</th>
+            <th>택배사</th>
+            <th>운송장번호</th>
+            <th>저장</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 주문관리 리스트 띄움 tr부분이 추가됨-->
+          <tr>
+            <!-- 주문처리, 택배사, 운송장번호선택 -->
+            <form action="#">
+              <input type="hidden" value="?">
+            <td>1</td>
+            <td>2023-06-08</td>
+            <td>
+              <select name="parcel-status" id="">
+                <option value="parcel-ready">배송준비</option>
+                <option value="parcel-ing">배송중</option>
+                <option value="parcel-done">배송완료</option>
+              </select>
+            </td>
+            <td>남성양말세트 스탠다드</td>
+            <td>16900</td>
+            <td>결제완료</td>
+            <td>홍길동</td>
+            <td>010-1234-1234</td>
+            <td>경기도 포천시 삼육사로 2135-13 대진아트빌 다동 402호</td>
+            <td>
+                <select name="" id="">
+                  <option value="">우체국</option>
+                  <option value="">CJ</option>
+                  <option value="">한진택배</option>
+                </select>
+              </td>
+              <td><input type="text" placeholder="운송장" class="search-input"></td>
+              <td><button type="submit" class="save-btn">save</button></td>
+            </form>
+            <!-- 저장버튼 누르면 비동기로 저장 -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/admin/admin_header.js}"></script>
+<script>
+  let $head = $('#seller-main');
+  $(".header-nav-item>a").removeClass("header-active");
+  $head.addClass("header-active");
+</script>
+</body>
+</html>

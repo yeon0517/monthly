@@ -1,0 +1,160 @@
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+*{
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+body{
+  font-family:  'SUIT-Regular';
+}
+li{
+  list-style: none;
+}
+button{
+  font-family:  'SUIT-Regular';
+  background-color: white;
+  cursor: pointer;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td{
+  border:1px solid #8eb4c8;
+  padding: 10px;
+  font-weight: 300;
+  font-size: 14px;
+  word-break: keep-all;
+}
+.to-modify {
+  text-decoration: none;
+  cursor: pointer;
+  color:white;
+  background-color: #8eb4c8;
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+a:visited {
+  color:white;
+}
+
+select{
+  outline: none;
+  font-family:  'SUIT-Regular';
+  cursor: pointer;
+}
+.product-list-wrap{
+  width: 80%;
+  margin: 0 auto;
+}
+.product-list-section{
+  margin-top: 30px;
+}
+/* 상단제목부분 */
+.product-list-section h2{
+  font-size: 23px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.brand-name{
+  font-size: 25px;
+  color: #8eb4c8;
+  font-weight: 900;
+  margin-right: 5px;
+}
+/* 상품검색section */
+.search{
+  width: 50px;
+  background-color: #8eb4c8;
+  color: white;
+}
+.search-dropdown{
+  margin-left: 7px;
+  margin-right: 10px;
+  width: 100px;
+  height: 20px;
+}
+.search-input{
+  width: 200px;
+  box-sizing: border-box;
+  border: 1px solid #8eb4c8;
+  align-items: center;
+  height: 20px;
+  padding-left: 5px;
+}
+.search-input:focus{
+  outline: none;
+  background-color: #dce8ee;
+}
+/* 판매상태 */
+.product-status-p{
+  margin-left: 30px;
+  color: #8eb4c8;
+}
+.status-input>label{
+  margin: 0 10px;
+  vertical-align: middle;
+  line-height: 18px;
+}
+.status-input input{
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.status-input span{
+  vertical-align: middle;
+}
+
+
+/* 검색버튼 */
+.btn-box{
+  margin: 10px auto 0;
+  width: 100px;
+  align-items: center;
+}
+.search-btn{
+  width: 100%;
+  height: 30px;
+  background-color: #1e4a53;
+  border-radius: 3px;
+  color: white;
+  transition: all .3s ease-in-out;
+}
+.search-btn:hover{
+  background-color: #8eb4cb;
+}
+
+/* 주문관리 리스트테이블 */
+.product-list-container tr{
+  text-align: center;
+}
+.product-list-head>tr>th{
+  background-color: #dce8ee;
+}
+
+.save-btn{
+  background-color: #8eb4c8;
+  color:white;
+  padding: 3px 5px;
+  border-radius: 2px;
+  transition: all .3s ease-in-out;
+}
+.save-btn:hover{
+  background-color: #1e4a53;
+}
+/* 검색 결과 없을 때 */
+.empty{
+  box-sizing: border-box;
+  border: 1px solid #8eb4c8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+.none{
+  display: none;
+}

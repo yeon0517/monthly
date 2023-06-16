@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품등록</title>
+  <link rel="stylesheet" th:href="@{/css/seller/seller_product_register.css}">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/admin/admin_header.css}">
+</head>
+<body>
+<header class="header" th:replace="fragment/seller_header :: admin_header"></header>
+  <div class="register-wrap">
+    <section class="register-section register-title">
+      <!-- 판매자 브랜드 이름 띄우기 -->
+      <h2><span class="brand-name">미하이삭스</span> 구독서비스 상품등록</h2>
+    </section>
+    <!-- 상품 내용 등록 구역 -->
+    <section class="register-section">
+      <form action="">
+        <table class="register-table">
+          <colgroup>
+            <col style="width: 180px" />
+            <col style="width: auto" />
+          </colgroup>
+          <tr>
+            <th scope="row">상품명</th>
+            <td>
+              <input type="text" class="text-input">
+              <span class="inner-info">구독서비스 상품명을 입력하세요</span>
+            </td>
+          </tr>
+          <tr>
+            <th >가격</th>
+            <td>
+              <input type="text" class="text-input">
+              <span class="inner-info">구독상품의 한 달 가격을 설정해주세요 ex. 16900</span>
+            </td>
+          </tr>
+          <tr>
+            <th>옵션</th>
+            <td>
+              <input type="text" class="text-input">
+              <span class="inner-info">구독 상품의 구성을 알려주세요 ex.중목 3켤레 / 비누+샤워망 세트</span>
+            </td>
+          </tr>
+          <tr>
+            <th>재고</th>
+            <td><input type="text" class="text-input"></td>
+          </tr>
+          <tr>
+            <th>대표이미지</th>
+            <td class="product-image-td">
+              <p>권장 이미지 사이즈는 가로500px 세로 500px 입니다.</p>
+              <input type="file"  id="post-image-rp" name="productFile" accept="image/*">
+              <div class="product-image">
+                <img src="" alt="">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>상세이미지</th>
+            <td class="product-image-td">
+              <p>권장 이미지 사이즈는 가로500px 세로 500px 입니다.</p>
+              <p>최대 4장까지 등록 가능합니다.</p>
+              <input type="file" id="post-image" name="productFiles" accept="image/*" multiple />
+              <div class="product-detail-image">
+                <ul class="product-detail-image-ul">
+                  <li class="img-list"></li>
+                  <li class="img-list"></li>
+                  <li class="img-list"></li>
+                  <li class="img-list"></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>상품 설명</th>
+            <td><div id="summernote"><p></p></div></td>
+          </tr>
+        </table>
+        <div class="btn-box">
+          <!-- 취소 시 원래 있던 데이터로 초기화 -->
+          <!-- 저장 시 비동기로 저장? -->
+          <button class="cancel-btn" type="button">취소</button>
+          <button class="preview-btn" type="button">미리보기</button>
+          <button class="save-btn" type="submit">저장</button>
+        </div>
+      </form>
+    </section>
+  </div>
+  <!-- 상품상세 페이지 미리보기 화면 모달 -->
+  <div class="preview-modal">
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+  <script th:src="@{/js/seller/seller_product_modify.js}"></script>
+  <script th:src="@{/js/admin/admin_header.js}"></script>
+  <script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+    //헤더에 active 색추가
+    let $head = $('#seller-regist');
+    $(".header-nav-item>a").removeClass("header-active");
+    $head.addClass("header-active");
+  </script>
+</body>
+</html>
