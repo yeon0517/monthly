@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.example.monthly.dto.AdminDto" alias="adminDto"/>
+        <typeAlias type="com.example.monthly.dto.BrandDto" alias="brandDto"/>
+        <typeAlias type="com.example.monthly.dto.BrandFileDto" alias="brandFileDto"/>
+        <typeAlias type="com.example.monthly.dto.CardDto" alias="cardDto"/>
+        <typeAlias type="com.example.monthly.dto.DeliveryDto" alias="deliveryDto"/>
+        <typeAlias type="com.example.monthly.dto.ExSubsDto" alias="exSubsDto"/>
+        <typeAlias type="com.example.monthly.dto.ParcelDto" alias="parcelDto"/>
+        <typeAlias type="com.example.monthly.dto.PaymentDto" alias="paymentDto"/>
+        <typeAlias type="com.example.monthly.dto.ProductDto" alias="productDto"/>
+        <typeAlias type="com.example.monthly.dto.ProductFileDto" alias="productFileDto"/>
+        <typeAlias type="com.example.monthly.dto.ReviewDto" alias="reviewDto"/>
+        <typeAlias type="com.example.monthly.dto.SellerDto" alias="sellerDto"/>
+        <typeAlias type="com.example.monthly.dto.SubsDto" alias="subsDto"/>
+        <typeAlias type="com.example.monthly.dto.UserDto" alias="userDto"/>
+    </typeAliases>
+
+</configuration>

@@ -1,0 +1,229 @@
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+*{
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+body{
+  font-family:  'SUIT-Regular';
+}
+button{
+  cursor: pointer;
+}
+
+/* 섹션2개 전체..레이아웃 */
+
+.apply-container{
+  width: 80%;
+  margin: 0 auto;
+}
+.apply-section{
+  margin-top: 30px;
+}
+
+.to-home{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+.to-home>a{
+  text-decoration: none;
+  color: #1e4a53;
+}
+.to-home>a>span{
+  color: #8eb4c8;
+  font-size: 18px;
+  font-weight: 700;
+}
+/* 판매자신청제목 */
+.apply-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.apply-section>h2{
+  text-align: center;
+  font-size: 33px;
+  color: #8eb4c8;
+}
+
+/* 두번째섹션 */
+.apply-title>h3{
+  font-size: 20px;
+}
+.required{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.required>p{
+  margin-left: 5px;
+}
+
+/* 판매자정보 테이블 */
+.bar{
+  border-bottom: 1px solid #8eb4c8;
+  margin-top: 20px;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td{
+  border:1px solid #8eb4c8;
+  padding: 10px 10px 10px 18px;
+  font-weight: 300;
+  font-size: 14px;
+  text-align: left;
+}
+th>img{
+  margin-left: 5px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+}
+table input{
+  width: 200px;
+  box-sizing: border-box;
+  border: 1px solid #8eb4c8;
+  align-items: center;
+  height: 20px;
+  padding-left: 5px;
+  margin-right: 10px;
+  caret-color: #8eb4cb;
+}
+input:focus{
+  outline: none;
+  background-color: #dce8ee;
+}
+/* 주소칸 */
+.seller-postcode{
+  display: flex;
+  align-items: center;
+}
+#postcode{
+  width: 50px;
+  margin-bottom: 5px;
+}
+#postcode-btn{
+  cursor: pointer;
+}
+#postcode-btn>img{
+  height: 20px;
+  position: relative;
+  top: -1px;
+}
+#address1, #address2{
+  width: 280px;
+}
+#address1{
+  margin-bottom: 5px;
+}
+#seller-contents{
+  width: 90%;
+}
+textarea{
+  padding: 5px;
+  border: 1px solid #8eb4c8;
+  caret-color: #8eb4cb;
+  resize: none;
+}
+textarea:focus{
+  outline: none;
+  background-color: #dce8ee;
+}
+
+/* 이용약관동의/개인정보처리동의 */
+.agreement-title{
+  margin-top: 20px;
+}
+.agreement-area{
+  border: 1px solid #8eb4c8;
+  margin-top: 10px;
+  padding: 10px;
+}
+.check-box{
+  margin-right: 5px;
+}
+.agree-contents{
+  box-sizing: border-box;
+  margin: 10px auto;
+  width: 100%;
+  border: 1px solid #8eb4c8;
+  overflow: auto;
+  height: 200px;
+  padding: 20px;
+}
+.agree-contents>p{
+  font-size: 10px;
+}
+.agreement-table{
+  margin-bottom: 20px;
+}
+.agreement-table th, .agreement-table td{
+  font-size: 10px;
+
+}
+/* 설명박스부분 */
+.apply-explain{
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #dce8ee;
+  border-radius: 3px;
+  margin: 20px auto 0;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  line-height: 25px;
+  font-size: 14px;
+}
+
+/* 제출 취소버튼 */
+.btn-box {
+  box-sizing: border-box;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+.save-btn, .cancel-btn{
+  width: 100px;
+  height: 30px;
+  margin: 0 5px;
+  font-family: 'SUIT-Regular';
+  border-radius: 3px;
+  transition: all .3s ease-in-out;
+}
+.cancel-btn{
+  color: #1e4a53;
+  background-color: #dce8ee;
+}
+.save-btn{
+  color:white;
+  background-color: #1e4a53;
+}
+.cancel-btn:hover, .save-btn:hover{
+  color: white;
+  background-color: #8eb4c8;
+}
+
+/* 인풋칸 설명 */
+.inner-info{
+  color: #8eb4c8;
+}
+/* 유효성검사 & 정규표현식*/
+.input-check{
+  margin-top: 5px;
+  font-size: 12px;
+  color: #c88e8e;
+}
+.none{
+  display: none;
+}

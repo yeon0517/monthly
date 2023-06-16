@@ -1,0 +1,158 @@
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+*{
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+body{
+  font-family:  'SUIT-Regular';
+}
+li{
+  list-style: none;
+}
+button{
+  font-family:  'SUIT-Regular';
+  background-color: white;
+  cursor: pointer;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td{
+  border:1px solid #8eb4c8;
+  padding: 10px;
+  font-weight: 300;
+  font-size: 14px;
+  word-break: keep-all;
+}
+select{
+  outline: none;
+  font-family:  'SUIT-Regular';
+  cursor: pointer;
+}
+
+.register-wrap{
+  width: 80%;
+  margin: 0 auto;
+}
+.register-section{
+  margin-top: 30px;
+}
+/* 상단제목부분 */
+.register-title>h2{
+  font-size: 23px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.brand-name{
+  font-size: 25px;
+  color: #8eb4c8;
+  font-weight: 900;
+  margin-right: 5px;
+}
+/* 상품등록내용부분 */
+.text-input{
+  width: 200px;
+  box-sizing: border-box;
+  border: 1px solid #8eb4c8;
+  align-items: center;
+  height: 20px;
+  padding-left: 5px;
+  margin-right: 10px;
+  caret-color: #8eb4c8;
+}
+input:focus{
+  outline: none;
+  background-color: #dce8ee;
+}
+textarea{
+  padding: 5px;
+  border: 1px solid #8eb4c8;
+}
+textarea:focus{
+  outline: none;
+  background-color: #dce8ee;
+}
+.product-contents{
+  width: 90%;
+}
+/* 인풋칸 설명 */
+.inner-info{
+  color: #8eb4c8;
+}
+
+/* 이미지등록 */
+.product-image-td>p{
+  margin-bottom: 10px;
+  color: #8eb4c8;
+  font-size: 16px;
+}
+.product-image{
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #dce8ee;
+  margin-top: 10px;
+  width: 50%;
+}
+.product-image>img{
+  width: 100%;
+  object-fit: cover;
+}
+
+/* 상세이미지등록 */
+.product-detail-image{
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #dce8ee;
+  margin-top: 10px;
+}
+.product-detail-image-ul{
+  display: flex;
+
+}
+.product-detail-image-ul>li{
+  border: 1px solid #8eb4c8;
+  margin-right: 10px;
+  width: 150px;
+  height: 150px;
+}
+.product-detail-image-ul>li>img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 저장 취소버튼 */
+.btn-box {
+  box-sizing: border-box;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+.save-btn, .cancel-btn, .preview-btn{
+  width: 100px;
+  height: 30px;
+  margin: 0 5px;
+  font-family: 'SUIT-Regular';
+  border-radius: 3px;
+  transition: all .3s ease-in-out;
+}
+.cancel-btn, .preview-btn{
+  color: #1e4a53;
+  background-color: #dce8ee;
+}
+.save-btn{
+  color:white;
+  background-color: #1e4a53;
+}
+.cancel-btn:hover, .save-btn:hover, .preview-btn:hover{
+  color: white;
+  background-color: #8eb4c8;
+}
+/* 미리보기 모달 */

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>판매자 로그인</title>
+  <link rel="stylesheet" th:href="@{/css/seller/seller_login.css}">
+</head>
+
+<body>
+  <div class="login-wrap">
+    <!-- 로고 클릭시 구매자메인으로 이동 -->
+    <header class="login-header">
+      <h1>
+        <a href="#">
+          <img th:src="@{/img/seller/logo.png}" alt="">
+        </a>
+      </h1>
+    </header>
+    <div class="login-container">
+      <div class="login-container-top">
+        <ul class="login-tab">
+          <!-- js에서 판매자/관리자 선택에 따라 url분리 -->
+          <!-- 인풋칸을 넣어야함? -->
+          <li class="login-tab-btn selected"><span data-who="seller">판매자</span></li>
+          <li class="login-tab-btn"><span date-who="admin">관리자</span></li>
+          <input type="hidden">
+        </ul>
+      </div>
+      <div class="login-contents">
+        <form action="#">
+          <div class="login-input-wrap">
+            <p>아이디</p>
+            <input type="text">
+            <p class="input-check">요상한 아이디입니다.</p>
+          </div>
+          <div class="login-input-wrap">
+            <p>비밀번호</p>
+            <input type="password">
+            <p class="input-check">비밀번호가 일치하지 않습니다.</p>
+          </div>
+          <div class="login-input-wrap">
+            <button class="login-btn">로그인</button>
+          </div>
+        </form>
+      </div>
+      <div class="login-bottom">
+        <!-- 판매자 신청 페이지로 이동 -->
+        <a href="../html/seller_apply.html">판매자신청하기</a>
+        <a href="#">아이디/비밀번호찾기</a>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script th:src="@{/js/seller/seller_login.js}"></script>
+</body>
+
+</html>
