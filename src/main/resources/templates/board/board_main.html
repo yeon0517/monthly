@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>main</title>
+  <link rel="stylesheet" th:href="@{/css/board/board_main.css}" />
+  <link rel="stylesheet" th:href="@{/css/board/all.css}" />
+</head>
+<body>
+<header class="board-header"  th:replace="fragment/board_header :: board_header"></header>
+<!-- 전체 박스 -->
+<div class="allWrap">
+  <div class="allContainer">
+    <!-- wrap이 반복 -->
+    <div class="wrap">
+      <div class="whole">
+        <div class="whole-box">
+          <div class="wrap_div">
+            <a href="#"><img th:src="@{/img/boardImg/main.jpg}" alt="메인이미지" /></a>
+          </div>
+          <div class="wrap_list">
+            <ul class="wrap_ul">
+              <li class="wrap_il">
+                <div class="box">
+                  <a href="#"><img th:src="@{/img/boardImg/ha.jpg}" alt="하" /></a>
+                  <p class="box_name">
+                    <span>[노플라스틱선데이] 럭키 키링</span>
+                  </p>
+                  <p class="price">6000원</p>
+                </div>
+              </li>
+              <li class="wrap_il">
+                <div class="box">
+                  <a href="#"><img th:src="@{/img/boardImg/ho.jpg}" alt="호" /></a>
+                  <p class="box_name">
+                    <span>[노플라스틱선데이] 럭키 키링</span>
+                  </p>
+                  <p class="price">6000원</p>
+                </div>
+              </li>
+              <li class="wrap_il">
+                <div class="box">
+                  <a href="#"><img th:src="@{/img/boardImg/hi.jpg}" alt="하이" /></a>
+                  <p class="box_name">
+                    <span>[노플라스틱선데이] 럭키 키링</span>
+                  </p>
+                  <p class="price">6000원</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- wrap이 반복 -->
+    <div class="wrap">
+      <div class="whole">
+        <div class="whole-box">
+          <div class="wrap_div">
+            <a href="#"><img th:src="@{/img/boardImg/main.jpg}" alt="메인이미지" /></a>
+          </div>
+          <div class="wrap_list">
+            <ul class="wrap_ul">
+              <li class="wrap_il">
+                <div class="box">
+                  <a href="#"><img th:src="@{/img/boardImg/ha.jpg}" alt="하" /></a>
+                  <p class="box_name">
+                    <span>[노플라스틱선데이] 럭키 키링</span>
+                  </p>
+                  <p class="price">6000원</p>
+                </div>
+              </li>
+              <li class="wrap_il">
+                <div class="box">
+                  <a href="#"><img th:src="@{/img/boardImg/ho.jpg}" alt="호" /></a>
+                  <p class="box_name">
+                    <span>[노플라스틱선데이] 럭키 키링</span>
+                  </p>
+                  <p class="price">6000원</p>
+                </div>
+              </li>
+              <li class="wrap_il">
+                <div class="box">
+                  <a href="#"><img th:src="@{/img/boardImg/hi.jpg}" alt="하이" /></a>
+                  <p class="box_name">
+                    <span>[노플라스틱선데이] 럭키 키링</span>
+                  </p>
+                  <p class="price">6000원</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- #container -->
+</div>
+<!-- #wrap -->
+
+<!-- 전체 박스 -->
+<div class="allTop" th:replace="fragment/board_top_btn :: board_top_btn"></div>
+<!--                                        파일경로/파일이름 :: 내가 지은 이름-->
+<!-- footer~!~!~ -->
+<div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script th:src="@{/js/board/board_main.js}"></script>
+<!--<script th:src="@{/js/board/board_mainmain.js}"></script>-->
+</body>
+</html>

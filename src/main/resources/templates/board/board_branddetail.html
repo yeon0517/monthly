@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>detail</title>
+  <link rel="stylesheet" th:href="@{/css/board/board_branddetail.css}" />
+  <link rel="stylesheet" th:href="@{/css/board/all.css}" />
+</head>
+<body>
+<header>
+  <div class="spanheader_div">
+        <span class="spanheader"
+        ><img
+                th:src="@{/img/allImg/span-removebg-preview.png}"
+                alt="span"
+                style="width: 398px; height: 34px"
+        /></span>
+  </div>
+  <div class="allHeader">
+    <div class="allLogo">
+      <img th:src="@{/img/allImg/logo.png}" alt="logo" id="allLogo_img" />
+    </div>
+    <!-- header왼쪽 -->
+    <div class="top_category">
+      <div class="allCategory">
+        <ul class="top_category_ul">
+          <li class="top_category_ul_li">
+            <a class="main_menu" th:href="@{/board_about.html}">About Montly</a>
+            <!-- <div class="top_category_div">
+            <ul class="list_ul active">
+              <li class="list_li">
+                <a href="#">Montly의 제안</a>
+              </li>
+              <li class="list_li">
+                <a href="#">Montly의 브랜드</a>
+              </li>
+              <li class="list_li">
+                <a href="#">Montly의 상품</a>
+              </li>
+            </ul>
+          </div> -->
+          </li>
+
+          <li class="allbar"></li>
+
+          <li class="login_li">로그인</li>
+        </ul>
+      </div>
+    </div>
+    <!-- header오른쪽 -->
+    <div class="allBanner">
+      <div class="allBannerbox">
+        <div class="banner_icon">
+          <div class="search_icon">
+            <a href="#"
+            ><img
+                    th:src="@{/img/allImg/search.png}"
+                    alt="검색아이콘"
+                    id="search_icon_img"
+            />
+            </a>
+          </div>
+
+          <!-- 검색하는 창 나오는 곳 -->
+          <div class="search_btn">
+            <form action="">
+              <input id="search_id" type="hidden" />
+              <div class="search_div">
+                <fieldset>
+                  <span>검색</span>
+                  <input type="text" id="keyword" />
+                  <input type="image" th:src="@{/img/allImg/search.png}" id="search" />
+                </fieldset>
+              </div>
+            </form>
+          </div>
+          <!-- 검색하는 창 나오는 곳 -->
+
+          <!-- 더보기 -->
+          <div class="allother">
+            <a href="#"
+            ><img th:src="@{/img/allImg/other.png}" alt="" id="allother_img"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 여긴 더보기 누르면 나오는 거  -->
+    <div class="sidenav">
+      <div class="sidenav_wrap">
+        <div class="allCancel">
+          <img th:src="@{/img/allImg/x.png}" alt="cancel" id="cancelimg" />
+        </div>
+        <div class="sidenav_up">
+          <div class="nav_up">
+            <p>세상의 모든 구독 서비스,</p>
+            <br />
+            <p>한 번에 모아보기</p>
+            <hr />
+          </div>
+          <div class="nav_down">
+            <div class="nav_f">
+              <a href="#">About Montly</a>
+            </div>
+            <div class="nav_s">
+              <a href="#">브랜드 All</a>
+            </div>
+            <div class="nav_t">
+              <a href="#">제품 All</a>
+            </div>
+          </div>
+        </div>
+        <div class="sidenav_down">
+          <div class="sidenav_down_f">
+            <a href="#">나의 monthly</a>
+          </div>
+          <div class="sidenav_down_s">
+            <a href="#">주문/배송조회</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 이건 top버튼 -->
+<div class="allTop">
+  <img th:src="@{/img/allImg/up-arrow.png}" alt="" id="allTopImg" />
+  <p>TOP</p>
+</div>
+<!-- 이건 top버튼 -->
+
+<!-- main -->
+<div class="wrap">
+  <div class="wrap-container">
+    <div class="main">
+      <div class="title">
+        <h2>모어포모레</h2>
+      </div>
+    </div>
+    <div class="main-img">
+      <img src="./img/detail.jpg" alt="" />
+    </div>
+    <div class="center">
+      <div class="brand-wrap">
+        <!-- <div class="brand-list">
+        <div class="list-img">
+          <img src="/img/one.jpg" alt="" />
+        </div>
+        <div class="list-p">
+          <h4>[브랜드이름넣어]</h4>
+          <p>고체바 & 숲 키링 세트</p>
+        </div>
+        <div class="list-price">
+          <p>18,000원</p>
+        </div>
+      </div>
+
+      <div class="brand-list">
+        <div class="list-img">
+          <img src="/img/one.jpg" alt="" />
+        </div>
+        <div class="list-p">
+          <h4>[브랜드이름넣어]</h4>
+          <p>고체바 & 숲 키링 세트</p>
+        </div>
+        <div class="list-price">
+          <p>18,000원</p>
+        </div>
+      </div>
+
+      <div class="brand-list">
+        <div class="list-img">
+          <img src="/img/one.jpg" alt="" />
+        </div>
+        <div class="list-p">
+          <h4>[브랜드이름넣어]</h4>
+          <p>고체바 & 숲 키링 세트</p>
+        </div>
+        <div class="list-price">
+          <p>18,000원</p>
+        </div>
+      </div>
+
+      <div class="brand-list">
+        <div class="list-img">
+          <img src="/img/one.jpg" alt="" />
+        </div>
+        <div class="list-p">
+          <h4>[브랜드이름넣어]</h4>
+          <p>고체바 & 숲 키링 세트</p>
+        </div>
+        <div class="list-price">
+          <p>18,000원</p>
+        </div>
+      </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer-->
+<div class="allfooter">
+  <div class="allfoot">
+    <ul class="allfooter_ul">
+      <div class="cs">
+        <div class="cs_left">
+          <ul>
+            <li class="title"><strong>C/S CENTER</strong></li>
+          </ul>
+          <ul>
+            <li class="tel">010-8800-2821</li>
+            <li class="tel_time">
+              <strong>평일</strong>
+              9:00 - 14:00
+              <strong>점심</strong>
+              12:00 - 13:00
+              <p>주말 및 공휴일 휴무</p>
+            </li>
+          </ul>
+        </div>
+        <div class="cs_right">
+          <ul>
+            <li class="title">COMPANY INFO</li>
+          </ul>
+          <div class="inner2">
+            <div class="info">
+              <span><strong>(주)구독과 좋아요</strong> </span>
+              <span>사업자등록번호 : 123-45-67890</span>
+              <br />
+              <span>전화 : 010-8800-2821 </span>
+              <br />
+              <span>주소 : 서울특별시 역삼동 테헤란로 건물 13층</span>
+              <br />
+              <span>호스팅제공 : 구독과좋아요</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script th:src="@{/js/board/board_branddetail.js}"></script>
+<script th:src="@{/js/board/board_main.js}"></script>
+</body>
+</html>
