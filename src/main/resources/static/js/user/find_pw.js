@@ -1,5 +1,5 @@
-const radio1 = document.querySelector(".check-method1");
-const radio2 = document.querySelector(".check-method2");
+const radio1 = document.querySelector("#check-method1");
+const radio2 = document.querySelector("#check-method2");
 
 radio1.addEventListener("click", () => {
   radio2.checked = false;
@@ -9,8 +9,8 @@ radio2.addEventListener("click", () => {
   radio1.checked = false;
 });
 
-const emailRadio = document.querySelector(".check-method1");
-const phoneRadio = document.querySelector(".check-method2");
+const emailRadio = document.querySelector("#check-method1");
+const phoneRadio = document.querySelector("#check-method2");
 const emailSection = document.querySelector(".input-email");
 const phoneSection = document.querySelector(".input-phone");
 
@@ -25,8 +25,8 @@ phoneRadio.addEventListener("click", function () {
 });
 
 window.addEventListener("DOMContentLoaded", function () {
-  var checkMethod1 = document.querySelector(".check-method1");
-  var checkMethod2 = document.querySelector(".check-method2");
+  var checkMethod1 = document.querySelector("#check-method1");
+  var checkMethod2 = document.querySelector("#check-method2");
   var inputId = document.querySelector(".id-space");
   var inputName = document.querySelector(".name-space");
   var inputEmail = document.querySelector(".email-space");

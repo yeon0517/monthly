@@ -1,6 +1,6 @@
-const radio1 = document.querySelector(".check-method1");
-const radio2 = document.querySelector(".check-method2");
-const noFindIdButton = document.querySelector(".no-find-id-button");
+const radio1 = document.querySelector("#check-method1");
+const radio2 = document.querySelector("#check-method2");
+const noFindIdButton = document.querySelector(".not-find-id-button");
 
 radio1.addEventListener("click", () => {
   radio2.checked = false;
@@ -14,8 +14,8 @@ radio2.addEventListener("click", () => {
   toggleFindIdButton();
 });
 
-const emailRadio = document.querySelector(".check-method1");
-const phoneRadio = document.querySelector(".check-method2");
+const emailRadio = document.querySelector("#check-method1");
+const phoneRadio = document.querySelector("#check-method2");
 const emailSection = document.querySelector(".input-email");
 const phoneSection = document.querySelector(".input-phone");
 
@@ -47,8 +47,8 @@ function toggleFindIdButton() {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
-  var checkMethod1 = document.querySelector(".check-method1");
-  var checkMethod2 = document.querySelector(".check-method2");
+  var checkMethod1 = document.querySelector("#check-method1");
+  var checkMethod2 = document.querySelector("#check-method2");
   var inputName = document.querySelector(".name-space");
   var inputEmail = document.querySelector(".email-space");
   var inputPhone1 = document.querySelector(".phone-space1");
