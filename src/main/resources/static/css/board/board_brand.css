@@ -1,0 +1,76 @@
+/* main css */
+.wrap-container {
+    padding: 80px 0 0;
+    margin: 0 auto 0;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.title h2 {
+    font-size: 33px;
+    font-weight: 100;
+    color: #1e4a53;
+}
+
+.brand_catagory {
+    display: flex;
+    font-size: 13px;
+    /* padding: 0 0 10px 6%; */
+}
+
+.btn {
+    padding: 46px 20px;
+}
+
+.btn p {
+    cursor: pointer;
+    color: #8eb4c8;
+}
+
+/* wrap의 css */
+.main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.center {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.row {
+    display: flex;
+    width: 1200px;
+    height: 100%;
+}
+.column {
+    margin: 10px 10px;
+}
+.column-content {
+    width: 400px;
+    height: 400px;
+}
+
+.column-content img {
+    width: 100%;
+    height: 100%;
+}
+
+.column-p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.column-p h4 {
+    color: #000000;
+}
+.column-p p {
+    color: #8eb4c8;
+}
