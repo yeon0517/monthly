@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/board/productInfo.css}" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="productInfo">
+      <div class="container">
+        <header>
+          <div
+            class="area"
+            style="
+              border: 1px solid black;
+              width: 100%;
+              height: 200px;
+              border: 1px solid;
+            "
+          >
+            header
+          </div>
+        </header>
+        <!-- 메인 -->
+        <div class="main">
+          <div class="product">
+            <div class="productArea">
+              <!-- 썸네일 -->
+              <div class="imgArea">
+                <div class="thuImg">
+                  <div class="thumbnail">
+                    <img
+                      src="../img/5e3eebd9f16e87a1d2898e229a8e69f7.jpg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+
+                <!-- 옆에 작은 이미지 -->
+                <div class="ImgList">
+                  <ul>
+                    <li class="list">
+                      <img src="../img/1.jpg" alt="" />
+                    </li>
+                    <li class="list">
+                      <img src="../img/2.jpg" alt="" />
+                    </li>
+                    <li class="list">
+                      <img src="../img/3.jpg" alt="" />
+                    </li>
+                    <li class="list">
+                      <img src="../img/4.jpg" alt="" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <form name="productForm" method="get" action="order.html">
+                <!-- 상품 정보 -->
+                <div class="InfoArea">
+                  <!-- 상품 이름 -->
+                  <!-- 상품 이름 필요하시면 여기다 넣고 사용 -->
+                  <input type="hidden" name="proTitle" />
+                  <div name="proTitle" class="proTitle">
+                    [모어포모레] 고체바 & 숲 키링 세트
+                  </div>
+
+                  <!-- 가격 -->
+                  <div class="proPrice">18000원</div>
+
+                  <div class="calender">
+                    <div style="display: flex; margin-bottom: 35px">
+                      날짜 선택 :
+                      <div class="result"></div>
+                      <!-- 날짜 값 필요하면 여기 다 넣고 사용 -->
+                      <input type="hidden" name="dateValue" />
+                    </div>
+
+                    <div class="calMain">
+                      <div class="sec_cal">
+                        <div class="cal_nav">
+                          <a href="javascript:;" class="nav-btn go-prev"
+                            >prev</a
+                          >
+                          <div class="year-month"></div>
+                          <a href="javascript:;" class="nav-btn go-next"
+                            >next</a
+                          >
+                        </div>
+                        <div class="cal_wrap">
+                          <div class="days">
+                            <div class="day">MON</div>
+                            <div class="day">TUE</div>
+                            <div class="day">WED</div>
+                            <div class="day">THU</div>
+                            <div class="day">FRI</div>
+                            <div class="day">SAT</div>
+                            <div class="day">SUN</div>
+                          </div>
+                          <div class="dates"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 옵션 -->
+                  <table class="optionTable" border="0">
+                    <tbody class="option">
+                      <tr>
+                        <!-- 옵션 이름 -->
+                        <th scope="row">고체바</th>
+                        <td>
+                          <div class="optName">에브리바디 올인원 바</div>
+                          <!--옵션값 필요하면 넣으세요 -->
+                          <input type="hidden" name="optName" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="totalAmount">
+                    <table class="amountSelect" border="1">
+                      <colgroup>
+                        <col style="width: 284px" />
+                        <col style="width: 80px" />
+                        <col style="width: 110px" />
+                      </colgroup>
+                      <tbody>
+                        <tr class="amountPro">
+                          <td>
+                            <div>상품이름</div>
+                            -
+                            <div>옵션내용</div>
+                          </td>
+                          <td>
+                            <span class="countBtn" style="width: 65px;">
+                              <!-- 수량 -->
+                              <input name="cnt" id="cnt" type="text" />
+                              <img
+                                class="up"
+                                src="../img/btn_count_up.gif"
+                                alt=""
+                              />
+                              <img
+                                class="down"
+                                src="../img/btn_count_down.gif"
+                                alt=""
+                              />
+                            </span>
+                          </td>
+                          <td class="right">
+                            <!-- 가격 data-price에 넣어주세요 -->
+                            <span name="price" class="price" data-price="18000"
+                              >18000원</span
+                            >
+                            <!-- 혹시 안되면 value에 가격 넣어주시면 됩니다 -->
+                            <input hidden name="price" value="" />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="totalPrice">
+                    <strong style="font-weight: 500; color: #8eb4c8"
+                      >TOTAL</strong
+                    >
+                    :
+                    <span style="color: #8eb4c8" class="total">
+                      <!-- 가격 -->
+                      <div class="pay">18000원</div>
+                    </span>
+                    <div class="countResult" style="color: #8eb4c8"></div>
+                  </div>
+
+                  <div class="payBtn">
+                    <input type="submit" class="buyBtn" value="BUY NOW" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- 상품정보 -->
+            <div class="proDetail">
+              <div class="detail">
+                <div class="detailLine">
+                  <!-- 텝으로 배너 이동 -->
+                  <section class="TabPanel">
+                    <ul class="TabPanelList">
+                      <!-- 클릭 했을때 스크롤 이동, 버튼 색변환 -->
+                      <li class="blurTab proInfo">상품상세정보</li>
+                      <li class="TabPanelItem review">상품구매안내</li>
+                      <li class="TabPanelItem caution">상품후기(2)</li>
+                    </ul>
+                  </section>
+                  <!-- 텝으로 배너 이동 -->
+
+                  <div class="cont">
+                    <p class="detailinfo showstep1">
+                      <img class="content" src="../img/proinfo.jpg" alt="" />
+                    </p>
+                    <button class="btn_open">더보기</button>
+                    <!-- <div class="btn_close hide">감추기</div> -->
+                  </div>
+
+                  <div class="payInfo">
+                    <div class="cont_all">
+                      <ul>
+                        <li class="payList">
+                          <div class="payListInnew">
+                            <h3>상품결제정보</h3>
+
+                            고액결제의 경우 안전을 위해 카드사에서 확인전화를
+                            드릴 수도 있습니다. 확인과정에서 도난 카드의
+                            사용이나 타인 명의의 주문등 정상적인 주문이 아니라고
+                            판단될 경우 임의로 주문을 보류 또는 취소할 수
+                            있습니다.
+                            <br />
+                            <br />
+
+                            무통장 입금은 상품 구매 대금은 PC뱅킹, 인터넷뱅킹,
+                            텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면
+                            됩니다.
+                            <br />
+
+                            주문시 입력한 입금자명과 실제입금자의 성명이 반드시
+                            일치하여야 하며, 6시간 이내로 입금을 하셔야 하며
+                            입금되지 않은 주문은 자동취소 됩니다.
+                          </div>
+                        </li>
+                        <li class="payList">
+                          <div class="payListInnew">
+                            <h3>배송정보</h3>
+                            <ul class="delivery">
+                              <li>배송방법 : 택배</li>
+                              <li>배송 지역 : 전국지역</li>
+                              <li>배송 비용 : 무료</li>
+                              <li>배송 기간 : 2일 ~ 5일</li>
+                              <li>
+                                배송 안내: - 배송 안내 : - 산간벽지나 도서지방은
+                                별도의 추가금액을 지불하셔야 하는 경우가
+                                있습니다.
+                                <br />
+                                고객님께서 주문하신 상품은 입금 확인후 배송해
+                                드립니다. 다만, 상품종류에 따라서 상품의 배송이
+                                다소 지연될 수 있습니다.
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                      <ul>
+                        <li class="payList">
+                          <div class="payListInnew">
+                            <h3>교환 및 반품 정보</h3>
+                            <b>교환 및 반품 주소</b>
+                            <br />
+                            - [12217] 경기도 남양주시 평내동 388-12 품고센터
+                            모레상점
+                            <b>
+                              <br />
+                              <br />
+                              교환 및 반품이 가능한 경우
+                            </b>
+                            <br />
+                            - 상품을 공급 받으신 날로부터 7일이내 단, 가전제품의
+                            <br />
+
+                            경우 포장을 개봉하였거나 포장이 훼손되어 상품가치가
+                            상실된 경우에는 교환/반품이 불가능합니다. 공급
+                            받으신 상품 및 용역의 내용이 표시.광고 내용과
+                            다르거나 다르게 이행된 경우에는 공급 받은 날로부터
+                            3월이내, 그 사실을 알게 된 날로부터 30일이내
+                            <br />
+                            <b>교환 및 반품이 불가능한 경우</b>
+                            - 고객님의 책임 있는 사유로 상품등이 멸실 또는
+                            훼손된 경우 단,상품의 내용을 확인하기위하여 포장
+                            등을 훼손한 경우는 제외
+                            <br />
+                            -포장을 개봉하였거나 포장이 훼손되어 상품가치가
+                            상실된 경우
+                            <br />
+                            -고객님의 사용 또는 일부 소비에 의하여 상품의 가치가
+                            현저히 감소한 경우 단, 화장품등의
+                            <br />
+                            경우 사용제품을 제공한 경우에 한 합니다.
+                            <br />
+                            -시간의 경과에 의하여 재판매가 곤란할 정도로
+                            상품등의 가치가 현저히 감소한 경우
+                            <br />
+                            -복제가 가능한 상품등의 포장을 훼손한 경우
+                            <br />
+                            (자세한 내용은 고객만족센터, 1:1 E-MAIL상담을 이용해
+                            주시기 바합니다)
+                            <br />
+                            고객님의 마음이 바뀌어 교환 반품을 하실 경우
+                            상품반송 비용은 고객님꼐서 부담하셔야 합니다
+                          </div>
+                        </li>
+
+                        <li class="payList">
+                          <div class="payListInnew temporary">
+                            <h3>서비스 문의</h3>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="proReview">
+                    <div class="board">
+                      <section class="boardContent-postCommentAndViews">
+                        <div class="boardContent-postComment">
+                          <div class="commentInput-wrap">
+                            <!-- 댓글 개수, 댓글 입력, 댓글 등록버튼 -->
+                            <h1 class="commentInput-count">REVIEW(100)</h1>
+                            <textarea
+                              class="commentInput-commentText"
+                              placeholder="댓글을 입력하세요"
+                            >
+                                      <!-- 댓글 입력하기 -->
+                                  </textarea
+                            >
+                            <div class="commentInput-buttonWrapper">
+                              <button
+                                class="commentInput-buttonComplete"
+                                name="register"
+                              >
+                                댓글 등록
+                              </button>
+                            </div>
+                          </div>
+
+                          <!-- 댓글 리스트 -->
+
+                          <!-- 마진없는 댓글 컨테이너 -->
+                          <ul class="commentList-CommentList">
+                            <!-- 마진 준 댓글 리스트 컨테이너 -->
+                            <li class="commentItem-commentContainer">
+                              <section
+                                class="commentItem-CommentHeader"
+                                style="width: 102%"
+                              >
+                                <div class="commentItem-writerWrapper">
+                                  <div class="commentItem-commentInfo">
+                                    <div class="commentItem-title">
+                                      <div class="commentItem-userNickname">
+                                        른시룽
+                                      </div>
+                                      <div class="commentItem-registerDate">
+                                        2143.08.10 13:42:55
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="boardReply-editDelete">
+                                  <button
+                                    type="button"
+                                    class="boardReply-editor-buttons"
+                                    style="
+                                      background-color: #8eb4c8;
+                                      border-radius: 20px;
+                                      width: 50px;
+                                    "
+                                  >
+                                    수정
+                                  </button>
+                                  <button
+                                    type="button"
+                                    class="boardReply-editor-buttons"
+                                    style="
+                                      background-color: #8eb4c8;
+                                      border-radius: 20px;
+                                      width: 50px;
+                                    "
+                                  >
+                                    삭제
+                                  </button>
+                                </div>
+                              </section>
+                              <section class="commentItem-CommentContent">
+                                <p class="commentItem-CommentContent">
+                                  안녕하세요
+                                </p>
+                              </section>
+                            </li>
+                          </ul>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 리뷰 -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"
+    ></script>
+    <script th:src="@{/js/board/productInfo.js}"></script>
+  </body>
+</html>

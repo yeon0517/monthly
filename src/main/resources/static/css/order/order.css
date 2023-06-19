@@ -1,0 +1,311 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  line-height: 1;
+  font-family: "SUIT-Regular";
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+textarea {
+  padding: 5px 6px;
+  border: 1px solid #d5d5d5;
+  line-height: 1.5;
+  resize: none;
+}
+
+a {
+  color: #353535;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: "SUIT-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.userModify {
+  position: relative;
+  clear: both;
+  margin: 0 5% 20px;
+}
+
+.container {
+  min-width: 100%;
+  padding: 150px 0 0;
+  margin: 0 auto 0;
+}
+
+.userTitle {
+  min-height: 30px;
+  padding: 45px 0 45px;
+  text-align: center;
+}
+
+.userTitle h2 {
+  font-size: 33px;
+  font-weight: normal;
+  color: #8eb4c8;
+}
+
+.mainInput {
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+}
+
+.mainInput > h3 {
+  margin: 50px 0 10px;
+  font-size: 16px;
+  color: #2e2e2e;
+}
+
+.mainInput > p {
+  margin: 50px 0 10px;
+  color: #353535;
+  text-align: right;
+}
+
+.modTable {
+  position: relative;
+  margin: 20px 0 0;
+  border-bottom: 1px solid #8eb4c8;
+  border-top: 0;
+  color: #fff;
+  line-height: 1.5;
+}
+
+colgroup {
+  display: table-column-group;
+}
+
+.modBody th {
+  padding: 15px 0 15px 18px;
+  border-top: 1px solid #8eb4c8;
+  border-left: 1px solid #8eb4c8;
+  border-bottom-width: 0;
+  color: #353535;
+  text-align: left;
+  font-weight: normal;
+  background-color: #fff;
+}
+
+.modBody td {
+  padding: 11px 10px 10px;
+  border-top: 1px solid #8eb4c8;
+  border-right: 1px solid #8eb4c8;
+  color: #353535;
+  vertical-align: middle;
+  width: auto;
+}
+
+input[type="text"],
+input[type="password"] {
+  height: 28px;
+  line-height: 24px;
+  padding: 2px 4px;
+  border: 1px solid #8eb4c8;
+  color: #111111;
+  font-size: 12px;
+}
+
+input {
+  vertical-align: middle;
+}
+
+th,
+td {
+  border: 0;
+}
+
+#postAddress {
+  width: 40px;
+  text-align: center;
+}
+
+.addr img {
+  height: auto;
+  vertical-align: middle;
+}
+
+#address1 {
+  width: 280px;
+  margin: 5px 0 0;
+}
+
+#address2 {
+  width: 280px;
+  margin: 5px 0 0;
+}
+
+.sumitBtn {
+  position: relative;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.sumitBtn > input {
+  width: 140px;
+  height: 40px;
+}
+
+#userRemove {
+  position: absolute;
+  right: 0;
+}
+
+.gender input {
+  margin: 0 0;
+}
+
+.payArea {
+  overflow: hidden;
+  position: relative;
+  margin: 50px 0 0;
+  padding: 0 341px 0 0;
+  border: 1px solid #8eb4c8;
+  color: #353535;
+  line-height: 1.5;
+}
+
+.payMent {
+  float: left;
+  width: 100%;
+}
+
+.ecTable {
+  padding: 10px 20px;
+}
+
+.ecTable p {
+  margin: 2px 9px;
+  padding: 1px 0 1px 20px;
+  line-height: 1.4;
+  background: url(../img/ico_info.gif) no-repeat 0 2px;
+}
+
+.agree {
+  padding: 0 20px;
+}
+
+table {
+  width: 100%;
+  border: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 0;
+  vertical-align: top;
+}
+
+.subs {
+  width: 130px;
+  padding: 20px 0;
+  border-top: 1px solid #8eb4c8;
+  font-weight: normal;
+  text-align: left;
+  font-size: small;
+}
+
+.subsArea {
+  padding: 20px 0;
+  border-top: 1px solid #8eb4c8;
+}
+
+.textArea {
+  position: relative;
+  margin: 0 0 8px;
+  padding: 0 80px 0 0;
+}
+
+#subscript {
+  width: 96%;
+  height: 57px;
+  resize: none;
+}
+
+textarea {
+  padding: 5px 6px;
+  border: 1px solid #8eb4c8;
+  line-height: 1.5;
+  outline: none;
+  font-size: 100%;
+  color: #111111;
+  vertical-align: middle;
+}
+
+.payTotal {
+  width: 340px !important;
+  margin: 0 -341px 0 0 !important;
+  font-size: 15px;
+  height: 184px;
+  float: right;
+  text-align: right;
+  background: #fbfafa;
+  border-left: 1px solid #8eb4c8;
+}
+
+.payTotal h4 {
+  margin: 17px 10px 0 0;
+  color: #8eb4c8;
+}
+
+.price {
+  margin: 17px 10px 0 0;
+  color: #8eb4c8;
+}
+
+#inputPrice {
+  width: 190px;
+  height: auto;
+  padding: 0;
+  border: 0;
+  color: #222;
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 0px;
+  line-height: normal;
+  background: #fbfafa;
+}
+
+.payTotal span {
+  vertical-align: -5px;
+}
+
+.pay {
+  width: 100%;
+  height: 66px;
+  margin-top: 15px;
+  padding: 12px;
+  font-family: "SUIT-Regular";
+  background: #8eb4c8;
+  text-align: center;
+  cursor: pointer;
+  font-size: 30px;
+  color: #fff;
+}

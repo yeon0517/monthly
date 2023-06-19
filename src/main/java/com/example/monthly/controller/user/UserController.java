@@ -2,6 +2,7 @@ package com.example.monthly.controller.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 // 로그인, 회원가입, 정보수정 등
@@ -9,4 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/user/*")
 public class UserController {
+
+
+    @GetMapping("/mypage")
+    public void mypage(){
+
+    }
+
+    @GetMapping("/userModify")
+    public void userModify(){
+
+    }
+
 }

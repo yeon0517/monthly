@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/user/userModify.css}" />
+  </head>
+  <body>
+    <div class="userModify">
+
+      <div class="container">
+
+        <header>
+          <div class="area" style="border: 1px solid black;
+          width: 100%;
+          height: 200px;
+          border: 1px solid;" >header</div>
+        </header>
+
+        <div class="userTitle" style="position: relative">
+          <h2>회원 정보 수정</h2>
+        </div>
+
+        <form id="editForm" name="editForm" action="mypage.html" method="get">
+          <div class="mainInput">
+            <h3>기본 정보</h3>
+            <p class="require">
+              <img src="../img/ico_required.gif" alt="" />
+              필수사항
+            </p>
+          </div>
+
+          <!-- 배송지, 새로운비밀번호,확인 비밀번호 제외 모든 값이 db에서 가져와서 넣어줘야함 -->
+          <div class="tableContainer">
+            <table class="modTable" style="width: 100%;" border="1">
+              <colgroup>
+                <col style="width: 150px" />
+                <col style="width: auto" />
+              </colgroup>
+              <tbody class="modBody">
+                <!-- 아이디 -->
+                <tr>
+                  <th scope="row">
+                    아이디
+                    <img src="../img/ico_required.gif" alt="" />
+                  </th>
+                  <td>
+                    <!-- 아이디 넣기 -->
+                    <input name="userId" id="userId" type="text" value="" placeholder="" required />
+                    (영소문자/숫자,4~16자)
+                  </td>
+                </tr>
+
+                <!-- 현재비밀번호 -->
+                <tr>
+                  <th>현재비밀번호</th>
+                  <td>
+                    <input id="userPassword" type="password" value="" placeholder="" />
+                    (영대소문자/숫자/특수문자 중 3가지 이상 조합,8~16자)
+                  </td>
+                </tr>
+
+                <!-- 새로운 비밀번호 -->
+                <tr>
+                  <th>새로운 비밀번호</th>
+                  <td>
+                    <input
+                      id="userNewPassword" class="pw"
+                      type="password"
+                      onchange="check_pw()"
+                    />
+                    (영대소문자/숫자/특수문자 중 3가지 이상 조합,8~16자)
+                    <span id="checked"></span>
+                  </td>
+                </tr>
+
+                <!-- 비밀번호 확인 -->
+                <tr>
+                  <th>비밀번호 확인</th>
+                  <td>
+                    <input name="checkPassword" id="checkPassword" class="pw" type="password" onchange="check_pw()" />
+                    (영소문자/숫자,4~16자)
+                    <span id="check"></span>
+                  </td>
+                </tr>
+
+                <!-- 이름 -->
+                <tr>
+                  <th>
+                    이름
+                    <img src="../img/ico_required.gif" alt="" />
+                  </th>
+                  <td>
+                    <!-- 이름 넣기 -->
+                    <input name="userName" id="userName" type="text" value="" placeholder="" required />
+                    
+                  </td>
+                </tr>
+                <!-- 생년월일 -->
+                <tr>
+                  <th>생년월일</th>
+                  <td>
+                    <input name="userBirthday" id="userBirthday" value="" type="text" placeholder="" />
+                  </td>
+                </tr>
+                <!-- 주소 -->
+                <tr>
+                  <th>주소</th>
+                  <td class="address">
+                    <input name="postAddress" id="postAddress" type="text" />
+                    
+                      <img src="../img/btn_zipcode.gif" onclick="sample6_execDaumPostcode()" style="vertical-align: middle;" />
+                    
+                    <br />
+                    <input name="address1" id="address1" type="text" /> 기본주소
+                    <br />
+                    <input name="address2" id="address2" type="text" /> 나머지주소(상세주소)
+                  </td>
+                </tr>
+
+                <!-- 휴대전화 -->
+                <tr>
+                  <th>
+                    휴대전화
+                    <img src="../img/ico_required.gif" alt="" />
+                  </th>
+                  <td>
+                    <!-- 휴대전화 넣기 -->
+                    <input name="userPhoneNumber" value="" id="userPhoneNumber" type="text" required />
+                  </td>
+                </tr>
+
+                <!-- 이메일 -->
+                <tr>
+                  <th>
+                    이메일
+                    <img src="../img/ico_required.gif" alt="" />
+                  </th>
+                  <td>
+                    <!-- 이메일 넣기 -->
+                    <input name="userEmail" value="" id="userEmail" type="text" required />
+                  </td>
+                </tr>
+
+                <!-- 성별 -->
+                <tr>
+                  <th>
+                    성별
+                  </th>
+                  <td class="gender">
+                    <!-- db에서 값을 받아와서 if문 사용해서 M이면 남자 버튼 고정, F면 여자 버튼 고정 -->
+                    <input type="radio" name="gender" value="male" onclick="return false">남성
+                    <input type="radio" name="gender" value="female" checked onclick="return false">여성
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 버튼 -->
+            <div class="sumitBtn">
+              <input
+                id="userModify"
+                type="submit"
+                style="background-color: #1e4a53; color: #f8f9fa"
+                value="회원정보 수정"
+                
+              />
+              <!-- mypage,main 으로? -->
+              <input
+              class="backBtn"
+                type="button"
+                style="background-color: #dce8ee; cursor: pointer;"
+                value="취소"
+                href="mypage.html"
+              />
+              <input id="userRemove" style="background-color: #dce8ee; cursor: pointer;" type="button" value="회원탈퇴"></input>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <footer class="foot" style="border: 1px solid black;
+        width: 100%;
+        height: 200px;
+        border: 1px solid;">
+        footer
+      </footer>
+    </div>
+
+  </body>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"
+  ></script>
+  <script th:src="@{/js/user/userModify.js}"></script>
+</html>
