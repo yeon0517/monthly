@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -103,8 +103,8 @@
     <h1>잠시 후 다시 시도해주세요.(500)</h1>
     <p>아래 버튼을 눌러 로그인 페이지나 메인 페이지로 이동하세요.</p>
     <div>
-    <a href="/user/login">로그인</a>
-    <a href="#">메인 페이지</a>
+    <a th:href="@{/admin/login}">로그인</a>
+    <a th:href="@{/admin/main}">메인 페이지</a>
   </div>
   </div>
 </div>
@@ -112,20 +112,20 @@
   
   <div class="page-move">
 <li><a href="#">
-  <img src="../img/monthly1.jpeg" alt="">
+  <img th:src="@{/img/admin/monthly2.jpeg}" alt="">
 </a>
 <h1 style="font-size: 18px;">monthly의 대하여</h1>
 <h2 style="font-size: 15px;">요기서 설명해 주지</h2>
 </li>
 <li><a href="#">
-  <img src="../img/monthly2.jpeg" alt="">
+  <img th:src="@{/img/admin/monthly2.jpeg}" alt="">
 </a>
 <h1 style="font-size: 18px;">관리자 표 추천 템~ㅋㅎ</h1>
 <h2 style="font-size: 15px;">언제 바뀔지 모르는디</h2>
 <h3 style="font-size: 14px;">아무튼 추천임.</h3>
  </li>
 <li><a href="#">
-  <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/026ddf171638765.Y3JvcCwxOTk5LDE1NjQsMCwyMTc.jpg" alt="">
+  <img th:src="@{/img/admin/monthly2.jpeg}" alt="">
 </a>
 <h1 style="font-size: 18px;">판매자 되면 요론것도 준당</h1>
 <h2 style="font-size: 16px;">판매자 되러</h2>
