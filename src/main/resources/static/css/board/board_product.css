@@ -1,0 +1,117 @@
+.wrap-container {
+    padding: 80px 0 0;
+    margin: 0 auto 0;
+}
+
+.title {
+    text-align: center;
+}
+
+.title h2 {
+    font-size: 33px;
+    font-weight: 100;
+    color: #1e4a53;
+}
+
+.brand_catagory {
+    display: flex;
+    font-size: 13px;
+    /* padding: 0 0 10px 6%; */
+}
+
+.btn {
+    padding: 46px 20px;
+}
+
+.btn p {
+    cursor: pointer;
+    color: #8eb4c8;
+}
+.main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 제품 css */
+.product-row {
+    display: flex;
+    width: 1400px;
+    height: 100%;
+}
+.product-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+.product-colum {
+    width: 400px;
+    height: 500px;
+    position: relative;
+}
+
+.product-img img {
+    width: 310px;
+    height: 310px;
+    cursor: pointer;
+}
+.product-img {
+    overflow: hidden;
+}
+
+.product-img:hover img {
+    transform: scale(1.1);
+    transition: all 0.2s linear;
+}
+.product-info {
+    display: flex;
+}
+.procuct-p {
+    display: flex;
+}
+.brand h4 {
+    cursor: pointer;
+}
+.product-name {
+    margin: 0 10px;
+    cursor: pointer;
+}
+.product-list {
+    margin-top: 50px;
+}
+.product-modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 5;
+}
+
+.modal-up {
+    width: 80px;
+    height: 20px;
+    background-color: #ffffff;
+    text-align: center;
+    border-radius: 30px;
+    justify-content: center;
+    color: #1e4a53;
+    font-size: 15px;
+    margin-top: 12px;
+    border: solid 3px #1e4a53;
+}
+.modal-down {
+    width: 30px;
+    height: 30px;
+    background-color: #ffffff;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 225px;
+}
+.product-modal img {
+    width: 20px;
+    height: 20px;
+}
