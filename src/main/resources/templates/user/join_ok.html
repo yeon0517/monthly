@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 | monthly.</title>
+    <link rel="stylesheet" th:href="@{/css/user/user_header.css}">
+    <link rel="stylesheet" th:href="@{/css/user/user_footer.css}">
+    <link rel="stylesheet" th:href="@{/css/user/join_ok.css}">
+  </head>
+
+  <body>
+<!--  <header class="header" th:replace="fragment/user_header :: user_header"></header>-->
+
+    <div id="main">
+      <div class="title">
+        <h2>회원가입 완료</h2>
+      </div>
+      <div class="container">
+        <div class="info-space">
+          <p class="info">스마트한 구독생활의 시작, monthly.</p>
+          <div class="result-box">
+            <div class="member-info">
+              <div class="info-detail">
+                <ul class="list">
+                  <li>
+                    <strong class="id">아이디</strong
+                    ><strong class="result"> : <span>abc123</span></strong>
+                  </li>
+                  <li>
+                    <strong class="name">이름</strong
+                    ><span class="result"> : <span>케인인</span></span>
+                  </li>
+                  <li>
+                    <strong class="email">이메일</strong
+                    ><span class="result"> : <span>aaa@gmail.com</span></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <p class="message2">
+            회원가입이 성공적으로 이루어졌습니다. 항상 고객님의
+            <br />
+            즐거운 구독 서비스를 위해 최선의 노력을 다하는 monthly가 되도록
+            하겠습니다.
+          </p>
+          <p class="after-button">
+            <a th:href="@{/user/login}" class="login">로그인</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+<!--    <footer class="footer" th:replace="fragment/user_footr :: user_footer"></footer>-->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script th:src="@{/js/user/join_ok.js}"></script>
+  </body>
+</html>

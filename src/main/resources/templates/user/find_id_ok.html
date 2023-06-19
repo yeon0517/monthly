@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>아이디 찾기 | monthly.</title>
+    <link rel="stylesheet" th:href="@{/css/user/user_header.css}">
+    <link rel="stylesheet" th:href="@{/css/user/user_footer.css}">
+    <link rel="stylesheet" th:href="@{/css/user/find_id_ok.css}">
+  </head>
+
+  <body>
+<!--  <header class="header" th:replace="fragment/user_header :: user_header"></header>-->
+
+    <div id="main">
+      <div class="title2">
+        <h2>아이디 찾기</h2>
+      </div>
+      <div class="container">
+        <div class="info-space2" style="display: none;">
+          <p class="info2">입력하신 정보에 저장된 아이디가 없습니다!</p>
+          <div class="result-box2">
+            <p class="message2">
+              입력하신 정보로 고객님의 아이디를 찾을 수 없습니다.
+            </p>
+            <img th:src="@{/img/user/warning.png}" alt="">
+            <p class="message2">
+            
+              <br />
+             하단에 아이디 찾기를 클릭해 다시 시도해보시거나 
+             <br />
+             회원가입 버튼을 클릭해 monthly의 다양한 서비스를 체험해보세요! 
+            </p>
+            <p class="after-button">
+              <a th:href="@{/user/findId}" class="find-id">아이디 찾기</a>
+              <a th:href="@{/user/join}" class="join">회원가입</a>
+            </p>
+            </div>
+        </div>
+        <div class="info-space">
+          <p class="info2">아이디 찾기가 완료 되었습니다.</p>
+          <div class="result-box">
+            <p class="message">
+              monthly를 이용해주셔서 감사합니다.<br />
+              다음정보로 가입된 아이디가 총 <span class="id-cnt">1</span>개
+              있습니다.
+            </p>
+            <div class="member-info">
+              <p class="thumbnail">
+                <img
+                  th:src="@{//img.echosting.cafe24.com/skin/base/member/img_member_default.gif}"
+                  alt=""
+                />
+              </p>
+              <div class="info-detail">
+                <ul class="list">
+                  <li>
+                    <strong class="name">이름</strong
+                    ><strong class="result"> : <span>케인</span></strong>
+                  </li>
+                  <li>
+                    <strong class="email">이메일</strong
+                    ><span class="result"> : <span>123@email.com</span></span>
+                  </li>
+                  <li>
+                    <strong class="id">아이디</strong
+                    ><span class="result"> : <span>abc</span></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <p class="message2">
+            고객님의 아이디 찾기가 성공적으로 이루어졌습니다. 항상 고객님의
+            <br />
+            즐거운 구독 서비스를 위해 최선의 노력을 다하는 monthly가 되도록
+            하겠습니다.
+          </p>
+          <p class="after-button">
+            <a th:href="@{/user/login}" class="login">로그인</a>
+            <a th:href="@{/user/findPw}" class="find-pw">비밀번호찾기</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+<!--    <footer class="footer" th:replace="fragment/user_footr :: user_footer"></footer>-->
+
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script th:src="@{/js/user/find_id_ok.js}"></script>
+  </body>
+</html>
