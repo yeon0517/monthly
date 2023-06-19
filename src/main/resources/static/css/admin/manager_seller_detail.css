@@ -1,0 +1,181 @@
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+*{
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+body{
+  font-family:  'SUIT-Regular';
+}
+
+/* 섹션2개 전체..레이아웃 */
+.main-section{
+  margin-top: 30px;
+}
+.main-container{
+  width: 80%;
+  margin: 0 auto;
+}
+.main-container2{
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+.main-container3{
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  height: 280px;
+}
+
+tbody{
+  text-align: center;
+}
+table{
+  border: 1px solid black;
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td{
+  border:1px solid #8eb4c8;
+  padding: 10px;
+  font-weight: 300;
+  font-size: 12px;
+}
+
+select{
+  outline: none;
+  font-family:  'SUIT-Regular';
+  cursor: pointer;
+}
+button{
+  font-family:  'SUIT-Regular';
+  background-color: white;
+  cursor: pointer;
+}
+/* 검색창 테이블 */
+.main-section1-th{
+  background-color: #dce8ee;
+  color: black;
+  width: 50px;
+}
+.main-section1-table{
+  margin-bottom: 10px;
+}
+.period-input>label{
+  margin: 0 10px;
+  vertical-align: middle;
+  line-height: 18px;
+}
+.period-input input{
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.period-input span{
+  vertical-align: middle;
+}
+
+.search-dropdown{
+  margin-left: 7px;
+  margin-right: 10px;
+  width: 100px;
+  height: 20px;
+}
+.search-input{
+  width: 200px;
+  box-sizing: border-box;
+  border: 1px solid #8eb4c8;
+  align-items: center;
+  height: 20px;
+  padding-left: 10px;
+}
+.search-input:focus{
+  outline: none;
+  background-color: #dce8ee;
+}
+
+/* 검색버튼 */
+.btn-box{
+  margin: 10px auto 0;
+  width: 100px;
+  align-items: center;
+}
+
+/* 브랜드이름 */
+.main-container>h2{
+  font-size: 23px;
+  margin-bottom: 10px;
+  font-weight: 500;
+
+}
+.brand-name{
+  font-size: 25px;
+  color: #8eb4c8;
+  font-weight: 900;
+  margin-right: 5px;
+}
+.service-name{
+  font-size: 22px;
+  color: #1e4a53;
+  font-weight: 900;
+  margin-right: 5px;
+}
+
+.none-subscriber>h3{
+  text-align: center;
+  margin: 5px;
+  display: none;
+}
+
+/* 검색창 테이블 */
+.subscriber-input,
+.brand-input{
+  width: 200px;
+  box-sizing: border-box;
+  border: 1px solid #8eb4c8;
+  align-items: center;
+  height: 20px;
+  padding-left: 10px;
+}
+.subscriber-input:focus,
+.brand-input:focus{
+  outline: none;
+  background-color: #dce8ee;
+}
+
+
+/* 검색버튼 */
+
+.search-btn{
+  width: 70%;
+  height: 25px;
+  background-color: #1e4a53;
+  border-radius: 3px;
+  color: white;
+}
+
+
+/* 구독자관리 리스트테이블 */
+.brand-list-head>tr>th{
+  background-color: #dce8ee;
+  font-size: 14px;
+}
+
+
+.message-submit-btn,
+.out-btn{
+  background-color: #8eb4c8;
+  color:white;
+  padding: 3px 5px;
+  border-radius: 2px;
+  width: 80px;
+}
+
+
+
+

@@ -1,0 +1,180 @@
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+*{
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+body{
+  font-family:  'SUIT-Regular';
+}
+
+/* 섹션2개 전체..레이아웃 */
+.main-section{
+  margin-top: 30px;
+}
+.main-container{
+  width: 80%;
+  margin: 0 auto;
+}
+
+table{
+  border: 1px solid black;
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td{
+  border:1px solid #8eb4c8;
+  padding: 10px;
+  font-weight: 300;
+  font-size: 14px;
+}
+select{
+  outline: none;
+  font-family:  'SUIT-Regular';
+  cursor: pointer;
+}
+button{
+  font-family:  'SUIT-Regular';
+  background-color: white;
+  cursor: pointer;
+}
+.search-input{
+  width: 200px;
+  box-sizing: border-box;
+  border: 1px solid #8eb4c8;
+  align-items: center;
+  height: 20px;
+  padding-left: 10px;
+}
+/* 브랜드이름 */
+.main-container>h2{
+  font-size: 23px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.brand-name, .selected-period{
+  font-size: 25px;
+  color: #8eb4c8;
+  font-weight: 900;
+  margin-right: 5px;
+}
+
+/* 검색창 테이블 */
+.main-section1-th{
+  background-color: #8eb4c8;
+  color: white;
+  width: 50px;
+}
+.period{
+  border-bottom: 1px solid white;
+}
+.period-input>label{
+  margin: 0 10px;
+  vertical-align: middle;
+  line-height: 18px;
+}
+.period-input input{
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.period-input span{
+  vertical-align: middle;
+}
+
+.search-dropdown{
+  margin-left: 7px;
+  margin-right: 10px;
+  width: 100px;
+  height: 20px;
+}
+.subscriber-input,
+.brand-input{
+  width: 200px;
+  box-sizing: border-box;
+  border: 1px solid #8eb4c8;
+  align-items: center;
+  height: 20px;
+  padding-left: 10px;
+}
+.subscriber-input:focus,
+.brand-input:focus{
+  outline: none;
+  background-color: #dce8ee;
+}
+
+/* 검색버튼 */
+.btn-box{
+  margin: 10px auto 0;
+  width: 100px;
+  align-items: center;
+}
+.search-btn{
+  width: 100%;
+  height: 30px;
+  background-color: #1e4a53;
+  border-radius: 3px;
+  color: white;
+}
+
+
+/* 판매자관리 리스트테이블 */
+.seller-list-head>tr>th{
+  background-color: #dce8ee;
+  font-size: 14px;
+}
+th:nth-child(1),th:nth-child(2){
+  width: 40px;
+}
+
+th:nth-child(4){
+  width: 80px;
+}
+th:nth-child(6){
+  width: 70px;
+}
+th:nth-child(8){
+  width: 130px;
+}
+th:nth-child(9){
+  width: 200px;
+}
+th:nth-child(10),th:nth-child(11){
+  width: 30px;
+}
+.parcel-status{
+  text-align: center;
+  font-size: 12px;
+}
+
+td{
+  font-size: 12px;
+ 
+}
+.seller-list-body>tr>td{
+  font-size: 12px;
+ text-align: center;
+}
+
+.brand-link,
+.save-btn{
+  background-color: #8eb4c8;
+  color:white;
+  padding: 3px;
+  border-radius: 2px;
+  width: 50px;
+}
+
+
+
+
+/*판매자신청 없을 때*/
+.none-subscriber>h3{
+  text-align: center;
+  margin: 5px;
+  display: none;
+}
