@@ -29,31 +29,31 @@ $(document).ready(function () {
     // 반복할 요소의 배열
     let products = [
         {
-            imgSrc: "/img/product (3).jpg",
+            imgSrc: "/img/boardImg/product (3).jpg",
             brand: "[브랜드이름]",
             productName: "Y2K 호보백",
             price: "39,000원",
         },
         {
-            imgSrc: "/img/product (2).jpg",
+            imgSrc: "/img/boardImg/product (2).jpg",
             brand: "[브랜드이름]",
             productName: "Y2K 호보백",
             price: "39,000원",
         },
         {
-            imgSrc: "/img/product (3).jpg",
+            imgSrc: "/img/boardImg/product (3).jpg",
             brand: "[브랜드이름]",
             productName: "Y2K 호보백",
             price: "39,000원",
         },
         {
-            imgSrc: "/img/product (4).jpg",
+            imgSrc: "/img/boardImg/product (4).jpg",
             brand: "[브랜드이름]",
             productName: "Y2K 호보백",
             price: "39,000원",
         },
         {
-            imgSrc: "/img/product (4).jpg",
+            imgSrc: "/img/boardImg/product (4).jpg",
             brand: "[브랜드이름]",
             productName: "Y2K 호보백",
             price: "39,000원",

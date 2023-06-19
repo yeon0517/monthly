@@ -19,22 +19,22 @@ $(document).ready(function () {
 $(document).ready(function () {
     let brands = [
         {
-            imgSrc: "/img/one.jpg",
+            imgSrc: "/img/boardImg/one.jpg",
             title: "모어포모레",
             description: "환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트",
         },
         {
-            imgSrc: "/img/two.jpg",
+            imgSrc: "/img/boardImg/two.jpg",
             title: "모어포모레",
             description: "환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트",
         },
         {
-            imgSrc: "/img/three.jpg",
+            imgSrc: "/img/boardImg/three.jpg",
             title: "모어포모레",
             description: "환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트",
         },
         {
-            imgSrc: "/img/two.jpg",
+            imgSrc: "/img/boardImg/two.jpg",
             title: "모어포모레",
             description: "환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트",
         },

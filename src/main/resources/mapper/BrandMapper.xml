@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.monthly.mapper.BrandMapper">
+    <insert id="brandInsert">
+        <selectKey keyProperty="brandNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_BRAND.NEXTVAL FROM MONTHLY_BRAND
+        </selectKey>
+        INSERT INTO MONTHLY_BRAND (BRAND_NUMBER, BRAND_NAME, BRAND_CONTENTS, BRAND_REGISTER_DATE, SELLER_NUMBER)
+        VALUES (#{brandNumber},#{brandName},#{brandContents},#{brandRegisterDate},#{sellerNumber})
+
+    </insert>
+</mapper>

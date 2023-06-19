@@ -18,6 +18,23 @@ public class BoardController {
 
     @GetMapping("/board_main")
     public void main(){
-
     }
+
+    @GetMapping("/board_brand")
+    public void mainbrand(){
+    }
+
+    @GetMapping("/board_product")
+    public void mainproduct(){
+    }
+
+    @GetMapping("/board_branddetail")
+    public void mainbrandDetail(){
+    }
+
+    @GetMapping("/board_about")
+    public void mainabout(){
+    }
+
+
 }

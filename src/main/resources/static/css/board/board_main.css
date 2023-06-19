@@ -19,7 +19,7 @@
     height: 50%;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 .wrap_div {
     width: 50%;
@@ -114,5 +114,5 @@
     display: flex;
     margin-top: 329px;
     flex-direction: row-reverse;
-    margin-left: -93px;
+    margin-left: -54px;
 }
