@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>매니저 | 판매자관리</title>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <link rel="stylesheet" th:href="@{/css/admin/manager_seller.css}">
+  <link rel="stylesheet" th:href="@{/css/admin/admin_header.css}" />
+
+</head>
+<body>
+
+<header class="header" th:replace="fragment/admin_header::admin_header">
+</header>
+
+  <!-- 판매자 메인 주문관리 목록 검색창 -->
+  <section class="main-section main-section1">
+    <div class="main-container main-container1">
+      <!-- 판매자 브랜드이름띄우기 -->
+      <h2><span class="brand-name">Monthly</span> 판매자 검색</h2>
+      <!-- 검색 조건 form태그 -->
+      <form action="">
+      <table class="main-section1-table">
+        <tr>
+          <th class="main-section1-th period">기간</th>
+          <td class="period-input">
+            <label><input type="radio" name="period" value="today" checked><span>오늘</span></label>
+            <label><input type="radio" name="period" value="yesterday"><span>어제</span></label>
+            <label><input type="radio" name="period" value="1month"><span>1개월</span></label>
+            <label><input type="radio" name="period" value="3month"><span>3개월</span></label>
+            <label><input type="radio" name="period" value="all"><span>전체</span></label>
+          </td>
+        </tr>
+        <tr>
+          <th class="main-section1-th search">검색</th>
+          <td>
+            <select name="search-select" id="" class="search-dropdown">
+              <option value="seller-number">판매자 번호</option>
+              <option value="seller-name">판매자 이름</option>
+              <option value="seller-id">판매자 아이디</option>
+            </select>
+            <input type="text" placeholder="입력" class="search-input">
+          </td>
+        </tr>
+      </table>
+      <!-- 검색버튼 누르면 판매자관리리스트테이블 비동기로 띄움 -->
+      <div class="btn-box"><button type="submit" class="search-btn">검색</button></div>
+    </form>
+    </div>
+  </section>
+  <!-- 판매자 주문관리 리스트테이블 -->
+  <section class="main-section main-section2">
+    <div class="main-container main-container2">
+      <!-- 검색 기간 조건에 따라 오늘/어제/1개월/3개월/전체로 span안에 텍스트변경 -->
+      <h2><span class="brand-name">Monthly</span>판매자 관리</h2>
+      <table>
+        <thead class="seller-list-head">
+          <!--판매자신청없을때 띄워질 알림글 가려놨음-->
+          <span class="none-subscriber"><h3>오늘 판매자 신청 없음. </h3></span>
+      
+          <tr>
+            <th>판매자 번호</th>
+            <th>이름</th>
+            <th>상태</th>
+            <th>아이디</th>
+            <th>연락처</th>
+            <th>신청일</th>
+            <th>사업자 등록 번호</th>
+            <th>이메일</th>
+            <th>주소</th>
+            <th>브랜드</th>
+            <th>저장</th>
+          </tr>
+        </thead>
+        <tbody class="seller-list-body">
+         
+          <tr> <form action="#"> <!--판매자 리스트 띄움 ajax처리 #1-->
+              <input type="hidden" value="?">
+              <td>1</td>
+              <td>박은서</td>
+              <td>
+                <select name="parcel-status" id="#" class="parcel-status">
+                  <option value="sell-ready">영업신청</option>
+                  <option value="sell-ing">영업허가</option>
+                  <option value="sell-close">폐업</option>
+                </select>
+              </td>
+              <td>nsoe12</td>
+              <td>010-1234-1234</td>
+              <td>2023/03/10</td>
+              <td>123-12-12345</td>
+              <td>nsoe12@naver.com</td>
+              <td>서울특별시 서초구 반포대로 58. 101동 501호(서초동. 서초아파트)</td>
+              <td>
+                <!-- <input type="text" placeholder="브랜드 명" class="brand-input">   -->
+                <button type="button" class="brand-link"> 브랜드 이동</button>   
+              </td>
+              <td><button type="submit" class="save-btn">save</button></td>
+            </form> 
+            <!-- 저장버튼 누르면 비동기로 저장 -->
+          </tr><!--판매자 리스트 띄움 ajax처리 #1끝-->
+      
+          <tr> <form action="#"> <!--판매자 리스트 띄움 ajax처리 #2-->
+            <input type="hidden" value="?">
+            <td>2</td>
+            <td>박은서</td>
+            <td>
+              <select name="parcel-status" id="" class="parcel-status">
+                <option value="sell-ready">영업신청</option>
+                <option value="sell-ing">영업허가</option>
+                <option value="sell-close">폐업</option>
+              </select>
+            </td>
+            <td>nsoe12</td>
+            <td>010-1234-1234</td>
+            <td>2023/03/16</td>
+            <td>123-12-12345</td>
+            <td>nsoe12@naver.com</td>
+            <td>서울특별시 서초구 반포대로 58. 101동 501호(서초동. 서초아파트)</td>
+            <td>
+              <!-- <input type="text" placeholder="브랜드 명" class="brand-input">   -->
+              <button type="button" class="brand-link"> 브랜드 이동</button>   
+            </td>
+            <td><button type="submit" class="save-btn">save</button></td>
+          </form> 
+          <!-- 저장버튼 누르면 비동기로 저장 -->
+        </tr><!--판매자 리스트 띄움 ajax처리 #2끝-->
+
+
+        </tbody>
+      </table> <!-----판매자 관리 리스트 테이블 끝 -->
+    </div>
+  </section>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+</body>
+</html>

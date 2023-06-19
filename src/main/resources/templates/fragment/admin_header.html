@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자헤더</title>
+  <link rel="stylesheet" th:href="@{/css/admin/admin_header.css}"/>
+</head>
+
+<body>
+
+  <header class="header-menu" th:fragment="admin_header">
+    <div class="header-container">
+      <div class="header-wrap">
+        <ul class="header-nav">
+          <li class="header-nav-item"><a th:href="@{/admin/main}" id="admin_main">홈</a></li>
+          <li class="header-nav-item"><a href="">전체 회원 관리</a></li>
+          <li class="header-nav-item"><a href="">전체 상품 관리</a></li>
+          <li class="header-nav-item"><a href="">판매자 관리</a></li>
+          <li class="header-nav-item"><a href="">구독자 관리</a></li>
+        </ul>
+        <ul class="header-nav nav-right">
+          <li class="header-nav-item"><a href="">monthly</a></li>
+          <li class="header-nav-item logout"><a href="">로그아웃</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </header>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script th:src="@{/js/admin/admin_header.js}"></script>
+</body>
+
+</html>
