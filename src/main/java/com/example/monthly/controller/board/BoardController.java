@@ -15,4 +15,9 @@ public class BoardController {
     public void productInfo(){
 
     }
+
+    @GetMapping("/board_main")
+    public void main(){
+
+    }
 }

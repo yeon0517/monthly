@@ -30,7 +30,10 @@ html {
     justify-content: space-between;
     margin: 0 auto;
 }
-
+.main_menu{
+    text-decoration: none;
+   
+}
 .allContainer {
     margin-top: 23px;
 }
@@ -87,7 +90,7 @@ html {
     justify-content: flex-end;
 }
 
-.bar {
+.allbar {
     border-right: 1px solid #ddd;
     height: 16px;
     margin: 8px 20px 0;

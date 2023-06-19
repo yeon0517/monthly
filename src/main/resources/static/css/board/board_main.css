@@ -109,7 +109,7 @@
     height: 25px;
 }
 
-.whole-box:nth-child(2n) {
+.wrap:nth-child(2n) .whole-box {
     width: 1400px;
     display: flex;
     margin-top: 329px;
