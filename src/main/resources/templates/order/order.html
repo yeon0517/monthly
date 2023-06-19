@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/order/order.css}" />
+  </head>
+  <body>
+    <div class="userModify">
+      <div class="container">
+        <header>
+          <div
+            class="area"
+            style="
+              border: 1px solid black;
+              width: 100%;
+              height: 200px;
+              border: 1px solid;
+            "
+          >
+            header
+          </div>
+        </header>
+
+        <div class="userTitle" style="position: relative">
+          <h2>ORDER</h2>
+        </div>
+
+        <!-- 결제창으로 -->
+        <form id="editForm" name="editForm" method="get" action="">
+          <div class="mainInput">
+            <h3>배송지 정보</h3>
+            <p class="require">
+              <img src="../img/ico_required.gif" alt="" />
+              필수사항
+            </p>
+          </div>
+          <div class="tableContainer">
+            <table class="modTable" style="width: 100%" border="1">
+              <colgroup>
+                <col style="width: 150px" />
+                <col style="width: auto" />
+              </colgroup>
+              <tbody class="modBody">
+                <!-- 비밀번호 확인 -->
+                <tr>
+                  <th>배송지 선택</th>
+                  <td class="gender">
+                    <!-- db에서 값을 받아와서 if문 사용해서 M이면 남자 버튼 고정, F면 여자 버튼 고정 -->
+                    <input
+                      type="radio"
+                      id="address"
+                      value="same"
+                      checked
+                      onclick="return false"
+                    />회원 정보와 동일
+                    <input
+                      type="radio"
+                      id="address"
+                      value="new"
+                      onclick="return false"
+                    />새로운 배송지
+                  </td>
+                </tr>
+
+                <!-- 이름 -->
+                <tr>
+                  <th>
+                    받으시는 분
+                    <img src="../img/ico_required.gif" alt="" />
+                  </th>
+                  <td>
+                    <input name="userName" id="userName" type="text" placeholder="" />
+                  </td>
+                </tr>
+
+                <!-- 주소 -->
+                <tr>
+                  <th>주소</th>
+                  <td class="address">
+                    <input name="postAddress" id="postAddress" type="text" />
+
+                    <img
+                      src="../img/btn_zipcode.gif"
+                      onclick="sample6_execDaumPostcode()"
+                      style="vertical-align: middle"
+                    />
+
+                    <br />
+                    <input name="address1" id="address1" type="text" /> 기본주소
+                    <br />
+                    <input name="address2" id="address2" type="text" /> 나머지주소(상세주소)
+                  </td>
+                </tr>
+
+                <!-- 휴대전화 -->
+                <tr>
+                  <th>
+                    휴대전화
+                    <img src="../img/ico_required.gif" alt="" />
+                  </th>
+                  <td>
+                    <input name="userPhoneNumber" id="userPhoneNumber" type="text" />
+                  </td>
+                </tr>
+
+                <!-- 이메일 -->
+                <tr>
+                  <th>
+                    이메일
+                    <img src="../img/ico_required.gif" alt="" />
+                  </th>
+                  <td>
+                    <input  name = " userEmail" id="userEmail" type="text" />
+                  </td>
+                </tr>
+
+                <tr>
+                  <th>베송지 메세지</th>
+                  <td>
+                    <textarea
+                      name="omessage"
+                      id="omessage"
+                      cols="70"
+                      rows="10"
+                      style="width: 797px; height: 53px"
+                    ></textarea>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 버튼 -->
+            <div class="payArea">
+              <div class="payMent">
+                <div class="ecTable">
+                  <p>
+                    소액 결제시 의 경우 정책에 따라 결제 금액 제한이 있을수
+                    잇습니다.
+                  </p>
+                </div>
+                <div class="agree">
+                  <table border="0">
+                    <tbody>
+                      <tr>
+                        <th class="subs" scope="row">청약철회방침(필수)</th>
+                        <td class="subsArea">
+                          <div class="textArea">
+                            <textarea
+                              
+                              id="subscript"
+                              cols="70"
+                              rows="10"
+                              style="border: #8eb4c8; resize: none;"
+                              
+                            >
+제1조(청약철회)1. “모레상점”과 재화 등의 구매에 관한 계약을 체결한 이용자는 「전자상거래 등에서의 소비자보호에 관한 법률」 제13조 제2항에 따른 계약내용에 관한 서면을 받은 날(그 서면을 받은 때보다 재화 등의 공급이 늦게 이루어진 경우에는 재화 등을 공급받거나 재화 등의 공급이 시작된 날을 말합니다)부터 7일 이내에는 청약의 철회를 할 수 있습니다. 다만, 청약철회에 관하여 「전자상거래 등에서의 소비자보호에 관한 법률」에 달리 정함이 있는 경우에는 동 법 규정에 따릅니다. 2. 이용자는 재화 등을 배송 받은 경우 다음 각 호의 1에 해당하는 경우에는 반품 및 교환을 할 수 없습니다.가.    이용자에게 책임 있는 사유로 재화 등이 멸실 또는 훼손된 경우(다만, 재화 등의 내용을 확인하기 위하여 포장 등을 훼손한 경우에는 청약철회를 할 수 있습니다.)나.    이용자의 사용 또는 일부 소비에 의하여 재화 등의 가치가 현저히 감소한 경우다.    시간의 경과에 의하여 재판매가 곤란할 정도로 재화 등의 가치가 현저히 감소한 경우라.    같은 성능을 지닌 재화 등으로 복제가 가능한 경우 그 원본인 재화 등의 포장을 훼손한 경우3. 제2항 나호 내지 라호의 경우에 “모레상점”이 사전에 청약철회 등이 제한되는 사실을 소비자가 쉽게 알 수 있는 곳에 명기하거나 시용상품을 제공하는 등의 조치를 하지 않았다면 이용자의 청약철회 등이 제한되지 않습니다.4. 이용자는 제1항 및 제2항의 규정에 불구하고 재화 등의 내용이 표시·광고 내용과 다르거나 계약내용과 다르게 이행된 때에는 당해 재화 등을 공급받은 날부터 3월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터 30일 이내에 청약철회 등을 할 수 있습니다.제2조(청약철회 등의 효과)1. “모레상점”은 이용자로부터 재화 등을 반환 받은 경우 3영업일 이내에 이미 지급받은 재화 등의 대금을 환급합니다. 이 경우 “모레상점”이 이용자에게 재화 등의 환급을 지연한때에는 그 지연기간에 대하여 공정거래위원회가 정하여 고시하는 지연 이자율을 곱하여 산정한 지연이자를 지급합니다.2. “모레상점”은 위 대금을 환급함에 있어서 이용자가 신용카드 또는 전자화폐 등의 결제수단으로 재화 등의 대금을 지급한 때에는 지체 없이 당해 결제수단을 제공한 사업자로 하여금 재화 등의 대금의 청구를 정지 또는 취소하도록 요청합니다.3. 청약철회 등의 경우 공급받은 재화 등의 반환에 필요한 비용은 이용자가 부담합니다. “모레상점”은 이용자에게 청약철회 등을 이유로 위약금 또는 손해배상을 청구하지 않습니다. 다만 재화 등의 내용이 표시·광고 내용과 다르거나 계약내용과 다르게 이행되어 청약철회 등을 하는 경우 재화 등의 반환에 필요한 비용은 “모레상점”이 부담합니다.4. 이용자가 재화 등을 제공받을 때 발송비를 부담한 경우에 “모레상점”은 청약철회 시 그 비용을 누가 부담하는지를 이용자가 알기 쉽도록 명확하게 표시합니다.제16조(청약철회 등의 효과)
+
+① “모레상점”은 이용자로부터 재화 등을 반환받은 경우 3영업일 이내에 이미 지급받은 재화등의 대금을 환급합니다. 이 경우 “몰”이 이용자에게 재화등의 환급을 지연한 때에는 그 지연기간에 대하여 공정거래위원회가 정하여 고시하는 지연이자율을 곱하여 산정한 지연이자를 지급합니다.
+
+② “모레상점”은 위 대금을 환급함에 있어서 이용자가 신용카드 또는 전자화폐 등의 결제수단으로 재화등의 대금을 지급한 때에는 지체없이 당해 결제수단을 제공한 사업자로 하여금 재화등의 대금의 청구를 정지 또는 취소하도록 요청합니다.
+
+③ 청약철회등의 경우 공급받은 재화등의 반환에 필요한 비용은 이용자가 부담합니다. “몰”은 이용자에게 청약철회등을 이유로 위약금 또는 손해배상을 청구하지 않습니다. 다만 재화등의 내용이 표시·광고 내용과 다르거나 계약내용과 다르게 이행되어 청약철회등을 하는 경우 재화등의 반환에 필요한 비용은 “모레상점”이 부담합니다.
+
+④ 이용자가 재화등을 제공받을때 발송비를 부담한 경우에 “몰”은 청약 철회시 그 비용을 누가 부담하는지를 이용자가 알기 쉽도록 명확하게 표시합니다.</textarea
+                            >
+                          </div>
+                          <div style="display: flex">
+                            <input class="check" type="checkbox" />
+                            <div
+                              style="
+                                margin-left: 12px;
+                                font-size: small;
+                                font-weight: bolder;
+                              "
+                            >
+                              동의함
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- 결제 버튼 -->
+              <div class="payTotal">
+                <h4>최종결제 금액</h4>
+                <p class="price">
+                  <input
+                    id="inputPrice"
+                    name="inputPrice"
+                    type="text"
+                    style="
+                      text-align: right;
+                      ime-mode: disabled;
+                      clear: none;
+                      border: 0px;
+                      float: none;
+                      color: #1e4a53;
+                    "
+                    size="10"
+                    value="15000"
+                  />
+                  <span>원</span>
+                </p>
+                <div class="payBtn">
+                  <input class="pay" id="btn" type="submit" value="결제하기">
+                    <!-- <span class="payText">결제하기</span> -->
+                  </input>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <footer
+        class="foot"
+        style="
+          border: 1px solid black;
+          width: 100%;
+          height: 200px;
+          border: 1px solid;
+          margin-top: 30px;
+        "
+      >
+        footer
+      </footer>
+    </div>
+  </body>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"
+  ></script>
+  <script th:src="@{/js/order/order.js}"></script>
+</html>

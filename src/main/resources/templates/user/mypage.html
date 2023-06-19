@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/user/mypage.css}" />
+
+     <!-- jquery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <!-- bootstrap 4 -->
+     <link
+       rel="stylesheet"
+       href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+     />
+     <link
+       rel="stylesheet"
+       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+     />
+ 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ 
+     <!-- fullcalendar -->
+     <link
+       rel="stylesheet"
+       href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css"
+     />
+     <script
+       type="text/javascript"
+       src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js"
+     ></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="mypage">
+      
+        <header>
+          <div
+            class="area"
+            style="
+              border: 1px solid black;
+              width: 100%;
+              height: 200px;
+              border: 1px solid;
+            "
+          >
+            header
+          </div>
+        </header>
+        <!-- 마이페이지 타이틀 -->
+        <div class="mypageTitle">
+          <h2>MY PAGE</h2>
+        </div>
+
+        <!-- 캘린더 -->
+        <div class="subCal">
+          <!-- <img class="block" src="../img/67c02aec30489c0df6af1c20908f5259.jpg" style="width: 100%; border: 1px;" ></img> -->
+          <div id="calendarBox">
+            <div id="calendar"></div>
+          </div>
+      
+          <!-- modal 추가 -->
+          <!-- 외부 구독 내용 보내기 -->
+          <form action="" method="get">
+          <div
+          class="modal fade"
+          id="calendarModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    일정을 입력하세요.
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label  class="col-form-label">일정 내용</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="calendar_content"
+                      name="calendar_content"
+                    />
+                    <label  class="col-form-label">시작 날짜</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="calendar_start_date"
+                      name="calendar_start_date"
+                    />
+                    <label  class="col-form-label">종료 날짜</label>
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="calendar_end_date"
+                      name="calendar_end_date"
+                    />
+                    <label  class="col-form-label">가격</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="calendar_price"
+                      name="calendar_price"
+                    />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning" id="addCalendar">
+                    추가
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    id="sprintSettingModalClose"
+                  >
+                    취소
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        </form>
+      
+      
+
+
+        <!-- 구독 리스트 -->
+        <div class="subList">
+          <div class="subTitle">
+            <h3>
+              나의 구독 리스트
+              <span>(최근 3개월 기준)</span>
+            </h3>
+          </div>
+
+          <div class="listTitle">
+            <h3>내부 구독 리스트</h3>
+          </div>
+          <div class="prolist">
+            <div class="exSubList">
+              <table class="exTable" boarder="1">
+                <thead class="exthead">
+                  <tr>
+                    <th>NO</th>
+                    <th>PRODUCT INFO</th>
+                    <th style="width: 550px">TITLE</th>
+                    <th>DATE</th>
+                    <th>PRICE</th>
+                  </tr>
+                </thead>
+
+                <!-- 구독 정보 가져오기 -->
+                <tbody class="extbody">
+                  <tr style="background-color: #ffffff; color: #555555">
+                    <td class="productNumber">
+                      <span>45234</span>
+                    </td>
+                    <td class="productImg">
+                      <img
+                        src ="../img/5e3eebd9f16e87a1d2898e229a8e69f7.jpg"
+                        alt=""
+                      />
+                    </td>
+                    <td class="productTitle" style="font-weight: bolder">
+                      <span>[모어포모레] 심플 설거지 세트</span>
+                    </td>
+                    <td class="productDate">
+                      <span>2023-06-07 </span>
+                    </td>
+                    <td class="productPrice" style="font-weight: bolder">
+                      <span>15000원</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 외부 구독 테이블에서 정보 가져오기 -->
+          <div class="listTitle">
+            <h3>외부 구독 리스트</h3>
+          </div>
+          <div class="prolist">
+            <div class="exSubList">
+              <table class="exTable" boarder="1">
+                <thead class="exthead">
+                  <tr>
+                    <th>NO</th>
+                    <th style="width: 550px">TITLE</th>
+                    <th>DATE</th>
+                    <th>PRICE</th>
+                  </tr>
+                </thead>
+
+                <!-- 외부 구독 정보 가져오기 -->
+                <tbody class="extbody">
+                  <tr style="background-color: #ffffff; color: #555555">
+                    <td class="productNumber">
+                      <span>45234</span>
+                    </td>
+
+                    <td
+                      class="productTitle"
+                      style="font-weight: bolder; width: 550px; height: 100px"
+                    >
+                      <span>[모어포모레] 심플 설거지 세트</span>
+                    </td>
+                    <td class="productDate">
+                      <span>2023-06-07 </span>
+                    </td>
+                    <td class="productPrice" style="font-weight: bolder">
+                      <span>15000원</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 옵션 버튼 -->
+        <div class="optionBtn">
+          <div class="userModify">
+            <a
+              class="modBtn"
+              style="background-color: #8eb4c8; color: #f8f9fa;"
+              href="../html/userModify.html"
+            >
+              회원정보 수정</a
+            >
+          </div>
+        </div>
+
+        <footer
+          class="foot"
+          style="
+            border: 1px solid black;
+            width: 100%;
+            height: 200px;
+            border: 1px solid;
+          "
+        >
+          footer
+        </footer>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script th:src="@{/js/user/mypage.js}"></script>
+  </body>
+</html>
