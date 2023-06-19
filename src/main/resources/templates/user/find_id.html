@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>아이디 찾기 | monthly.</title>
+    <link rel="stylesheet" th:href="@{/css/user/user_header.css}">
+    <link rel="stylesheet" th:href="@{/css/user/user_footer.css}">
+    <link rel="stylesheet" th:href="@{/css/user/find_id.css}">
+  </head>
+
+  <body>
+<!--  <header class="header" th:replace="fragment/user_header :: user_header"></header>-->
+
+    <div id="main">
+      <div class="title2">
+        <h2>아이디 찾기</h2>
+      </div>
+      <div class="container">
+        <fieldset class="field">
+          <p class="check">
+            <input id="check-method1" value="2" type="radio" />
+            <label for="check-method1">이메일</label>
+            <input id="check-method2" value="2" type="radio" />
+            <label for="check-method2">휴대폰번호</label>
+          </p>
+          <p class="input-name">
+            <strong class="name">이름</strong>
+            <input class="name-space" type="text" />
+          </p>
+          <p class="input-email">
+            <strong class="email">이메일</strong>
+            <input class="email-space" type="text" />
+          </p>
+          <p class="input-phone" style="display: none">
+            <strong class="phone">휴대폰번호</strong>
+            <input class="phone-space1" maxlength="3" type="text" />
+            -
+            <input class="phone-space2" maxlength="4" type="text" />
+            -
+            <input class="phone-space3" maxlength="4" type="text" />
+          </p>
+        </fieldset>
+        <p class="button-area">
+          <a href="" class="not-find-id-button">확인</a>
+          <a th:href="@{/user/findIdOK}" class="find-id-button" style="display: none"
+            >확인</a
+          >
+        </p>
+      </div>
+    </div>
+
+<!--  <footer class="footer" th:replace="fragment/user_footr :: user_footer"></footer>-->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script th:src="@{/js/user/find_id.js}"></script>
+  </body>
+</html>

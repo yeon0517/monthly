@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: "SUIT-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "SUIT-Regular";
+  position: relative;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+#main {
+  min-width: 1150px;
+  padding: 150px 0 0;
+  margin: 0 auto 0;
+  position: relative;
+}
+
+.title {
+  min-height: 30px;
+  padding: 0 0 45px;
+  text-align: center;
+}
+
+.title > h2 {
+  font-size: 33px;
+  font-weight: normal;
+  color: #1e4a53;
+}
+
+.container {
+  width: 560px !important;
+  margin: 0 auto;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 30px 0;
+  line-height: 150%;
+  text-align: center;
+}
+
+.info-space {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.info {
+  margin: 0 0 30px;
+  font-size: 20px;
+  color: #8eb4c8;
+  font-weight: bold;
+}
+
+.result-box {
+  border-width: 1px;
+  border-color: #d7d5d5;
+  text-align: left;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #e8e8e8;
+  color: #404040;
+}
+
+.member-info {
+  display: table;
+  table-layout: fixed;
+  padding: 15px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.info-detail {
+  display: table-cell;
+  padding: 0 40px;
+  width: auto;
+  line-height: 1.5em;
+  font-size: 13px;
+  border-left: 1px solid #e8e8e8;
+  vertical-align: middle;
+}
+
+.list {
+  text-align: left;
+}
+
+.list > li {
+  list-style: square;
+}
+
+.name,
+.email,
+.id {
+  width: 30%;
+  float: left;
+  margin: 0 0 2px;
+  padding: 0 4px 0 0;
+  line-height: 22px;
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+.result {
+  padding-left: 30%;
+  display: block;
+  margin: 0 0 2px;
+  padding: 0 5px 0 100px;
+  min-height: 22px;
+  line-height: 22px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.message2 {
+  margin: 40px 0 0;
+  color: #757575;
+}
+
+.after-button {
+  padding: 10px 0;
+  text-align: center;
+}
+
+.login {
+  font-size: 16px;
+  font-weight: 400;
+  width: 120px;
+  display: inline-block;
+  line-height: 42px;
+  color: #fff;
+  background: #000000;
+  text-decoration: none;
+}
+/* 메인 영역 끝 */

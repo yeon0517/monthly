@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: "SUIT-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "SUIT-Regular";
+  position: relative;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+#main {
+  min-width: 1150px;
+  padding: 150px 0 0;
+  margin: 0 auto 0;
+  position: relative;
+}
+
+.title2 {
+  min-height: 30px;
+  padding: 0 0 45px;
+  text-align: center;
+}
+
+.title2 > h2 {
+  font-size: 33px;
+  font-weight: normal;
+  color: #1e4a53;
+}
+
+.field {
+  border: none;
+  display: block;
+}
+
+.field > p {
+  margin: 7px 50px 0;
+}
+
+.container {
+  width: 560px !important;
+  padding: 30px 90px;
+  border-bottom: 1px solid #e1e1e1;
+  border-top: 1px solid #e1e1e1;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0 auto;
+}
+
+.check {
+  margin-left: 195px !important;
+  margin-bottom: 30px;
+  color: #353535;
+}
+
+.id,
+.name,
+.email,
+.phone {
+  padding: 0 !important;
+  background: none !important;
+  font-weight: 300;
+  display: inline-block;
+  margin: 0 0 5px;
+  width: 140px;
+}
+
+.id-space {
+  width: 170px;
+  line-height: 24px;
+  padding: 2px 4px;
+  border: 1px solid #d5d5d5;
+  color: #111111;
+  font-size: 12px;
+}
+
+.name-space,
+.email-space {
+  width: 235px !important;
+  line-height: 24px;
+  padding: 2px 4px;
+  border: 1px solid #d5d5d5;
+  color: #111111;
+  font-size: 12px;
+}
+
+.phone-space1,
+.phone-space2,
+.phone-space3 {
+  width: 60px;
+  line-height: 24px;
+  padding: 2px 4px;
+  border: 1px solid #d5d5d5;
+  color: #111111;
+  font-size: 12px;
+}
+
+.button-area {
+  padding-top: 20px;
+  padding-right: 52px;
+  text-align: center;
+}
+
+.not-find-pw-button {
+  cursor: unset;
+  font-size: 16px;
+  font-weight: 400;
+  width: 120px;
+  display: inline-block;
+  line-height: 42px;
+  color: #fff;
+  background: gray;
+}
+
+.find-pw-button {
+  font-size: 16px;
+  font-weight: 400;
+  width: 120px;
+  display: inline-block;
+  line-height: 42px;
+  color: #fff;
+  background: #111;
+}
+
+a {
+  text-decoration: none !important;
+  outline: 0 !important;
+  transition: all 0.3s ease;
+}
+
+input {
+  outline: none;
+}
+
+#check-method2 {
+  margin-left: 10px;
+}
