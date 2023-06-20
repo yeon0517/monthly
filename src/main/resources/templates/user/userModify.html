@@ -6,24 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/user/userModify.css}" />
+    <link rel="stylesheet" th:href="@{/css/board/all.css}" />
   </head>
   <body>
+  <header class="board-header"  th:replace="fragment/board_header :: board_header"></header>
     <div class="userModify">
 
       <div class="container">
-
-        <header>
-          <div class="area" style="border: 1px solid black;
-          width: 100%;
-          height: 200px;
-          border: 1px solid;" >header</div>
-        </header>
 
         <div class="userTitle" style="position: relative">
           <h2>회원 정보 수정</h2>
         </div>
 
-        <form id="editForm" name="editForm" action="mypage.html" method="get">
+        <form id="editForm" name="editForm" th:action="@{/user/userModify}" method="post" enctype="multipart/form-data">
           <div class="mainInput">
             <h3>기본 정보</h3>
             <p class="require">
@@ -48,7 +43,8 @@
                   </th>
                   <td>
                     <!-- 아이디 넣기 -->
-                    <input name="userId" id="userId" type="text" value="" placeholder="" required />
+                    <input name="userId" id="userId" type="text"
+                           th:value="${user.userId}" value="" placeholder="" required  disabled/>
                     (영소문자/숫자,4~16자)
                   </td>
                 </tr>
@@ -57,8 +53,9 @@
                 <tr>
                   <th>현재비밀번호</th>
                   <td>
-                    <input id="userPassword" type="password" value="" placeholder="" />
-                    (영대소문자/숫자/특수문자 중 3가지 이상 조합,8~16자)
+                    <input class="pw" hidden th:value="${user.userPassword}">
+                    <input id="userPassword" type="password" onchange="pw()"  placeholder="" />
+                    <span id="pwchk"></span>
                   </td>
                 </tr>
 
@@ -81,7 +78,7 @@
                   <th>비밀번호 확인</th>
                   <td>
                     <input name="checkPassword" id="checkPassword" class="pw" type="password" onchange="check_pw()" />
-                    (영소문자/숫자,4~16자)
+
                     <span id="check"></span>
                   </td>
                 </tr>
@@ -94,7 +91,7 @@
                   </th>
                   <td>
                     <!-- 이름 넣기 -->
-                    <input name="userName" id="userName" type="text" value="" placeholder="" required />
+                    <input name="userName" id="userName" type="text" th:value="${user.userName}" placeholder="" required disabled />
                     
                   </td>
                 </tr>
@@ -102,21 +99,21 @@
                 <tr>
                   <th>생년월일</th>
                   <td>
-                    <input name="userBirthday" id="userBirthday" value="" type="text" placeholder="" />
+                    <input name="userBirthday" id="userBirthday" th:value="${user.userBirthday}" type="text" placeholder=""  disabled/>
                   </td>
                 </tr>
                 <!-- 주소 -->
                 <tr>
                   <th>주소</th>
                   <td class="address">
-                    <input name="postAddress" id="postAddress" type="text" />
+                    <input name="deliveryPostcode" id="postAddress" th:value="${delivery.deliveryPostcode}" type="text" />
                     
-                      <img src="../img/btn_zipcode.gif" onclick="sample6_execDaumPostcode()" style="vertical-align: middle;" />
+                      <img src="../img/btn_zipcode.gif"  onclick="sample6_execDaumPostcode()" style="vertical-align: middle;" />
                     
                     <br />
-                    <input name="address1" id="address1" type="text" /> 기본주소
+                    <input name="deliveryAddress1" id="address1" th:value="${delivery.deliveryAddress1}"   type="text" /> 기본주소
                     <br />
-                    <input name="address2" id="address2" type="text" /> 나머지주소(상세주소)
+                    <input name="deliveryAddress2" id="address2" th:value="${delivery.deliveryAddress2}"  type="text" /> 나머지주소(상세주소)
                   </td>
                 </tr>
 
@@ -128,7 +125,7 @@
                   </th>
                   <td>
                     <!-- 휴대전화 넣기 -->
-                    <input name="userPhoneNumber" value="" id="userPhoneNumber" type="text" required />
+                    <input name="userPhoneNumber" th:value="${user.userPhoneNumber}" id="userPhoneNumber" type="text" required  disabled/>
                   </td>
                 </tr>
 
@@ -140,7 +137,7 @@
                   </th>
                   <td>
                     <!-- 이메일 넣기 -->
-                    <input name="userEmail" value="" id="userEmail" type="text" required />
+                    <input name="userEmail"  th:value="${user.userEmail}" id="userEmail" type="text" required disabled/>
                   </td>
                 </tr>
 
@@ -151,8 +148,9 @@
                   </th>
                   <td class="gender">
                     <!-- db에서 값을 받아와서 if문 사용해서 M이면 남자 버튼 고정, F면 여자 버튼 고정 -->
-                    <input type="radio" name="gender" value="male" onclick="return false">남성
-                    <input type="radio" name="gender" value="female" checked onclick="return false">여성
+                    <input hidden class="gender" th:value="${user.userGender}">
+                    <input type="radio" name="gender" value="M" onclick="return false">남성
+                    <input type="radio" name="gender" value="F"  onclick="return false">여성
                   </td>
                 </tr>
               </tbody>
@@ -168,25 +166,14 @@
                 
               />
               <!-- mypage,main 으로? -->
-              <input
-              class="backBtn"
-                type="button"
-                style="background-color: #dce8ee; cursor: pointer;"
-                value="취소"
-                href="mypage.html"
-              />
-              <input id="userRemove" style="background-color: #dce8ee; cursor: pointer;" type="button" value="회원탈퇴"></input>
+              <a class="backBtn" th:href="@{/user/mypage}">취소</a>
+              <a id="userRemove" th:href="@{/user/changeStatus}">회원탈퇴</a>
             </div>
           </div>
         </form>
       </div>
 
-      <footer class="foot" style="border: 1px solid black;
-        width: 100%;
-        height: 200px;
-        border: 1px solid;">
-        footer
-      </footer>
+      <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
     </div>
 
   </body>
@@ -197,4 +184,5 @@
     crossorigin="anonymous"
   ></script>
   <script th:src="@{/js/user/userModify.js}"></script>
+  <script th:src="@{/js/board/board_main.js}"></script>
 </html>

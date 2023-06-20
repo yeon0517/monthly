@@ -213,13 +213,27 @@ document.addEventListener("DOMContentLoaded", function () {
     //전체보기시 더보기 버튼 감추기 & 감추기 버튼 표시
     if (!classList.contains("showstep1") && !classList.contains("showstep2")) {
       e.target.classList.add("hide");
-      document.querySelector(".btn_close").classList.remove("hide");
+      // document.querySelector(".btn_close").classList.remove("hide");
     }
   });
 });
 
-document.querySelector(".btn_close").addEventListener("click", function (e) {
-  e.target.classList.add("hide");
-  document.querySelector(".btn_open").classList.remove("hide"); // 더보기 버튼 감춤
-  document.querySelector(".detailinfo").classList.add("showstep1"); // 초기 감춤 상태로 복귀
+// document.querySelector(".btn_close").addEventListener("click", function (e) {
+//   e.target.classList.add("hide");
+//   document.querySelector(".btn_open").classList.remove("hide"); // 더보기 버튼 감춤
+//   document.querySelector(".detailinfo").classList.add("showstep1"); // 초기 감춤 상태로 복귀
+// });
+
+$(function () {
+  var lnb = $("#lnb").offset().top;
+
+  $(window).scroll(function () {
+    var window = $(this).scrollTop();
+
+    if (lnb <= window) {
+      $("#lnb").addClass("fixed");
+    } else {
+      $("#lnb").removeClass("fixed");
+    }
+  });
 });

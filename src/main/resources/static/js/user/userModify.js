@@ -39,6 +39,9 @@ function check_pw() {
     document.getElementById("checked").innerHTML =
       "!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.";
     document.getElementById("checked").style.color = "red";
+  } else{
+    document.getElementById("checked").innerHTML = "사용가능합니다"
+    document.getElementById("checked").style.color = "blue";
   }
   if (
     document.getElementById("userNewPassword").value != "" &&
@@ -55,8 +58,21 @@ function check_pw() {
         "비밀번호가 일치하지 않습니다.";
       document.getElementById("check").style.color = "red";
     }
+
+  }
+
+}
+
+function pw(){
+  if($('.pw').val() == $('#userPassword')){
+    document.getElementById("pwchk").innerHTML = "비밀번호가 일치합니다.";
+    document.getElementById("pwchk").style.color = "blue";
+  }else{
+    document.getElementById("pwchk").innerHTML = "비밀번호가 일치하지 않습니다.";
+    document.getElementById("pwchk").style.color = "red";
   }
 }
+
 
 function sample6_execDaumPostcode() {
   new daum.Postcode({
@@ -111,3 +127,25 @@ function sample6_execDaumPostcode() {
 $(".backBtn").on("click", function () {
   location.href = "mypage.html";
 });
+
+let gender = $('.gender').val();
+
+if(gender == 'M'){
+  $("input:radio[name ='gender']:input[value='M']").attr("checked", true);
+}else {
+  $("input:radio[name ='gender']:input[value='F']").attr("checked", true);
+}
+
+let birthday = $('#userBirthday').val().substring(0,10)
+
+$('#userBirthday').val(birthday);
+
+
+
+
+
+
+
+
+
+
