@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.monthly.mapper.OrderMapper">
+    <select id="select" resultType="deliveryDto">
+        SELECT DELIVERY_NUMBER,DELIVERY_POSTCODE,DELIVERY_ADDRESS1,DELIVERY_ADDRESS2,USER_NUMBER FROM MONTHLY_DELIVERY WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+    <insert id="insert">
+        <selectKey keyProperty="deliveryNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_DELIVERY.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_DELIVERY (DELIVERY_NUMBER, DELIVERY_POSTCODE, DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, USER_NUMBER)
+        VALUES (SEQ_DELIVERY.nextval,#{deliveryPostcode},#{deliveryAddress1},#{deliveryAddress2},#{userNumber})
+    </insert>
+
+    <update id="update">
+        UPDATE MONTHLY_DELIVERY
+        SET DELIVERY_POSTCODE = #{deliveryPostcode},DELIVERY_ADDRESS1 = #{deliveryAddress1},DELIVERY_ADDRESS2=#{deliveryAddress2}
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
+
+</mapper>

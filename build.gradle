@@ -41,6 +41,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     //aop
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+    //서버 재실행없이 html css js 적용
+    implementation('org.springframework.boot:spring-boot-devtools')
 }
 
 tasks.named('test') {
