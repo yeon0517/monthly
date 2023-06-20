@@ -1,10 +1,19 @@
 package com.example.monthly.controller.seller;
 
+import com.example.monthly.dto.SellerDto;
 import com.example.monthly.service.seller.SellerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 // 판매자 브랜드관리, 제품등록, 제품관리 등과 관련
 @Controller
@@ -24,6 +33,12 @@ public class SellerController {
     @GetMapping("/apply")
     public String apply(){
         return "seller/seller_apply";
+    }
+
+    @PostMapping("/apply")
+    public RedirectView sellerApply(SellerDto sellerDto){
+        sellerService.sellerApply(sellerDto);
+        return new RedirectView("/board/board_main");
     }
 
     @GetMapping("/brand")
