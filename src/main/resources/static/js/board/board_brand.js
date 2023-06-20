@@ -58,6 +58,11 @@ function addBrands(brands) {
         let title = $("<h4>" + brand.title + "</h4>");
         let description = $("<p>" + brand.description + "</p>");
 
+        // 이미지 클릭 이벤트 처리
+        columnImg.click(function() {
+            window.location.href = "/board/brandDetail";
+        });
+
         columnP.append(title, description);
         columnContent.append(columnImg, columnP);
         column.append(columnContent);

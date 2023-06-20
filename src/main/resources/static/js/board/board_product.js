@@ -88,6 +88,12 @@ function addProducts(products) {
             '<div class="product-price"><p>' + product.price + "</p></div>"
         );
 
+        // 이미지 클릭 이벤트 처리
+        productImg.click(function() {
+            window.location.href = "/board/brandDetail";
+        });
+
+
         productInfo.append(brand, productName);
         productContent.append(productImg, productInfo, price);
         productColumn.append(productContent);
