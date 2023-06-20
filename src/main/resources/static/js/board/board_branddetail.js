@@ -1,31 +1,31 @@
 $(document).ready(function () {
     let brands = [
         {
-            imgSrc: "/img/one.jpg",
+            imgSrc: "/img/boardImg/one.jpg",
             title: "[브랜드이름넣어]",
             description: "고체바 & 숲 키링 세트",
             price: "18,000원",
         },
         {
-            imgSrc: "/img/one.jpg",
+            imgSrc: "/img/boardImg/one.jpg",
             title: "[브랜드이름넣어]",
             description: "고체바 & 숲 키링 세트",
             price: "18,000원",
         },
         {
-            imgSrc: "/img/one.jpg",
+            imgSrc: "/img/boardImg/one.jpg",
             title: "[브랜드이름넣어]",
             description: "고체바 & 숲 키링 세트",
             price: "18,000원",
         },
         {
-            imgSrc: "/img/one.jpg",
+            imgSrc: "/img/boardImg/one.jpg",
             title: "[브랜드이름넣어]",
             description: "고체바 & 숲 키링 세트",
             price: "18,000원",
         },
         {
-            imgSrc: "/img/one.jpg",
+            imgSrc: "/img/boardImg/one.jpg",
             title: "[브랜드이름넣어]",
             description: "고체바 & 숲 키링 세트",
             price: "18,000원",
