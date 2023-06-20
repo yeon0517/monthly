@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.SellerMapper">
 
+<!--판매자 신청-->
+    <insert id="insert">
+        <selectKey keyProperty="sellerNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_SELLER.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_SELLER(SELLER_NUMBER, SELLER_NAME, SELLER_ID, SELLER_PASSWORD, SELLER_PHONE_NUMBER, SELLER_ADDRESS,
+        SELLER_EMAIL, SELLER_CONTENTS, SELLER_COMPANY_REGISTER_NUMBER)
+        VALUES (#{sellerNumber},#{sellerName},#{sellerId},#{sellerPassword},#{sellerPhoneNumber},#{sellerAddress},#{sellerEmail},#{sellerContents},#{sellerCompanyRegisterNumber})
+    </insert>
+<!--판매자 아이디 중복검사-->
+    <select id="selectId" resultType="int">
+        SELECT COUNT(*) FROM MONTHLY_SELLER WHERE SELLER_ID =#{sellerId}
+    </select>
+<!--판매자 로그인-->
+    <select id="selectSellerNumber" resultType="long">
+        SELECT SELLER_NUMBER FROM MONTHLY_SELLER
+        WHERE SELLER_ID =#{sellerId} and SELLER_PASSWORD=#{sellerPassword}
+    </select>
+
+
+
 </mapper>

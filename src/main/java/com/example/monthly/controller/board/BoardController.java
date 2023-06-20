@@ -18,6 +18,5 @@ public class BoardController {
 
     @GetMapping("/board_main")
     public void main(){
-
     }
 }

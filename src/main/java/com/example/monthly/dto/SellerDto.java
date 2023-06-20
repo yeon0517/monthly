@@ -16,7 +16,7 @@ public class SellerDto {
     private String sellerAddress;
     private String sellerEmail;
     private String sellerContents;
-    private String sellerCompanyRegisterNumber;
+    private Integer sellerCompanyRegisterNumber;
     private int sellerStatus;
     private String sellerRegistDate;
 }
