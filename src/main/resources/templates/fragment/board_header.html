@@ -10,24 +10,28 @@
 </head>
 <body>
 <header class="board-header" th:fragment="board_header">
-  <div class="spanheader_div">
+  <div class="spanheader_div" >
         <span class="spanheader"
-        ><img
+        >
+
+          <img
                 th:src="@{/img/allImg/span-removebg-preview.png}"
                 alt="span"
                 style="width: 398px; height: 34px"
         /></span>
   </div>
   <div class="allHeader">
-    <div class="allLogo">
+    <div class="allLogo" >
+      <a th:href="@{/board/main}">
       <img th:src="@{/img/allImg/logo.png}" alt="logo" id="allLogo_img" />
+      </a>
     </div>
     <!-- header왼쪽 -->
     <div class="top_category">
       <div class="allCategory">
         <ul class="top_category_ul">
           <li class="top_category_ul_li">
-            <a class="main_menu" th:href="@{/board_about.html}">About Montly</a>
+            <a class="main_menu" th:href="@{/board/about}">About Montly</a>
             <!-- <div class="top_category_div">
             <ul class="list_ul active">
               <li class="list_li">
@@ -45,7 +49,11 @@
 
           <li class="allbar"></li>
 
-          <li class="login_li">로그인</li>
+          <li class="login_li">
+          <a class="login_a" th:href="@{/user/login}">
+            로그인
+          </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -103,13 +111,13 @@
           </div>
           <div class="nav_down">
             <div class="nav_f">
-              <a href="#">About Montly</a>
+              <a th:href="@{/board/about}">About Montly</a>
             </div>
             <div class="nav_s">
-              <a href="#">브랜드 All</a>
+              <a th:href="@{/board/brand}">브랜드 All</a>
             </div>
             <div class="nav_t">
-              <a href="#">제품 All</a>
+              <a th:href="@{/board/product}">제품 All</a>
             </div>
           </div>
         </div>
