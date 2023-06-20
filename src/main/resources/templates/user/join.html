@@ -6,13 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입 | monthly.</title>
-    <link rel="stylesheet" th:href="@{/css/user/user_header.css}">
-    <link rel="stylesheet" th:href="@{/css/user/user_footer.css}">
+    <link rel="stylesheet" th:href="@{/css/board/all.css}" />
     <link rel="stylesheet" th:href="@{/css/user/join.css}">
   </head>
 
   <body>
-<!--  <header class="header" th:replace="fragment/user_header :: user_header"></header>-->
+  <header class="board-header"  th:replace="fragment/board_header :: board_header"></header>
 
     <div id="join-area">
       <!-- 타이틀 영역 -->
@@ -48,7 +47,7 @@
               />
             </th>
             <td>
-              <input class="member-id" placeholder="" value="" type="text" />
+              <input class="member-id" name="userId" type="text" />
               <span id="idMsg"></span>
               (영문소문자/숫자, 4~16자)
               <p class="warning1" style="display: none;">
@@ -74,7 +73,7 @@
                 autocomplete="off"
                 maxlength="16"
                 0="disabled"
-                value=""
+                name="userPassword"
                 type="password"
               />
               (영문 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자)
@@ -126,9 +125,8 @@
                 ><input
 
                   class="member-name"
-                  placeholder=""
                   maxlength="30"
-                  value=""
+                  name="userName"
                   type="text"
                   required
               /></span>
@@ -141,10 +139,9 @@
               <input
 
                 class="member-address1"
-                placeholder=""
                 readonly="readonly"
                 maxlength="14"
-                value=""
+                name="userAddress"
                 type="text"
               />
               <a href="#none" onclick="" class="post-btn"
@@ -155,17 +152,15 @@
               <input
               
                 class="member-address2"
-                placeholder=""
                 readonly="readonly"
-                value=""
+                name="userAddress"
                 type="text"
               />
               기본주소<br />
               <input
               
                 class="member-address3"
-                placeholder=""
-                value=""
+                name="userAddress"
                 type="text"
               />
               나머지주소 (선택입력가능)
@@ -183,7 +178,7 @@
               />
             </th>
             <td>
-              <select class="member-mobile1">
+              <select class="member-mobile1" name="userPhoneNumber">
                 <option value="010">010</option>
                 <option value="011">011</option>
                 <option value="016">016</option>
@@ -194,13 +189,13 @@
 
                 class="member-mobile2"
                 maxlength="4"
-                value=""
+                name="userPhoneNumber"
                 type="text"
               />-<input
 
                 class="member-mobile3"
                 maxlength="4"
-                value=""
+                name="userPhoneNumber"
                 type="text"
               />
               <button type="button" class="mobile-check-button">
@@ -231,7 +226,7 @@
               />
             </th>
             <td>
-              <input class="member-email" value="" type="text" />
+              <input class="member-email" name="userEmail" type="text" />
               <p class="warning4" style="display: none;">*올바른 이메일 형식이 아닙니다.</p>
               <p class="info4" style="display: none;">*사용 가능한 이메일 입니다.</p>
               <span id="emailMsg"></span>
@@ -251,14 +246,14 @@
             <td>
               <div class="before-gender">
               <input
-
+                name="userGender"
                 class="member-gender1"
                 value="M"
                 type="radio"
                 autocomplete="off"
               /><label class="gender">남자</label>
               <input
-
+                name="userGender"
                 class="member-gender2"
                 value="F"
                 type="radio"
@@ -274,27 +269,24 @@
               <input
 
                 class="member-birth-year"
-                placeholder=""
                 maxlength="4"
-                value=""
+                name="userBirthday"
                 type="text"
               />
               년
               <input
 
                 class="member-birth-month"
-                placeholder=""
                 maxlength="2"
-                value=""
+                name="userBirthday"
                 type="text"
               />
               월
               <input
 
                 class="member-birth-day"
-                placeholder=""
                 maxlength="2"
-                value=""
+                name="userBirthday"
                 type="text"
               />
               일
@@ -341,14 +333,16 @@
 
       <!-- 가입 버튼 영역 -->
       <div class="submit-area">
-        <a href="" class="no-submit-button" onclick="">회원가입</a>
-        <a th:href="@{/user/joinOK}" class="submit-button" style="display: none;" onclick="">회원가입</a>
+        <button class="no-submit-button">회원가입</button>
+        <button type="submit" class="submit-button" style="display: none;">회원가입</button>
       </div>
     </div>
     <!-- 회원 가입 영역 끝 -->
-<!--    <footer class="footer" th:replace="fragment/user_footr :: user_footer"></footer>-->
+  <div class="allTop" th:replace="fragment/board_top_btn :: board_top_btn"></div>
+  <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script th:src="@{/js/user/join.js}"></script>
+  <script th:src="@{/js/board/board_main.js}"></script>
   </body>
 </html>
