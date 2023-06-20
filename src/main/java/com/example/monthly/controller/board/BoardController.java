@@ -19,6 +19,7 @@ public class BoardController {
     @GetMapping("/main")
     public String main(){
         return "board/board_main";
+
     }
 
     @GetMapping("/brand")

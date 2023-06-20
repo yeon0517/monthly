@@ -26,6 +26,7 @@ div{
 a{
   text-decoration: none;
   cursor: pointer;
+  color : black;
 }
 a:visited{
   text-decoration: none;
