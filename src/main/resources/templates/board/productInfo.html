@@ -5,24 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" th:href="@{/css/board/productInfo.css}" />
+    <link rel="stylesheet" th:href="@{/css/board/all.css}" />
     <title>Document</title>
   </head>
   <body>
+  <header class="board-header"  th:replace="fragment/board_header :: board_header"></header>
     <div class="productInfo">
       <div class="container">
-        <header>
-          <div
-            class="area"
-            style="
-              border: 1px solid black;
-              width: 100%;
-              height: 200px;
-              border: 1px solid;
-            "
-          >
-            header
-          </div>
-        </header>
         <!-- 메인 -->
         <div class="main">
           <div class="product">
@@ -57,7 +46,7 @@
                 </div>
               </div>
 
-              <form name="productForm" method="get" action="order.html">
+              <form name="productForm" method="get" action="/order/order">
                 <!-- 상품 정보 -->
                 <div class="InfoArea">
                   <!-- 상품 이름 -->
@@ -187,7 +176,7 @@
               <div class="detail">
                 <div class="detailLine">
                   <!-- 텝으로 배너 이동 -->
-                  <section class="TabPanel">
+                  <section class="TabPanel" id="lnb">
                     <ul class="TabPanelList">
                       <!-- 클릭 했을때 스크롤 이동, 버튼 색변환 -->
                       <li class="blurTab proInfo">상품상세정보</li>
@@ -390,14 +379,17 @@
                       </section>
                     </div>
                   </div>
+                  <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
                 </div>
               </div>
             </div>
+
 
             <!-- 리뷰 -->
           </div>
         </div>
       </div>
+
     </div>
 
     <script
@@ -406,5 +398,6 @@
       crossorigin="anonymous"
     ></script>
     <script th:src="@{/js/board/productInfo.js}"></script>
+  <script th:src="@{/js/board/board_main.js}"></script>
   </body>
 </html>

@@ -2,6 +2,7 @@ package com.example.monthly.mapper;
 
 import com.example.monthly.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
+
 import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 @Transactional
 class UserMapperTest {
+
     @Autowired
     private UserMapper userMapper;
     private UserDto userDto;
@@ -40,5 +42,38 @@ class UserMapperTest {
                 .isEqualTo(userDto.getUserNumber());
     }
 
+
+
+    @Test
+    @DisplayName("회원 정보 검색")
+    void selectAll() {
+        userMapper.insert(userDto);
+
+        log.info("===========출력=========" +userDto.toString());
+       assertThat(userMapper.selectAll(userDto.getUserNumber()).getUserId()).isEqualTo(userDto.getUserId());
+    }
+
+
+
+    @Test
+    void updatePassword(){
+        userMapper.insert(userDto);
+
+        userDto.setUserPassword("12345");
+
+        userMapper.updatePassword(userDto);
+
+
+        assertThat(userMapper.selectAll(userDto.getUserNumber()).getUserPassword()).isEqualTo("12345");
+    }
+
+    @Test
+    void userWithdraw(){
+        userMapper.insert(userDto);
+
+        userMapper.userWithdraw(userDto.getUserNumber());
+
+        assertThat(userMapper.selectAll(userDto.getUserNumber()).getUserStatus()).isEqualTo(0);
+    }
 
 }
