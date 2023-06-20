@@ -5,13 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>아이디 찾기 | monthly.</title>
-    <link rel="stylesheet" th:href="@{/css/user/user_header.css}">
-    <link rel="stylesheet" th:href="@{/css/user/user_footer.css}">
+    <link rel="stylesheet" th:href="@{/css/board/all.css}" />
     <link rel="stylesheet" th:href="@{/css/user/find_id.css}">
   </head>
 
   <body>
-<!--  <header class="header" th:replace="fragment/user_header :: user_header"></header>-->
+  <header class="board-header"  th:replace="fragment/board_header :: board_header"></header>
 
     <div id="main">
       <div class="title2">
@@ -50,10 +49,11 @@
         </p>
       </div>
     </div>
-
-<!--  <footer class="footer" th:replace="fragment/user_footr :: user_footer"></footer>-->
+  <div class="allTop" th:replace="fragment/board_top_btn :: board_top_btn"></div>
+  <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script th:src="@{/js/user/find_id.js}"></script>
+    <script th:src="@{/js/board/board_main.js}"></script>
   </body>
 </html>
