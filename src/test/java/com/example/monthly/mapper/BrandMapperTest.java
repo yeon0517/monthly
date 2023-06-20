@@ -26,7 +26,7 @@ class BrandMapperTest {
 
     @BeforeEach
     void setUp(){
-        
+
         brandDto = new BrandDto();
         brandDto.setBrandName("모어포모레");
         brandDto.setBrandContents("환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트");
