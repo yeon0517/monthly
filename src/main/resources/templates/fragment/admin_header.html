@@ -16,14 +16,14 @@
       <div class="header-wrap">
         <ul class="header-nav">
           <li class="header-nav-item"><a th:href="@{/admin/main}" id="admin_main">홈</a></li>
-          <li class="header-nav-item"><a href="">전체 회원 관리</a></li>
-          <li class="header-nav-item"><a href="">전체 상품 관리</a></li>
-          <li class="header-nav-item"><a href="">판매자 관리</a></li>
-          <li class="header-nav-item"><a href="">구독자 관리</a></li>
+          <li class="header-nav-item"><a th:href="@{/admin/allMember}">전체 회원 관리</a></li>
+          <li class="header-nav-item"><a th:href="@{/admin/allGoods}">전체 상품 관리</a></li>
+          <li class="header-nav-item"><a th:href="@{/admin/seller}">판매자 관리</a></li>
+          <li class="header-nav-item"><a th:href="@{/admin/subMember}">구독자 관리</a></li>
         </ul>
         <ul class="header-nav nav-right">
           <li class="header-nav-item"><a href="">monthly</a></li>
-          <li class="header-nav-item logout"><a href="">로그아웃</a></li>
+          <li class="header-nav-item logout"><a th:href="@{/admin/login}">로그아웃</a></li>
         </ul>
 
       </div>
