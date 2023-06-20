@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(MockitoExtension.class)
-class BoardServiceTest {
+class BrandServiceTest {
 
     @Mock
     private BrandMapper brandMapper;
@@ -28,7 +28,7 @@ class BoardServiceTest {
         brandDto = new BrandDto();
         brandDto.setBrandName("모어포모레");
         brandDto.setBrandContents("환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트");
-        brandDto.setBrandRegistDate("2023-06-19");
+        brandDto.setBrandRegisterDate("20230620");
         brandDto.setSellerNumber(1L);
         brandMapper.brandInsert(brandDto);
 

@@ -16,24 +16,29 @@ public class BoardController {
 
     }
 
-    @GetMapping("/board_main")
-    public void main(){
+    @GetMapping("/main")
+    public String main(){
+        return "board/board_main";
     }
 
-    @GetMapping("/board_brand")
-    public void mainbrand(){
+    @GetMapping("/brand")
+    public String brand(){
+        return "board/board_brand";
     }
 
-    @GetMapping("/board_product")
-    public void mainproduct(){
+    @GetMapping("/product")
+    public String product(){
+        return "board/board_product";
     }
 
-    @GetMapping("/board_branddetail")
-    public void mainbrandDetail(){
+    @GetMapping("/brandDetail")
+    public String brandDetail(){
+        return "board/board_branddetail";
     }
 
-    @GetMapping("/board_about")
-    public void mainabout(){
+    @GetMapping("/about")
+    public String about(){
+        return "board/board_about";
     }
 
 

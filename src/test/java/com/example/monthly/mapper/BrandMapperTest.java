@@ -26,11 +26,12 @@ class BrandMapperTest {
 
     @BeforeEach
     void setUp(){
+        
         brandDto = new BrandDto();
         brandDto.setBrandName("모어포모레");
         brandDto.setBrandContents("환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트");
-        brandDto.setBrandRegistDate("2023-06-19");
-        brandDto.setSellerNumber(1L);
+        brandDto.setBrandRegisterDate("20230619");
+        brandDto.setSellerNumber(sellerDto.getSellerNumber());
         brandMapper.brandInsert(brandDto);
 
     }
