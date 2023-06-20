@@ -18,5 +18,5 @@ public class SellerDto {
     private String sellerContents;
     private String sellerCompanyRegisterNumber;
     private int sellerStatus;
-    private String sellerRegistDate;
+    private String sellerRegisterDate;
 }

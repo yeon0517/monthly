@@ -21,15 +21,13 @@
       <!-- 판매자 브랜드이름띄우기 -->
       <h2><span class="brand-name">Monthly</span> 판매자 검색</h2>
       <!-- 검색 조건 form태그 -->
-      <form action="">
+      <form th:action="@{/admin/search}" method="post" enctype="multipart/form-data">
       <table class="main-section1-table">
         <tr>
           <th class="main-section1-th period">기간</th>
           <td class="period-input">
             <label><input type="radio" name="period" value="today" checked><span>오늘</span></label>
             <label><input type="radio" name="period" value="yesterday"><span>어제</span></label>
-            <label><input type="radio" name="period" value="1month"><span>1개월</span></label>
-            <label><input type="radio" name="period" value="3month"><span>3개월</span></label>
             <label><input type="radio" name="period" value="all"><span>전체</span></label>
           </td>
         </tr>
@@ -57,9 +55,6 @@
       <h2><span class="brand-name">Monthly</span>판매자 관리</h2>
       <table>
         <thead class="seller-list-head">
-          <!--판매자신청없을때 띄워질 알림글 가려놨음-->
-          <span class="none-subscriber"><h3>오늘 판매자 신청 없음. </h3></span>
-      
           <tr>
             <th>판매자 번호</th>
             <th>이름</th>
@@ -75,30 +70,33 @@
           </tr>
         </thead>
         <tbody class="seller-list-body">
-         
-          <tr> <form action="#"> <!--판매자 리스트 띄움 ajax처리 #1-->
+<!--        <form action="#">-->
+
+        <tr th:each="seller:${searchList}"> <!--판매자 리스트 띄움 ajax처리 #1-->
               <input type="hidden" value="?">
-              <td>1</td>
-              <td>박은서</td>
-              <td>
+              <td th:text="${seller.sellerNumber}">1</td>
+              <td th:text="${seller.sellerName}">박은서</td>
+              <td th:text="${seller.sellerStatus}">
                 <select name="parcel-status" id="#" class="parcel-status">
                   <option value="sell-ready">영업신청</option>
                   <option value="sell-ing">영업허가</option>
                   <option value="sell-close">폐업</option>
                 </select>
               </td>
-              <td>nsoe12</td>
-              <td>010-1234-1234</td>
-              <td>2023/03/10</td>
-              <td>123-12-12345</td>
-              <td>nsoe12@naver.com</td>
-              <td>서울특별시 서초구 반포대로 58. 101동 501호(서초동. 서초아파트)</td>
+              <td th:text="${seller.sellerId}">nsoe12</td>
+              <td th:text="${seller.sellerPhoneNumber}">010-1234-1234</td>
+              <td th:text="${seller.sellerRegistDate}">2023/03/10</td>
+              <td th:text="${seller.sellerCompanyRegistuerNumber}">123-12-12345</td>
+              <td th:text="${seller.sellerEmail}">nsoe12@naver.com</td>
+              <td th:text="${seller.sellerAddress}">서울특별시 서초구 반포대로 58. 101동 501호(서초동. 서초아파트)</td>
               <td>
                 <!-- <input type="text" placeholder="브랜드 명" class="brand-input">   -->
                 <button type="button" class="brand-link"> 브랜드 이동</button>   
               </td>
               <td><button type="submit" class="save-btn">save</button></td>
-            </form> 
+
+
+<!--        </form>-->
             <!-- 저장버튼 누르면 비동기로 저장 -->
           </tr><!--판매자 리스트 띄움 ajax처리 #1끝-->
       
