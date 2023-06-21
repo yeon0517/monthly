@@ -18,13 +18,13 @@
       <div class="whole">
         <div class="whole-box">
           <div class="wrap_div">
-            <a th:href="@{/board/brandDetail}"><img th:src="@{/img/boardImg/main.jpg}" alt="메인이미지" /></a>
+            <a th:href="@{/board/brandDetail}"><img th:src="@{/img/boardImg/main.jpg}" alt="메인이미지" /></a> <!--브랜드 파일 이미지 넣기-->
           </div>
           <div class="wrap_list">
             <ul class="wrap_ul">
-              <li class="wrap_il">
+              <!--<li class="wrap_il">
                 <div class="box">
-<!--                 여긴 제품 상세페이지로 들어가야함.-->
+&lt;!&ndash;                 여긴 제품 상세페이지로 들어가야함.&ndash;&gt;
                   <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/ha.jpg}" alt="하" /></a>
                   <p class="box_name">
                     <span>[노플라스틱선데이] 럭키 키링</span>
@@ -49,7 +49,16 @@
                   </p>
                   <p class="price">6000원</p>
                 </div>
-              </li>
+              </li>-->
+                <li class="wrap_il" th:each=" brand : ${brandSelect}">
+                    <div class="box">
+                        <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/ho.jpg}" alt="호" /></a>
+                        <p class="box_name">
+                            <span th:text="${brand.brandName}"></span>
+                        </p>
+                        <p class="price">6000원</p>
+                    </div>
+                </li>
             </ul>
           </div>
         </div>

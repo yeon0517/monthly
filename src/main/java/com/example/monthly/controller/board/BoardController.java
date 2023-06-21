@@ -2,6 +2,10 @@ package com.example.monthly.controller.board;
 
 import com.example.monthly.service.board.ProductService;
 import com.example.monthly.vo.ProductVo;
+
+import com.example.monthly.mapper.BoardMapper;
+import com.example.monthly.service.board.BoardService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +20,10 @@ public class BoardController {
 
     private final ProductService productService;
 
+    private final BoardService boardService;
+
+
+
     @GetMapping("/productInfo")
     public String productInfo(Long productNumber, Model model){
 //        productMain에서 productNumber을 get 형식으로 넘겨주고 나는 그걸 받아서  넣어준다.
@@ -26,7 +34,9 @@ public class BoardController {
     }
 
     @GetMapping("/main")
-    public String main(){
+    public String main(Model model){
+        model.addAttribute("brandSelect",boardService.brandSelect());
+
         return "board/board_main";
 
     }
@@ -37,12 +47,15 @@ public class BoardController {
     }
 
     @GetMapping("/product")
-    public String product(){
+    public String product(Model model){
+        model.addAttribute("productSelect" , boardService.productSelect());
         return "board/board_product";
     }
 
     @GetMapping("/brandDetail")
-    public String brandDetail(){
+    public String brandDetail(Model model){
+        model.addAttribute("brandSelect",boardService.brandSelect());
+        model.addAttribute("productSelect" , boardService.productSelect());
         return "board/board_branddetail";
     }
 
