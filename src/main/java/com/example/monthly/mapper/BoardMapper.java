@@ -1,20 +1,19 @@
 package com.example.monthly.mapper;
 
 import com.example.monthly.dto.BrandDto;
+import com.example.monthly.dto.ProductDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
-public interface BrandMapper {
-    // 추가
-    public void brandInsert(BrandDto brandDto);
+public interface BoardMapper {
 
-    // 삭제
-    public void brandDelete(Long brandNumber);
+    List<BrandDto> brandSelect();
+//    이것의 이름은  Service에서 만든 이름으로.. 괄호 안에는 매개변수가 들어가야하는데 지금 현재 안받아서 비워둠
 
-    // 수정
-    public void brandUpdate(BrandDto brandDto);
+    List<ProductDto> productSelect();
 
-    //brand 조회
-    public Long brandSelectAll(Long brandNumber);
+
 
 }

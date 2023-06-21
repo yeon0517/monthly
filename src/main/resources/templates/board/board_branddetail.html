@@ -16,73 +16,33 @@
 
 <!-- main -->
 <div class="wrap">
-  <div class="wrap-container">
-    <div class="main">
-      <div class="title">
-        <h2>모어포모레</h2>
-      </div>
-    </div>
-    <div class="main-img">
-      <img th:src="@{/img/boardImg/detail.jpg}" alt="" />
-    </div>
-    <div class="center">
-      <div class="brand-wrap">
-        <!-- <div class="brand-list">
-        <div class="list-img">
-          <img src="/img/one.jpg" alt="" />
-        </div>
-        <div class="list-p">
-          <h4>[브랜드이름넣어]</h4>
-          <p>고체바 & 숲 키링 세트</p>
-        </div>
-        <div class="list-price">
-          <p>18,000원</p>
-        </div>
-      </div>
-
-      <div class="brand-list">
-        <div class="list-img">
-          <img src="/img/one.jpg" alt="" />
-        </div>
-        <div class="list-p">
-          <h4>[브랜드이름넣어]</h4>
-          <p>고체바 & 숲 키링 세트</p>
-        </div>
-        <div class="list-price">
-          <p>18,000원</p>
-        </div>
-      </div>
-
-      <div class="brand-list">
-        <div class="list-img">
-          <img src="/img/one.jpg" alt="" />
-        </div>
-        <div class="list-p">
-          <h4>[브랜드이름넣어]</h4>
-          <p>고체바 & 숲 키링 세트</p>
-        </div>
-        <div class="list-price">
-          <p>18,000원</p>
-        </div>
-      </div>
-
-      <div class="brand-list">
-        <div class="list-img">
-          <img src="/img/one.jpg" alt="" />
-        </div>
-        <div class="list-p">
-          <h4>[브랜드이름넣어]</h4>
-          <p>고체바 & 숲 키링 세트</p>
-        </div>
-        <div class="list-price">
-          <p>18,000원</p>
-        </div>
-      </div> -->
-      </div>
-    </div>
-  </div>
+<!--  <div class="wrap-container">-->
+<!--    <div class="main">-->
+<!--      <div class="title">-->
+<!--        <h2 th:text="${brand.brandName}"></h2>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="main-img">-->
+<!--      <img th:src="@{/img/boardImg/detail.jpg}" alt="" />-->
+<!--    </div>-->
+<!--    <div class="center">-->
+<!--      <div class="brand-wrap" th:each="brand : ${brandSelect}">-->
+<!--        <div class="brand-list">-->
+<!--          <div class="list-img">-->
+<!--            <img th:src="@{/img/boardImg/ho.jpg}" alt="" />-->
+<!--          </div>-->
+<!--          <div class="list-p" th:each="product : ${productSelect}">-->
+<!--            <h4 th:text="${brand.brandName}"></h4>-->
+<!--            <p th:text="${product.productContents}"></p>-->
+<!--          </div>-->
+<!--          <div class="list-price">-->
+<!--            <p  th:text="${product.productPrice}"></p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
-
 <!-- footer-->
 <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
 

@@ -290,7 +290,9 @@ input {
     align-items: center;
     justify-content: space-around;
 }
-
+.allfooter{
+    width: 100%;
+}
 .allfoot {
     height: 250px;
     margin: 50px auto;

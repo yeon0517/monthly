@@ -1,7 +1,10 @@
 package com.example.monthly.controller.board;
 
+import com.example.monthly.mapper.BoardMapper;
+import com.example.monthly.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/board/*")
 public class BoardController {
 
+    private final BoardService boardService;
+
     @GetMapping("/productInfo")
     public void productInfo(){
 
     }
 
     @GetMapping("/main")
-    public String main(){
+    public String main(Model model){
+        model.addAttribute("brandSelect",boardService.brandSelect());
+
         return "board/board_main";
 
     }
@@ -28,12 +35,15 @@ public class BoardController {
     }
 
     @GetMapping("/product")
-    public String product(){
+    public String product(Model model){
+        model.addAttribute("productSelect" , boardService.productSelect());
         return "board/board_product";
     }
 
     @GetMapping("/brandDetail")
-    public String brandDetail(){
+    public String brandDetail(Model model){
+        model.addAttribute("brandSelect",boardService.brandSelect());
+        model.addAttribute("productSelect" , boardService.productSelect());
         return "board/board_branddetail";
     }
 
