@@ -27,9 +27,11 @@ class SellerMapperTest {
         sellerDto.setSellerId("ccc");
         sellerDto.setSellerPassword("1234");
         sellerDto.setSellerPhoneNumber("010-1234-1234");
-        sellerDto.setSellerAddress("서울");
+        sellerDto.setSellerPostcode("11111");
+        sellerDto.setSellerAddress1("서울시 강남구");
+        sellerDto.setSellerAddress2("1-1");
         sellerDto.setSellerEmail("aaa@naver.com");
-        sellerDto.setSellerCompanyRegisterNumber(1111);
+        sellerDto.setSellerCompanyRegisterNumber("1111");
         sellerDto.setSellerContents("메올");
     }
 
@@ -40,7 +42,6 @@ class SellerMapperTest {
         assertThat(sellerMapper.selectSellerNumber(sellerDto.getSellerId(), sellerDto.getSellerPassword()))
                 .isEqualTo(sellerDto.getSellerNumber());
     }
-
     @Test
     void selectSellerNumber() {
     }

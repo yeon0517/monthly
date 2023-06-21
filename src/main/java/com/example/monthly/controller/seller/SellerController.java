@@ -23,9 +23,19 @@ public class SellerController {
     private final SellerService sellerService;
 
     @GetMapping("/login")
-    public String login(){
-        return "seller/seller_login"; }
+    public String login(){ return "seller/seller_login"; }
 
+    @PostMapping("/login")
+    public RedirectView login(String sellerId, String sellerPassword, HttpServletRequest req){
+        try {
+            Long sellerNumber = sellerService.findSellerNumber(sellerId,sellerPassword);
+            req.getSession().setAttribute("sellerNumber",sellerNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new RedirectView("/seller/login");
+        }
+        return new RedirectView("/seller/main");
+    }
     @GetMapping("/main")
     public String main(){
         return "seller/seller_main"; }
@@ -36,10 +46,15 @@ public class SellerController {
     }
 
     @PostMapping("/apply")
-    public RedirectView sellerApply(SellerDto sellerDto){
+    public RedirectView sellerApply(SellerDto sellerDto, RedirectAttributes redirectAttributes){
         sellerService.sellerApply(sellerDto);
-        return new RedirectView("/board/board_main");
+        redirectAttributes.addFlashAttribute("sellerId",sellerDto.getSellerId());
+        redirectAttributes.addFlashAttribute("sellerEmail",sellerDto.getSellerEmail());
+        redirectAttributes.addFlashAttribute("sellerName",sellerDto.getSellerName());
+        return new RedirectView("/seller/apDone");
     }
+    @GetMapping("/apDone")
+    public String applyDone(){return "seller/seller_apply_done";}
 
     @GetMapping("/brand")
     public String brand(){return "seller/seller_brand";}
@@ -52,4 +67,11 @@ public class SellerController {
 
     @GetMapping("/register")
     public String productRegister(){return "seller/seller_product_register";}
+
+    @GetMapping("/logout")
+    public RedirectView logout(HttpServletRequest req){
+        req.getSession().invalidate();
+        return new RedirectView("/seller/login");
+    }
+
 }

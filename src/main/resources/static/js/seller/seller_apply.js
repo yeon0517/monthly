@@ -1,5 +1,5 @@
 // 판매자신청페이지!!!
-// import * as seller from '../module/seller.js';
+import * as seller from '../module/seller.js';
 // 아이디인풋칸
 let $sellerIdInput = $('#seller-id');
 // 아이디 메세지 띄울곳
@@ -26,22 +26,30 @@ $sellerIdInput.on('blur', function() {
         let id = $sellerIdInput.val();
         console.log(id);
 
-        $.ajax({
-            url: '/sellers/checkId',
-            type: 'get',
-            data: {sellerId: id},
-            success: function (result) {
-                if (result == 1) {
-                    $sellerIdMsg.text('중복된 아이디 입니다.')
-                    $sellerIdMsg.css("color","#c88e8e");
-                } else {
-                    checkIdValidity();
-                }
-            },
-            error: function (a, b, c) {
-                console.log(c);
+        seller.checkId(id, function(result){
+            if (result == 1) {
+                $sellerIdMsg.text('중복된 아이디 입니다.')
+                $sellerIdMsg.css("color","#c88e8e");
+            } else {
+                checkIdValidity();
             }
         });
+        // $.ajax({
+        //     url: '/sellers/checkId',
+        //     type: 'get',
+        //     data: {sellerId: id},
+        //     success: function (result) {
+        //         if (result == 1) {
+        //             $sellerIdMsg.text('중복된 아이디 입니다.')
+        //             $sellerIdMsg.css("color","#c88e8e");
+        //         } else {
+        //             checkIdValidity();
+        //         }
+        //     },
+        //     error: function (a, b, c) {
+        //         console.log(c);
+        //     }
+        // });
     }
 });
 
@@ -57,28 +65,15 @@ let $cuPwMsg = $('.current-seller-password-msg');
 let $userPwMsg = $('.seller-password-msg');
 let $chPwMsg = $('.seller-password-check-msg');
 
-// 현재비밀번호 맞는지 확인 ajax
-$currentPwInput.on('blur', function(){
-  if($(this).val()==''){
-    $cuPwMsg.text('비밀번호를 입력하세요');
-	}else{
-    // 		let pw = $currentPwInput.val();
-    // 		$.ajax({
-      // 			url : '/user/checkPwOk.us',
-      // 			type : 'get',
-      // 			data : {
-        // 				userNumber : userNumber,
-        // 				userPassword : pw			
-// 			},
-// 			success : function(result){
-// 				$cuPwMsg.text(result);
-// 			},
-// 			error : function(a,b,c){
-  // 				console.log(c);
-  // }
-  // });
-}
-});
+// 판매자정보수정에서 사용 -
+// 현재비밀번호 맞는지 확인
+// $currentPwInput.on('blur', function(){
+//   if($(this).val()==''){
+//     $cuPwMsg.text('비밀번호를 입력하세요');
+// 	}else{
+//
+// }
+// });
 
 //변경비밀번호를 입력하지 않으면 메세지
 // 비밀번호 정규표현식 
@@ -113,8 +108,32 @@ $checkPwInput.on('blur', function(){
 });
 
 // 전화번호 정규표현식?
+const autoHyphen2 = (target) => {
+    target.value = target.value
+        .replace(/[^0-9]/g, '')
+        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+}
+let $PInput=$('#seller-phone-number');
+// -------안되면 포기한다
 
-// 이메일 정규표현식?
+
+// 이메일 정규표현식
+let $sellerEmailInput = $('#seller-email');
+let $sellerEmailMsg = $('.seller-email-msg');
+
+const validEmailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+$sellerEmailInput.on('blur', function(){
+    if($(this).val()==''){
+        $sellerEmailMsg.text('이메일 주소를 입력하세요');
+        $sellerEmailMsg.css("color","#c88e8e");
+    }else if(validEmailRegex.test($(this).val())){
+        $sellerEmailMsg.text('사용 가능한 이메일 입니다.');
+        $sellerEmailMsg.css("color","#8eb4c8");
+    }else{
+        $sellerEmailMsg.text('올바른 이메일 형식이 아닙니다.');
+        $sellerEmailMsg.css("color","#c88e8e");
+    }
+});
 
 // 전체동의 체크박스 선택시 밑에 있는 동의체크도 모두 선택
 let $agreeAll = $("#agreeAll");
