@@ -3,6 +3,7 @@ package com.example.monthly.service;
 import com.example.monthly.dto.UserDto;
 import com.example.monthly.mapper.UserMapper;
 import com.example.monthly.service.user.UserService;
+import com.example.monthly.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,6 +30,7 @@ class UserServiceTest {
     private UserService userService;
 
     private UserDto userDto;
+    private UserVo userVo;
 
     @BeforeEach
     void setUp(){
@@ -47,11 +49,11 @@ class UserServiceTest {
     @Test
     @DisplayName("회원 가입 검사")
     void register() {
-        doNothing().when(userMapper).insert(any(UserDto.class));
+        doNothing().when(userMapper).insert(any(UserVo.class));
 
-        userService.register(userDto);
+        userService.register(userVo);
 
-        verify(userMapper, times(1)).insert(userDto);
+        verify(userMapper, times(1)).insert(userVo);
     }
 
 }

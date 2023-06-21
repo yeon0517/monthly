@@ -26,9 +26,9 @@ class UserMapperTest {
     void setUp() {
         userDto = new UserDto();
         userDto.setUserId("dkfsd97");
-        userDto.setUserPassword("sdjfsd1");
+        userDto.setUserPassword("sdjfsd11");
         userDto.setUserName("케인");
-        userDto.setUserPhoneNumber("010-1234-1234");
+        userDto.setUserPhoneNumber("512-5548-5485");
         userDto.setUserGender("M");
         userDto.setUserEmail("test@email.com");
         userDto.setUserBirthday("1993-09-08");

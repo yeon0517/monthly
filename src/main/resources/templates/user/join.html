@@ -14,6 +14,7 @@
   <header class="board-header"  th:replace="fragment/board_header :: board_header"></header>
 
     <div id="join-area">
+      <form class="signup-form" th:action="@{/user/join}" method="post">
       <!-- 타이틀 영역 -->
       <div class="title-area">
         <h2>회원 가입</h2>
@@ -51,9 +52,11 @@
               <span id="idMsg"></span>
               (영문소문자/숫자, 4~16자)
               <p class="warning1" style="display: none;">
-                *아이디는 영어소문자, 숫자를 포함한 4글자 이상이여야 합니다.
+                *아이디는 영어소문자, 숫자를 포함한 4글자 이상이여야 합니다. </p>
+              <p class="warning5" style="display: none;">
+                *중복된 아이디입니다, 다른 아이디를 사용해주세요. </p>
                 <p class="info1" style="display: none;">*사용 가능한 아이디입니다.</p>
-              </p>
+
             </td>
           </tr>
           <tr>
@@ -178,7 +181,7 @@
               />
             </th>
             <td>
-              <select class="member-mobile1" name="userPhoneNumber">
+              <select class="member-mobile1" name="userPhoneNumber1">
                 <option value="010">010</option>
                 <option value="011">011</option>
                 <option value="016">016</option>
@@ -189,30 +192,15 @@
 
                 class="member-mobile2"
                 maxlength="4"
-                name="userPhoneNumber"
+                name="userPhoneNumber2"
                 type="text"
               />-<input
 
                 class="member-mobile3"
                 maxlength="4"
-                name="userPhoneNumber"
+                name="userPhoneNumber3"
                 type="text"
               />
-              <button type="button" class="mobile-check-button">
-                인증번호받기
-              </button>
-              <p class="txtWarn gBlank5" id="result_send_verify_mobile_fail">
-                휴대폰 번호를 입력하세요.
-              </p>
-              <ul
-                class="txtInfo gBlank5 displaynone"
-                id="result_send_verify_mobile_success"
-              >
-                <li hidden>인증번호가 발송되었습니다.</li>
-                <li hidden>
-                  인증번호를 받지 못하셨다면 휴대폰 번호를 확인해 주세요.
-                </li>
-              </ul>
             </td>
           </tr>
           <tr>
@@ -270,7 +258,7 @@
 
                 class="member-birth-year"
                 maxlength="4"
-                name="userBirthday"
+                name="userBirthdayY"
                 type="text"
               />
               년
@@ -278,7 +266,7 @@
 
                 class="member-birth-month"
                 maxlength="2"
-                name="userBirthday"
+                name="userBirthdayM"
                 type="text"
               />
               월
@@ -286,7 +274,7 @@
 
                 class="member-birth-day"
                 maxlength="2"
-                name="userBirthday"
+                name="userBirthdayD"
                 type="text"
               />
               일
@@ -336,13 +324,15 @@
         <button class="no-submit-button">회원가입</button>
         <button type="submit" class="submit-button" style="display: none;">회원가입</button>
       </div>
+      </form>
     </div>
     <!-- 회원 가입 영역 끝 -->
   <div class="allTop" th:replace="fragment/board_top_btn :: board_top_btn"></div>
-  <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
+  <div class="allFooter" th:replace="fragment/board_footer :: board_footer"></div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <script th:src="@{/js/user/join.js}"></script>
   <script th:src="@{/js/board/board_main.js}"></script>
+  <script th:src="@{/js/user/address.js}"></script>
   </body>
 </html>

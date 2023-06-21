@@ -277,7 +277,8 @@ input {
 .warning1,
 .warning2,
 .warning3,
-.warning4 {
+.warning4,
+.warning5 {
   color: #c88e8e;
   margin-left: 4px;
 }
