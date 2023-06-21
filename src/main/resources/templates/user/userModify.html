@@ -106,14 +106,14 @@
                 <tr>
                   <th>주소</th>
                   <td class="address">
-                    <input name="deliveryPostcode" id="postAddress" th:value="${delivery.deliveryPostcode}" type="text" />
+                    <input name="deliveryPostcode" id="postAddress" th:value="${user.deliveryPostcode}" type="text" />
                     
                       <img src="../img/btn_zipcode.gif"  onclick="sample6_execDaumPostcode()" style="vertical-align: middle;" />
                     
                     <br />
-                    <input name="deliveryAddress1" id="address1" th:value="${delivery.deliveryAddress1}"   type="text" /> 기본주소
+                    <input name="deliveryAddress1" id="address1" th:value="${user.deliveryAddress1}"   type="text" /> 기본주소
                     <br />
-                    <input name="deliveryAddress2" id="address2" th:value="${delivery.deliveryAddress2}"  type="text" /> 나머지주소(상세주소)
+                    <input name="deliveryAddress2" id="address2" th:value="${user.deliveryAddress2}"  type="text" /> 나머지주소(상세주소)
                   </td>
                 </tr>
 
@@ -148,7 +148,7 @@
                   </th>
                   <td class="gender">
                     <!-- db에서 값을 받아와서 if문 사용해서 M이면 남자 버튼 고정, F면 여자 버튼 고정 -->
-                    <input hidden class="gender" th:value="${user.userGender}">
+                    <input type="hidden" id="gender" th:value="${user.userGender}">
                     <input type="radio" name="gender" value="M" onclick="return false">남성
                     <input type="radio" name="gender" value="F"  onclick="return false">여성
                   </td>

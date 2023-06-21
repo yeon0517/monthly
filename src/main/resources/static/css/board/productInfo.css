@@ -697,3 +697,18 @@ p {
   top: 0;
   width: 1104px;
 }
+
+.detailinfo div{
+  text-align: center;
+}
+.supply {
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.supply span {
+  padding: 0px 0px 10px 0;
+  font-size: 24px;
+  font-weight: bold;
+}

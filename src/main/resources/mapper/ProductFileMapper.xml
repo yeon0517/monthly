@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.monthly.mapper.ProductFileMapper">
+    <select id="proFileSelect" resultType="productFileDto">
+        SELECT PRODUCT_FILE_NAME,PRODUCT_FILE_NUMBER,PRODUCT_FILE_UPLOAD_PATH,PRODUCT_FILE_UUID,PRODUCT_NUMBER FROM MONTHLY_PRODUCT_FILE
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </select>
+</mapper>

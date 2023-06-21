@@ -2,6 +2,7 @@ package com.example.monthly.service.user;
 
 import com.example.monthly.dto.UserDto;
 import com.example.monthly.mapper.UserMapper;
+import com.example.monthly.vo.DeliveryVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ public class UserService {
 
 
     //회원번호로 회원 전체 조회
-    public UserDto findAll(Long userNumber){
+    public DeliveryVo findAll(Long userNumber){
         if (userNumber == null) {
             throw new IllegalArgumentException("회원 번호 누락");
         }

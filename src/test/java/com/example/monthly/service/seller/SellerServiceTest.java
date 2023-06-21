@@ -33,7 +33,7 @@ class SellerServiceTest {
         sellerDto.setSellerPhoneNumber("010-1234-1234");
         sellerDto.setSellerAddress("서울");
         sellerDto.setSellerEmail("aaa@naver.com");
-        sellerDto.setSellerCompanyRegisterNumber(1111);
+        sellerDto.setSellerCompanyRegisterNumber("1111");
         sellerDto.setSellerContents("메올");
     }
     @Test

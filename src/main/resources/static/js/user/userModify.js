@@ -128,7 +128,11 @@ $(".backBtn").on("click", function () {
   location.href = "mypage.html";
 });
 
-let gender = $('.gender').val();
+// let gender = $('.gender').val();
+
+let gender = document.getElementById("gender").value;
+
+console.log(gender);
 
 if(gender == 'M'){
   $("input:radio[name ='gender']:input[value='M']").attr("checked", true);
