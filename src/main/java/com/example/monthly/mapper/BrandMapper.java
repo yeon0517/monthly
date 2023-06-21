@@ -14,6 +14,9 @@ public interface BrandMapper {
     // 수정
     public void brandUpdate(BrandDto brandDto);
 
+    // 개인브랜드조회
+    public BrandDto brandSelect(Long sellerNumber);
+
     //brand 조회
     public Long brandSelectAll(Long brandNumber);
 

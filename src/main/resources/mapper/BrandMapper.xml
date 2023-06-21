@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.BrandMapper">
+    <select id="brandSelect" resultType="brandDto">
+        SELECT BRAND_NUMBER, BRAND_NAME, BRAND_CONTENTS
+        FROM MONTHLY_BRAND
+        WHERE SELLER_NUMBER = #{sellerNumber}
+    </select>
 
     <insert id="brandInsert">
         <selectKey keyProperty="brandNumber" order="BEFORE" resultType="long">
             SELECT SEQ_BRAND.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO MONTHLY_BRAND (BRAND_NUMBER, BRAND_CONTENTS, BRAND_NAME, BRAND_REGISTER_DATE, SELLER_NUMBER)
-        VALUES (#{brandNumber},#{brandContents},#{brandName},#{brandRegisterDate},#{sellerNumber})
+        INSERT INTO MONTHLY_BRAND (BRAND_NUMBER, BRAND_CONTENTS, BRAND_NAME, SELLER_NUMBER)
+        VALUES (#{brandNumber},#{brandContents},#{brandName}, #{sellerNumber})
     </insert>
-
-    <delete id="brandDelete">
-        DELETE FROM MONTHLY_BRAND
-        WHERE BRAND_NUMBER = #{brandNumber}
-    </delete>
 
     <select id="brandSelectAll" resultType="_int">
         SELECT BRAND_NUMBER, BRAND_CONTENTS, BRAND_NAME, BRAND_REGISTER_DATE, SELLER_NUMBER

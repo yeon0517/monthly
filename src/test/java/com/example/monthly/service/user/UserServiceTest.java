@@ -2,6 +2,7 @@ package com.example.monthly.service.user;
 
 import com.example.monthly.dto.UserDto;
 import com.example.monthly.mapper.UserMapper;
+import com.example.monthly.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,14 +25,18 @@ class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
+    private UserVo userVo;
     private UserDto userDto;
 
     @BeforeEach
     void setUp(){
+        userVo = new UserVo();
+        userVo.setUserId("aaa");
+        userVo.setUserPassword("12346");
         userDto = new UserDto();
         userDto.setUserId("aaa");
         userDto.setUserPassword("12346");
-        userMapper.insert(userDto);
+        userMapper.insert(userVo);
     }
 
     @Test
