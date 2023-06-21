@@ -1,13 +1,16 @@
 package com.example.monthly.mapper;
 
 import com.example.monthly.dto.UserDto;
+import com.example.monthly.vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
 
-    public void insert(UserDto userDto);
+    public void insert(UserVo userVo);
+
+
 
     public Long selectUserNumber(@Param("userId")String userId,
                                  @Param("userPassword")String userPassword);
@@ -19,5 +22,5 @@ public interface UserMapper {
 
     void userWithdraw(Long userNumber);
 
-
+    UserDto showJoinInfo(UserDto userDto);
 }

@@ -17,6 +17,7 @@
         <typeAlias type="com.example.monthly.dto.SellerDto" alias="sellerDto"/>
         <typeAlias type="com.example.monthly.dto.SubsDto" alias="subsDto"/>
         <typeAlias type="com.example.monthly.dto.UserDto" alias="userDto"/>
+        <typeAlias type="com.example.monthly.vo.UserVo" alias="userVo"/>
     </typeAliases>
 
 </configuration>
