@@ -7,6 +7,7 @@ import com.example.monthly.mapper.OrderMapper;
 import com.example.monthly.service.order.OrderService;
 import com.example.monthly.service.seller.SellerService;
 import com.example.monthly.service.user.UserService;
+import com.example.monthly.vo.DeliveryVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,30 +39,30 @@ public class UserController {
     @GetMapping("/userModify")
     public String userModify(Long userNumber, Model model){
         //        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        userNumber = 1L;
-        UserDto userDto = userService.findAll(1L);
-        DeliveryDto deliveryDto = orderService.findDelivery(userNumber);
-        if(deliveryDto != null){
-            model.addAttribute("delivery",deliveryDto);
-        }
-        model.addAttribute("user",userDto);
+        userNumber = 74L;
+        DeliveryVo user = userService.findAll(userNumber);
+        model.addAttribute("user",user);
         return "user/userModify";
     }
 
     @PostMapping("/userModify")
-    public String userModify(UserDto userDto, DeliveryDto deliveryDto, String checkPassword, HttpServletRequest req, RedirectAttributes redirectAttributes){
+    public String userModify(UserDto userDto, DeliveryDto deliveryDto, String checkPassword, HttpServletRequest req){
 //        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
        userDto.setUserNumber(1L);
-       deliveryDto.setUserNumber(1L);
        userDto.setUserPassword(checkPassword);
        userService.updatePassword(userDto);
 
-//       if(orderService.findDelivery(1L).getUserNumber() == 1L){
-//           orderService.changeDelivery(deliveryDto);
-//       }else {
-//            orderService.registerDelivery(deliveryDto);
-//
-//       }
+       //배송지 수정 (세션에서 받아온 userNumber 넣기)
+       deliveryDto.setUserNumber(74L);
+
+        System.out.println(deliveryDto);
+
+       if(userService.findAll(74L).getDeliveryPostcode() != null){
+           orderService.changeDelivery(deliveryDto);
+       }else {
+            orderService.registerDelivery(deliveryDto);
+
+       }
 
         return "user/mypage";
 

@@ -46,18 +46,30 @@
                 </div>
               </div>
 
-              <form name="productForm" method="get" action="/order/order">
+              <form name="productForm" method="get" th:action="@{/order/order}">
                 <!-- 상품 정보 -->
                 <div class="InfoArea">
+<!--                  제품 번호 -->
+                  <input type="hidden" id="productNumber" th:value="${product.productNumber}">
+<!--                  브랜드 이름-->
+                  <div class="supply">
+                    <span>
+                      <!--브랜드 주소 이동할때 브랜드 번호도 같이 보내면 될듯 th:href="@{/board/brandDetail(brandNumber=${product.brandNumber})}"-->
+                      <a th:href="@{/board/brandDetail}" style="color: #8eb4c8">
+                        <div th:text="${product.brandName}+ '>'">브랜드 이름></div>
+                      </a>
+                    </span>
+                  </div>
+
                   <!-- 상품 이름 -->
                   <!-- 상품 이름 필요하시면 여기다 넣고 사용 -->
                   <input type="hidden" name="proTitle" />
-                  <div name="proTitle" class="proTitle">
+                  <div name="proTitle" class="proTitle" th:text="[ + ${product.brandName} + ] + ${product.productName}">
                     [모어포모레] 고체바 & 숲 키링 세트
                   </div>
 
                   <!-- 가격 -->
-                  <div class="proPrice">18000원</div>
+                  <div class="proPrice" th:text="${product.productPrice} + 원">18000원</div>
 
                   <div class="calender">
                     <div style="display: flex; margin-bottom: 35px">
@@ -101,7 +113,7 @@
                         <!-- 옵션 이름 -->
                         <th scope="row">고체바</th>
                         <td>
-                          <div class="optName">에브리바디 올인원 바</div>
+                          <div class="optName" th:text="${product.productOption}">에브리바디 올인원 바</div>
                           <!--옵션값 필요하면 넣으세요 -->
                           <input type="hidden" name="optName" />
                         </td>
@@ -119,9 +131,9 @@
                       <tbody>
                         <tr class="amountPro">
                           <td>
-                            <div>상품이름</div>
+                            <div th:text="${product.productName}">상품이름</div>
                             -
-                            <div>옵션내용</div>
+                            <div th:text="${product.productOption}">옵션내용</div>
                           </td>
                           <td>
                             <span class="countBtn" style="width: 65px;">
@@ -141,11 +153,11 @@
                           </td>
                           <td class="right">
                             <!-- 가격 data-price에 넣어주세요 -->
-                            <span name="price" class="price" data-price="18000"
+                            <span name="price" class="price" th:text="${product.productPrice}+원"  data-price="18000"
                               >18000원</span
                             >
                             <!-- 혹시 안되면 value에 가격 넣어주시면 됩니다 -->
-                            <input hidden name="price" value="" />
+                            <input type="hidden" id="price" name="price" th:value="${product.productPrice}" />
                           </td>
                         </tr>
                       </tbody>
@@ -159,7 +171,7 @@
                     :
                     <span style="color: #8eb4c8" class="total">
                       <!-- 가격 -->
-                      <div class="pay">18000원</div>
+                      <div class="pay" th:text="${product.productPrice}+원">18000원</div>
                     </span>
                     <div class="countResult" style="color: #8eb4c8"></div>
                   </div>
@@ -189,6 +201,7 @@
                   <div class="cont">
                     <p class="detailinfo showstep1">
                       <img class="content" src="../img/proinfo.jpg" alt="" />
+                      <div style="text-align: center" th:text="${product.productContents}">안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</div>
                     </p>
                     <button class="btn_open">더보기</button>
                     <!-- <div class="btn_close hide">감추기</div> -->

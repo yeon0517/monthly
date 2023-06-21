@@ -1,6 +1,7 @@
 package com.example.monthly.mapper;
 
 import com.example.monthly.dto.UserDto;
+import com.example.monthly.vo.DeliveryVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,7 +14,7 @@ public interface UserMapper {
                                  @Param("userPassword")String userPassword);
 
 
-    UserDto selectAll(Long userNumber);
+    DeliveryVo selectAll(Long userNumber);
 
     void updatePassword(UserDto userDto);
 
