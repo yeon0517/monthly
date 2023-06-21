@@ -8,6 +8,7 @@ import com.example.monthly.service.order.OrderService;
 import com.example.monthly.service.seller.SellerService;
 import com.example.monthly.service.user.UserService;
 import com.example.monthly.vo.DeliveryVo;
+import com.example.monthly.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,12 +87,13 @@ public class UserController {
         return "user/join"; }
 
     @PostMapping("/join")
-    public RedirectView join(UserDto userDto){
-        userService.register(userDto);
+    public RedirectView join(UserVo userVo){
+        userService.register(userVo);
         return new RedirectView("/user/joinOK"); }
 
     @GetMapping("/joinOK")
-    public String joinOK(){
+    public String joinOK(UserDto userDto){
+        userService.showJoin(userDto);
         return "user/join_ok"; }
 
     @GetMapping("/findId")

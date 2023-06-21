@@ -6,11 +6,17 @@
         <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
             SELECT SEQ_USER.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO MONTHLY_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_PHONE_NUMBER, USER_EMAIL,
-                                  USER_GENDER, USER_BIRTHDAY)
-        VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName}, #{userPhoneNumber}, #{userEmail},
-          #{userGender}, #{userBirthday})
+        INSERT INTO MONTHLY_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_PHONE_NUMBER, USER_EMAIL, USER_GENDER, USER_BIRTHDAY)
+        VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName},
+        #{userPhoneNumber1} || '-' || #{userPhoneNumber2} || '-' || #{userPhoneNumber3},
+        #{userEmail}, #{userGender},
+        #{userBirthdayY} || '-' || #{userBirthdayM} || '-' || #{userBirthdayD})
     </insert>
+
+
+    <select id="showJoinInfo">
+        SELECT USER_ID, USER_NAME, USER_EMAIL FROM MONTHLY_USER WHERE USER_NUMBER = #{userNumber}
+    </select>
 
     <select id="selectUserNumber" resultType="long">
         SELECT USER_NUMBER FROM MONTHLY_USER WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}

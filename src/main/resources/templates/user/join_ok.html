@@ -25,15 +25,15 @@
                 <ul class="list">
                   <li>
                     <strong class="id">아이디</strong
-                    ><strong class="result"> : <span>abc123</span></strong>
+                    ><strong class="result"> : <span th:value="${user.userId}"></span></strong>
                   </li>
                   <li>
                     <strong class="name">이름</strong
-                    ><span class="result"> : <span>케인인</span></span>
+                    ><span class="result"> : <span th:value="${user.userName}"></span></span>
                   </li>
                   <li>
                     <strong class="email">이메일</strong
-                    ><span class="result"> : <span>aaa@gmail.com</span></span>
+                    ><span class="result"> : <span th:value="${user.userEmail}"></span></span>
                   </li>
                 </ul>
               </div>
@@ -52,7 +52,7 @@
       </div>
     </div>
   <div class="allTop" th:replace="fragment/board_top_btn :: board_top_btn"></div>
-  <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
+  <div class="allFooter" th:replace="fragment/board_footer :: board_footer"></div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script th:src="@{/js/user/join_ok.js}"></script>
