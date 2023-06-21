@@ -13,7 +13,9 @@ public class SellerDto {
     private String sellerId;
     private String sellerPassword;
     private String sellerPhoneNumber;
-    private String sellerAddress;
+    private String sellerPostcode;
+    private String sellerAddress1;
+    private String sellerAddress2;
     private String sellerEmail;
     private String sellerContents;
     private String sellerCompanyRegisterNumber;

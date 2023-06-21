@@ -30,7 +30,7 @@ class AdminMapperTest {
         sellerDto.setSellerRegisterDate("2019/02/12");
         sellerDto.setSellerCompanyRegisterNumber("1231212345");
         sellerDto.setSellerEmail("nsoe12@naver.com");
-        sellerDto.setSellerAddress("서울특별시 서초구 반포대로 58. 101동 501호(서초동. 서초아파트)");
+        sellerDto.setSellerAddress1("서울특별시 서초구 반포대로 58. 101동 501호(서초동. 서초아파트)");
 //        adminMapper.insert(sellerDto);
 
     }

@@ -26,6 +26,13 @@ public class SellerService {
     }
     
 //    판매자 로그인
+    /**
+     * 판매자 로그인
+     * @param sellerId
+     * @param sellerPassword
+     * @return
+     * @throws IllegalArgumentException 존재하지 않는 회원 id, pw로 조회하는 경우
+     */
     @Transactional(readOnly = true)
     public Long findSellerNumber(String sellerId, String sellerPassword){
         if(sellerId==null||sellerPassword==null){throw new IllegalArgumentException("아이디,패스워드 누락!");}

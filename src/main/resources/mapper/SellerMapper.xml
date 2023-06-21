@@ -7,9 +7,9 @@
         <selectKey keyProperty="sellerNumber" order="BEFORE" resultType="long">
             SELECT SEQ_SELLER.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO MONTHLY_SELLER(SELLER_NUMBER, SELLER_NAME, SELLER_ID, SELLER_PASSWORD, SELLER_PHONE_NUMBER, SELLER_ADDRESS,
+        INSERT INTO MONTHLY_SELLER(SELLER_NUMBER, SELLER_NAME, SELLER_ID, SELLER_PASSWORD, SELLER_PHONE_NUMBER, SELLER_POSTCODE,SELLER_ADDRESS1, SELLER_ADDRESS2,
         SELLER_EMAIL, SELLER_CONTENTS, SELLER_COMPANY_REGISTER_NUMBER)
-        VALUES (#{sellerNumber},#{sellerName},#{sellerId},#{sellerPassword},#{sellerPhoneNumber},#{sellerAddress},#{sellerEmail},#{sellerContents},#{sellerCompanyRegisterNumber})
+        VALUES (#{sellerNumber},#{sellerName},#{sellerId},#{sellerPassword},#{sellerPhoneNumber},#{sellerPostcode},#{sellerAddress1}, #{sellerAddress2},#{sellerEmail},#{sellerContents},#{sellerCompanyRegisterNumber})
     </insert>
 <!--판매자 아이디 중복검사-->
     <select id="selectId" resultType="int">
