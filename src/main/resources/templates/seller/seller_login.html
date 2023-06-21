@@ -14,7 +14,7 @@
     <!-- 로고 클릭시 구매자메인으로 이동 -->
     <header class="login-header">
       <h1>
-        <a href="#">
+        <a href="@{/board/main}">
           <img th:src="@{/img/seller/logo.png}" alt="">
         </a>
       </h1>
@@ -30,19 +30,19 @@
         </ul>
       </div>
       <div class="login-contents">
-        <form action="#">
+        <form th:action="@{/seller/login}" method="post" id="select-login">
           <div class="login-input-wrap">
             <p>아이디</p>
-            <input type="text">
-            <p class="input-check">요상한 아이디입니다.</p>
+            <input type="text" name="sellerId" id="select-id">
+            <p class="input-check"></p>
           </div>
           <div class="login-input-wrap">
             <p>비밀번호</p>
-            <input type="password">
-            <p class="input-check">비밀번호가 일치하지 않습니다.</p>
+            <input type="password" name="sellerPassword" id="select-password">
+            <p class="input-check"></p>
           </div>
           <div class="login-input-wrap">
-            <button type="button" class="login-btn">로그인</button>
+            <button type="submit" class="login-btn">로그인</button>
           </div>
         </form>
       </div>

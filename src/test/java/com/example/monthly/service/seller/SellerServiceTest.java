@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 @Slf4j
 class SellerServiceTest {
@@ -31,9 +32,11 @@ class SellerServiceTest {
         sellerDto.setSellerId("ccc");
         sellerDto.setSellerPassword("1234");
         sellerDto.setSellerPhoneNumber("010-1234-1234");
-        sellerDto.setSellerAddress("서울");
+        sellerDto.setSellerPostcode("1234");
+        sellerDto.setSellerAddress1("서울시 강남구");
+        sellerDto.setSellerAddress2("1-1");
         sellerDto.setSellerEmail("aaa@naver.com");
-        sellerDto.setSellerCompanyRegisterNumber("1111");
+        sellerDto.setSellerCompanyRegisterNumber("1111-1111");
         sellerDto.setSellerContents("메올");
     }
     @Test
@@ -52,4 +55,19 @@ class SellerServiceTest {
         assertThat(sellerNumber).isEqualTo(1L);
     }
 
+    @Test
+    @DisplayName("판매자번호조회 : 존재하지 않는 회원 예외검사")
+    void findSellerNumberException(){
+        doReturn(null).when(sellerMapper).selectSellerNumber(any(String.class), any(String.class));
+        assertThatThrownBy(() -> sellerService.findSellerNumber("test","1234"))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("존재하지");
+    }
+
+    @Test@DisplayName("판매자 아이디 중복 검사")
+    void sellerIdCheck(){
+        doReturn(1).when(sellerMapper).selectId(any(String.class));
+        int result = sellerService.sellerIdCheck("test");
+        assertThat(result).isEqualTo(1);
+    }
 }

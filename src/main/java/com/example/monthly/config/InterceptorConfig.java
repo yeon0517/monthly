@@ -18,7 +18,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(sellerLoginInterceptor)
                 .addPathPatterns("/seller/*")
                 .excludePathPatterns("/seller/login")
-                .excludePathPatterns("/seller/apply");
+                .excludePathPatterns("/seller/apply")
+                .excludePathPatterns("/seller/apDone");
 //        관리자 로그인 인터셉터 등록
 
 //        구매자 로그인 인터셉터 등록 (마이페이지, 정보수정, ..등?)

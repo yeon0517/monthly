@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>판매자신청 | monthly.</title>
+  <link rel="stylesheet" th:href="@{/css/board/all.css}" />
+  <link rel="stylesheet" th:href="@{/css/user/join_ok.css}">
+</head>
+
+<body>
+<header class="board-header"  th:replace="fragment/board_header :: board_header"></header>
+
+<div id="main">
+  <div class="title2">
+    <h2>판매자 신청 완료</h2>
+  </div>
+  <div class="container">
+    <div class="info-space">
+      <p class="info2">즐거운 구독 생활의 시작, monthly.</p>
+      <div class="result-box">
+        <div class="member-info">
+          <div class="info-detail">
+            <ul class="list">
+              <li>
+                <strong class="id">아이디</strong
+                ><strong class="result"> : <span th:text="${sellerId}"></span></strong>
+              </li>
+              <li>
+                <strong class="name">이름</strong
+                ><span class="result"> : <span th:text="${sellerName}"></span></span>
+              </li>
+              <li>
+                <strong class="email">이메일</strong
+                ><span class="result"> : <span th:text="${sellerEmail}"></span></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="message2">
+        monthly.판매자 신청이 성공적으로 이루어졌습니다.
+        <br />
+        입점 심사 후, 등록하신 이메일로 입점 결과를 알려드립니다.
+      </p>
+      <p class="after-button">
+        <a th:href="@{/board/main}" class="login">홈으로 돌아가기</a>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="allTop" th:replace="fragment/board_top_btn :: board_top_btn"></div>
+<div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script th:src="@{/js/user/join_ok.js}"></script>
+<script th:src="@{/js/board/board_main.js}"></script>
+</body>
+</html>
