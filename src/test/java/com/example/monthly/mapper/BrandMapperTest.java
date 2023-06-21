@@ -3,7 +3,9 @@ package com.example.monthly.mapper;
 import com.example.monthly.dto.BrandDto;
 import com.example.monthly.dto.SellerDto;
 import lombok.extern.slf4j.Slf4j;
+import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,34 +18,40 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 class BrandMapperTest {
 
-//    @Autowired
-//    private BrandMapper brandMapper;
-//    @Autowired
-//    private SellerMapper sellerMapper;
-//
-//    private BrandDto brandDto;
-//    private SellerDto sellerDto;
-//
-//    @BeforeEach
-//    void setUp(){
-//        sellerDto = new SellerDto();
-//        sellerDto.setSellerName("d");
-//        sellerDto.setSellerId("a");
-//        sellerDto.setSellerPassword("1");
-//
-//
-//        brandDto = new BrandDto();
-//        brandDto.setBrandName("모어포모레");
-//        brandDto.setBrandContents("환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트");
-//        brandDto.setBrandRegisterDate("20230619");
-//        brandDto.setSellerNumber(sellerDto.getSellerNumber());
-//
-//
-//    }
-//
-//    @Test
-//    void brandInsert(){
-//        brandMapper.brandInsert(brandDto);
-//    }
+    @Autowired
+    private BrandMapper brandMapper;
+
+    private BrandDto brandDto;
+
+    @BeforeEach
+    void setUp(){
+        brandDto = new BrandDto();
+        brandDto.setBrandName("샘크래프트");
+        brandDto.setBrandContents("종이용기 립밥");
+        brandDto.setSellerNumber(15L);
+
+    }
+
+    @Test
+    @DisplayName("브랜드 등록 및 판매자번호로 브랜드 조회")
+    void brandInsert() {
+        brandMapper.brandInsert(brandDto);
+        assertThat(brandMapper.brandSelect(brandDto.getSellerNumber()).getBrandNumber())
+        .isEqualTo(brandDto.getBrandNumber());
+
+    }
+    @Test
+    void brandSelect() {
+    }
+
+
+    @Test
+    void brandUpdate() {
+
+    }
+
+    @Test
+    void brandSelectAll() {
+    }
 
 }
