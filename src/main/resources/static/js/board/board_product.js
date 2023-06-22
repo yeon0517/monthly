@@ -86,7 +86,7 @@ $(document).ready(function () {
 // });
 
 $(document).ready(function() {
-    let products = /*[[${productSelect}]]*/ [];
+    let products = [[${productSelect}]];
 
     addProducts(products);
 });
@@ -125,7 +125,7 @@ function addProducts(products) {
 
         if (productCount === 4) {
             $(".product-list").append(productRow);
-            productRow = $('<div class="product-row"></div>');
+            productRow = $('<div class="product-column"></div>');
             productCount = 0;
         }
     });

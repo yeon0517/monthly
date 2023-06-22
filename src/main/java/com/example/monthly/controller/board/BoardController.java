@@ -36,13 +36,14 @@ public class BoardController {
     @GetMapping("/main")
     public String main(Model model){
         model.addAttribute("brandSelect",boardService.brandSelect());
-
+        model.addAttribute("productSelect" , boardService.productSelect());
         return "board/board_main";
 
     }
 
     @GetMapping("/brand")
-    public String brand(){
+    public String brand(Model model){
+        model.addAttribute("brandSelect",boardService.brandSelect());
         return "board/board_brand";
     }
 

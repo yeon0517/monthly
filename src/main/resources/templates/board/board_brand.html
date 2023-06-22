@@ -18,80 +18,22 @@
       <div class="title">
         <h2>구독가능한 브랜드</h2>
       </div>
-      <!-- <div class="brand_button">
-        <div class="brand_catagory">
-          <div class="all btn">
-            <p>All</p>
-          </div>
-          <div class="btn">
-            <p>첫번째 브랜드</p>
-          </div>
-          <div class="btn">
-            <p>두번째 브랜드</p>
-          </div>
-          <div class="btn">
-            <p>세번째 브랜드</p>
-          </div>
-          <div class="btn">
-            <p>네번째 브랜드</p>
-          </div>
-        </div>
-      </div> -->
+
       <div class="center">
         <div class="row">
           <!-- 하나의 컬럼 이게 반복된당-->
-          <!-- <div class="colum">
-            <div class="colum-content">
-              <div class="colum-img">
-                <img src="/img/one.jpg" alt="" />
+          <div class="column" th:each="brand : ${brandSelect}">
+            <div class="column-content">
+              <div class="column-img">
+                <img th:src="@{/img/boardImg/ho.jpg}" alt=""  style="width: 400px; height: 400px"/>
               </div>
-              <div class="colim-p">
-                <h4>모어포모레</h4>
-                <p>
-                  환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트
+              <div class="column-p">
+                <h4 th:text="${brand.brandName}"></h4>
+                <p th:text="${brand.brandContents}">
                 </p>
               </div>
             </div>
           </div>
-          <div class="colum">
-            <div class="colum-content">
-              <div class="colum-img">
-                <img src="/img/two.jpg" alt="" />
-              </div>
-              <div class="colim-p">
-                <h4>모어포모레</h4>
-                <p>
-                  환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="colum">
-            <div class="colum-content">
-              <div class="colum-img">
-                <img src="/img/three.jpg" alt="" />
-              </div>
-              <div class="colim-p">
-                <h4>모어포모레</h4>
-                <p>
-                  환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="colum">
-            <div class="colum-content">
-              <div class="colum-img">
-                <img src="/img/two.jpg" alt="" />
-              </div>
-              <div class="colim-p">
-                <h4>모어포모레</h4>
-                <p>
-                  환경문제 해결을 적극적으로 기여하는 모레상점 기부 프로젝트
-                </p>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
