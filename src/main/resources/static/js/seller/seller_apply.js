@@ -1,5 +1,6 @@
 // 판매자신청페이지!!!
 import * as seller from '../module/seller.js';
+
 // 아이디인풋칸
 let $sellerIdInput = $('#seller-id');
 // 아이디 메세지 띄울곳
@@ -67,13 +68,24 @@ let $chPwMsg = $('.seller-password-check-msg');
 
 // 판매자정보수정에서 사용 -
 // 현재비밀번호 맞는지 확인
-// $currentPwInput.on('blur', function(){
-//   if($(this).val()==''){
-//     $cuPwMsg.text('비밀번호를 입력하세요');
-// 	}else{
-//
-// }
-// });
+$currentPwInput.on('blur', function(){
+  if($(this).val()==''){
+    $cuPwMsg.text('비밀번호를 입력하세요');
+	}else{
+      let password = $currentPwInput.val();
+      // console.log(password);
+
+      seller.checkCurrentPw(password, function(result){
+          if (result == 0) {
+              $cuPwMsg.text('비밀번호가 일치하지 않습니다.');
+              $cuPwMsg.css("color","#c88e8e");
+          } else {
+            $cuPwMsg.text('비밀번호 확인 완료!');
+            $cuPwMsg.css("color", "#8eb4c8");
+          }
+      });
+}
+});
 
 //변경비밀번호를 입력하지 않으면 메세지
 // 비밀번호 정규표현식 
@@ -163,7 +175,7 @@ $(".agree-check").on('click', function(){
 
 
 // 취소버튼 클릭시 페이지 이동
-$('.cancel-btn').on('click', function (){
+$('.cancle-to-main-btn').on('click', function (){
     window.location.href = '/board/main';
 });
 

@@ -24,15 +24,15 @@ export function checkId(sellerId, callback){
         error : function (a,b,c){console.error(c)}
     });
 }
+
+// 현재 비밀번호 맡는지 체크
 export function checkCurrentPw(sellerPassword,callback){
     $.ajax({
 			url : '/sellers/checkPw',
 			type : 'get',
-			data : {
-				userNumber : sellerNumber,
-				userPassword : sellerPassword
-			},
+			data : {sellerPassword : sellerPassword},
 			success : function(result){
+			    console.log('조회완료');
 				if(callback){
 				    callback(result)
                 };
@@ -40,3 +40,36 @@ export function checkCurrentPw(sellerPassword,callback){
 			error : function (a,b,c){console.error(c)}
 });
 }
+
+// 판매자 정보 수정
+export function modifySellerInfo(sellerDto,){
+    $.ajax({
+        url : '/sellers/modifyInfo',
+        type : 'patch',
+        data :sellerDto,
+        contentType : 'application/json;charset=utf-8',
+        success : function(){
+            console.log("수정완료")
+        },
+        error : function(a,b,c,){console.error(c)}
+    });
+}
+
+// 판매자 정보 조회
+export function findSellerInfo(callback){
+    console.log('ajax')
+    $.ajax({
+       url : '/sellers/findInfo',
+       type : 'get',
+       dataType : 'json',
+       success : function(result){
+           if(callback){
+               callback(result);
+           }
+           console.log('조회완료')
+        },
+       erroe : function(a,b,c){console.error(c)}
+    });
+}
+
+

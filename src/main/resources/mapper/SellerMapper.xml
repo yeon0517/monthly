@@ -21,7 +21,33 @@
         SELECT SELLER_NUMBER FROM MONTHLY_SELLER
         WHERE SELLER_ID =#{sellerId} and SELLER_PASSWORD=#{sellerPassword}
     </select>
+<!--판매자 정보조회-->
+    <select id="selectSellerInfo" resultType="sellerDto">
+        SELECT SELLER_NUMBER, SELLER_NAME, SELLER_ID, SELLER_PASSWORD, SELLER_PHONE_NUMBER,
+               SELLER_POSTCODE, SELLER_ADDRESS1, SELLER_ADDRESS2,
+               SELLER_EMAIL, SELLER_CONTENTS, SELLER_COMPANY_REGISTER_NUMBER
+        FROM MONTHLY_SELLER
+        WHERE SELLER_NUMBER = #{sellerNumber}
+    </select>
+<!--판매자 현재 비밀번호 확인-->
+    <select id="selectCurrentPw" resultType="int">
+        SELECT COUNT(*) FROM MONTHLY_SELLER
+        WHERE SELLER_NUMBER = #{sellerNumber}
+          AND SELLER_PASSWORD = #{sellerPassword}
+    </select>
 
-
+<!--판매자 정보 수정-->
+    <update id="updateSellerInfo">
+        update MONTHLY_SELLER
+        set  SELLER_PASSWORD = #{sellerPassword},
+             SELLER_PHONE_NUMBER=#{sellerPhoneNumber},
+             SELLER_POSTCODE = #{sellerPostcode},
+             SELLER_ADDRESS1 = #{sellerAddress1},
+             SELLER_ADDRESS2= #{sellerAddress2},
+             SELLER_EMAIL = #{sellerEmail},
+             SELLER_CONTENTS = #{sellerContents},
+             SELLER_COMPANY_REGISTER_NUMBER=#{sellerCompanyRegisterNumber}
+        where seller_number = #{sellerNumber};
+    </update>
 
 </mapper>
