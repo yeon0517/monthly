@@ -107,7 +107,7 @@
                   </div>
 
                   <!-- 옵션 -->
-                  <table class="optionTable" border="0">
+                  <table class="optionTable" border="0" style="width: 100%;">
                     <tbody class="option">
                       <tr>
                         <!-- 옵션 이름 -->
@@ -193,7 +193,7 @@
                       <!-- 클릭 했을때 스크롤 이동, 버튼 색변환 -->
                       <li class="blurTab proInfo">상품상세정보</li>
                       <li class="TabPanelItem review">상품구매안내</li>
-                      <li class="TabPanelItem caution">상품후기(2)</li>
+                      <li class="TabPanelItem caution" th:text="'상품후기(' +${reviewCnt}+ ')'">상품후기(2)</li>
                     </ul>
                   </section>
                   <!-- 텝으로 배너 이동 -->
@@ -310,20 +310,18 @@
                       </ul>
                     </div>
                   </div>
+
                   <div class="proReview">
                     <div class="board">
                       <section class="boardContent-postCommentAndViews">
                         <div class="boardContent-postComment">
                           <div class="commentInput-wrap">
                             <!-- 댓글 개수, 댓글 입력, 댓글 등록버튼 -->
-                            <h1 class="commentInput-count">REVIEW(100)</h1>
+                            <h1 class="commentInput-count" th:text="'REVIEW(' +${reviewCnt}+ ')'">REVIEW(100)</h1>
                             <textarea
-                              class="commentInput-commentText"
+                              class="commentInput-commentText" name="reivewContents"
                               placeholder="댓글을 입력하세요"
-                            >
-                                      <!-- 댓글 입력하기 -->
-                                  </textarea
-                            >
+                            ></textarea>
                             <div class="commentInput-buttonWrapper">
                               <button
                                 class="commentInput-buttonComplete"
@@ -338,61 +336,18 @@
 
                           <!-- 마진없는 댓글 컨테이너 -->
                           <ul class="commentList-CommentList">
-                            <!-- 마진 준 댓글 리스트 컨테이너 -->
-                            <li class="commentItem-commentContainer">
-                              <section
-                                class="commentItem-CommentHeader"
-                                style="width: 102%"
-                              >
-                                <div class="commentItem-writerWrapper">
-                                  <div class="commentItem-commentInfo">
-                                    <div class="commentItem-title">
-                                      <div class="commentItem-userNickname">
-                                        른시룽
-                                      </div>
-                                      <div class="commentItem-registerDate">
-                                        2143.08.10 13:42:55
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="boardReply-editDelete">
-                                  <button
-                                    type="button"
-                                    class="boardReply-editor-buttons"
-                                    style="
-                                      background-color: #8eb4c8;
-                                      border-radius: 20px;
-                                      width: 50px;
-                                    "
-                                  >
-                                    수정
-                                  </button>
-                                  <button
-                                    type="button"
-                                    class="boardReply-editor-buttons"
-                                    style="
-                                      background-color: #8eb4c8;
-                                      border-radius: 20px;
-                                      width: 50px;
-                                    "
-                                  >
-                                    삭제
-                                  </button>
-                                </div>
-                              </section>
-                              <section class="commentItem-CommentContent">
-                                <p class="commentItem-CommentContent">
-                                  안녕하세요
-                                </p>
-                              </section>
-                            </li>
+
+
+
                           </ul>
+
                         </div>
                       </section>
+
                     </div>
                   </div>
-                  <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
+
+                  <div  class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
                 </div>
               </div>
             </div>
@@ -405,11 +360,12 @@
 
     </div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.6.3.js"
-      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-      crossorigin="anonymous"
-    ></script>
+   <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script th:inline="javascript"> // 타임리프 문법을 자바스크립트에서 사용하기 위한 설정
+    // let loginNumber = [[${session.userNumber}]]; // 타임리프 문법은 [] 대괄호 2개로 감싸줘야 한다.
+    let loginNumber = 1;
+    </script>
+    <script type="module" th:src="@{/js/board/productInfoReview.js}"></script>
     <script th:src="@{/js/board/productInfo.js}"></script>
   <script th:src="@{/js/board/board_main.js}"></script>
   </body>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.monthly.mapper.ReviewMapper">
+    <insert id="insert">
+        INSERT INTO MONTHLY_REVIEW (REVIEW_NUMBER, REVIEW_CONTENTS, USER_NUMBER,PRODUCT_NUMBER)
+        VALUES (SEQ_REPLY.NEXTVAL,#{reviewContents},#{userNumber},#{productNumber})
+    </insert>
+
+   <update id="update">
+       UPDATE MONTHLY_REVIEW
+       SET  REVIEW_CONTENTS = #{reviewContents}, REVIEW_UPDATE_DATE = SYSDATE
+       WHERE REVIEW_NUMBER = #{reviewNumber}
+   </update>
+
+    <delete id="delete">
+        DELETE
+        FROM MONTHLY_REVIEW
+        WHERE REVIEW_NUMBER = #{replyNumber}
+    </delete>
+
+    <select id="select" resultType="reviewVo">
+        SELECT REVIEW_NUMBER, REVIEW_CONTENTS, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE,PRODUCT_NUMBER, MU.USER_NUMBER, MU.USER_ID
+        FROM MONTHLY_REVIEW MR JOIN MONTHLY_USER MU ON REVIEW_NUMBER = #{reviewNumber} AND MR.USER_NUMBER = MU.USER_NUMBER
+    </select>
+
+    <select id="selectList" resultType="reviewVo">
+        SELECT REVIEW_NUMBER, REVIEW_CONTENTS, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE, PRODUCT_NUMBER, MR.USER_NUMBER, MU.USER_ID
+        FROM MONTHLY_REVIEW MR JOIN MONTHLY_USER MU ON PRODUCT_NUMBER = #{productNumber} AND MU.USER_NUMBER = MU.USER_NUMBER
+        ORDER BY REVIEW_UPDATE_DATE DESC
+    </select>
+
+    <select id="selectListPage" resultType="reviewVo">
+        SELECT REVIEW_NUMBER, REVIEW_CONTENTS, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE, USER_NUMBER, USER_ID
+        FROM (
+                 SELECT ROWNUM RN, REVIEW_NUMBER, REVIEW_CONTENTS, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE, USER_NUMBER, USER_ID
+                 FROM (
+                          SELECT REVIEW_NUMBER, REVIEW_CONTENTS, REVIEW_REGISTER_DATE, REVIEW_UPDATE_DATE, U.USER_NUMBER, U.USER_ID
+                          FROM MONTHLY_USER U JOIN MONTHLY_REVIEW R
+                                                   ON U.USER_NUMBER = R.USER_NUMBER AND PRODUCT_NUMBER = #{productNumber}
+                          ORDER BY REVIEW_NUMBER DESC
+                      )
+             <![CDATA[
+                 WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+             ]]>
+     )
+        WHERE RN > (#{criteria.page}-1) * #{criteria.amount}
+    </select>
+
+    <select id="selectTotal" resultType="_int">
+        SELECT COUNT(REVIEW_NUMBER)
+        FROM MONTHLY_REVIEW
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+</mapper>

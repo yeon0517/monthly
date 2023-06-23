@@ -1,3 +1,7 @@
+
+
+
+
 $(document).ready(function () {
   calendarInit();
 });
@@ -242,49 +246,44 @@ $(function () {
 
 
 //제품 이미지 처리
-// displayAjax();
-//
-// function displayAjax(){
-//   let productNumber = $('#productNumber').val();
-//   console.log(productNumber);
-//
-//   $.ajax({
-//     url : '/profiles/imgList',
-//     type : 'get',
-//     data : {productNumber : productNumber},
-//     success : function(files){
-//       console.log("성공");
-//       let text = '';
-//       let thum = '';
-//
-//       files.forEach((item) => {
-//         console.log(item);
-//       });
-// //         files.forEach(file => {
-// //         let thufileName = file[1].productFileUploadPath + '/th' + file[1].productFileUuid + '_' + file[1].productFileName;
-// //           thum += `
-// //
-// //                     <img
-// //                       src="/files/display?fileName=${thufileName}" data-number="${file[0].productFileNumber}" data-name="${thufileName}"
-// //                     />
-// // `;
-// //       });
-//
-//       files.forEach(file => {
-//         let fileName = file.productFileUploadPath + '/' + file.productFileUuid + '_' + file.productFileName;
-//
-//         text += `
-//
-//                     <li class="list">
-//                      <img src="/files/display?fileName=${fileName}" data-number="${file.productFileNumber}" data-name="${fileName}" />
-//                     </li>
-//
-//
-// `;
-//       });
-//
-//       //$('.thumbnail').html(thum);
-//       $('.ImgList >ul').html(text);
-//     }
-//   });
-// }
+displayAjax();
+
+function displayAjax(){
+  let productNumber = $('#productNumber').val();
+  console.log(productNumber);
+
+  $.ajax({
+    url : '/profiles/imgList',
+    type : 'get',
+    data : {productNumber : productNumber},
+    success : function(files){
+      console.log("성공");
+      let text = '';
+      let thum = '';
+      let thufileName = files[0].productFileUploadPath + '/th_' + files[0].productFileUuid + '_' + files[0].productFileName;
+      thum += `
+
+                <img
+                 src="/profiles/display?fileName=${thufileName}" data-number="${files[0].productFileNumber}" data-name="${thufileName}"
+                />
+`;
+
+
+      files.forEach(file => {
+        let fileName = file.productFileUploadPath + '/' + file.productFileUuid + '_' + file.productFileName;
+        text += `
+
+                    <li class="list">
+                     <img src="/profiles/display?fileName=${fileName}" data-number="${file.productFileNumber}" data-name="${fileName}" />
+                    </li>
+
+
+`;
+      });
+
+      $('.thumbnail').html(thum);
+      $('.ImgList >ul').html(text);
+    }
+  });
+}
+
