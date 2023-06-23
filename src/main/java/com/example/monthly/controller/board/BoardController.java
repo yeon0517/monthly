@@ -1,6 +1,9 @@
 package com.example.monthly.controller.board;
 
 import com.example.monthly.service.board.ProductService;
+import com.example.monthly.service.board.ReviewService;
+import com.example.monthly.vo.Criteria;
+import com.example.monthly.vo.PageVo;
 import com.example.monthly.vo.ProductVo;
 
 import com.example.monthly.mapper.BoardMapper;
@@ -22,13 +25,16 @@ public class BoardController {
 
     private final BoardService boardService;
 
+    private final ReviewService reviewService;
 
 
     @GetMapping("/productInfo")
-    public String productInfo(Long productNumber, Model model){
+    public String productInfo(Long productNumber, Model model, Criteria criteria){
 //        productMain에서 productNumber을 get 형식으로 넘겨주고 나는 그걸 받아서  넣어준다.
         ProductVo productVo = productService.productView(1L);
-        System.out.println("==================" + productVo);
+        int reviewCnt = reviewService.findTotal(1L);
+        model.addAttribute("pageInfo",new PageVo(criteria,reviewCnt));
+        model.addAttribute("reviewCnt",reviewCnt);
         model.addAttribute("product",productVo);
         return "board/productInfo";
     }

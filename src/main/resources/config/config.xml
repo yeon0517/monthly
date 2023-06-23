@@ -20,6 +20,8 @@
         <typeAlias type="com.example.monthly.vo.DeliveryVo" alias="deliveryVo"/>
         <typeAlias type="com.example.monthly.vo.ProductVo" alias="productVo"/>
         <typeAlias type="com.example.monthly.vo.UserVo" alias="userVo"/>
+        <typeAlias type="com.example.monthly.vo.ReviewVo" alias="reviewVo"/>
+        <typeAlias type="com.example.monthly.vo.Criteria" alias="criteria"/>
     </typeAliases>
 
 </configuration>
