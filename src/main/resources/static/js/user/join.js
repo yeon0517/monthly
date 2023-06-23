@@ -37,6 +37,7 @@ agreeCheckboxes.forEach(function (checkbox) {
 
 const memberIDInput = document.querySelector(".member-id");
 const warning1 = document.querySelector(".warning1");
+const warning5 = document.querySelector(".warning5");
 const info1 = document.querySelector(".info1");
 
 memberIDInput.addEventListener("input", function () {
@@ -47,20 +48,38 @@ memberIDInput.addEventListener("input", function () {
   const isKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(inputText);
 
   if (inputText === "") {
+    warning5.style.display = "none";
     warning1.style.display = "none";
     info1.style.display = "none";
   } else if (inputLength < 4 || !hasEnglish || !hasNumber || isKorean) {
     warning1.style.display = "block";
+    warning5.style.display = "none";
     info1.style.display = "none";
   } else {
-    warning1.style.display = "none";
-    info1.style.display = "block";
+    $.ajax({
+      url: '/users/checkId',
+      type: 'get',
+      data: {userId: inputText},
+      success: function (result) {
+        if (result == 1) {
+          warning1.style.display = "none";
+          info1.style.display = "none";
+          warning5.style.display = "block";
+        } else {
+          warning1.style.display = "none";
+          warning5.style.display = "none";
+          info1.style.display = "block";
+        }
+      },
+      error: function (a, b, c) {
+        console.log(c);
+      }
+    });
   }
 });
 
 memberIDInput.addEventListener("blur", function () {
   const inputText = memberIDInput.value.trim();
-
   if (inputText === "") {
     warning1.style.display = "none";
     info1.style.display = "none";

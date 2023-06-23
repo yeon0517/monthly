@@ -16,10 +16,14 @@ radio2.addEventListener("click", () => {
 
 const emailRadio = document.querySelector("#check-method1");
 const phoneRadio = document.querySelector("#check-method2");
+const nameSection1 = document.querySelector(".input-name1");
+const nameSection2 = document.querySelector(".input-name2");
 const emailSection = document.querySelector(".input-email");
 const phoneSection = document.querySelector(".input-phone");
 
 emailRadio.addEventListener("click", function () {
+  nameSection1.style.display = "block";
+  nameSection2.style.display = "none";
   emailSection.style.display = "block";
   phoneSection.style.display = "none";
   clearInputFields();
@@ -27,6 +31,8 @@ emailRadio.addEventListener("click", function () {
 });
 
 phoneRadio.addEventListener("click", function () {
+  nameSection1.style.display = "none";
+  nameSection2.style.display = "block";
   emailSection.style.display = "none";
   phoneSection.style.display = "block";
   clearInputFields();
@@ -49,7 +55,8 @@ function toggleFindIdButton() {
 window.addEventListener("DOMContentLoaded", function () {
   var checkMethod1 = document.querySelector("#check-method1");
   var checkMethod2 = document.querySelector("#check-method2");
-  var inputName = document.querySelector(".name-space");
+  var inputName1 = document.querySelector(".name-space1");
+  var inputName2 = document.querySelector(".name-space2");
   var inputEmail = document.querySelector(".email-space");
   var inputPhone1 = document.querySelector(".phone-space1");
   var inputPhone2 = document.querySelector(".phone-space2");
@@ -69,7 +76,8 @@ window.addEventListener("DOMContentLoaded", function () {
     toggleFindIdButton();
   });
 
-  inputName.addEventListener("input", toggleFindIdButton);
+  inputName1.addEventListener("input", toggleFindIdButton);
+  inputName2.addEventListener("input", toggleFindIdButton);
   inputEmail.addEventListener("input", toggleFindIdButton);
   inputPhone1.addEventListener("input", toggleFindIdButton);
   inputPhone2.addEventListener("input", toggleFindIdButton);
@@ -94,7 +102,8 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   function clearInputFields() {
-    inputName.value = "";
+    inputName1.value = "";
+    inputName2.value = "";
     inputEmail.value = "";
     inputPhone1.value = "";
     inputPhone2.value = "";
@@ -102,13 +111,15 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   function toggleFindIdButton() {
-    var nameValue = inputName.value.trim();
+    var nameValue1 = inputName1.value.trim();
+    var nameValue2 = inputName2.value.trim();
     var emailValue = inputEmail.value.trim();
     var phone1Value = inputPhone1.value.trim();
     var phone2Value = inputPhone2.value.trim();
     var phone3Value = inputPhone3.value.trim();
 
-    var isValidName = nameValue.length >= 2;
+    var isValidName1 = nameValue1.length >= 2;
+    var isValidName2 = nameValue2.length >= 2;
     var isValidEmail =
       emailValue.length >= 2 &&
       /^[^\s@]+@[^\s@]+\.(net|org|com)$/.test(emailValue);
@@ -117,9 +128,14 @@ window.addEventListener("DOMContentLoaded", function () {
       phone2Value.length >= 4 &&
       phone3Value.length >= 4;
 
-    if (isValidName && (isValidEmail || isValidPhone)) {
+    if (isValidName1 && isValidEmail) {
       noFindIdButton.style.display = "none";
       findIdButton.style.display = "inline-block";
+
+    } else if (isValidName2 && isValidPhone){
+      noFindIdButton.style.display = "none";
+      findIdButton.style.display = "inline-block";
+
     } else {
       noFindIdButton.style.display = "inline-block";
       findIdButton.style.display = "none";
