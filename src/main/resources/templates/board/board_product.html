@@ -17,89 +17,13 @@
       <div class="title">
         <h2>구독가능한 제품</h2>
       </div>
-      <!-- <div class="brand_button">
-        <div class="brand_catagory">
-          <div class="all btn">
-            <p>All</p>
-          </div>
-          <div class="btn">
-            <p>첫번째</p>
-          </div>
-          <div class="btn">
-            <p>두번째</p>
-          </div>
-          <div class="btn">
-            <p>세번째</p>
-          </div>
-          <div class="btn">
-            <p>네번째</p>
-          </div>
-        </div>
-      </div> -->
-<!--      <div class="product-list">-->
-<!--        &lt;!&ndash; 여기를 js로 다 넣어서 반복문을 만들었어여~ &ndash;&gt;-->
-<!--        <div class="product-row">-->
-<!--          <div class="product-colum">-->
-<!--            <div class="product-content">-->
-<!--              <div class="product-img">-->
-<!--                <img src="/img/product (1).jpg" alt="" />-->
-<!--              </div>-->
-<!--              <div class="product-p" th:each="product : ${productSelect}">-->
-<!--                <div class="brand"><h4>[브랜드이름]</h4></div>-->
-<!--                <div th:text="${product.productName}" class="product-name"><p></p></div>-->
-<!--              </div>-->
-<!--              <div class="product-price" th:text="${product.productPrice}"><p></p></div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--&lt;!&ndash;          <div class="product-colum">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="product-content">&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="product-img">&ndash;&gt;-->
-<!--&lt;!&ndash;                <img src="/img/product (2).jpg" alt="" />&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="procuct-p">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="brand"><h4>[브랜드이름]</h4></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="product-name"><p>Y2K 호보백</p></div>&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="product-price"><p>39,000원</p></div>&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="product-modal">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="modal-up"><p>관심상품</p></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="modal-down">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <img src="/img/add-cart.png" alt="" />&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          <div class="product-colum">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="product-content">&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="product-img">&ndash;&gt;-->
-<!--&lt;!&ndash;                <img src="/img/product (3).jpg" alt="" />&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="procuct-p">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="brand"><h4>[브랜드이름]</h4></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="product-name"><p>Y2K 호보백</p></div>&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="product-price"><p>39,000원</p></div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          <div class="product-colum">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="product-content">&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="product-img">&ndash;&gt;-->
-<!--&lt;!&ndash;                <img src="/img/product (4).jpg" alt="" />&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="procuct-p">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="brand"><h4>[브랜드이름]</h4></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="product-name"><p>Y2K 호보백</p></div>&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="product-price"><p>39,000원</p></div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--        </div>-->
-<!--      </div>-->
-      <div class="product-list" style="display: flex; width: 1400px;">
+
+
+      <div class="product-list"> <!-- style="display: flex; width: 1400px;"-->
         <!-- product-row 요소에 th:each 루프를 사용하여 반복적으로 생성 -->
-        <div class="product-row" th:each="product : ${productSelect}">
-          <div class="product-column">
-            <div class="product-content">
+        <div class="product-row" >
+          <div class="product-column" th:each="product : ${productSelect}">
+            <div class="product-content" >
               <div class="product-img">
                 <img th:src="@{/img/boardImg/ho.jpg}" alt="" />
               </div>

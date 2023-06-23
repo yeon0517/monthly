@@ -5,10 +5,12 @@
     <select id="brandSelect" resultType="brandDto">
         SELECT *
         FROM MONTHLY_BRAND
+        ORDER BY BRAND_NUMBER
     </select>
 
     <select id="productSelect" resultType="productDto">
         SELECT *
         FROM MONTHLY_PRODUCT
+        ORDER BY PRODUCT_NUMBER
     </select>
 </mapper>

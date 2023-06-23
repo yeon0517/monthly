@@ -14,102 +14,41 @@
 <div class="allWrap">
   <div class="allContainer">
     <!-- wrap이 반복 -->
+
     <div class="wrap">
       <div class="whole">
         <div class="whole-box">
           <div class="wrap_div">
-            <a th:href="@{/board/brandDetail}"><img th:src="@{/img/boardImg/main.jpg}" alt="메인이미지" /></a> <!--브랜드 파일 이미지 넣기-->
+            <a th:href="@{/board/brandDetail}">
+              <img th:src="@{/img/boardImg/main.jpg}" alt="메인이미지" />
+            </a>
           </div>
           <div class="wrap_list">
             <ul class="wrap_ul">
-              <!--<li class="wrap_il">
-                <div class="box">
-&lt;!&ndash;                 여긴 제품 상세페이지로 들어가야함.&ndash;&gt;
-                  <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/ha.jpg}" alt="하" /></a>
-                  <p class="box_name">
-                    <span>[노플라스틱선데이] 럭키 키링</span>
-                  </p>
-                  <p class="price">6000원</p>
-                </div>
-              </li>
-              <li class="wrap_il">
+              <!-- 최대 3개의 상품 -->
+              <li class="wrap_il" th:each="product, index : ${productSelect}" th:if="${product.brandNumber == brandSelect[0].brandNumber && index.index < 3}">
                 <div class="box">
                   <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/ho.jpg}" alt="호" /></a>
                   <p class="box_name">
-                    <span>[노플라스틱선데이] 럭키 키링</span>
+                    <span th:text="${product.productName}"></span>
                   </p>
-                  <p class="price">6000원</p>
-                </div>
-              </li>
-              <li class="wrap_il">
-                <div class="box">
-                  <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/hi.jpg}" alt="하이" /></a>
-                  <p class="box_name">
-                    <span>[노플라스틱선데이] 럭키 키링</span>
-                  </p>
-                  <p class="price">6000원</p>
-                </div>
-              </li>-->
-                <li class="wrap_il" th:each=" brand : ${brandSelect}">
-                    <div class="box">
-                        <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/ho.jpg}" alt="호" /></a>
-                        <p class="box_name">
-                            <span th:text="${brand.brandName}"></span>
-                        </p>
-                        <p class="price">6000원</p>
-                    </div>
-                </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- wrap이 반복 -->
-    <div class="wrap">
-      <div class="whole">
-        <div class="whole-box">
-          <div class="wrap_div">
-<!--            브랜드 상세페이지로 넘어가야함.-->
-            <a th:href="@{/board/brandDetail}"><img th:src="@{/img/boardImg/main.jpg}" alt="메인이미지" /></a>
-          </div>
-          <div class="wrap_list">
-            <ul class="wrap_ul">
-              <li class="wrap_il">
-                <div class="box">
-                  <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/ha.jpg}" alt="하" /></a>
-                  <p class="box_name">
-                    <span>[노플라스틱선데이] 럭키 키링</span>
-                  </p>
-                  <p class="price">6000원</p>
-                </div>
-              </li>
-              <li class="wrap_il">
-                <div class="box">
-                  <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/ho.jpg}" alt="호" /></a>
-                  <p class="box_name">
-                    <span>[노플라스틱선데이] 럭키 키링</span>
-                  </p>
-                  <p class="price">6000원</p>
-                </div>
-              </li>
-              <li class="wrap_il">
-                <div class="box">
-                  <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/hi.jpg}" alt="하이" /></a>
-                  <p class="box_name">
-                    <span>[노플라스틱선데이] 럭키 키링</span>
-                  </p>
-                  <p class="price">6000원</p>
+                  <p class="price" th:text="${product.productPrice}"></p>
                 </div>
               </li>
             </ul>
-          </div>
+         </div>
         </div>
       </div>
     </div>
+
+
+
+
+
+    <!-- #wrap -->
   </div>
-  <!-- #container -->
 </div>
-<!-- #wrap -->
+
 
 <!-- 전체 박스 -->
 <div class="allTop" th:replace="fragment/board_top_btn :: board_top_btn"></div>
@@ -118,6 +57,6 @@
 <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script th:src="@{/js/board/board_main.js}"></script>
-<!--<script th:src="@{/js/board/board_mainmain.js}"></script>-->
+<script th:src="@{/js/board/board_mainmain.js}"></script>
 </body>
 </html>
