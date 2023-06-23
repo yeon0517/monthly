@@ -5,9 +5,9 @@ $(".login-tab-btn").on("click", function(){
   $(".login-tab-btn").removeClass("selected");
   $(this).toggleClass("selected");
 
-//  판매자인지 관리자인지에 따라 form action 다르게 보냄 >
-//  selected 클래스를 가진 요소의 data-who 속성을 가져온다
-//  data-who 가 seller 면 $section.attr("action","seller/login")으로 바꿔준다
+ // 판매자인지 관리자인지에 따라 form action 다르게 보냄 >
+ // selected 클래스를 가진 요소의 data-who 속성을 가져온다
+ // data-who 가 seller 면 $section.attr("action","seller/login")으로 바꿔준다
 
   let who = $(this).children().attr('data-who');
   console.log(who);
@@ -29,5 +29,4 @@ $(".login-tab-btn").on("click", function(){
   console.log($section.attr("action"));
 
 });
-
 

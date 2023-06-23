@@ -18,23 +18,50 @@
 //       }
 //     }
 //   });
-let myChart = document.getElementById('myChart').getContext('2d');
+// let myChart = document.getElementById('myChart').getContext('2d');
 let myChartTwo = document.getElementById('myChartTwo').getContext('2d');
 
-let barChart = new Chart(myChart, {
-  type:'line',
-  data:{
-      labels : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-      datasets:[{
-          label :'협력 판매자 증가 추이',
-          data : [
-              5,10,18,25,50,80,130,200,250,350,500,700
-          ],
-          backgroundColor:[
-            '#1E4A53'
-          ]
-      }]
-  }
+// let barChart = new Chart(myChart, {
+//   type:'line',
+//   data:{
+//       labels : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+//       datasets:[{
+//           label :'협력 판매자 증가 추이',
+//           data : [
+//               5,10,18,25,50,80,130,200,250,350,500,700
+//           ],
+//           backgroundColor:[
+//             '#1E4A53'
+//           ]
+//       }]
+//   }
+// });
+
+$.ajax({
+    url: `/admin/`,
+    method: 'GET',
+    success: function(response) {
+        let data = response.data;
+        let labels = data.labels;
+        let values = data.values;
+
+        let myChart = document.getElementById('myChart').getContext('2d');
+
+        let barChart = new Chart(myChart, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '협력 판매자 증가 추이',
+                    data: values,
+                    backgroundColor: '#1E4A53'
+                }]
+            }
+        });
+    },
+    error: function(error) {
+        console.log('데이터 가져오기 실패:', error);
+    }
 });
 
 

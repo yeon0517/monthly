@@ -1,6 +1,7 @@
 package com.example.monthly.mapper;
 
 import com.example.monthly.dto.SellerDto;
+import com.example.monthly.vo.AdminChartVo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,11 @@ class AdminMapperTest {
     @Autowired
     private AdminMapper adminMapper;
 
+    @Autowired
+    private SellerMapper sellerMapper;
+
     private SellerDto sellerDto;
+    private AdminChartVo adminChartVo;
 
     @BeforeEach
     void setUp(){
@@ -31,20 +36,14 @@ class AdminMapperTest {
         sellerDto.setSellerCompanyRegisterNumber("1231212345");
         sellerDto.setSellerEmail("nsoe12@naver.com");
         sellerDto.setSellerAddress1("서울특별시 서초구 반포대로 58. 101동 501호(서초동. 서초아파트)");
-//        adminMapper.insert(sellerDto);
+        sellerMapper.insert(sellerDto);
 
     }
 
-    @Test
-    void insert() {
-        adminMapper.insert(sellerDto);
-        assertThat(adminMapper.selectSellerNumber(sellerDto.getSellerId(),sellerDto.getSellerName()))
-                .isEqualTo(sellerDto.getSellerNumber());
-
-    }
 
     @Test
-    void selectSellerNumber() {
+    void sellerApplication() {
+        adminMapper.sellerApplication(adminChartVo.getSellerRegistertDate());
     }
 
     @Test

@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -18,11 +21,17 @@ import java.util.List;
 public class AdminController {
     private final AdminService adminService;
 
+    @PostMapping("/login")
+    public RedirectView login(String adminId, String adminPassword, HttpServletRequest req){
+        try {
+            Long adminNumber = adminService.findAdminNumber(adminId, adminPassword);
+            req.getSession().setAttribute("adminNumber",adminNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new RedirectView("/seller/login");
+        }
 
-
-    @GetMapping("/login")
-    public String login(){
-        return "seller/seller_login";
+        return new RedirectView("/admin/main");
     }
 
     @GetMapping("/main")
@@ -45,14 +54,10 @@ public class AdminController {
     public String subMember(){
         return "admin/manager_seller_detail";}
 
-    @GetMapping("/search")
-    public String searchSeller(SearchVo searchVo, Model model){
-       List<SellerDto> searchList = adminService.findAll(searchVo);
-       model.addAttribute("searchList",searchList);
-               return "admin/manager_seller";
-
+    @GetMapping("/logout")
+    public RedirectView logout(HttpServletRequest req){
+        req.getSession().invalidate();
+        return new RedirectView("/seller/login");
     }
-
-
 
 }
