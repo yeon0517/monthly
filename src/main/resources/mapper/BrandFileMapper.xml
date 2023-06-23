@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.monthly.mapper.BrandFileMapper">
+<!--    브랜드이미지 등록-->
+    <insert id="insertBrandFile">
+        <selectKey keyProperty="brandFileNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_BRAND_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_BRAND_FILE
+            (BRAND_FILE_NUMBER, BRAND_FILE_NAME, BRAND_FILE_UPLOAD_PATH,
+             BRAND_FILE_UUID,BRAND_NUMBER)
+        VALUES(#{brandFileNumber},#{brandFileName},#{brandFileUploadPath},
+          #{brandFileUuid},#{brandNumber})
+    </insert>
+<!--    브랜드 대표 이미지 조회-->
+    <select id="selectBrandFile" resultType="brandFileDto">
+        SELECT BRAND_FILE_NUMBER, BRAND_FILE_NAME, BRAND_FILE_UPLOAD_PATH,
+               BRAND_FILE_UUID, BRAND_NUMBER
+        FROM MONTHLY_BRAND_FILE
+        WHERE BRAND_NUMBER = #{brandNumber}
+    </select>
+
+
+</mapper>

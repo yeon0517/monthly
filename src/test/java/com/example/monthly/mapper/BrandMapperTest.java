@@ -29,14 +29,14 @@ class BrandMapperTest {
         brandDto.setBrandName("샘크래프트");
         brandDto.setBrandContents("종이용기 립밥");
         brandDto.setSellerNumber(15L);
-
+        brandMapper.brandInsert(brandDto);
     }
 
     @Test
     @DisplayName("브랜드 등록 및 판매자번호로 브랜드 조회")
     void brandInsert() {
-        brandMapper.brandInsert(brandDto);
-        assertThat(brandMapper.brandSelect(brandDto.getSellerNumber()).getBrandNumber())
+
+        assertThat(brandMapper.brandSelectBySellerNumber(brandDto.getSellerNumber()).getBrandNumber())
         .isEqualTo(brandDto.getBrandNumber());
 
     }
@@ -48,6 +48,10 @@ class BrandMapperTest {
     @Test
     void brandUpdate() {
 
+       brandDto.setBrandContents("updateTitle");
+       brandMapper.brandUpdate(brandDto);
+       assertThat(brandMapper.brandSelectBySellerNumber(brandDto.getSellerNumber()).getBrandContents())
+               .isEqualTo(brandDto.getBrandContents());
     }
 
     @Test

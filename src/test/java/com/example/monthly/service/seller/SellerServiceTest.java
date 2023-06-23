@@ -70,4 +70,11 @@ class SellerServiceTest {
         int result = sellerService.sellerIdCheck("test");
         assertThat(result).isEqualTo(1);
     }
+    @Test
+    @DisplayName("판매자 회원 정보 수정")
+    void modifySellerInfo(){
+        doNothing().when(sellerMapper).updateSellerInfo(any(SellerDto.class));
+        sellerService.modifySellerInfo(sellerDto);
+        verify(sellerMapper, times(1)).updateSellerInfo(sellerDto);
+    }
 }

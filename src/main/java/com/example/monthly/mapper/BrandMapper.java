@@ -14,8 +14,11 @@ public interface BrandMapper {
     // 수정
     public void brandUpdate(BrandDto brandDto);
 
+//    판매자가 등록한 브랜드 존재 여부 검사
+    public int checkBrandExist(Long sellerNumber);
+
     // 개인브랜드조회
-    public BrandDto brandSelect(Long sellerNumber);
+    public BrandDto brandSelectBySellerNumber(Long sellerNumber);
 
     //brand 조회
     public Long brandSelectAll(Long brandNumber);

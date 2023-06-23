@@ -28,8 +28,9 @@
             <tr>
               <!-- 최초 입력 후 변경 불가해야함 -->
               <th scope="row">브랜드명</th>
-              <td><input type="text" id="brand-name" placeholder="브랜드명을 입력하세요">
-              <span class="input-check">브랜드이름이거안돼</span>
+              <td><input type="text" id="brand-name" placeholder="브랜드명을 입력하세요" th:value="${brand.brandName}" readonly>
+                <span class="inner-info">브랜드명은 한 번 등록 후 변경이 불가합니다.</span>
+              <span class="input-check"></span>
               </td>
             </tr>
             <tr>
@@ -37,14 +38,14 @@
               <th>설명</th>
               <td>
                 <textarea id="brand-contents" cols="30" rows="5" 
-                  placeholder="최대 150자이내로 브랜드에 대한 간단한 소개글을 작성해 주세요"></textarea>
+                  placeholder="최대 150자이내로 브랜드에 대한 간단한 소개글을 작성해 주세요" th:text="${brand.brandContents}"></textarea>
               </td>
             </tr>
             <tr>
               <!-- 수정시 이미지 미리보기 구역에 꽂혀있어야함 -->
               <th class="brand-image-th">대표이미지</th>
               <td class="brand-image-td">
-                <p>권장 이미지 사이즈는 가로1300px 세로 390px 입니다.</p>
+                <p>권장 이미지 사이즈는 가로 1300px 세로 390px 입니다.</p>
                 <input type="file" id="post-image" name="brandFile" accept="image/*" />
                 <!-- 이미지 등록시 미리보기 띄움 -->
                 <div class="brand-image">
@@ -54,11 +55,11 @@
             </tr>
           </tbody>
         </table>
-        <div class="btn-box">
+        <div class="btn-box brand-info-btn">
           <!-- 취소 시 원래 있던 데이터로 초기화 -->
           <!-- 저장 시 비동기로 저장? -->
           <button class="cancel-btn" type="button">취소</button>
-          <button class="save-btn" type="submit">저장</button>
+          <button class="save-btn" type="button">저장</button>
         </div>
       </form>
       <!-- 테이블 위 한 줄 데코 -->
@@ -73,7 +74,8 @@
       <h2>판매자 정보</h2>
     </section>
     <section class="brand-section">
-      <form action="" class="seller-info">
+      <form th:action="@{/sellers/modifyInfo}" method="patch" class="seller-info">
+        <input id="seller-number" type="hidden" name="sellerNumber" th:value="${seller.sellerNumber}">
       <table>
         <colgroup>
           <col style="width: 180px" />
@@ -85,16 +87,16 @@
               <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
             </th>
             <!-- 아이디변경불가 -->
-            <td><p>아이디111</p></td>
+            <td><p th:text="${seller.sellerId}"></p></td>
           </tr>
           <tr>
             <th>비밀번호
               <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
             </th>
             <td>
-              <input type="password" id="current-seller-password" required>
+              <input type="password" id="current-seller-password" class="pwGroup"required>
               <span class="inner-info">(현재 비밀번호를 입력해주세요)</span>
-              <p class="input-check current-seller-password-msg"></p>
+              <p class="input-check current-seller-password-msg pwGroupMsg"></p>
             </td>
           </tr>
           <tr>
@@ -102,9 +104,9 @@
               <img src="../resource/ico_required_blue.gif" alt="">
             </th>
             <td>
-              <input type="password" id="seller-password" required>
+              <input type="password" id="seller-password" class="pwGroup" required>
               <span class="inner-info">(영문 대소문자/숫자/특수문자 중 3가지 이상 조합, 8 ~ 16자)</span>
-              <p class="input-check seller-password-msg"></p>
+              <p class="input-check seller-password-msg pwGroupMsg"></p>
             </td>
           </tr>
           <tr>
@@ -112,15 +114,15 @@
               <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
             </th>
             <td>
-              <input type="password" id="seller-password-check" required>
-              <p class="input-check seller-password-check-msg"></p>
+              <input type="password" id="seller-password-check" class="pwGroup" required>
+              <p class="input-check seller-password-check-msg pwGroupMsg"></p>
             </td>
           </tr>
           <tr>
             <th>이름
               <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
             </th>
-            <td><p>홍길동</p></td>
+            <td><p th:text="${seller.sellerName}"></p></td>
           </tr>
           <tr>
             <th>주소
@@ -129,13 +131,13 @@
             <td>
               <!-- 주소api필요 -->
               <div class="seller-postcode">
-                <input type="text" id="postcode" required readonly>
+                <input type="text" id="postcode" required readonly th:value="${seller.sellerPostcode}">
                 <div id="postcode-btn">
                   <img th:src="@{/img/seller/btn_zipcode.gif}" alt="">
                 </div>
               </div>
-              <div><input type="text" id="address1" required><span class="inner-info">기본주소</span></div>
-              <div><input type="text" id="address2"><span class="inner-info">상세주소</span></div>
+              <div><input type="text" id="address1" required th:value="${seller.sellerAddress1}"><span class="inner-info">기본주소</span></div>
+              <div><input type="text" id="address2" th:value="${seller.sellerAddress2}"><span class="inner-info">상세주소</span></div>
               <p class="input-check"></p>
             </td>
           </tr>
@@ -144,7 +146,7 @@
               <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
             </th>
             <td>
-              <input type="text" id="seller-phone-number" required>
+              <input type="text" id="seller-phone-number" required th:value="${seller.sellerPhoneNumber}">
               <p class="input-check"></p></td>
           </tr>
           <tr>
@@ -152,7 +154,7 @@
               <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
             </th>
             <td>
-              <input type="text" id="seller-email" required>
+              <input type="text" id="seller-email" required th:value="${seller.sellerEmail}">
               <p class="input-check"></p>
             </td>
           </tr>
@@ -160,7 +162,8 @@
             <!-- 최초 등록 이후 변경불가 -->
             <th>사업자등록번호</th>
             <td>
-              <input type="text" id="seller-company-register-number">
+              <input type="text" id="seller-company-register-number" th:value="${seller.sellerCompanyRegisterNumber}" readonly>
+              <span class="inner-info">사업자등록번호는 한 번 등록 후 변경이 불가합니다.</span>
               <p class="input-check"></p>
             </td>
           </tr>
@@ -169,15 +172,15 @@
               <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
             </th>
             <td><textarea name="" id="seller-contents" cols="30" rows="10" required
-                placeholder="입점 후 계획하시는 브랜드 및 구독 서비스 상품에 대해 자세히 설명해주세요."></textarea></td>
+                placeholder="입점 후 계획하시는 브랜드 및 구독 서비스 상품에 대해 자세히 설명해주세요." th:text="${seller.sellerContents}"></textarea></td>
           </tr>
         </tbody>
       </table>
-      <div class="btn-box">
+      <div class="btn-box seller-info-btn">
         <!-- 취소 시 원래 있던 데이터로 초기화 -->
         <!-- 저장 시 비동기로 저장? -->
         <button class="cancel-btn" type="button">취소</button>
-        <button class="save-btn" type="submit">저장</button>
+        <button class="save-btn" type="button">저장</button>
       </div>
     </form>
     </section>
@@ -185,8 +188,9 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script th:src="@{/js/seller/address.js}"></script>
-  <script th:src="@{/js/seller/seller_brand.js}"></script>
+  <script type="module" th:src="@{/js/seller/seller_brand.js}"></script>
   <script th:src="@{/js/admin/admin_header.js}"></script>
+  <script type="module" th:src="@{/js/seller/seller_apply.js}"></script>
 </body>
 
 </html>
