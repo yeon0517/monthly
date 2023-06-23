@@ -14,6 +14,8 @@ public class UserVo {
     private String userId;
     private String userPassword;
     private String userName;
+    private String userName1;
+    private String userName2;
     private String userPhoneNumber;
     private String userPhoneNumber1;
     private String userPhoneNumber2;

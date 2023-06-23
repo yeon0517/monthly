@@ -10,8 +10,10 @@
   </head>
   <body>
     <div id="page">
+      <form class="login-form" th:action="@{/user/login}" method="post">
       <section class="content">
         <div class="login-container">
+
           <img class="login-image" th:src="@{/img/user/login.jpg}" />
           <div class="login-area">
             <h3 class="login-title">내 생활과 함께하는 구독</h3>
@@ -22,7 +24,7 @@
                   <div class="inner">
                     <div class="input">
                       <span class="id-label">아이디</span>
-                      <input autocomplete="off" placeholder="ID" class="id" />
+                      <input autocomplete="off" placeholder="ID" class="id" name="userId" />
                     </div>
                   </div>
                 </label>
@@ -39,6 +41,7 @@
                         autocomplete="off"
                         placeholder="PASSWORD"
                         class="password"
+                        name="userPassword"
                       />
                     </div>
                   </div>
@@ -49,7 +52,7 @@
               <button type="button"  class="not-login-button">
                 <span>로그인</span>
               </button>
-              <button type="button"  class="login-button" style="display: none;">
+              <button type="submit"  class="login-button" style="display: none;">
                 <span>로그인</span>
               </button>
             </div>
@@ -99,9 +102,18 @@
           </div>
         </div>
       </section>
+      </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script th:src="@{/js/user/login.js}"></script>
+    <script th:inline="javascript">
+      /* 로그인 실패 시 경고문구 */
+      var loginError = /*[[${loginError}]]*/ false;
+      if (loginError) {
+        var errorMessage = /*[[${errorMessage}]]*/ '';
+        alert(errorMessage);
+      }
+    </script>
   </body>
 </html>

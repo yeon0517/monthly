@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.UserMapper">
 
+    <!--구매자 회원가입-->
     <insert id="insert">
         <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
             SELECT SEQ_USER.NEXTVAL FROM DUAL
@@ -14,15 +15,33 @@
     </insert>
 
 
+    <!--회원가입 시 아이디 중복검사-->
+    <select id="checkId" resultType="int">
+        SELECT COUNT(*) FROM MONTHLY_USER WHERE USER_ID =#{userId}
+    </select>
+
+    <!--회원가입 완료 페이지-->
     <select id="showJoinInfo">
         SELECT USER_ID, USER_NAME, USER_EMAIL FROM MONTHLY_USER WHERE USER_NUMBER = #{userNumber}
     </select>
 
-    <select id="selectUserNumber" resultType="long">
-        SELECT USER_NUMBER FROM MONTHLY_USER WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
+    <!--로그인-->
+    <select id="userLogin" resultType="long">
+        SELECT USER_NUMBER FROM MONTHLY_USER
+        WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
 
+    <!--아이디 찾기-->
+    <select id="findId">
+        SELECT USER_NAME, USER_EMAIL, USER_ID FROM MONTHLY_USER
+        WHERE USER_Name = #{userName1} AND USER_EMAIL = #{userEmail} OR USER_Name = #{userName2} AND USER_PHONE_NUMBER = #{userPhoneNumber1} || '-' || #{userPhoneNumber2} || '-' || #{userPhoneNumber3}
+    </select>
 
+    <!--비밀번호 찾기-->
+    <select id="findPw">
+        SELECT USER_NAME, USER_EMAIL, USER_ID FROM MONTHLY_USER
+        WHERE USER_Name = #{userName}, USER_ID = #{userId} AND USER_EMAIL = #{userEmail} OR USER_PHONE_NUMBER = #{userPhoneNumber1} || '-' || #{userPhoneNumber2} || '-' || #{userPhoneNumber3}
+    </select>
 
 
     <select id="selectAll" resultType="deliveryVo">

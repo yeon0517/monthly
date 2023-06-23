@@ -13,6 +13,7 @@
   <header class="board-header"  th:replace="fragment/board_header :: board_header"></header>
 
     <div id="main">
+      <form id="joinOkInfo" name="showJoinForm" th:action="@{/user/joinOK}" method="get">
       <div class="title2">
         <h2>회원가입 완료</h2>
       </div>
@@ -25,15 +26,15 @@
                 <ul class="list">
                   <li>
                     <strong class="id">아이디</strong
-                    ><strong class="result"> : <span th:value="${user.userId}"></span></strong>
+                    ><strong class="result"> : <span th:text="${user.userId}"></span></strong>
                   </li>
                   <li>
                     <strong class="name">이름</strong
-                    ><span class="result"> : <span th:value="${user.userName}"></span></span>
+                    ><strong class="result"> : <span th:text="${user.userName}"></span></strong>
                   </li>
                   <li>
                     <strong class="email">이메일</strong
-                    ><span class="result"> : <span th:value="${user.userEmail}"></span></span>
+                    ><strong class="result"> : <span th:text="${user.userEmail}"></span></strong>
                   </li>
                 </ul>
               </div>
@@ -50,6 +51,7 @@
           </p>
         </div>
       </div>
+      </form>
     </div>
   <div class="allTop" th:replace="fragment/board_top_btn :: board_top_btn"></div>
   <div class="allFooter" th:replace="fragment/board_footer :: board_footer"></div>
