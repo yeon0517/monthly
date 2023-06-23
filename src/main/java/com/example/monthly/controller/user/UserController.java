@@ -3,13 +3,12 @@ package com.example.monthly.controller.user;
 
 import com.example.monthly.dto.DeliveryDto;
 import com.example.monthly.dto.UserDto;
-import com.example.monthly.mapper.OrderMapper;
 import com.example.monthly.service.order.OrderService;
-import com.example.monthly.service.seller.SellerService;
 import com.example.monthly.service.user.UserService;
 import com.example.monthly.vo.DeliveryVo;
 import com.example.monthly.vo.UserVo;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,34 +81,58 @@ public class UserController {
     public String login(){
         return "user/login"; }
 
+    @PostMapping("/login")
+    public RedirectView login(String userId, String userPassword, HttpServletRequest req, RedirectAttributes attributes) {
+        try {
+            Long userNumber = userService.userLogin(userId, userPassword);
+            req.getSession().setAttribute("userNumber", userNumber);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            attributes.addFlashAttribute("loginError", true);
+            attributes.addFlashAttribute("errorMessage", "아이디나 비밀번호가 올바르지 않습니다. 다시 시도해주세요.");
+            return new RedirectView("/user/login");
+        }
+
+        return new RedirectView("/board/main");
+    }
+
+
     @GetMapping("/join")
     public String join(){
         return "user/join"; }
 
-    @PostMapping("/join")
-    public RedirectView join(UserVo userVo){
-        userService.register(userVo);
-        return new RedirectView("/user/joinOK"); }
+    @GetMapping("/checkId")
+    public int checkId(String userId){
+        return userService.checkId(userId);
+    }
 
-    @GetMapping("/joinOK")
-    public String joinOK(UserDto userDto){
-        userService.showJoin(userDto);
-        return "user/join_ok"; }
+    @PostMapping("/joinOK")
+    public String joinOK(UserVo userVo, Model model) {
+        userService.register(userVo);
+        model.addAttribute("user", userVo);
+        return "user/join_ok";
+    }
+
 
     @GetMapping("/findId")
     public String findId(){
         return "user/find_id"; }
 
-    @GetMapping("/findIdOK")
-    public String findIdOK(){
+
+    @PostMapping("/findIdOK")
+    public String findIdOK(UserVo userVo, Model model) {
+        userService.findId(userVo);
+        model.addAttribute("user", userVo);
         return "user/find_id_ok"; }
 
     @GetMapping("/findPw")
     public String findPw(){
         return "user/find_pw"; }
 
-    @GetMapping("/findPwOK")
-    public String findPwOK(){
+    @PostMapping("/findPwOK")
+    public String findPwOK(UserVo userVo, Model model){
+        userService.findPw(userVo);
+        model.addAttribute("user", userVo);
         return "user/find_pw_ok"; }
 
 

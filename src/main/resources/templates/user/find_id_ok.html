@@ -56,15 +56,15 @@
                 <ul class="list">
                   <li>
                     <strong class="name">이름</strong
-                    ><strong class="result"> : <span>케인</span></strong>
+                    ><strong class="result"> : <span th:text="${user.userName}"></span></strong>
                   </li>
                   <li>
                     <strong class="email">이메일</strong
-                    ><span class="result"> : <span>123@email.com</span></span>
+                    ><span class="result"> : <span th:text="${user.userEmail}"></span></span>
                   </li>
                   <li>
                     <strong class="id">아이디</strong
-                    ><span class="result"> : <span>abc</span></span>
+                    ><span class="result"> : <span th:text="${user.userId}"></span></span>
                   </li>
                 </ul>
               </div>

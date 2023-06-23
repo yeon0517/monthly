@@ -67,7 +67,8 @@ html {
   color: #353535;
 }
 
-.name,
+.name1,
+.name2,
 .email,
 .phone {
   padding: 0 !important;
@@ -78,7 +79,8 @@ html {
   width: 140px;
 }
 
-.name-space,
+.name-space1,
+.name-space2,
 .email-space {
   width: 235px !important;
   line-height: 24px;
@@ -114,6 +116,7 @@ html {
   line-height: 42px;
   color: #fff;
   background: gray;
+  border: none;
 }
 
 .find-id-button {
@@ -124,6 +127,8 @@ html {
   line-height: 42px;
   color: #fff;
   background: #000000;
+  border: none;
+  cursor: pointer;
 }
 
 a {
