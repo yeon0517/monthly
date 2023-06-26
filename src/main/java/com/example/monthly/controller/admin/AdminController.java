@@ -46,9 +46,11 @@ public class AdminController {
     public String allGoods(){
         return "admin/manager_allGoods";}
 
+
     @GetMapping("/seller")
     public String seller(){
         return "admin/manager_seller";}
+
 
     @GetMapping("/subMember")
     public String subMember(){

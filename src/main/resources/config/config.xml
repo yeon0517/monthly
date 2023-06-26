@@ -23,6 +23,7 @@
         <typeAlias type="com.example.monthly.vo.ReviewVo" alias="reviewVo"/>
         <typeAlias type="com.example.monthly.vo.Criteria" alias="criteria"/>
         <typeAlias type="com.example.monthly.vo.AdminChartVo" alias="AdminChartVo"/>
+        <typeAlias type="com.example.monthly.vo.SearchVo" alias="SearchVo"/>
 
     </typeAliases>
 

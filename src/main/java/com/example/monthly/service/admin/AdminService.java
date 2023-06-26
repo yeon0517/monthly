@@ -1,5 +1,6 @@
 package com.example.monthly.service.admin;
 
+import com.example.monthly.dto.ReviewDto;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.mapper.AdminMapper;
 import com.example.monthly.mapper.SellerMapper;
@@ -18,12 +19,7 @@ import java.util.Optional;
 @Transactional
 public class AdminService {
     private final AdminMapper adminMapper;
-    //전체조회
-//    @Transactional(readOnly = true)
-//    public List<SellerDto> findAll(SearchVo searchVo) {
-//        return adminMapper.selectAll(searchVo);
-//
-//    }
+
 
 //    관리자 로그인
     /**
@@ -55,6 +51,30 @@ public Long findAdminNumber(String adminId, String adminPassword){
 
 
 
+    //전체조회
+    public SellerDto findAll(Long sellerNumber) {
+        if (sellerNumber == null) {
+            throw new IllegalArgumentException("회원 번호 누락");
+        }
+        return adminMapper.findAll(sellerNumber);
 
     }
+
+
+
+    //검색결과 조회 띄우기
+    public List<SellerDto> selectSeller(SearchVo searchVo) {
+        return adminMapper.selectSeller(searchVo);
+
+    }
+
+    //상태 변경
+    public void statusModify(SellerDto sellerDto){
+        if (sellerDto == null) {
+            throw new IllegalArgumentException("수정 정보 누락");
+        }
+        adminMapper.update(sellerDto);
+    }
+
+}
 

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.AdminMapper">
+    <insert id="insert">
+        <selectKey keyProperty="sellerNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_SELLER.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_SELLER(SELLER_NUMBER, SELLER_NAME, SELLER_ID, SELLER_PASSWORD, SELLER_PHONE_NUMBER, SELLER_POSTCODE,SELLER_ADDRESS1, SELLER_ADDRESS2,
+        SELLER_EMAIL, SELLER_CONTENTS, SELLER_COMPANY_REGISTER_NUMBER)
+        VALUES (#{sellerNumber},#{sellerName},#{sellerId},#{sellerPassword},#{sellerPhoneNumber},#{sellerPostcode},#{sellerAddress1}, #{sellerAddress2},#{sellerEmail},#{sellerContents},#{sellerCompanyRegisterNumber})
+    </insert>
 
     <select id="findAll" resultType="sellerDto">
         SELECT SELLER_NUMBER, SELLER_NAME, SELLER_STATUS,SELLER_ID,SELLER_PHONE_NUMBER,SELLER_REGISTER_DATE,SELLER_COMPANY_REGISTER_NUMBER,SELLER_EMAIL,SELLER_ADDRESS
@@ -22,6 +30,40 @@
         GROUP BY TRUNC(SELLER_REGISTER_DATE)
         ORDER BY TRUNC(SELLER_REGISTER_DATE)
     </select>
+
+    <select id="selectSeller" resultType="sellerDto">
+        SELECT * FROM MONTHLY_SELLER
+        <where>
+            <trim prefixOverrides="AND">
+            <if test="searchInput != ''">
+                <if test='searchSelect.equals("seller-number")'>
+                    SELLER_NUMBER = #{searchInput}
+                </if>
+                <if test='searchSelect.equals("seller-name")'>
+                    SELLER_NAME LIKE '%' || #{searchInput} || '%'
+                </if>
+                <if test='searchSelect.equals("seller-id")'>
+                    SELLER_ID LIKE '%' || #{searchInput} || '%'
+                </if>
+            </if>
+            <trim prefix="and">
+                    <if test='"today".equals(period)'>
+                        TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE)
+                    </if>
+                    <if test='"yesterday".equals(period)'>
+                        TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE) - 1
+                    </if>
+            </trim>
+            </trim>
+        </where>
+        ORDER BY SELLER_REGISTER_DATE DESC
+    </select>
+
+    <update id="update">
+        UPDATE MONTHLY_SELLER
+        SET  SELLER_STATUS = #{sellerStatus}
+        WHERE SELLER_NUMBER = #{sellerNumber}
+    </update>
 
 </mapper>
 
