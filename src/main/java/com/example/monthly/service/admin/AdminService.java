@@ -50,18 +50,6 @@ public Long findAdminNumber(String adminId, String adminPassword){
     }
 
 
-
-    //전체조회
-    public SellerDto findAll(Long sellerNumber) {
-        if (sellerNumber == null) {
-            throw new IllegalArgumentException("회원 번호 누락");
-        }
-        return adminMapper.findAll(sellerNumber);
-
-    }
-
-
-
     //검색결과 조회 띄우기
     public List<SellerDto> selectSeller(SearchVo searchVo) {
         return adminMapper.selectSeller(searchVo);

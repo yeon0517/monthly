@@ -26,13 +26,26 @@ function showList(map) {
             <td>${u.sellerAddress1}</td>
             <td>
 
-                <button type="button" class="brand-link"> 브랜드 이동</button>   
+                <button type="button" class="brand-link" data-seller-number="${u.sellerNumber}"> 브랜드 이동</button>   
             </td>
-            <td><button type="button" class="save-btn" id="save">save</button></td>
+            <td><button type="button" class="save-btn">save</button></td>
         </tr>`;
     });
     $('.seller-list-body').html(list);
+
+
 }
+
+    //구독자 페이지로 버튼 누르면 이동
+$('.seller-list-body').on('click','.brand-link',function (){
+    let sellerNumber = $(this).data('seller-number');
+// Perform the page redirect based on sellerNumber
+    window.location.href = `/admin/subMember?sellerNumber=${sellerNumber}`;
+});
+
+
+
+
 
 function showError(a, b, c) {
     console.error(c);
@@ -63,3 +76,4 @@ $('.seller-list-body').on('click', '.save-btn', function() {
     search.sellerStatusAjax(statusObj,showError
     );
 });
+

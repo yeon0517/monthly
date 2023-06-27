@@ -10,12 +10,6 @@
         VALUES (#{sellerNumber},#{sellerName},#{sellerId},#{sellerPassword},#{sellerPhoneNumber},#{sellerPostcode},#{sellerAddress1}, #{sellerAddress2},#{sellerEmail},#{sellerContents},#{sellerCompanyRegisterNumber})
     </insert>
 
-    <select id="findAll" resultType="sellerDto">
-        SELECT SELLER_NUMBER, SELLER_NAME, SELLER_STATUS,SELLER_ID,SELLER_PHONE_NUMBER,SELLER_REGISTER_DATE,SELLER_COMPANY_REGISTER_NUMBER,SELLER_EMAIL,SELLER_ADDRESS
-        FROM MONTHLY_SELLER
-        WHERE SELLER_NUMBER=#{sellerNumber},SELLER_NAME = #{sellerName},SELLER_ID=#{sellerId}
-    </select>
-
 <!--    관리자 로그인-->
     <select id="findAdminNumber" resultType="long" >
         SELECT ADMIN_NUMBER
@@ -65,6 +59,36 @@
         WHERE SELLER_NUMBER = #{sellerNumber}
     </update>
 
+<!--    <select id="searchProduct" resultType="productDto">-->
+<!--        SELECT P.PRODUCT_NUMBER, P.PRODUCT_NAME, P.PRODUCT_STATUS, B.BRAND_NAME, P.PRODUCT_REGISTER_DATE, S.SELLER_PHONE_NUMBER, S.SELLER_EMAIL, S.SELLER_NAME-->
+<!--        FROM MONTHLY_PRODUCT P-->
+<!--        left outer  JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER-->
+<!--        left outer JOIN MONTHLY_SELLER S ON B.SELLER_NUMBER = S.SELLER_NUMBER-->
+<!--        WHERE P.PRODUCT_NUMBER = #{productNumber}-->
+<!--        <where>-->
+<!--            <trim prefixOverrides="AND">-->
+<!--                <if test="searchInput != ''">-->
+<!--                    <if test='searchSelect.equals("seller-number")'>-->
+<!--                        SELLER_NUMBER = #{searchInput}-->
+<!--                    </if>-->
+<!--                    <if test='searchSelect.equals("seller-name")'>-->
+<!--                        SELLER_NAME LIKE '%' || #{searchInput} || '%'-->
+<!--                    </if>-->
+<!--                    <if test='searchSelect.equals("seller-id")'>-->
+<!--                        SELLER_ID LIKE '%' || #{searchInput} || '%'-->
+<!--                    </if>-->
+<!--                </if>-->
+<!--            </trim>-->
+<!--        </where>-->
+<!--        ORDER BY SELLER_REGISTER_DATE DESC-->
+<!--    </select>-->
+
+
+
+
+
+
+
 </mapper>
 
 
@@ -73,10 +97,3 @@
 
 
 
-
-<!--        <if test="searchType != null and searchValue != '' ">-->
-<!--        &lt;!&ndash;화면에서 보낸 데이터가 text를 비우고 보내면 빈 문자열을 보낸다. value는 ''를 해주면 아무것도 안쓰고 검색시 원하는대로 검색이 가능하다.&ndash;&gt;-->
-<!--        <bind name="sV" value=" '%' + searchValue '%'   "/>-->
-<!--        &lt;!&ndash;get방식으로 보낼 땐 parameterType으로 전달해주는 값이 없으므로 if문 안에 bind를 넣어주면 오류가 안난다.&ndash;&gt;-->
-<!--        WHERE ${searchType} like #{sV}-->
-<!--        </if>-->

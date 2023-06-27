@@ -17,7 +17,7 @@ import java.util.List;
 public class RestSellerSelectController {
 
     private final AdminService adminService;
-
+//판매자 관리 페이지 기간별,조건별 전체 검색
     @GetMapping("/sellers")
     public List<SellerDto> searchSelect(String period,String searchSelect, String searchInput){
         SearchVo searchVo = new SearchVo();

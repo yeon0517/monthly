@@ -17,8 +17,6 @@ public interface AdminMapper {
     public void update(SellerDto sellerDto);
     Long findAdminNumber(@Param("adminId")String adminId, @Param("adminPassword")String adminPassword);
 
-    //관리자에서 판매자 전체 조회
-    SellerDto findAll(Long sellerNumber);
     //카테고리별 조회 검색
     List<SellerDto> selectSeller(SearchVo searchVo);
 
