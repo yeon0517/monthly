@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.BrandFileMapper">
-<!--    브랜드이미지 등록-->
+    <!--    브랜드 이미지 존재하는지 체크 0/1을 반환-->
+    <select id="checkBrandFileExist" resultType="int">
+        SELECT COUNT(*) FROM MONTHLY_BRAND_FILE BF JOIN MONTHLY_BRAND B
+        ON BF.BRAND_NUMBER = B.BRAND_NUMBER
+        WHERE SELLER_NUMBER = #{sellerNumber}
+    </select>
+<!--    브랜드 대표이미지 등록-->
     <insert id="insertBrandFile">
         <selectKey keyProperty="brandFileNumber" order="BEFORE" resultType="long">
             SELECT SEQ_BRAND_FILE.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO MONTHLY_BRAND_FILE
             (BRAND_FILE_NUMBER, BRAND_FILE_NAME, BRAND_FILE_UPLOAD_PATH,
-             BRAND_FILE_UUID,BRAND_NUMBER)
+             BRAND_FILE_UUID,BRAND_NUMBER, BRAND_FILE_SIZE)
         VALUES(#{brandFileNumber},#{brandFileName},#{brandFileUploadPath},
-          #{brandFileUuid},#{brandNumber})
+          #{brandFileUuid},#{brandNumber},#{brandFileSize})
     </insert>
-<!--    브랜드 대표 이미지 조회-->
-    <select id="selectBrandFile" resultType="brandFileDto">
+<!--    판매자 번호로 브랜드 대표 이미지 수정-->
+    <update id="updateBrandFile">
+        UPDATE MONTHLY_BRAND_FILE
+        SET BRAND_FILE_NAME =#{brandFileName},
+            BRAND_FILE_UPLOAD_PATH = #{brandFileUploadPath},
+            BRAND_FILE_UUID = #{brandFileUuid}
+        WHERE BRAND_NUMBER IN(
+            SELECT BRAND_NUMBER FROM MONTHLY_BRAND WHERE SELLER_NUMBER= #{sellerNumber}
+        )
+    </update>
+
+<!--판매자 번호로 브랜드 대표 이미지 조회
+        long, square 두개 리스트로 -->
+    <select id="selectBrandFileBySellerNumber" resultType="brandFileDto">
         SELECT BRAND_FILE_NUMBER, BRAND_FILE_NAME, BRAND_FILE_UPLOAD_PATH,
-               BRAND_FILE_UUID, BRAND_NUMBER
+               BRAND_FILE_UUID, BRAND_NUMBER, BRAND_FILE_SIZE
         FROM MONTHLY_BRAND_FILE
-        WHERE BRAND_NUMBER = #{brandNumber}
+        WHERE BRAND_NUMBER IN(
+            SELECT BRAND_NUMBER FROM MONTHLY_BRAND WHERE SELLER_NUMBER= #{sellerNumber}
+        )
     </select>
 
-
+<!--   판매자 번호로 브랜드 대표이미지 파일 삭제-->
+    <delete id="deleteBrandFile">
+        DELETE FROM MONTHLY_BRAND_FILE
+        WHERE BRAND_NUMBER IN (
+            SELECT BRAND_NUMBER FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
+        )
+    </delete>
 </mapper>

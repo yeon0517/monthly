@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.BrandMapper">
-
 <!--    판매자가 등록한 브랜드 존재여부 검사-->
     <select id="checkBrandExist" resultType="int">
         SELECT COUNT(*) FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
     </select>
 <!-- sellerNumber로 브랜드 정보 조회-->
-    <select id="brandSelectBySellerNumber" resultType="brandDto">
+    <select id="selectBrandBySellerNumber" resultType="brandDto">
         SELECT BRAND_NUMBER, BRAND_NAME, BRAND_CONTENTS
         FROM MONTHLY_BRAND
         WHERE SELLER_NUMBER = #{sellerNumber}
     </select>
+<!--    sellerNumber로 brandNumber 가져오기-->
+    <select id="selectBrandNumberBySellerNumber" resultType="Long">
+        SELECT BRAND_NUMBER FROM MONTHLY_BRAND
+        WHERE SELLER_NUMBER = #{sellerNumber}
+    </select>
 
-    <insert id="brandInsert">
+<!--    브랜드 등록-->
+    <insert id="insertBrand">
         <selectKey keyProperty="brandNumber" order="BEFORE" resultType="long">
             SELECT SEQ_BRAND.NEXTVAL FROM DUAL
         </selectKey>
@@ -21,16 +26,16 @@
         VALUES (#{brandNumber},#{brandContents},#{brandName}, #{sellerNumber})
     </insert>
 
-    <select id="brandSelectAll" resultType="_int">
-        SELECT BRAND_NUMBER, BRAND_CONTENTS, BRAND_NAME, BRAND_REGISTER_DATE, SELLER_NUMBER
-        FROM MONTHLY_BRAND
-        WHERE BRAND_NUMBER =#{brandNumber}
-    </select>
 
-    <update id="brandUpdate">
+<!--    sellerNumber로 브랜드정보 update-->
+    <update id="updateBrand">
         UPDATE MONTHLY_BRAND
         SET BRAND_CONTENTS =#{brandContents}, BRAND_NAME = #{brandName}
         WHERE SELLER_NUMBER =#{sellerNumber}
     </update>
+
+    <delete id="deleteBrand">
+        DELETE FROM MONTHLY_BRAND WHERE BRAND_NUMBER = #{brandNumber}
+    </delete>
 
 </mapper>

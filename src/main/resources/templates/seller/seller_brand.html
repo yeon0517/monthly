@@ -18,7 +18,7 @@
     </section>
     <section class="brand-section">
       <!-- 브랜드정보저장 -->
-      <form class="brand-info-form"  action="#" method="" enctype="multipart/form-data">
+      <form class="brand-info-form"  method="post" enctype="multipart/form-data">
         <table class="brand-info-table">
           <colgroup>
             <col style="width: 180px" />
@@ -28,7 +28,7 @@
             <tr>
               <!-- 최초 입력 후 변경 불가해야함 -->
               <th scope="row">브랜드명</th>
-              <td><input type="text" id="brand-name" placeholder="브랜드명을 입력하세요" th:value="${brand.brandName}" readonly>
+              <td><input type="text" id="brand-name" placeholder="브랜드명을 입력하세요" name="brandName" th:value="${brand.brandName}" readonly>
                 <span class="inner-info">브랜드명은 한 번 등록 후 변경이 불가합니다.</span>
               <span class="input-check"></span>
               </td>
@@ -38,7 +38,7 @@
               <th>설명</th>
               <td>
                 <textarea id="brand-contents" cols="30" rows="5" 
-                  placeholder="최대 150자이내로 브랜드에 대한 간단한 소개글을 작성해 주세요" th:text="${brand.brandContents}"></textarea>
+                  placeholder="최대 150자이내로 브랜드에 대한 간단한 소개글을 작성해 주세요" name="brandContents" th:text="${brand.brandContents}"></textarea>
               </td>
             </tr>
             <tr>
@@ -46,9 +46,21 @@
               <th class="brand-image-th">대표이미지</th>
               <td class="brand-image-td">
                 <p>권장 이미지 사이즈는 가로 1300px 세로 390px 입니다.</p>
-                <input type="file" id="post-image" name="brandFile" accept="image/*" />
+                <input type="file" id="post-image" name="brandFileLong" accept="image/*" />
                 <!-- 이미지 등록시 미리보기 띄움 -->
-                <div class="brand-image">
+                <div class="brand-image img-long">
+                  <img src="" alt="">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <!-- 수정시 이미지 미리보기 구역에 꽂혀있어야함 -->
+              <th class="brand-image-th th-img-sq">대표이미지<br/>(정사각)</th>
+              <td class="brand-image-td td-img-sq">
+                <p>권장 이미지 사이즈는 가로 300px 세로 300px 입니다.</p>
+                <input type="hidden" id="post-image2" name="brandFileSq" accept="image/*" />
+                <!-- 이미지 등록시 미리보기 띄움 -->
+                <div class="brand-image img-sq">
                   <img src="" alt="">
                 </div>
               </td>
