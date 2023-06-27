@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 @Data
 @NoArgsConstructor
@@ -21,4 +23,6 @@ public class SellerDto {
     private String sellerCompanyRegisterNumber;
     private int sellerStatus;
     private String sellerRegisterDate;
+
+
 }

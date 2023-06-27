@@ -49,11 +49,20 @@ public Long findAdminNumber(String adminId, String adminPassword){
      * @return 판매자 정보 리스트
      */
     @Transactional(readOnly = true)
-    public List<AdminChartVo> getSellerApplication(Date sellerRegisterDate) {
-        return adminMapper.sellerApplication(sellerRegisterDate);
+    public List<AdminChartVo> getSellerApplication() {
+        return adminMapper.sellerApplication();
     }
 
-
+// 월간 전체 매출액
+    /**
+     * 차트 판매자 조회
+     * @param paymentDate 등록일자
+     * @return 판매자 정보 리스트
+     */
+    @Transactional(readOnly = true)
+    public List<AdminChartVo> getPaymentCount() {
+        return adminMapper.paymentCount();
+    }
 
 
     }

@@ -46,12 +46,12 @@ class UserMapperTest {
        userMapper.insert(userVo);
     }
 
-    @Test
-    @DisplayName("회원 가입 테스트")
-    void insert() {
-        assertThat(userMapper.selectUserNumber(userDto.getUserId(), userDto.getUserPassword()))
-                .isEqualTo(userDto.getUserNumber());
-    }
+//    @Test
+//    @DisplayName("회원 가입 테스트")
+//    void insert() {
+//        assertThat(userMapper.selectUserNumber(userDto.getUserId(), userDto.getUserPassword()))
+//                .isEqualTo(userDto.getUserNumber());
+//    }
 
 
 

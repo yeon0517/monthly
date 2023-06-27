@@ -10,6 +10,13 @@ import java.util.Date;
 @Component
 @NoArgsConstructor
 public class AdminChartVo {
-    private Date sellerRegistertDate;
+    private String sellerRegisterDate;
+    private int registrationCount;
+
+//    월간 매출 차트를 위한
+    private String paymentPrice;
+    private String paymentDate;
+    private int paymentStatus;
+    private int paymentPriceCount;
 
 }
