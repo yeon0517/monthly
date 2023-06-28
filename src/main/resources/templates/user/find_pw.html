@@ -13,17 +13,12 @@
   <header class="board-header"  th:replace="fragment/board_header :: board_header"></header>
 
     <div id="main">
+      <form class="signup-form" th:action="@{/user/findPwOK}" method="post">
       <div class="title2">
         <h2>비밀번호 찾기</h2>
       </div>
       <div class="container">
         <fieldset class="field">
-          <p class="check">
-            <input id="check-method1" value="2" type="radio" />
-            <label for="check-method1">이메일</label>
-            <input id="check-method2" value="2" type="radio" />
-            <label for="check-method2">휴대폰번호</label>
-          </p>
           <p class="input-id">
             <strong class="id">아이디</strong>
             <input class="id-space" type="text" name="userId"/>
@@ -36,22 +31,15 @@
             <strong class="email">이메일</strong>
             <input class="email-space" type="text" name="userEmail"/>
           </p>
-          <p class="input-phone" style="display: none">
-            <strong class="phone">휴대폰번호</strong>
-            <input class="phone-space1" maxlength="3" type="text" />
-            -
-            <input class="phone-space2" maxlength="4" type="text" />
-            -
-            <input class="phone-space3" maxlength="4" type="text" />
-          </p>
         </fieldset>
         <p class="button-area">
-          <a href="" class="not-find-pw-button">확인</a>
-          <a th:href="@{/user/findPwOK}" class="find-pw-button" style="display: none"
-            >확인</a
+          <button class="not-find-pw-button">확인</button>
+          <button type="submit" class="find-pw-button" style="display: none"
+            >확인</button
           >
         </p>
       </div>
+      </form>
     </div>
   <div class="allTop" th:replace="fragment/board_top_btn :: board_top_btn"></div>
   <div class="allFooter" th:replace="fragment/board_footer :: board_footer"></div>

@@ -136,15 +136,21 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">주소</th>
+            <th scope="row">주소
+              <img
+                      th:src="@{https://morestore1.cafe24.com/%EC%82%AC%EC%A7%84/%E1%84%91%E1%85%B5%E1%86%AF%E1%84%89%E1%85%AE%20%E1%84%87%E1%85%A7%E1%86%AF%202.png}"
+                      width="10"
+                      height="10"
+                      alt="필수"
+              /></th>
             <td>
               <div class="before-address">
               <input
 
-                class="member-address1"
+                id="member-address1"
                 readonly="readonly"
                 maxlength="14"
-                name="userAddress"
+                name="userPostcode"
                 type="text"
               />
               <a href="#none" onclick="" class="post-btn"
@@ -154,19 +160,19 @@
               ></div>
               <input
               
-                class="member-address2"
+                id="member-address2"
                 readonly="readonly"
-                name="userAddress"
+                name="userAddress1"
                 type="text"
               />
               기본주소<br />
               <input
               
-                class="member-address3"
-                name="userAddress"
+                id="member-address3"
+                name="userAddress2"
                 type="text"
               />
-              나머지주소 (선택입력가능)
+              나머지주소
             </td>
           </tr>
           <tr>
@@ -331,6 +337,7 @@
   <div class="allFooter" th:replace="fragment/board_footer :: board_footer"></div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script th:src="@{/js/user/join.js}"></script>
   <script th:src="@{/js/board/board_main.js}"></script>
   <script th:src="@{/js/user/address.js}"></script>

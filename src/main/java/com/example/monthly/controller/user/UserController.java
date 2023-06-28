@@ -76,7 +76,7 @@ public class UserController {
     }
 
 
-
+// 로그인
     @GetMapping("/login")
     public String login(){
         return "user/login"; }
@@ -97,14 +97,10 @@ public class UserController {
     }
 
 
+//    회원가입
     @GetMapping("/join")
     public String join(){
         return "user/join"; }
-
-    @GetMapping("/checkId")
-    public int checkId(String userId){
-        return userService.checkId(userId);
-    }
 
     @PostMapping("/joinOK")
     public String joinOK(UserVo userVo, Model model) {
@@ -113,26 +109,36 @@ public class UserController {
         return "user/join_ok";
     }
 
-
+//    아이디 찾기
     @GetMapping("/findId")
     public String findId(){
         return "user/find_id"; }
 
-
     @PostMapping("/findIdOK")
     public String findIdOK(UserVo userVo, Model model) {
-        userService.findId(userVo);
-        model.addAttribute("user", userVo);
-        return "user/find_id_ok"; }
+        UserVo user = userService.findId(userVo);
+        if (user == null) {
+            model.addAttribute("notFound", true);
+        } else {
+            model.addAttribute("user", user);
+        }
+        return "user/find_id_ok";
+    }
 
+
+    //    비밀번호 찾기
     @GetMapping("/findPw")
     public String findPw(){
         return "user/find_pw"; }
 
     @PostMapping("/findPwOK")
     public String findPwOK(UserVo userVo, Model model){
-        userService.findPw(userVo);
-        model.addAttribute("user", userVo);
+        UserVo user = userService.findPw(userVo);
+        if (user == null) {
+            model.addAttribute("notFound", true);
+        } else {
+            model.addAttribute("user", user);
+        }
         return "user/find_pw_ok"; }
 
 

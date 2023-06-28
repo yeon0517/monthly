@@ -17,13 +17,13 @@
         <h2>아이디 찾기</h2>
       </div>
       <div class="container">
-        <div class="info-space2" style="display: none;">
+        <div class="info-space2" th:if="${notFound}">
           <p class="info2">입력하신 정보에 저장된 아이디가 없습니다!</p>
           <div class="result-box2">
             <p class="message2">
               입력하신 정보로 고객님의 아이디를 찾을 수 없습니다.
             </p>
-            <img th:src="@{/img/user/warning.png}" alt="">
+            <img th:src="@{/img/user/warning.png}" alt=""/>
             <p class="message2">
             
               <br />
@@ -37,13 +37,12 @@
             </p>
             </div>
         </div>
-        <div class="info-space">
+        <div class="info-space" th:unless="${notFound}">
           <p class="info2">아이디 찾기가 완료 되었습니다.</p>
           <div class="result-box">
             <p class="message">
               monthly를 이용해주셔서 감사합니다.<br />
-              다음정보로 가입된 아이디가 총 <span class="id-cnt">1</span>개
-              있습니다.
+              다음정보로 가입된 아이디가 있습니다.
             </p>
             <div class="member-info">
               <p class="thumbnail">
