@@ -100,7 +100,7 @@ input {
   outline: none;
 }
 
-.member-address1 {
+#member-address1 {
   width: 50px;
   text-align: center;
 }
@@ -109,8 +109,8 @@ input {
   margin-top: 5px;
 }
 
-.member-address2,
-.member-address3 {
+#member-address2,
+#member-address3 {
   width: 280px;
   height: 28px;
   line-height: 24px;

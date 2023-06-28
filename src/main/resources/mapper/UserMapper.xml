@@ -32,15 +32,15 @@
     </select>
 
     <!--아이디 찾기-->
-    <select id="findId">
+    <select id="findId" resultType="userVo">
         SELECT USER_NAME, USER_EMAIL, USER_ID FROM MONTHLY_USER
-        WHERE USER_Name = #{userName1} AND USER_EMAIL = #{userEmail} OR USER_Name = #{userName2} AND USER_PHONE_NUMBER = #{userPhoneNumber1} || '-' || #{userPhoneNumber2} || '-' || #{userPhoneNumber3}
+        WHERE USER_Name = #{userName} AND USER_EMAIL = #{userEmail}
     </select>
 
     <!--비밀번호 찾기-->
-    <select id="findPw">
-        SELECT USER_NAME, USER_EMAIL, USER_ID FROM MONTHLY_USER
-        WHERE USER_Name = #{userName}, USER_ID = #{userId} AND USER_EMAIL = #{userEmail} OR USER_PHONE_NUMBER = #{userPhoneNumber1} || '-' || #{userPhoneNumber2} || '-' || #{userPhoneNumber3}
+    <select id="findPw" resultType="userVo">
+        SELECT USER_NAME, USER_ID, USER_PASSWORD FROM MONTHLY_USER
+        WHERE USER_ID = #{userId} AND USER_Name = #{userName} AND USER_EMAIL = #{userEmail}
     </select>
 
 

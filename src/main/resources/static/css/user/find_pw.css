@@ -116,6 +116,7 @@ html {
 }
 
 .not-find-pw-button {
+  border: none;
   cursor: unset;
   font-size: 16px;
   font-weight: 400;
@@ -127,6 +128,7 @@ html {
 }
 
 .find-pw-button {
+  border: none;
   font-size: 16px;
   font-weight: 400;
   width: 120px;
