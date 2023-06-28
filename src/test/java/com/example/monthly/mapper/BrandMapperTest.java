@@ -38,7 +38,6 @@ class BrandMapperTest {
 
         assertThat(brandMapper.selectBrandBySellerNumber(brandDto.getSellerNumber()).getBrandNumber())
         .isEqualTo(brandDto.getBrandNumber());
-
     }
 
     @Test

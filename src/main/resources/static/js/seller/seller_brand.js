@@ -97,6 +97,10 @@ let formData = new FormData(form);
 // FormData의 value 확인
   for (let value of formData.values()) {console.log(value);}
   console.log("************************************************")
+  //이미지파일이 두개가 아니면 저장을 막는다.
+  if($input.val()==''||$input2.val()==''){
+    alert("브랜드이미지를 등록 해 주세요");
+  }else{
   brand.saveBrandInfo(formData);
   //브랜드정보업데이트하여 다시 보여주기
   brand.findBrandInfo(
@@ -107,7 +111,9 @@ let formData = new FormData(form);
     );
   console.log('브랜드정보저장완료');
   alert("브랜드 정보가 저장되었습니다.");
+  }
 });
+
 
 
 

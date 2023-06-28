@@ -27,36 +27,28 @@ public class BrandRestController {
 
     @PostMapping("/saveInfo")
     public void saveBrandInfo(BrandDto brandDto,HttpServletRequest req,
-                              @RequestParam("brandFileLong")MultipartFile file
-                              /*@RequestParam("brandFileSq")MultipartFile fileSq*/){
+                              @RequestParam("brandFileLong")MultipartFile fileLong,
+                              @RequestParam("brandFileSq")MultipartFile fileSq){
         System.out.println("*********&&&&&&&&&&&&&&&***************");
         Long sellerNumber = (Long)req.getSession().getAttribute("sellerNumber");
         Long brandNumber = brandService.checkBrandNumber(sellerNumber);
         brandDto.setSellerNumber(sellerNumber);
 //        브랜드 대표 이미지 저장
-        if(brandNumber !=null && file != null){
+        if(brandNumber !=null && fileLong != null && fileSq !=null){
             try {
-                brandFileService.registerAndSaveBrandFile(file, sellerNumber, brandNumber);
+                brandFileService.registerAndSaveBrandFile(fileLong,"long", sellerNumber, brandNumber);
+                brandFileService.registerAndSaveBrandFile(fileSq,"square", sellerNumber, brandNumber);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-//        if(brandNumber !=null && fileSq != null){
-//            try {
-//                brandFileService.registerAndSaveBrandFile(fileSq, sellerNumber, brandNumber);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-//        브랜드 정보 저장
         brandService.saveBrandInfo(brandDto);
     }
 
-    @GetMapping("/findBrandFile")
-    public BrandFileDto findBrandFileInfo(HttpServletRequest req){
-        Long sellerNumber =(Long)req.getSession().getAttribute("sellerNumber");
-        return brandFileService.findBrandFile(sellerNumber);
-    }
+//    @GetMapping("/findBrandFile")
+//    public BrandFileDto findBrandFileInfo(HttpServletRequest req){
+//        Long sellerNumber =(Long)req.getSession().getAttribute("sellerNumber");
+//        return brandFileService.findBrandFile(sellerNumber);
+//    }
 
 }

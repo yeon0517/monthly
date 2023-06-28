@@ -31,52 +31,53 @@ public class BrandFileService {
 
     @Value("${brand.file.dir}")
     private String brandFileDir;
-//    브랜드 파일 정보 DB저장
-    public void register(BrandFileVo brandFileVo) throws IllegalArgumentException{
-        if(brandFileVo==null){
-            throw new IllegalArgumentException("브랜드 파일 정보 누락");
-        }
-        if(brandFileVo.getBrandNumber()==null){
-            throw new IllegalArgumentException("브랜드 번호 없음 / 브랜드 등록필요"); }
 
-        int isExist = brandFileMapper.checkBrandFileExist(brandFileVo.getSellerNumber());
-        if(isExist == 0){
+//    브랜드파일 정보 DB 저장
+    public void register(BrandFileVo brandFileVo)throws IllegalArgumentException{
+        if(brandFileVo == null){throw new IllegalArgumentException("브랜드파일정보누락");}
+        if(brandFileVo.getBrandNumber()==null){throw new IllegalArgumentException("브랜드번호없음 브랜드등록필요");}
+        int isExist = brandFileMapper.checkBrandFileExist(brandFileVo.getSellerNumber(),brandFileVo.getBrandFileSize());
+        if(isExist==0){
             brandFileMapper.insertBrandFile(brandFileVo);
         }else{
-            removeImg(brandFileVo.getSellerNumber());
+            Long brandFileNumber = brandFileMapper.selectBrandFileBySize(brandFileVo.getSellerNumber(),brandFileVo.getBrandFileSize());
+            brandFileVo.setBrandFileNumber(brandFileNumber);
+//            실제 파일은 삭제하고 DB에 정보는 남겨둔다
+            removeImg(brandFileNumber);
+//            DB에 있는 파일정보는 업데이트한다.
             brandFileMapper.updateBrandFile(brandFileVo);
+
         }
     }
+//    실제 브랜드파일삭제
+    public void removeImg(Long brandFileNumber){
+        if(brandFileNumber==null){throw new IllegalArgumentException("판매자번호누락");}
+        BrandFileDto file = findBrandFile(brandFileNumber);
+        File target = new File(brandFileDir,file.getBrandFileUploadPath()+"/"+file.getBrandFileUuid()+"_"+file.getBrandFileName());
+        File thumbnail = new File(brandFileDir, file.getBrandFileUploadPath()+"/th_"+file.getBrandFileUuid()+"_"+file.getBrandFileName());
+        if(target.exists()){target.delete();}
+        if(thumbnail.exists()){thumbnail.delete();}
+    }
 
-//    브랜드파일 정보 삭제
-    public void remove(Long sellerNumber, String brandFileSize) {
-        if (sellerNumber == null) {
-            throw new IllegalArgumentException("판매자번호 누락");}
-        removeImg(sellerNumber);
+//    브랜드파일정보 DB삭제
+    public void remove(Long sellerNumber){
+        if(sellerNumber == null){throw new IllegalArgumentException("판매자 번호 누락");}
         brandFileMapper.deleteBrandFile(sellerNumber);
     }
-//    브랜드이미지 실제파일 삭제
-    public void removeImg(Long sellerNumber){
-        if(sellerNumber==null){throw new IllegalArgumentException("판매자 번호누락");}
-        BrandFileDto file = findBrandFile(sellerNumber);
-        File target = new File(brandFileDir, file.getBrandFileUploadPath() + "/" + file.getBrandFileUuid() + "_" + file.getBrandFileName());
-        File thumbnail = new File(brandFileDir, file.getBrandFileUploadPath() + "/th_" + file.getBrandFileUuid() + "_" + file.getBrandFileName());
-        if (target.exists()) {
-            target.delete();
-        }
-        if (thumbnail.exists()) {
-            thumbnail.delete();
-        }
+
+//    판매자 번호로 브랜드파일 리스트 조회
+    public List<BrandFileDto> findList(Long sellerNumber){return brandFileMapper.selectBrandFileList(sellerNumber);}
+
+//   파일번호로 브랜드파일 1개 조회
+    public BrandFileDto findBrandFile(Long brandFileNumber){
+        return brandFileMapper.selectBrandFile(brandFileNumber);}
+
+//  파일번호 조회 : 긴거 짧은거 구분
+    public Long findBrandFileNumber(Long sellerNumber, String brandFileSize){
+        return brandFileMapper.selectBrandFileBySize(sellerNumber, brandFileSize);
     }
 
-//    브랜드 파일조회
-
-    public BrandFileDto findBrandFile(Long sellerNumber){
-        if(sellerNumber==null){throw new IllegalArgumentException("판매자번호누락");}
-        return brandFileMapper.selectBrandFileBySellerNumber(sellerNumber);
-    }
-
-//    실제 파일 저장처리
+//    실제 파일 저장
     public BrandFileVo saveBrandFile(MultipartFile file) throws IOException{
 
         String originName = file.getOriginalFilename();
@@ -85,7 +86,7 @@ public class BrandFileService {
         String sysName = uuid.toString()+"_"+originName;
         File uploadPath = new File(brandFileDir, getUploadPath());
 
-//        경로에 필요한 폴더 생성
+        // 경로에 필요한 폴더 생성
         if(!uploadPath.exists()){
             uploadPath.mkdirs();
         }
@@ -98,7 +99,7 @@ public class BrandFileService {
             out.close();
         }
 
-//        brandNumber 제외한 모든 정보를 가진 brandFileVo 반환
+//        brandNumber,sellerNumber,brandFileSize 제외한 정보를 가진 brandFileVo 반환
         BrandFileVo brandFileVo = new BrandFileVo();
         brandFileVo.setBrandFileName(originName);
         brandFileVo.setBrandFileUuid(uuid.toString());
@@ -112,10 +113,11 @@ public class BrandFileService {
      * @param sellerNumber
      * @throws IOException
      */
-    public void registerAndSaveBrandFile(MultipartFile file, Long sellerNumber, Long brandNumber)throws IOException, IllegalArgumentException{
+    public void registerAndSaveBrandFile(MultipartFile file, String brandFileSize, Long sellerNumber, Long brandNumber)throws IOException, IllegalArgumentException{
         BrandFileVo brandFileVo = saveBrandFile(file);
         brandFileVo.setSellerNumber(sellerNumber);
         brandFileVo.setBrandNumber(brandNumber);
+        brandFileVo.setBrandFileSize(brandFileSize);
         register(brandFileVo);
     }
 
