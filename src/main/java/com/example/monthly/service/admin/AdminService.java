@@ -51,8 +51,8 @@ public Long findAdminNumber(String adminId, String adminPassword){
 
 // 월간 전체 매출액
     /**
-     * 차트 판매자 조회
-     * @return 판매자 정보 리스트
+     * 차트 매출액 조회
+     * @return 판매자 매출액 리스트
      */
     @Transactional(readOnly = true)
     public List<AdminChartVo> getPaymentCount() {
@@ -76,5 +76,10 @@ public Long findAdminNumber(String adminId, String adminPassword){
         adminMapper.update(sellerDto);
     }
 
-}
+    // 판매자 신청 현황 날짜 별 처리 현황
+    @Transactional(readOnly = true)
+    public List<AdminChartVo> getSellerStatusByDate() {
+        return adminMapper.getSellerStatusByDate();
+    }
 
+}
