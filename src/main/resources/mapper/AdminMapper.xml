@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.AdminMapper">
-
-    <select id="findAll" resultType="sellerDto">
-        SELECT SELLER_NUMBER, SELLER_NAME, SELLER_STATUS,SELLER_ID,SELLER_PHONE_NUMBER,SELLER_REGISTER_DATE,SELLER_COMPANY_REGISTER_NUMBER,SELLER_EMAIL,SELLER_ADDRESS
-        FROM MONTHLY_SELLER
-        WHERE SELLER_NUMBER=#{sellerNumber},SELLER_NAME = #{sellerName},SELLER_ID=#{sellerId}
-    </select>
+    <insert id="insert">
+        <selectKey keyProperty="sellerNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_SELLER.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_SELLER(SELLER_NUMBER, SELLER_NAME, SELLER_ID, SELLER_PASSWORD, SELLER_PHONE_NUMBER, SELLER_POSTCODE,SELLER_ADDRESS1, SELLER_ADDRESS2,
+        SELLER_EMAIL, SELLER_CONTENTS, SELLER_COMPANY_REGISTER_NUMBER)
+        VALUES (#{sellerNumber},#{sellerName},#{sellerId},#{sellerPassword},#{sellerPhoneNumber},#{sellerPostcode},#{sellerAddress1}, #{sellerAddress2},#{sellerEmail},#{sellerContents},#{sellerCompanyRegisterNumber})
+    </insert>
 
 <!--    관리자 로그인-->
     <select id="findAdminNumber" resultType="long" >
@@ -59,6 +61,39 @@
     </select>
 
 
+    <select id="selectSeller" resultType="sellerDto">
+        SELECT * FROM MONTHLY_SELLER
+        <where>
+            <trim prefixOverrides="AND">
+            <if test="searchInput != ''">
+                <if test='searchSelect.equals("seller-number")'>
+                    SELLER_NUMBER = #{searchInput}
+                </if>
+                <if test='searchSelect.equals("seller-name")'>
+                    SELLER_NAME LIKE '%' || #{searchInput} || '%'
+                </if>
+                <if test='searchSelect.equals("seller-id")'>
+                    SELLER_ID LIKE '%' || #{searchInput} || '%'
+                </if>
+            </if>
+            <trim prefix="and">
+                    <if test='"today".equals(period)'>
+                        TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE)
+                    </if>
+                    <if test='"yesterday".equals(period)'>
+                        TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE) - 1
+                    </if>
+            </trim>
+            </trim>
+        </where>
+        ORDER BY SELLER_REGISTER_DATE DESC
+    </select>
+
+    <update id="update">
+        UPDATE MONTHLY_SELLER
+        SET  SELLER_STATUS = #{sellerStatus}
+        WHERE SELLER_NUMBER = #{sellerNumber}
+    </update>
 
 
 
@@ -70,10 +105,3 @@
 
 
 
-
-<!--        <if test="searchType != null and searchValue != '' ">-->
-<!--        &lt;!&ndash;화면에서 보낸 데이터가 text를 비우고 보내면 빈 문자열을 보낸다. value는 ''를 해주면 아무것도 안쓰고 검색시 원하는대로 검색이 가능하다.&ndash;&gt;-->
-<!--        <bind name="sV" value=" '%' + searchValue '%'   "/>-->
-<!--        &lt;!&ndash;get방식으로 보낼 땐 parameterType으로 전달해주는 값이 없으므로 if문 안에 bind를 넣어주면 오류가 안난다.&ndash;&gt;-->
-<!--        WHERE ${searchType} like #{sV}-->
-<!--        </if>-->

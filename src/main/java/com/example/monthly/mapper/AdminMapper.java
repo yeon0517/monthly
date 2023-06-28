@@ -12,12 +12,13 @@ import java.util.List;
 
 @Mapper
 public interface AdminMapper {
-    void insert(SellerDto sellerDto);
+    public void insert(SellerDto sellerDto);
 
+    public void update(SellerDto sellerDto);
     Long findAdminNumber(@Param("adminId")String adminId, @Param("adminPassword")String adminPassword);
 
-//    public List<SellerDto> selectAll(SearchVo searchVo);
-
+    //카테고리별 조회 검색
+    List<SellerDto> selectSeller(SearchVo searchVo);
 
     List<AdminChartVo> sellerApplication();
 
