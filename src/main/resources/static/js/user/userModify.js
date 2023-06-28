@@ -63,14 +63,40 @@ function check_pw() {
 
 }
 
-function pw(){
-  if($('.pw').val() == $('#userPassword')){
+$('#userPassword').on('change',function (){
+    console.log($('.hiddenPw').val());
+    console.log($('#userPassword'));
+  if($('.hiddenPw').val() == $('#userPassword').val()){
     document.getElementById("pwchk").innerHTML = "비밀번호가 일치합니다.";
     document.getElementById("pwchk").style.color = "blue";
   }else{
     document.getElementById("pwchk").innerHTML = "비밀번호가 일치하지 않습니다.";
     document.getElementById("pwchk").style.color = "red";
   }
+});
+
+
+
+
+function submitCheck() {
+
+
+  if($('.hiddenPw').val() == $('#userPassword').val() && $('#userNewPassword').val() == $('#checkPassword').val() ) {
+
+    return true;
+  }else if($('#userNewPassword').val() != $('#checkPassword').val()){
+    alert("변경할 비밀번호를 확인하세요");
+    return false;
+  } else {
+    alert("비밀번호를 확인하세요");
+    return false;
+  }
+
+
+
+
+  return false;
+
 }
 
 

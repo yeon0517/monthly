@@ -1,6 +1,8 @@
 package com.example.monthly.mapper;
 
 import com.example.monthly.dto.DeliveryDto;
+import com.example.monthly.dto.KakaoDto;
+import com.example.monthly.dto.SubsDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ class OrderMapperTest {
     private OrderMapper orderMapper;
 
     private DeliveryDto deliveryDto;
+    private SubsDto subsDto =new SubsDto();
+    private KakaoDto kakaoDto = new KakaoDto();
 
     @Autowired
     void setUp(){
@@ -47,4 +51,17 @@ class OrderMapperTest {
         orderMapper.update(deliveryDto);
         assertThat(orderMapper.select(deliveryDto.getUserNumber()).getDeliveryPostcode()).isEqualTo("강서");
     }
+
+    @Test
+    void subsInsert(){
+        subsDto.setUserNumber(1L);
+        subsDto.setProductNumber(1L);
+        orderMapper.subsInsert(subsDto);
+    }
+
+    @Test
+    void kakaPay(){
+    }
+
+
 }

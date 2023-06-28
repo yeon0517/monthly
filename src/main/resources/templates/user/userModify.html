@@ -18,7 +18,7 @@
           <h2>회원 정보 수정</h2>
         </div>
 
-        <form id="editForm" name="editForm" th:action="@{/user/userModify}" method="post" enctype="multipart/form-data">
+        <form id="editForm" name="editForm" th:action="@{/user/userModify}" onsubmit="return submitCheck();" method="post" enctype="multipart/form-data">
           <div class="mainInput">
             <h3>기본 정보</h3>
             <p class="require">
@@ -53,8 +53,8 @@
                 <tr>
                   <th>현재비밀번호</th>
                   <td>
-                    <input class="pw" hidden th:value="${user.userPassword}">
-                    <input id="userPassword" type="password" onchange="pw()"  placeholder="" />
+                    <input class="hiddenPw" hidden th:value="${user.userPassword}">
+                    <input id="userPassword" type="password"  placeholder="" />
                     <span id="pwchk"></span>
                   </td>
                 </tr>
@@ -161,6 +161,7 @@
               <input
                 id="userModify"
                 type="submit"
+
                 style="background-color: #1e4a53; color: #f8f9fa"
                 value="회원정보 수정"
                 

@@ -9,6 +9,7 @@ import com.example.monthly.vo.DeliveryVo;
 import com.example.monthly.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,27 +38,27 @@ public class UserController {
 
 
     @GetMapping("/userModify")
-    public String userModify(Long userNumber, Model model){
-        //        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        userNumber = 74L;
+    public String userModify(HttpServletRequest req, Model model){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         DeliveryVo user = userService.findAll(userNumber);
         model.addAttribute("user",user);
         return "user/userModify";
     }
 
     @PostMapping("/userModify")
-    public String userModify(UserDto userDto, DeliveryDto deliveryDto, String checkPassword, HttpServletRequest req){
-//        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-       userDto.setUserNumber(1L);
+    public String userModify(UserDto userDto, DeliveryDto deliveryDto, @Param("checkPassword") String checkPassword, HttpServletRequest req){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+       userDto.setUserNumber(userNumber);
        userDto.setUserPassword(checkPassword);
-       userService.updatePassword(userDto);
-
+        if(checkPassword.length() != 0){
+           userService.updatePassword(userDto);
+       }
        //배송지 수정 (세션에서 받아온 userNumber 넣기)
-       deliveryDto.setUserNumber(74L);
+       deliveryDto.setUserNumber(userNumber);
 
         System.out.println(deliveryDto);
 
-       if(userService.findAll(74L).getDeliveryPostcode() != null){
+       if(userService.findAll(userNumber).getDeliveryPostcode() != null){
            orderService.changeDelivery(deliveryDto);
        }else {
             orderService.registerDelivery(deliveryDto);
@@ -69,9 +70,9 @@ public class UserController {
     }
 
     @GetMapping("/changeStatus")
-    public RedirectView userWithdraw(Long userNumber ,HttpServletRequest req){
-//        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        userService.changeStatus(1L);
+    public RedirectView userWithdraw(HttpServletRequest req){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        userService.changeStatus(userNumber);
         return new RedirectView("/user/login");
     }
 

@@ -19,4 +19,49 @@
         WHERE USER_NUMBER = #{userNumber}
     </update>
 
+<!--    구독 추가-->
+    <insert id="subsInsert" >
+        <selectKey keyProperty="subsNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_SUBSCRIBE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_SUBSCRIBE (SUBS_NUMBER, USER_NUMBER, PRODUCT_NUMBER)
+        VALUES (SEQ_SUBSCRIBE.nextval,#{userNumber},#{productNumber})
+    </insert>
+
+<!--    카카오 결제 정보-->
+    <insert id="kakaoPay">
+        <selectKey keyProperty="kakoNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_KAKAO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_KAKAO (KAKAO_NUMBER, KAKAO_MERCHANT, KAKAO_CUSTOMER_ID, KAKAO_PAY_DATE, KAKAO_CARD_NAME,
+                                   KAKAO_CARD_NUMBER, KAKAO_IMP_UID, KAKAO_PAID_AMOUNT, KAKAO_PG_TYPE, USER_NUMBER)
+        VALUES (SEQ_KAKAO.nextval,#{merchantId},#{customerId},#{payDate},#{cardName},#{cardNumber},#{impUid},#{paidAmount},#{pgType},#{userNumber})
+    </insert>
+
+    <!--    카드 추가-->
+    <insert id="cardInsert">
+        INSERT INTO MONTHLY_CARD (CARD_NUMBER, CARD_COMPANY, USER_NUMBER)
+        VALUES (#{cardNumber},#{cardCompany},#{userNumber})
+    </insert>
+
+<!--    결제 추가-->
+    <insert id="paymentInsert">
+        <selectKey keyProperty="paymentNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_PAYMENT.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_PAYMENT (PAYMENT_NUMBER, PAYMENT_PRICE, CARD_NUMBER, USER_NUMBER,
+                                     PRODUCT_NUMBER, SUBS_NUMBER)
+        VALUES (SEQ_PAYMENT.nextval,#{paymentPrice},#{cardNumber},#{userNumber},#{productNumber},#{subsNumber})
+    </insert>
+    
+
+<!--    배송주문 추가-->
+    <insert id="parcelInsert">
+        INSERT INTO MONTHLY_PARCEL (PARCEL_NUMBER, PARCEL_DATE, PARCEL_INVOICE,
+                                    DELIVERY_POSTCODE, DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, PAYMENT_NUMBER,CARD_NUMBER)
+        VALUES (SEQ_PARCEL.nextval,#{parcelDate},#{parcelInvoice},#{deliveryPostcode},#{deliveryAddress1},#{deliveryAddress2},#{paymentNumber},#{cardNumber})
+    </insert>
+
+
+
 </mapper>
