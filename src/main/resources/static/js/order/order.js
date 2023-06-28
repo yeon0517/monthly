@@ -1,3 +1,5 @@
+
+
 function sample6_execDaumPostcode() {
   new daum.Postcode({
     oncomplete: function (data) {
@@ -57,3 +59,90 @@ $(".payBtn").on("click", function () {
   }
   // document.getElementsByClassName('.payBtn').submit();
 });
+
+
+$('#new').on('click',function (){
+  $('#postAddress').val("");
+  $('#address1').val("");
+  $('#address2').val("");
+});
+
+$('#same').on('click',function (){
+  window.location.reload();
+});
+
+
+document.cookie="safeCookie1=foo;SameSite=Lax";
+document.cookie="safeCookie2=foo";
+document.cookie="crossCookie=bar;SameSite=None;Secure";
+
+let uuid = self.crypto.randomUUID();
+let userEmail = $('#userEmail').val();
+let price = $('#inputPrice').val();
+let userName = $('#userName').val();
+let productTitle = $('.productTitle').val();
+let userPhoneNumber = $('#userPhoneNumber').val();
+let postAddress = $('#postAddress').val();
+let proDate = $('.productRegisterDate').val();
+$('.pay').on('click',function (){
+  var IMP = window.IMP;
+  IMP.init('imp25167604');
+  IMP.request_pay({
+    pg: "kakaopay",
+    pay_method: "card",
+    merchant_uid: "monthly"+"_"+proDate +"_"+uuid, // 상점에서 관리하는 주문 번호
+    name : productTitle,
+    amount : price, // 빌링키 발급과 함께 1,004원 결제승인을 시도합니다.
+    customer_uid : uuid, // 필수 입력
+    buyer_email : userEmail,
+    buyer_name : userName,
+    buyer_tel : userPhoneNumber,
+    buyer_postcode: postAddress,
+    m_redirect_url : "https://yourservice.com/mobile/billing/landing" //모바일에서 빌링키 발급 후 이동할 URL
+  }, function(rsp) {
+    if ( rsp.success ) {
+      console.log(rsp);
+      console.log(rsp.imp_uid );
+      console.log(rsp.card_name);
+      console.log(rsp.card_number);
+      console.log(rsp.customer_id);
+      console.log(rsp.merchant_uid);
+      console.log(rsp.paid_amount);
+      console.log(rsp.pg_type);
+
+      $.ajax({
+        url : '/orders/payInfo/',
+        type: 'post',
+        data: {
+          merchant_uid : rsp.merchant_uid,
+          customer_id : uuid,
+          imp_uid : rsp.imp_uid,
+          card_name: rsp.card_name,
+          card_number: rsp.card_number,
+          paid_amount: rsp.paid_amount,
+          pg_type: rsp.pg_type
+        },
+        success : function (result){
+          alert("구독 완료");
+        } ,
+        error : error
+      });
+      alert('빌링키 발급 성공');
+    } else {
+      alert('빌링키 발급 실패');
+    }
+
+    $(this).submit();
+  });
+
+});
+
+
+
+
+
+
+
+
+
+

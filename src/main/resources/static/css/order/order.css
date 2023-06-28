@@ -247,6 +247,7 @@ td {
   width: 96%;
   height: 57px;
   resize: none;
+  font-family: "SUIT-Regular";
 }
 
 textarea {

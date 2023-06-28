@@ -43,6 +43,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     //서버 재실행없이 html css js 적용
     implementation('org.springframework.boot:spring-boot-devtools')
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 
 tasks.named('test') {

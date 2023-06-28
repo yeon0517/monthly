@@ -27,8 +27,8 @@ public class ReviewController {
 //    댓글 추가
     @PostMapping("/review")
     public String reviewRegister(@RequestBody ReviewDto reviewDto, HttpServletRequest req){
-//        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        reviewDto.setUserNumber(1L);
+       Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        reviewDto.setUserNumber(userNumber);
         reviewService.reviewRegister(reviewDto);
         return "추가 성공";
     }

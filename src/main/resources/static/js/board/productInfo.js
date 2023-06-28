@@ -106,6 +106,7 @@ $(".dates").on("click", ".current", function (event) {
   let day = $(this).text();
   // $(".result").text(year + "-" + day);
   $(".result").text(year + "-" + day);
+  $("#parcelDate").val(year + "-" + day);
 });
 
 //가격 넣기

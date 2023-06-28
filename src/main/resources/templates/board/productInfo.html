@@ -50,7 +50,7 @@
                 <!-- 상품 정보 -->
                 <div class="InfoArea">
 <!--                  제품 번호 -->
-                  <input type="hidden" id="productNumber" th:value="${product.productNumber}">
+                  <input type="hidden" name="productNumber" id="productNumber" th:value="${product.productNumber}">
 <!--                  브랜드 이름-->
                   <div class="supply">
                     <span>
@@ -73,10 +73,10 @@
 
                   <div class="calender">
                     <div style="display: flex; margin-bottom: 35px">
-                      날짜 선택 :
+                      배송 날짜 선택 :
                       <div class="result"></div>
                       <!-- 날짜 값 필요하면 여기 다 넣고 사용 -->
-                      <input type="hidden" name="dateValue" />
+                      <input type="hidden" id="parcelDate" name="parcelDate"  />
                     </div>
 
                     <div class="calMain">
