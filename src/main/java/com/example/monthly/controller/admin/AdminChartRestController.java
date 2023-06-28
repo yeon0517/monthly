@@ -23,8 +23,17 @@ public class AdminChartRestController {
 //        return adminService.getSellerApplication(sellerRegistertDate);
 //    }
 
-    @GetMapping("/allChart/{sellerRegistertDate}")
-    public List<AdminChartVo> getSellerApplication(@PathVariable("sellerRegistertDate") Date sellerRegistertDate) {
-        return adminService.getSellerApplication(sellerRegistertDate);
+    @GetMapping("/sellerChart")
+    public List<AdminChartVo> getSellerApplication() {
+        System.out.println("출략");
+        return adminService.getSellerApplication();
+    }
+
+    @GetMapping("/sellerChartTwo")
+    public List<AdminChartVo> getPaymentCount() {
+        System.out.println("예압~!");
+        List<AdminChartVo> result = adminService.getPaymentCount();
+        System.out.println(result);
+        return result;
     }
 }

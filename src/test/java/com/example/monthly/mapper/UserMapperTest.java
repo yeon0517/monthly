@@ -46,6 +46,7 @@ class UserMapperTest {
        userMapper.insert(userVo);
     }
 
+
     @Test
     @DisplayName("회원 가입 테스트")
     void insert() {

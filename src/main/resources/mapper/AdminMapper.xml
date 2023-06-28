@@ -16,12 +16,51 @@
     </select>
 
     <select id="sellerApplication" resultType="adminChartVo">
-        SELECT TRUNC(SELLER_REGISTER_DATE) AS REGISTRATION_DATE, COUNT(*) AS REGISTRATION_COUNT
+        SELECT TO_CHAR(b.dt, 'YYYY-MM') AS SELLER_REGISTER_DATE
+        , NVL(SUM(a.REGISTRATION_COUNT), 0) REGISTRATION_COUNT
+        FROM ( SELECT TO_CHAR(SELLER_REGISTER_DATE, 'YYYY-MM-DD') AS SELLER_REGISTER_DATE
+        , COUNT(*) REGISTRATION_COUNT
         FROM MONTHLY_SELLER
-        WHERE TRUNC(SELLER_REGISTER_DATE) =#{sellerRegistertDate}
-        GROUP BY TRUNC(SELLER_REGISTER_DATE)
-        ORDER BY TRUNC(SELLER_REGISTER_DATE)
+        WHERE SELLER_REGISTER_DATE BETWEEN TO_DATE('2023-01-01', 'YYYY-MM-DD')
+        AND TO_DATE('2023-12-31', 'YYYY-MM-DD')
+        GROUP BY SELLER_REGISTER_DATE
+        ) a
+        , ( SELECT TO_DATE('2023-01-01','YYYY-MM-DD') + LEVEL - 1 AS dt
+        FROM dual
+        <![CDATA[
+            CONNECT BY LEVEL <= (TO_DATE('2023-12-31','YYYY-MM-DD') - TO_DATE('2023-01-01','YYYY-MM-DD') + 1)
+             ]]>
+        ) b
+        WHERE b.dt = a.SELLER_REGISTER_DATE(+)
+        GROUP BY TO_CHAR(b.dt, 'YYYY-MM')
+        ORDER BY TO_CHAR(b.dt, 'YYYY-MM')
     </select>
+
+    <select id="paymentCount" resultType="adminChartVo">
+        SELECT TO_CHAR(b.dt, 'YYYY-MM') AS PAYMENT_DATE,
+        NVL(SUM(a.PAYMENT_PRICE), 0) AS PAYMENT_PRICE_COUNT
+        FROM (
+        SELECT TO_CHAR(PAYMENT_DATE, 'YYYY-MM') AS PAYMENT_DATE,
+        PAYMENT_PRICE,
+        PAYMENT_STATUS
+        FROM MONTHLY_PAYMENT
+        WHERE PAYMENT_STATUS = 1
+        AND PAYMENT_DATE BETWEEN TO_DATE('2023-01-01', 'YYYY-MM-DD') AND TO_DATE('2023-12-31', 'YYYY-MM-DD')
+        ) a
+        RIGHT JOIN (
+        SELECT TO_DATE('2023-' || LPAD(LEVEL, 2, '0'), 'YYYY-MM') AS dt
+        FROM dual
+        <![CDATA[
+            CONNECT BY LEVEL <= 12
+              ]]>
+        ) b ON TO_CHAR(b.dt, 'YYYY-MM') = a.PAYMENT_DATE
+        GROUP BY TO_CHAR(b.dt, 'YYYY-MM')
+        ORDER BY TO_CHAR(b.dt, 'YYYY-MM')
+    </select>
+
+
+
+
 
 </mapper>
 
