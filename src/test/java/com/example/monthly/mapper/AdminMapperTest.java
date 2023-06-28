@@ -3,11 +3,7 @@ package com.example.monthly.mapper;
 import com.example.monthly.dto.PaymentDto;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.vo.AdminChartVo;
-<<<<<<< HEAD
-import lombok.Data;
-=======
 import com.example.monthly.vo.SearchVo;
->>>>>>> es/0623재클론
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,16 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-<<<<<<< HEAD
 import java.time.LocalDate;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-=======
->>>>>>> es/0623재클론
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
