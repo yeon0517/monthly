@@ -10,6 +10,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${file.dir}")
     private String fileDir;
 
+    @Value("{brand.file.dir}")
+    private String brandFileDir;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //        addResourceHandlers() : 리소스 경로와 연결될 url경로를 작성한다.
@@ -18,5 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
 //                실제 리소스가 존재하는 외부 경로를 알려준다.
                 .addResourceLocations("file:"+fileDir);
 //              로컬디스크 경로는 file: 을 반드시 사용해야 한다.
+        registry.addResourceHandler("/brand/upload/**")
+                .addResourceLocations("brandFile:"+brandFileDir);
     }
 }

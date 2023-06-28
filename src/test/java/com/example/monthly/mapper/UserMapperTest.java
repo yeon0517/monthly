@@ -50,8 +50,13 @@ class UserMapperTest {
     @Test
     @DisplayName("회원 가입 테스트")
     void insert() {
+
         assertThat(userMapper.userLogin(userDto.getUserId(), userDto.getUserPassword()))
                 .isEqualTo(userDto.getUserNumber());
+
+//        assertThat(userMapper.selectUserNumber(userDto.getUserId(), userDto.getUserPassword()))
+//                .isEqualTo(userDto.getUserNumber());
+
     }
 
     @Test

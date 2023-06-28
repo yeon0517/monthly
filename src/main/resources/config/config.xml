@@ -25,7 +25,7 @@
         <typeAlias type="com.example.monthly.vo.Criteria" alias="criteria"/>
         <typeAlias type="com.example.monthly.vo.AdminChartVo" alias="AdminChartVo"/>
         <typeAlias type="com.example.monthly.vo.SearchVo" alias="SearchVo"/>
-
+        <typeAlias type="com.example.monthly.vo.BrandFileVo" alias="brandFileVo"/>
 
     </typeAliases>
 
