@@ -1,7 +1,9 @@
 package com.example.monthly.controller.seller;
 
 import com.example.monthly.dto.BrandDto;
+import com.example.monthly.dto.BrandFileDto;
 import com.example.monthly.dto.SellerDto;
+import com.example.monthly.service.board.BrandFileService;
 import com.example.monthly.service.board.BrandService;
 import com.example.monthly.service.seller.SellerService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ import java.util.List;
 public class SellerController {
     private final SellerService sellerService;
     private final BrandService brandService;
+    private final BrandFileService brandFileService;
 
     @GetMapping("/login")
     public String login(){ return "seller/seller_login"; }
@@ -65,6 +68,9 @@ public class SellerController {
         Long sellerNumber = (Long) req.getSession().getAttribute("sellerNumber");
         SellerDto sellerDto = sellerService.findSellerInfo(sellerNumber);
         BrandDto brandDto = brandService.findBrandInfo(sellerNumber);
+//        조회를 비동기로 해와서 페이지 진입하자마자 띄워준다면 필요없다.
+//        BrandFileDto brandFileDto = brandFileService.findBrandFile(sellerNumber);
+//        model.addAttribute("brandFile", brandFileDto);
         model.addAttribute("seller", sellerDto);
         model.addAttribute("brand", brandDto);
         return "seller/seller_brand";}

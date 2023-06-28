@@ -76,7 +76,7 @@ textarea:focus{
   width: 90%;
 }
 /* 이미지파일 등록 구역 */
-.brand-info-table .brand-image-th{
+.brand-info-table .th-img-sq{
   border-bottom: 1px solid #8eb4c8;
 }
 .brand-image-td>p{
@@ -91,12 +91,16 @@ textarea:focus{
   box-sizing: border-box;
   padding: 10px;
   border: 1px solid #dce8ee;
-
 }
 .brand-image>img{
   width: 100%;
   object-fit: cover;
 }
+.img-sq>img{
+  width:50%;
+  object-fit: cover;
+}
+
 /* 저장 취소버튼 */
 .btn-box {
   box-sizing: border-box;
