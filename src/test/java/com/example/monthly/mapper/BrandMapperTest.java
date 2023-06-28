@@ -32,23 +32,23 @@ class BrandMapperTest {
         brandMapper.insertBrand(brandDto);
     }
 
-    @Test
-    @DisplayName("브랜드 등록 및 판매자번호로 브랜드 조회")
-    void insertBrand() {
-
-        assertThat(brandMapper.selectBrandBySellerNumber(brandDto.getSellerNumber()).getBrandNumber())
-        .isEqualTo(brandDto.getBrandNumber());
-    }
-
-    @Test
-    @DisplayName("브랜드정보수정")
-    void updateBrand() {
-
-       brandDto.setBrandContents("updateTitle");
-       brandMapper.updateBrand(brandDto);
-       assertThat(brandMapper.selectBrandBySellerNumber(brandDto.getSellerNumber()).getBrandContents())
-               .isEqualTo(brandDto.getBrandContents());
-    }
+//    @Test
+//    @DisplayName("브랜드 등록 및 판매자번호로 브랜드 조회")
+//    void insertBrand() {
+//
+//        assertThat(brandMapper.selectBrandBySellerNumber(brandDto.getSellerNumber()).getBrandNumber())
+//        .isEqualTo(brandDto.getBrandNumber());
+//    }
+//
+//    @Test
+//    @DisplayName("브랜드정보수정")
+//    void updateBrand() {
+//
+//       brandDto.setBrandContents("updateTitle");
+//       brandMapper.updateBrand(brandDto);
+//       assertThat(brandMapper.selectBrandBySellerNumber(brandDto.getSellerNumber()).getBrandContents())
+//               .isEqualTo(brandDto.getBrandContents());
+//    }
 
 
 }

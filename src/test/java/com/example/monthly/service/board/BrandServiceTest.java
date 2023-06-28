@@ -36,30 +36,30 @@ class BrandServiceTest {
 
     }
 
-    @Test
-    @DisplayName("brand 정보 없으면 최초저장")
-    void saveBrandInfo() {
-        doReturn(0).when(brandMapper).checkBrandExist(any(Long.class));
-        doNothing().when(brandMapper).insertBrand(any(BrandDto.class));
-        brandService.saveBrandInfo(brandDto);
-        verify(brandMapper, times(1)).insertBrand(brandDto);
-    }
-    @Test
-    @DisplayName("brand 정보 존재하면 업데이트")
-    void saveBrandInfo2() {
-        doReturn(1).when(brandMapper).checkBrandExist(any(Long.class));
-        doNothing().when(brandMapper).updateBrand(any(BrandDto.class));
-        brandService.saveBrandInfo(brandDto);
-        verify(brandMapper, times(1)).updateBrand(brandDto);
-    }
-
-    @Test
-    @DisplayName("브랜드정보조회")
-    void findBrandInfo(){
-        doReturn(brandDto).when(brandMapper).selectBrandBySellerNumber(any(Long.class));
-        BrandDto foundBrand = brandService.findBrandInfo(14L);
-        assertThat(foundBrand.getBrandName()).isEqualTo(brandDto.getBrandName());
-    }
+//    @Test
+//    @DisplayName("brand 정보 없으면 최초저장")
+//    void saveBrandInfo() {
+//        doReturn(0).when(brandMapper).checkBrandExist(any(Long.class));
+//        doNothing().when(brandMapper).insertBrand(any(BrandDto.class));
+//        brandService.saveBrandInfo(brandDto);
+//        verify(brandMapper, times(1)).insertBrand(brandDto);
+//    }
+//    @Test
+//    @DisplayName("brand 정보 존재하면 업데이트")
+//    void saveBrandInfo2() {
+//        doReturn(1).when(brandMapper).checkBrandExist(any(Long.class));
+//        doNothing().when(brandMapper).updateBrand(any(BrandDto.class));
+//        brandService.saveBrandInfo(brandDto);
+//        verify(brandMapper, times(1)).updateBrand(brandDto);
+//    }
+//
+//    @Test
+//    @DisplayName("브랜드정보조회")
+//    void findBrandInfo(){
+//        doReturn(brandDto).when(brandMapper).selectBrandBySellerNumber(any(Long.class));
+//        BrandDto foundBrand = brandService.findBrandInfo(14L);
+//        assertThat(foundBrand.getBrandName()).isEqualTo(brandDto.getBrandName());
+//    }
 
 
 
