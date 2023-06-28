@@ -61,16 +61,8 @@ html {
   margin: 0 auto;
 }
 
-.check {
-  margin-left: 195px !important;
-  margin-bottom: 30px;
-  color: #353535;
-}
-
-.name1,
-.name2,
-.email,
-.phone {
+.name,
+.email{
   padding: 0 !important;
   background: none !important;
   font-weight: 300;
@@ -79,25 +71,13 @@ html {
   width: 140px;
 }
 
-.name-space1,
-.name-space2,
+.name-space,
 .email-space {
   width: 235px !important;
   line-height: 24px;
   padding: 2px 4px;
   border: 1px solid #d5d5d5;
   color: #111111;
-  font-size: 12px;
-}
-
-.phone-space1,
-.phone-space2,
-.phone-space3 {
-  width: 60px;
-  line-height: 24px;
-  padding: 2px 4px;
-  border: 1px solid #d5d5d5;
-  color: #000000;
   font-size: 12px;
 }
 

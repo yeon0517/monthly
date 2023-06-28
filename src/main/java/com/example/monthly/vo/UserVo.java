@@ -11,11 +11,16 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class UserVo {
     private Long userNumber;
+    private Long deliveryNumber;
     private String userId;
     private String userPassword;
     private String userName;
     private String userName1;
     private String userName2;
+    private String userAddress;
+    private String userPostcode;
+    private String userAddress1;
+    private String userAddress2;
     private String userPhoneNumber;
     private String userPhoneNumber1;
     private String userPhoneNumber2;

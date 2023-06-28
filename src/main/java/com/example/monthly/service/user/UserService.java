@@ -27,23 +27,17 @@ public class UserService {
         return userMapper.checkId(userId);
     }
 
-    // 가입 후 기본 정보 출력
-    @Transactional(readOnly = true)
-    public UserDto showJoinInfo(UserDto userNumber) {
-        return userMapper.showJoinInfo(userNumber);
-
-    }
 
     //  아이디 찾기
-    public void findId(UserVo userVo){
+    public UserVo findId(UserVo userVo){
         if (userVo == null){ throw new IllegalArgumentException("입력란 누락이나 조건이 충족되지 않음"); }
-        userMapper.findId(userVo);
+        return userMapper.findId(userVo);
     }
 
     //  비밀번호 찾기
-    public void findPw(UserVo userVo){
+    public UserVo findPw(UserVo userVo){
         if (userVo == null){ throw new IllegalArgumentException("입력란 누락이나 조건이 충족되지 않음"); }
-        userMapper.findPw(userVo);
+       return userMapper.findPw(userVo);
     }
 
     /**

@@ -53,8 +53,6 @@ class UserMapperTest {
                 .isEqualTo(userDto.getUserNumber());
     }
 
-
-
     @Test
     @DisplayName("회원 정보 검색")
     void selectAll() {

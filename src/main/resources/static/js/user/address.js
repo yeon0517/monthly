@@ -45,10 +45,10 @@ function execDaumPostcode() {
           }
 
          // 우편번호와 주소 정보를 해당 필드에 넣는다.
-         document.getElementsByClassName('member-address1').value = data.zonecode;
-         document.getElementsByClassName("member-address2").value = addr;
+         document.getElementById('member-address1').value = data.zonecode;
+         document.getElementById("member-address2").value = addr;
          // 커서를 상세주소 필드로 이동한다.
-         document.getElementsByClassName("member-address3").focus();
+         document.getElementById("member-address3").focus();
       }
   }).open();
 }
