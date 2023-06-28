@@ -1,5 +1,6 @@
 package com.example.monthly.service.admin;
 
+import com.example.monthly.dto.ReviewDto;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.mapper.AdminMapper;
 import com.example.monthly.mapper.SellerMapper;
@@ -18,12 +19,7 @@ import java.util.Optional;
 @Transactional
 public class AdminService {
     private final AdminMapper adminMapper;
-    //전체조회
-//    @Transactional(readOnly = true)
-//    public List<SellerDto> findAll(SearchVo searchVo) {
-//        return adminMapper.selectAll(searchVo);
-//
-//    }
+
 
 //    관리자 로그인
     /**
@@ -45,7 +41,6 @@ public Long findAdminNumber(String adminId, String adminPassword){
 // 차트 판매자 조회
     /**
      * 차트 판매자 조회
-     * @param sellerRegisterDate 등록일자
      * @return 판매자 정보 리스트
      */
     @Transactional(readOnly = true)
@@ -53,10 +48,10 @@ public Long findAdminNumber(String adminId, String adminPassword){
         return adminMapper.sellerApplication();
     }
 
+
 // 월간 전체 매출액
     /**
      * 차트 판매자 조회
-     * @param paymentDate 등록일자
      * @return 판매자 정보 리스트
      */
     @Transactional(readOnly = true)
@@ -65,5 +60,21 @@ public Long findAdminNumber(String adminId, String adminPassword){
     }
 
 
+
+    //검색결과 조회 띄우기
+    public List<SellerDto> selectSeller(SearchVo searchVo) {
+        return adminMapper.selectSeller(searchVo);
+
+
     }
+
+    //상태 변경
+    public void statusModify(SellerDto sellerDto){
+        if (sellerDto == null) {
+            throw new IllegalArgumentException("수정 정보 누락");
+        }
+        adminMapper.update(sellerDto);
+    }
+
+}
 
