@@ -19,6 +19,8 @@ public interface AdminMapper {
 //    public List<SellerDto> selectAll(SearchVo searchVo);
 
 
-    List<AdminChartVo> sellerApplication(@Param("sellerRegisterDate") Date sellerRegisterDate);
+    List<AdminChartVo> sellerApplication();
+
+    List<AdminChartVo> paymentCount();
 
 }
