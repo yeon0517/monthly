@@ -2,10 +2,14 @@ package com.example.monthly.controller.user;
 
 
 import com.example.monthly.dto.DeliveryDto;
+import com.example.monthly.dto.ExSubsDto;
 import com.example.monthly.dto.UserDto;
+import com.example.monthly.mapper.SubsMapper;
 import com.example.monthly.service.order.OrderService;
+import com.example.monthly.service.user.MypageService;
 import com.example.monthly.service.user.UserService;
 import com.example.monthly.vo.DeliveryVo;
+import com.example.monthly.vo.SubsVo;
 import com.example.monthly.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
@@ -20,6 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 
 // 로그인, 회원가입, 정보수정 등
@@ -31,10 +40,26 @@ public class UserController {
 
     private final OrderService orderService;
 
-    @GetMapping("/mypage")
-    public void mypage(){
+    private final MypageService mypageService;
 
+    @GetMapping("/mypage")
+    public void mypage(HttpServletRequest req, Model model){
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        List<SubsVo> subs = mypageService.subsFindAll(userNumber);
+        System.out.println("=====================================================");
+        System.out.println(subs.get(0).toString());
+        System.out.println("=====================================================");
+        String str = subs.get(0).getSubsStartDate().substring(0,10);
+        subs.get(0).setSubsStartDate(str);
+        model.addAttribute("subs",subs.get(0));
+
+//        외부 구독
+        ExSubsDto exSubs = mypageService.exSubsFindAll(userNumber);
+        exSubs.setExSubsDate(exSubs.getExSubsDate().substring(0,10));
+        model.addAttribute("exSubs",exSubs);
     }
+
+
 
 
     @GetMapping("/userModify")

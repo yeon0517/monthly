@@ -31,8 +31,8 @@ public class BoardController {
     @GetMapping("/productInfo")
     public String productInfo(Long productNumber, Model model, Criteria criteria){
 //        productMain에서 productNumber을 get 형식으로 넘겨주고 나는 그걸 받아서  넣어준다.
-        ProductVo productVo = productService.productView(1L);
-        int reviewCnt = reviewService.findTotal(1L);
+        ProductVo productVo = productService.productView(productNumber);
+        int reviewCnt = reviewService.findTotal(productNumber);
         model.addAttribute("pageInfo",new PageVo(criteria,reviewCnt));
         model.addAttribute("reviewCnt",reviewCnt);
         model.addAttribute("product",productVo);
