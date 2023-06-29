@@ -17,10 +17,18 @@ public class UserService {
     private final UserMapper userMapper;
 
     // 회원 가입
-    public void register(UserVo userVo){
-        if (userVo == null){ throw new IllegalArgumentException("입력란 누락이나 조건이 충족되지 않음"); }
+    public void register(UserVo userVo) {
+        if (userVo == null) {
+            throw new IllegalArgumentException("입력란 누락이나 조건이 충족되지 않음");
+        }
         userMapper.insert(userVo);
+
+    // 주소 입력란이 공백이 아닐 때만 주소를 추가
+        if (!userVo.getUserPostcode().isEmpty() && !userVo.getUserAddress2().isEmpty()) {
+            userMapper.insertAddress(userVo);
+        }
     }
+
 
     // 회원 가입 아이디 중복 검사
     public int checkId(String userId){

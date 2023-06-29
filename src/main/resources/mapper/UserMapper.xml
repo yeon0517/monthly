@@ -7,13 +7,21 @@
         <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
             SELECT SEQ_USER.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO MONTHLY_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_PHONE_NUMBER, USER_EMAIL, USER_GENDER, USER_BIRTHDAY)
-        VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName},
-        #{userPhoneNumber1} || '-' || #{userPhoneNumber2} || '-' || #{userPhoneNumber3},
-        #{userEmail}, #{userGender},
-        #{userBirthdayY} || '-' || #{userBirthdayM} || '-' || #{userBirthdayD})
+            INSERT INTO MONTHLY_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_PHONE_NUMBER, USER_EMAIL, USER_GENDER, USER_BIRTHDAY)
+            VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName},
+            #{userPhoneNumber1} || '-' || #{userPhoneNumber2} || '-' || #{userPhoneNumber3},
+             #{userEmail}, #{userGender},
+            #{userBirthdayY} || '-' || #{userBirthdayM} || '-' || #{userBirthdayD})
     </insert>
 
+    <!-- 구매자 회원가입 주소-->
+    <insert id="insertAddress">
+    <selectKey keyProperty="deliveryNumber" order="BEFORE" resultType="long">
+        SELECT SEQ_DELIVERY.NEXTVAL FROM DUAL
+    </selectKey>
+        INSERT INTO MONTHLY_DELIVERY (DELIVERY_NUMBER, DELIVERY_POSTCODE, DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, USER_NUMBER)
+        VALUES (#{deliveryNumber}, #{userPostcode}, #{userAddress1}, #{userAddress2}, #{userNumber})
+    </insert>
 
     <!--회원가입 시 아이디 중복검사-->
     <select id="checkId" resultType="int">
