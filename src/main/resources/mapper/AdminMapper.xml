@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.AdminMapper">
+    <!--판매자 검색 인서트 -->
     <insert id="insert">
         <selectKey keyProperty="sellerNumber" order="BEFORE" resultType="long">
             SELECT SEQ_SELLER.NEXTVAL FROM DUAL
@@ -9,7 +10,19 @@
         SELLER_EMAIL, SELLER_CONTENTS, SELLER_COMPANY_REGISTER_NUMBER)
         VALUES (#{sellerNumber},#{sellerName},#{sellerId},#{sellerPassword},#{sellerPhoneNumber},#{sellerPostcode},#{sellerAddress1}, #{sellerAddress2},#{sellerEmail},#{sellerContents},#{sellerCompanyRegisterNumber})
     </insert>
-
+    <!--상품검색 테스트 인서트 -->
+    <insert id="insertProduct">
+        <selectKey keyProperty="productNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_PRODUCT.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_PRODUCT (PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_STATUS, BRAND_NUMBER, PRODUCT_REGISTER_DATE)
+        VALUES (#{productNumber}, #{productName}, #{productStatus},
+        (SELECT B.BRAND_NUMBER
+        FROM MONTHLY_BRAND B
+        LEFT JOIN MONTHLY_SELLER S ON B.SELLER_NUMBER = S.SELLER_NUMBER
+        WHERE B.BRAND_NAME = #{brandName}),
+        #{productRegisterDate})
+        </insert>
 <!--    관리자 로그인-->
     <select id="findAdminNumber" resultType="long" >
         SELECT ADMIN_NUMBER
@@ -60,7 +73,7 @@
         ORDER BY TO_CHAR(b.dt, 'YYYY-MM')
     </select>
 
-
+<!--판매자 검색 기능-->
     <select id="selectSeller" resultType="sellerDto">
         SELECT * FROM MONTHLY_SELLER
         <where>
@@ -88,11 +101,66 @@
         </where>
         ORDER BY SELLER_REGISTER_DATE DESC
     </select>
+<!--상품 검색 기능-->
+    <select id="searchProduct" resultType="productVo">
+        SELECT P.PRODUCT_NUMBER, P.PRODUCT_NAME, P.PRODUCT_STATUS, B.BRAND_NAME, P.PRODUCT_REGISTER_DATE, S.SELLER_PHONE_NUMBER, S.SELLER_EMAIL, S.SELLER_NAME
+        FROM MONTHLY_PRODUCT P
+                 LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
+                 LEFT OUTER JOIN MONTHLY_SELLER S ON B.SELLER_NUMBER = S.SELLER_NUMBER
+        <where>
+            <if test="searchInput != ''">
+                <choose>
+                    <when test="searchSelect == 'goods-number'">
+                        P.PRODUCT_NUMBER = #{searchInput}
+                    </when>
+                    <when test="searchSelect == 'brand-name'">
+                        B.BRAND_NAME LIKE '%' ||#{searchInput}|| '%'
+                    </when>
+                    <when test="searchSelect == 'goods-name'">
+                        P.PRODUCT_NAME LIKE '%' || #{searchInput} || '%'
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </select>
 
+    <!--판매자의 브랜드,구독자 조회-->
+<select id="selectSubUser" resultType="productVo">
+    SELECT
+        MP.PRODUCT_NUMBER,
+        MP.PRODUCT_NAME,
+        COUNT(MS.USER_NUMBER) AS USER_NUMBER_COUNT
+    FROM
+        MONTHLY_USER MU
+            JOIN MONTHLY_SUBSCRIBE MS ON MU.USER_NUMBER = MS.USER_NUMBER
+            JOIN MONTHLY_PRODUCT MP ON MS.PRODUCT_NUMBER = MP.PRODUCT_NUMBER
+            JOIN MONTHLY_BRAND MB ON MP.BRAND_NUMBER = MB.BRAND_NUMBER
+            JOIN MONTHLY_SELLER MSN ON MB.SELLER_NUMBER = MSN.SELLER_NUMBER
+    WHERE
+        MSN.SELLER_NUMBER = #{sellerNumber}
+    GROUP BY
+        MP.PRODUCT_NUMBER,
+        MP.PRODUCT_NAME
+</select>
+
+
+
+
+
+
+
+    <!--판매자 상태 수정 기능-->
     <update id="update">
         UPDATE MONTHLY_SELLER
         SET  SELLER_STATUS = #{sellerStatus}
         WHERE SELLER_NUMBER = #{sellerNumber}
+    </update>
+
+    <!--상품 상태 수정 기능-->
+    <update id="updateProduct">
+        UPDATE MONTHLY_PRODUCT
+        SET  PRODUCT_STATUS = #{productStatus}
+        WHERE PRODUCT_NUMBER = #{productNumber}
     </update>
 
     <select id="getSellerStatusByDate" resultType="adminChartVo">
@@ -101,7 +169,7 @@
                  JOIN MONTHLY_SELLER s ON m.SELLER_NUMBER = s.SELLER_NUMBER
         WHERE m.BRAND_REGISTER_DATE >= TRUNC(SYSDATE) - 2
         GROUP BY TO_CHAR(m.BRAND_REGISTER_DATE, 'MM-DD')
-        ORDER BY TO_CHAR(m.BRAND_REGISTER_DATE, 'MM-DD') 
+        ORDER BY TO_CHAR(m.BRAND_REGISTER_DATE, 'MM-DD')
     </select>
 
 <select id="sellerMonth" resultType="adminChartVo">
@@ -123,6 +191,7 @@
              JOIN MONTHLY_SELLER s ON m.SELLER_NUMBER = s.SELLER_NUMBER
     WHERE m.BRAND_REGISTER_DATE >= TRUNC(ADD_MONTHS(SYSDATE, -3), 'MM')
 </select>
+
 
 
 

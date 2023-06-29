@@ -5,6 +5,7 @@ import com.example.monthly.dto.SellerDto;
 import com.example.monthly.mapper.AdminMapper;
 import com.example.monthly.mapper.SellerMapper;
 import com.example.monthly.vo.AdminChartVo;
+import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -61,19 +62,33 @@ public Long findAdminNumber(String adminId, String adminPassword){
 
 
 
-    //검색결과 조회 띄우기
+    //판매자 검색결과 조회 띄우기
     public List<SellerDto> selectSeller(SearchVo searchVo) {
         return adminMapper.selectSeller(searchVo);
-
-
+    }
+    //상품 검색결과 조회 띄우기
+    public List<ProductVo> searchProduct(SearchVo searchVo) {
+        return adminMapper.searchProduct(searchVo);
+    }
+    //판매자에서 브랜드페이지로 이동 시 구독자 조회
+    public List<ProductVo> selectSubUser(Long sellerNumber) {
+        return adminMapper.selectSubUser(sellerNumber);
     }
 
-    //상태 변경
+
+    //판매자 상태 변경
     public void statusModify(SellerDto sellerDto){
         if (sellerDto == null) {
             throw new IllegalArgumentException("수정 정보 누락");
         }
         adminMapper.update(sellerDto);
+    }
+    //상품 상태 변경
+    public void goodsStModify(ProductVo productVo){
+        if (productVo == null) {
+            throw new IllegalArgumentException("수정 정보 누락");
+        }
+        adminMapper.updateProduct(productVo);
     }
 
     // 판매자 신청 현황 날짜 별 처리 현황
