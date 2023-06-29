@@ -55,37 +55,55 @@ $(document).ready(function () {
 
 
 //검색하면 결과 나오는 ajax
-function getSearchList() {
+function submitSearchForm() {
+    // 검색어 입력값 가져오기
+    let keyword = document.getElementById("keyword").value;
+
+    // 검색 조건 선택값 가져오기
+    let searchSelect = document.getElementById("searchSelect").value;
+
+    // Ajax 요청 보내기
     $.ajax({
-        type: 'GET',
-        url: "/board/product",
-        data: $("form[name=searchForm]").serialize(),
-        success: function(result) {
-            if (result.length >= 1) {
-                result.forEach(function(item) {
-                    var str = ""; // str 변수 초기화
-                    // str 변수에 결과를 추가하는 로직 작성
-                    // 예를 들어, 결과를 어떤 요소에 출력하려면 다음과 같이 작성할 수 있습니다.
-                    str += "<p>" + item.title + "</p>";
-                    str += "<p>" + item.description + "</p>";
-                    $("#searchResults").append(str); // 결과를 출력할 요소의 ID에 맞게 수정
-                });
-            }
+        type: "GET",
+        url: "/boards/search",
+        data: {
+            searchSelect: searchSelect,
+            searchInput: keyword
+        },
+        success: function(response) {
+            // 검색 결과를 받은 후의 처리
+            displaySearchResults(response);
         },
         error: function(error) {
-            console.log(error); // 에러 처리 로직 추가
+            console.log(error);
         }
     });
 }
 
+function displaySearchResults(results) {
+    let searchResultsContainer = document.getElementById("searchResults");
 
+    // 이전에 표시된 결과 초기화
+    searchResultsContainer.innerHTML = "";
 
+    // 결과를 순회하며 요소 추가
+    results.forEach(function(result) {
+        let resultItem = document.createElement("div");
+        resultItem.className = "searchResultItem";
 
+        // 결과 정보 표시
+        let productName = document.createElement("p");
+        productName.textContent = "Product Name: " + result.productName;
+        resultItem.appendChild(productName);
 
+        let brandName = document.createElement("p");
+        brandName.textContent = "Brand Name: " + result.brandName;
+        resultItem.appendChild(brandName);
 
-
-
-
+        // 결과 요소를 컨테이너에 추가
+        searchResultsContainer.appendChild(resultItem);
+    });
+}
 
 
 
