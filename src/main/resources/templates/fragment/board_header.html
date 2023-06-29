@@ -73,13 +73,13 @@
 
           <!-- 검색하는 창 나오는 곳 -->
           <div class="search_btn">
-            <form action="">
+            <form action="" name="searchForm">
               <input id="search_id" type="hidden" />
               <div class="search_div">
                 <fieldset>
                   <span>검색</span>
-                  <input type="text" id="keyword" />
-                  <input type="image" th:src="@{/img/allImg/search.png}" id="search" />
+                  <input type="text" id="keyword" name="keyword" />
+                  <input type="image" th:src="@{/img/allImg/search.png}" id="search" onclick="getSearchList()" />
                 </fieldset>
               </div>
             </form>

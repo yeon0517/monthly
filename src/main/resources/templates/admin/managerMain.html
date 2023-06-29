@@ -40,17 +40,17 @@
               </tr>
 
 
-                <tr>
+                <tr  th:each="month : ${sellerMonth}">
                   <th>최근 30일 평균</th>
-                  <td>3건</td>
-                  <td>12건</td>
+                  <td th:text="${month.sellerStatusOneCount + '건'}"></td>
+                  <td th:text="${month.sellerStatusTwoCount + '건'}"></td>
                 </tr>
 
-                <tr>
-                  <th>최근 3개월 평균</th>
-                  <td>2건</td>
-                  <td>8건</td>
-                </tr>
+              <tr th:each="threeMonth : ${threeAverage}">
+                <th>최근 3개월 평균</th>
+                <td th:text="${#numbers.formatInteger(threeMonth.sellerStatusOneCount , 4, 'COMMA') + '건'}"></td>
+                <td th:text="${#numbers.formatInteger(threeMonth.sellerStatusTwoCount , 4, 'COMMA') + '건'}"></td>
+              </tr>
               </tbody>
             </table>
           </div>

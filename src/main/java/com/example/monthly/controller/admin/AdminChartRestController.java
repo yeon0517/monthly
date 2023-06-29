@@ -41,14 +41,6 @@ public class AdminChartRestController {
         return result;
     }
 
-    @GetMapping("/sellerStatus")
-    public String sellerStatus(Model model) {
-        List<AdminChartVo> sellerStatus = adminService.getSellerStatusByDate();
-        model.addAttribute("sellerStatus", sellerStatus);
-        System.out.println(sellerStatus);
-        log.info(sellerStatus.toString()); //무조건  string값으로
-        return "admin/managerMain";
-    }
 }
 
 

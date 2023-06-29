@@ -81,5 +81,14 @@ public Long findAdminNumber(String adminId, String adminPassword){
     public List<AdminChartVo> getSellerStatusByDate() {
         return adminMapper.getSellerStatusByDate();
     }
+    @Transactional(readOnly = true)
+    public List<AdminChartVo> sellerMonth() {
+        return adminMapper.sellerMonth();
+    }
+    @Transactional(readOnly = true)
+    public List<AdminChartVo> threeAverage() {
+        return adminMapper.threeAverage();
+    }
+
 
 }

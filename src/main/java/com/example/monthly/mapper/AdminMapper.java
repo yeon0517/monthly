@@ -27,5 +27,6 @@ public interface AdminMapper {
 
     // 신청현황
     List<AdminChartVo> getSellerStatusByDate();
-
+    List<AdminChartVo> sellerMonth();
+    List<AdminChartVo> threeAverage();
 }

@@ -42,9 +42,12 @@ public class AdminController {
     @GetMapping("/main")
     public String sellerStatus(Model model){
         List<AdminChartVo> sellerStatus = adminService.getSellerStatusByDate();
+        List<AdminChartVo> sellerMonth = adminService.sellerMonth();
+        List<AdminChartVo> threeAverage = adminService.threeAverage();
+        log.info(sellerStatus.toString()); //log.info는 무조건  string값으로
         model.addAttribute("sellerStatus", sellerStatus);
-        System.out.println(sellerStatus);
-
+        model.addAttribute("sellerMonth", sellerMonth);
+        model.addAttribute("threeAverage", threeAverage);
         return "admin/managerMain";}
 
     @GetMapping("/allMember")
