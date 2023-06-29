@@ -24,4 +24,9 @@ public interface AdminMapper {
 
     List<AdminChartVo> paymentCount();
 
+
+    // 신청현황
+    List<AdminChartVo> getSellerStatusByDate();
+    List<AdminChartVo> sellerMonth();
+    List<AdminChartVo> threeAverage();
 }
