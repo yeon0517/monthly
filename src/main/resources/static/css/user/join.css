@@ -176,14 +176,26 @@ input {
 }
 
 .member-birth-year {
-  width: 60px;
+  width: 70px;
   margin: 0 4px 0 4px;
+  height: 34px;
+  border: 1px solid #d5d5d5;
+  outline: none;
+  font-size: 100%;
+  color: #111111;
+  vertical-align: middle;
 }
 
 .member-birth-month,
 .member-birth-day {
-  width: 30px;
-  margin: 0 4px 0 0;
+  width: 50px;
+  margin: 0 4px 0 4px;
+  height: 34px;
+  border: 1px solid #d5d5d5;
+  outline: none;
+  font-size: 100%;
+  color: #111111;
+  vertical-align: middle;
 }
 
 /* 약관 동의 영역 */

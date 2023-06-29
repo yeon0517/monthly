@@ -13,6 +13,7 @@ import java.util.List;
 public interface UserMapper {
     // 회원가입
     public void insert(UserVo userVo);
+    public void insertAddress(UserVo userVo);
 
     // 회원가입 아이디 중복 검사
     public int checkId(String userId);
