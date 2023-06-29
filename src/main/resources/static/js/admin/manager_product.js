@@ -54,3 +54,15 @@ $('.goods-list-body').on('click','.save-btn',function (){
     console.log("==========0000000000000000000000");
     search2.productStatusAjax(pstObj,showError);
 });
+
+//엔터처리==================================
+$('.search-input').on('keydown', function (e){
+    if(e.keyCode == 13){
+        console.log('Enter');
+        let searchInput = $('.search-input').val();
+        let searchSelect = $('.search-dropdown').val();
+
+        search2.getProductList({searchSelect : searchSelect, searchInput:searchInput}, showPdl, showError);
+
+    }
+});

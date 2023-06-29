@@ -76,3 +76,18 @@ $('.seller-list-body').on('click', '.save-btn', function() {
     search.sellerStatusAjax(statusObj,showError);
 });
 
+
+
+
+
+//엔터처리==================================
+$('.search-input').on('keydown', function (e){
+    if(e.keyCode == 13){
+        console.log('Enter');
+        let searchInput = $('.search-input').val();
+        let searchSelect = $('.search-dropdown').val();
+        let searchPeriod = $('input[name=period]:checked').val();
+        search.getList({period : searchPeriod, searchSelect : searchSelect, searchInput:searchInput}, showList, showError);
+
+    }
+});

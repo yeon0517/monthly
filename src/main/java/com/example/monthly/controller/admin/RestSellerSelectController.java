@@ -25,7 +25,6 @@ public class RestSellerSelectController {
         searchVo.setSearchSelect(searchSelect);
         searchVo.setPeriod(period);
         searchVo.setSearchInput(searchInput);
-
         System.out.println("============================");
         System.out.println(searchVo);
         return adminService.selectSeller(searchVo);
