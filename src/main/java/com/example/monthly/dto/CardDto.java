@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class CardDto {
-    private Long cardNumber;
+    private String cardNumber;
     private Long userNumber;
     private String cardCompany;
     private String cardExpiredDate;

@@ -145,7 +145,7 @@
             <h3>내부 구독 리스트</h3>
           </div>
           <div class="prolist">
-            <div class="exSubList">
+            <div class="exSubList" th:each="subs : ${subs}">
               <table class="exTable" boarder="1">
                 <thead class="exthead">
                   <tr>
@@ -161,22 +161,27 @@
                 <tbody class="extbody">
                   <tr style="background-color: #ffffff; color: #555555">
                     <td class="productNumber">
-                      <span>45234</span>
+                      <span th:text="${subs.productNumber}">45234</span>
                     </td>
                     <td class="productImg">
-                      <img
+                      <img th:if="${subs.productFileName == null}"
                         src ="../img/5e3eebd9f16e87a1d2898e229a8e69f7.jpg"
                         alt=""
                       />
+                      <img th:unless="${subs.productFileName == null}" th:style="${'background-image:url(/upload/' + subs.productFileUploadPath + '/th_' + subs.productFileUuid + '_' + subs.productFileName + ')'}">
                     </td>
+
                     <td class="productTitle" style="font-weight: bolder">
-                      <span>[모어포모레] 심플 설거지 세트</span>
+                      <a th:href="@{/board/productInfo(productNumber=${subs.productNumber})}">
+                      <span th:text="${subs.productName}"></span>
+                      </a>
                     </td>
+
                     <td class="productDate">
-                      <span>2023-06-07 </span>
+                      <span th:text="${subs.subsStartDate}">2023-06-07 </span>
                     </td>
                     <td class="productPrice" style="font-weight: bolder">
-                      <span>15000원</span>
+                      <span th:text="${subs.paymentPrice} + 원">15000원</span>
                     </td>
                   </tr>
                 </tbody>
@@ -189,7 +194,7 @@
             <h3>외부 구독 리스트</h3>
           </div>
           <div class="prolist">
-            <div class="exSubList">
+            <div class="exSubList" th:each="exSubs : ${exSubs}">
               <table class="exTable" boarder="1">
                 <thead class="exthead">
                   <tr>
@@ -204,20 +209,20 @@
                 <tbody class="extbody">
                   <tr style="background-color: #ffffff; color: #555555">
                     <td class="productNumber">
-                      <span>45234</span>
+                      <span th:text="${exSubs.exSubsNumber}">45234</span>
                     </td>
 
                     <td
                       class="productTitle"
-                      style="font-weight: bolder; width: 550px; height: 100px"
+                      style="font-weight: bolder; width: 550px"
                     >
-                      <span>[모어포모레] 심플 설거지 세트</span>
+                      <span th:text="${exSubs.exSubsName}">[모어포모레] 심플 설거지 세트</span>
                     </td>
                     <td class="productDate">
-                      <span>2023-06-07 </span>
+                      <span th:text="${exSubs.exSubsDate}">2023-06-07 </span>
                     </td>
                     <td class="productPrice" style="font-weight: bolder">
-                      <span>15000원</span>
+                      <span th:text="${exSubs.exSubsPrice} + 원">15000원</span>
                     </td>
                   </tr>
                 </tbody>

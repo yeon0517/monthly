@@ -57,10 +57,18 @@ class OrderMapperTest {
         subsDto.setUserNumber(1L);
         subsDto.setProductNumber(1L);
         orderMapper.subsInsert(subsDto);
+
+        SubsDto subs =  orderMapper.subsSelect(subsDto.getUserNumber() ,subsDto.getProductNumber());
+
+        assertThat(subs.getProductNumber()).isEqualTo(subsDto.getProductNumber());
     }
 
     @Test
-    void kakaPay(){
+    void subsSelect(Long userNumber, Long productNumber){
+        subsDto.setProductNumber(1L);
+        subsDto.setUserNumber(1L);
+        orderMapper.subsInsert(subsDto);
+
     }
 
 
