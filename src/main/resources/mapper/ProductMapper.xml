@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.ProductMapper">
+<!--제품번호로 제품하나 조회-->
     <select id="selectProduct" resultType="productVo">
-        SELECT PRODUCT_NUMBER,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_AMOUNT,PRODUCT_CONTENTS,
-               PRODUCT_CONTENTS,PRODUCT_OPTION,PRODUCT_REGISTER_DATE,PRODUCT_STATUS,MB.BRAND_NUMBER,MB.BRAND_NAME
+        SELECT PRODUCT_NUMBER, PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_AMOUNT,PRODUCT_CONTENTS,
+               PRODUCT_OPTION,PRODUCT_REGISTER_DATE,PRODUCT_STATUS,MB.BRAND_NUMBER,MB.BRAND_NAME
         FROM MONTHLY_PRODUCT MP JOIN MONTHLY_BRAND MB on PRODUCT_NUMBER = #{productNumber} AND MP.BRAND_NUMBER = MB.BRAND_NUMBER
     </select>
 
+<!--제품등록-->
+    <insert id="insertProduct">
+        <selectKey keyProperty="productNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_PRODUCT.NEXTVAL FROM DUAL
+        </selectKey>
+    INSERT INTO MONTHLY_PRODUCT(PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_AMOUNT, PRODUCT_OPTION, PRODUCT_CONTENTS, BRAND_NUMBER)
+    VALUES(#{productNumber},#{productName},#{productPrice},#{productAmount},#{productOption},#{productContents}, #{brandNumber})
+    </insert>
+
+<!--제품수정-->
+    <update id="updateProduct">
+        UPDATE MONTHLY_PRODUCT
+        SET PRODUCT_NAME = #{productName}, PRODUCT_PRICE = #{productPrice}, PRODUCT_AMOUNT=#{productAmount},
+            PRODUCT_OPTION = #{productOption}, PRODUCT_CONTENTS=#{productContents}, PRODUCT_STATUS = #{productStatus}
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </update>
+
+<!--제품삭제-->
+    <delete id="deleteProduct">
+        DELETE FROM MONTHLY_PRODUCT
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </delete>
+
+<!--제품리스트 조회-->
+    <select id="selectAll" resultType="productDto">
+
+    </select>
 </mapper>
