@@ -47,3 +47,16 @@ export function getProductList(pdl, callback,error){
         error : error
     });
 }
+//상품 상태변경
+export function productStatusAjax(pstObj,error){
+    $.ajax({
+        url: `/search/products/${pstObj.productStatus}`,
+        type: 'patch',
+        data:  JSON.stringify(pstObj),
+        contentType : 'application/json; charset=utf-8',
+        success: function(){
+            console.log('판매상태변경 ajax연결 성공');
+        },
+        error:error
+    });
+}

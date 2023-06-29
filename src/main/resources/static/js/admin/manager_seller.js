@@ -35,21 +35,21 @@ function showList(map) {
 
 
 }
+search.getList({period : '', searchSelect : '', searchInput:''}, showList, showError);
 
-    //구독자 페이지로 버튼 누르면 이동
+//구독자 페이지로 버튼 누르면 이동
 $('.seller-list-body').on('click','.brand-link',function (){
     let sellerNumber = $(this).data('seller-number');
 // Perform the page redirect based on sellerNumber
     window.location.href = `/admin/subMember?sellerNumber=${sellerNumber}`;
 });
 
-
-
-
-
+//에러 코드
 function showError(a, b, c) {
     console.error(c);
 }
+
+
 // 검색 조건에 따른 회원 조회
 $('.search-btn').on('click', function (){
     let searchInput = $('.search-input').val();
@@ -73,7 +73,6 @@ $('.seller-list-body').on('click', '.save-btn', function() {
         sellerNumber : sellerNumber
     }
     console.log(statusObj);
-    search.sellerStatusAjax(statusObj,showError
-    );
+    search.sellerStatusAjax(statusObj,showError);
 });
 

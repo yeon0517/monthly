@@ -65,21 +65,27 @@ public Long findAdminNumber(String adminId, String adminPassword){
     //판매자 검색결과 조회 띄우기
     public List<SellerDto> selectSeller(SearchVo searchVo) {
         return adminMapper.selectSeller(searchVo);
-
-
+    }
+    //상품 검색결과 조회 띄우기
+    public List<ProductVo> searchProduct(SearchVo searchVo) {
+        return adminMapper.searchProduct(searchVo);
     }
 
-    //상태 변경
+
+    //판매자 상태 변경
     public void statusModify(SellerDto sellerDto){
         if (sellerDto == null) {
             throw new IllegalArgumentException("수정 정보 누락");
         }
         adminMapper.update(sellerDto);
     }
-
-    //상품 검색결과 조회 띄우기
-    public List<ProductVo> searchProduct(SearchVo searchVo) {
-        return adminMapper.searchProduct(searchVo);
+    //상품 상태 변경
+    public void goodsStModify(ProductVo productVo){
+        if (productVo == null) {
+            throw new IllegalArgumentException("수정 정보 누락");
+        }
+        adminMapper.updateProduct(productVo);
     }
+
 }
 

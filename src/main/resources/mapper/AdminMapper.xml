@@ -131,6 +131,12 @@
         WHERE SELLER_NUMBER = #{sellerNumber}
     </update>
 
+    <!--상품 상태 수정 기능-->
+    <update id="updateProduct">
+        UPDATE MONTHLY_PRODUCT
+        SET  PRODUCT_STATUS = #{productStatus}
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </update>
 
 
 </mapper>

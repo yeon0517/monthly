@@ -17,8 +17,11 @@ public interface AdminMapper {
     public void insert(SellerDto sellerDto); //판매자 검색 인서트
     public void insertProduct(ProductVo productVo); //상품검색 인서트
 
-    public void update(SellerDto sellerDto);
     Long findAdminNumber(@Param("adminId")String adminId, @Param("adminPassword")String adminPassword);
+
+    public void update(SellerDto sellerDto); //판매자 상태변경
+    public void updateProduct(ProductVo productVo); //상품 판매상태 변경
+
 
     //카테고리별 판매자 조회 검색
     List<SellerDto> selectSeller(SearchVo searchVo);

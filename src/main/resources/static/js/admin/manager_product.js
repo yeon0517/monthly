@@ -12,7 +12,7 @@ function showPdl(map2){
               <td>
                 <select name="parcel-status" class="parcel-status">
                   <option value="1" ${1==i.productStatus ? `selected="selected"`:''}>판매 중</option>
-                  <option value="2" ${0==i.productStatus ? `selected="selected"`:''}>판매 종료</option>
+                  <option value="0" ${0==i.productStatus ? `selected="selected"`:''}>판매 종료</option>
                 </select>
               </td>
               <td>${i.brandName}</td>
@@ -41,3 +41,16 @@ $('.search-btn').on('click', function (){
     console.log(searchSelect);
     search2.getProductList({searchSelect : searchSelect, searchInput:searchInput}, showPdl, showError);
 })
+
+//상품 상태 변경
+$('.goods-list-body').on('click','.save-btn',function (){
+    let productStatus = $(this).closest('tr').find('.parcel-status').val();
+    let productNumber = $(this).closest('tr').find('.product-number').text();
+    let pstObj={
+        productStatus:productStatus,
+        productNumber:productNumber
+    }
+    console.log(pstObj);
+    console.log("==========0000000000000000000000");
+    search2.productStatusAjax(pstObj,showError);
+});

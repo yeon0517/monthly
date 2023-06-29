@@ -48,5 +48,12 @@ public class RestSellerSelectController {
         System.out.println(searchVo);
         return adminService.searchProduct(searchVo);
     }
+    //상품 상태 수정기능
+    @PatchMapping("/products/{productStatus}")
+    public void goodsStModify(@PathVariable("productStatus") int productStatus,
+                              @RequestBody ProductVo productVo){
+        productVo.setProductStatus(productStatus);
+        adminService.goodsStModify(productVo);
+    }
 }
 
