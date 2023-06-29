@@ -69,9 +69,18 @@ function calendarInit() {
     }
     // 이번달
     for (var i = 1; i <= nextDate; i++) {
-      calendar.innerHTML =
-        calendar.innerHTML + '<div class="day current">' + i + "</div>";
+      // 현재 날짜보다 이전인 경우
+      if (currentYear < today.getFullYear() ||
+          (currentYear === today.getFullYear() && currentMonth < today.getMonth()) ||
+          (currentYear === today.getFullYear() && currentMonth === today.getMonth() && i < today.getDate())) {
+        calendar.innerHTML +=
+            '<div class="day current disable">' + i + "</div>";
+      } else {
+        calendar.innerHTML +=
+            '<div class="day current able">' + i + "</div>";
+      }
     }
+
     // 다음달
     for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
       calendar.innerHTML =
@@ -100,11 +109,10 @@ function calendarInit() {
 }
 
 //날짜 넣기
-$(".dates").on("click", ".current", function (event) {
+$(".dates").on("click", ".able", function (event) {
   event.preventDefault();
   let year = $(".year-month").text();
   let day = $(this).text();
-  // $(".result").text(year + "-" + day);
   $(".result").text(year + "-" + day);
   $("#parcelDate").val(year + "-" + day);
 });

@@ -28,7 +28,7 @@
               <!-- 최대 3개의 상품 -->
               <li class="wrap_il" th:each="product, index : ${productSelect}" th:if="${product.brandNumber == brandSelect[0].brandNumber && index.index < 3}">
                 <div class="box">
-                  <a th:href="@{/board/productInfo}"><img th:src="@{/img/boardImg/ho.jpg}" alt="호" /></a>
+                  <a th:href="@{/board/productInfo(productNumber=${product.productNumber})}"><img th:src="@{/img/boardImg/ho.jpg}" alt="호" /></a>
                   <p class="box_name">
                     <span th:text="${product.productName}"></span>
                   </p>
