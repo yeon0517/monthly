@@ -6,11 +6,15 @@ import com.example.monthly.service.board.BrandFileService;
 import com.example.monthly.service.board.BrandService;
 import com.example.monthly.vo.BrandFileVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +22,9 @@ import java.io.IOException;
 public class BrandRestController {
     private final BrandService brandService;
     private final BrandFileService brandFileService;
+
+    @Value("${brand.file.dir}")
+    private String fileDir;
 
     @GetMapping("/findInfo")
     public BrandDto findBrandInfo(HttpServletRequest req){
@@ -45,10 +52,17 @@ public class BrandRestController {
         brandService.saveBrandInfo(brandDto);
     }
 
-//    @GetMapping("/findBrandFile")
-//    public BrandFileDto findBrandFileInfo(HttpServletRequest req){
-//        Long sellerNumber =(Long)req.getSession().getAttribute("sellerNumber");
-//        return brandFileService.findBrandFile(sellerNumber);
-//    }
+//    브랜드파일넘버를 받는다.
+    @GetMapping("/findBrandFile")
+    public BrandFileDto findBrandFileNumber(String brandFileSize, HttpServletRequest req){
+        Long sellerNumber =(Long)req.getSession().getAttribute("sellerNumber");
+        Long brandFileNumber = brandFileService.findBrandFileNumber(sellerNumber, brandFileSize);
+        return brandFileService.findBrandFile(brandFileNumber);
+    }
+//    실제 이미지를 띄워준다.
+    @GetMapping("/showImg")
+    public byte[] showImg(String fileName) throws IOException{
+        return FileCopyUtils.copyToByteArray(new File(fileDir,fileName));
+    }
 
 }

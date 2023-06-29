@@ -29,18 +29,18 @@
                     SELECT BRAND_NUMBER FROM MONTHLY_BRAND WHERE SELLER_NUMBER= #{sellerNumber}
         )
     </select>
+<!--    브랜드 이미지 파일 사이즈에 따라 브랜드파일번호 조회-->
+    <select id="selectBrandFileBySize" resultType="long">
+        SELECT BRAND_FILE_NUMBER FROM MONTHLY_BRAND_FILE WHERE BRAND_NUMBER IN(
+            SELECT BRAND_NUMBER FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
+            )AND BRAND_FILE_SIZE = #{brandFileSize}
+    </select>
 <!--    파일 넘버로 조회-->
     <select id="selectBrandFile" resultType="brandFileDto">
         SELECT BRAND_FILE_NUMBER, BRAND_FILE_NAME, BRAND_FILE_UPLOAD_PATH,
                BRAND_FILE_UUID, BRAND_NUMBER, BRAND_FILE_SIZE
         FROM MONTHLY_BRAND_FILE
         WHERE BRAND_FILE_NUMBER = #{brandFileNumber}
-    </select>
-<!--    브랜드 이미지 파일 사이즈에 따라 브랜드파일번호 조회-->
-    <select id="selectBrandFileBySize" resultType="long">
-        SELECT BRAND_FILE_NUMBER FROM MONTHLY_BRAND_FILE WHERE BRAND_NUMBER IN(
-            SELECT BRAND_NUMBER FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
-            )AND BRAND_FILE_SIZE = #{brandFileSize}
     </select>
 
 <!--    판매자 번호로 브랜드 대표 이미지 수정-->

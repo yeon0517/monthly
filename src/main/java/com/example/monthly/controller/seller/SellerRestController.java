@@ -24,7 +24,7 @@ public class SellerRestController {
         return sellerService.checkCurrentPw(sellerNumber, sellerPassword);
     }
     @PatchMapping("/modifyInfo")
-    public void modifySellerInfo(@RequestBody SellerDto sellerDto,HttpServletRequest req ){
+    public void modifySellerInfo(@RequestBody SellerDto sellerDto, HttpServletRequest req ){
         Long sellerNumber = (Long)req.getSession().getAttribute("sellerNumber");
         sellerDto.setSellerNumber(sellerNumber);
         sellerService.modifySellerInfo(sellerDto);

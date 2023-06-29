@@ -42,11 +42,12 @@ export function checkCurrentPw(sellerPassword,callback){
 }
 
 // 판매자 정보 수정
-export function modifySellerInfo(sellerDto,){
+export function modifySellerInfo(sellerDto){
+    console.log('modifyAjax');
     $.ajax({
         url : '/sellers/modifyInfo',
         type : 'patch',
-        data :sellerDto,
+        data : JSON.stringify(sellerDto),
         contentType : 'application/json;charset=utf-8',
         success : function(){
             console.log("수정완료")
@@ -57,7 +58,7 @@ export function modifySellerInfo(sellerDto,){
 
 // 판매자 정보 조회
 export function findSellerInfo(callback){
-    console.log('ajax')
+    console.log('findInfoAjax');
     $.ajax({
        url : '/sellers/findInfo',
        type : 'get',

@@ -66,15 +66,24 @@ public class BrandFileService {
     }
 
 //    판매자 번호로 브랜드파일 리스트 조회
+    @Transactional(readOnly = true)
     public List<BrandFileDto> findList(Long sellerNumber){return brandFileMapper.selectBrandFileList(sellerNumber);}
 
 //   파일번호로 브랜드파일 1개 조회
+    @Transactional(readOnly = true)
     public BrandFileDto findBrandFile(Long brandFileNumber){
-        return brandFileMapper.selectBrandFile(brandFileNumber);}
+        if(brandFileNumber==null){throw new IllegalArgumentException("브랜드 파일 번호 누락");}
+        return Optional.ofNullable(brandFileMapper.selectBrandFile(brandFileNumber))
+                .orElseThrow(() -> {throw new IllegalArgumentException("존재하지 않는 브랜드파일");});
+    }
 
 //  파일번호 조회 : 긴거 짧은거 구분
+    @Transactional(readOnly = true)
     public Long findBrandFileNumber(Long sellerNumber, String brandFileSize){
-        return brandFileMapper.selectBrandFileBySize(sellerNumber, brandFileSize);
+        if(sellerNumber == null){throw new IllegalArgumentException("판매자번호누락");}
+        else if(brandFileSize == null){throw new IllegalArgumentException("파일사이즈 누락");}
+        return Optional.ofNullable(brandFileMapper.selectBrandFileBySize(sellerNumber, brandFileSize))
+                .orElseThrow(() -> {throw new IllegalArgumentException("존재하지 않는 파일번호");} );
     }
 
 //    실제 파일 저장
