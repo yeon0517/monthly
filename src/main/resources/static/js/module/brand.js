@@ -17,13 +17,16 @@ export function findBrandInfo(callback){
         error : function(a,b,c){console.error(c)}
     });
 }
-// 브랜드 사진 조회
-export function showBrandFile(callback){
+
+// 브랜드 사진 파일 조회
+export function findBrandFile(brandFileSize, callback){
     $.ajax({
         url : '/brands/findBrandFile',
         type : 'get',
-        dataType : '', //brandFileDto가 오는데....
+        data : {brandFileSize : brandFileSize},
+        dataType : 'json',
         success : function (result){
+            // console.log(result);
             if(callback){
                 callback(result);
             }
@@ -31,19 +34,6 @@ export function showBrandFile(callback){
         error : function (a,b,c){console.error(c)}
     });
 }
-
-// 브랜드 정보 저장 - 완료
-// export function saveBrandInfo(brandDto){
-//     $.ajax({
-//        url : '/brands/saveInfo',
-//         type : 'post',
-//         data : brandDto,
-//         success : function(){
-//            console.log('수정완료');
-//         },
-//         error : function(a,b,c,){console.error(c)}
-//     });
-// }
 
 // 브랜드정보 + 브랜드 대표 이미지 저장
 export function saveBrandInfo(formData){
@@ -61,23 +51,17 @@ export function saveBrandInfo(formData){
     });
 }
 
-
-
-// 브랜드 사진 저장
-// export function saveBrandFile(formData){
+// 브랜드 정보 저장 - 완료
+// export function saveBrandInfo(brandDto){
 //     $.ajax({
-//        url : '/brands/saveBrandFile',
-//        type : 'post',
-//         enctype:'multipart/form-data',
-//        data : formData,
-//         processDate : false,
-//         contentType : false,
-//         cache : false,
-//        success : function(result){
-//            console.log(result);
-//            console.log('파일수정완료');
-//        } ,
-//         error : function (a,b,c){console.error(c)}
+//        url : '/brands/saveInfo',
+//         type : 'post',
+//         data : brandDto,
+//         success : function(){
+//            console.log('수정완료');
+//         },
+//         error : function(a,b,c,){console.error(c)}
 //     });
 // }
-//
+
+

@@ -47,7 +47,7 @@
              SELLER_EMAIL = #{sellerEmail},
              SELLER_CONTENTS = #{sellerContents},
              SELLER_COMPANY_REGISTER_NUMBER=#{sellerCompanyRegisterNumber}
-        where seller_number = #{sellerNumber};
+        where seller_number = #{sellerNumber}
     </update>
 
 </mapper>

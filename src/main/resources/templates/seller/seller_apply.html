@@ -96,7 +96,8 @@
                 <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
               </th>
               <td>
-                <input type="text" id="seller-phone-number" name="sellerPhoneNumber" placeholder="010-0000-0000" oninput ="autoHyphen2(this)" maxlength="13" required>
+                <input type="text" id="seller-phone-number" name="sellerPhoneNumber" placeholder="010-0000-0000" maxlength="13" required>
+                <span class="inner-info">ex. 010-1234-5678</span>
                 <p class="input-check seller-phone-number-msg"></p>
               </td>
             </tr>
@@ -106,6 +107,7 @@
               </th>
               <td>
                 <input type="text" id="seller-email" name="sellerEmail" placeholder="monthly@gmail.com" required>
+                <span class="inner-info">ex. monthly@gmail.com</span>
                 <p class="input-check seller-email-msg"></p>
               </td>
             </tr>

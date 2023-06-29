@@ -120,12 +120,22 @@ $checkPwInput.on('blur', function(){
 });
 
 // 전화번호 정규표현식?
-const autoHyphen2 = (target) => {
-    target.value = target.value
-        .replace(/[^0-9]/g, '')
-        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
-}
-let $PInput=$('#seller-phone-number');
+let $sellerPhoneInput = $('#seller-phone-number');
+let $sellerPhoneMsg = $('.seller-phone-number-msg');
+
+const regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+$sellerPhoneInput.on('blur', function(){
+    if($(this).val()==''){
+        $sellerPhoneMsg.text('휴대폰 번호를 입력하세요');
+        $sellerPhoneMsg.css("color","#c88e8e");
+    }else if(regExp.test($(this).val())){
+        $sellerPhoneMsg.text('사용 가능한 번호 입니다.');
+        $sellerPhoneMsg.css("color","#8eb4c8");
+    }else{
+        $sellerPhoneMsg.text('올바른 휴대폰번호 형식이 아닙니다.');
+        $sellerPhoneMsg.css("color","#c88e8e");
+    }
+});
 // -------안되면 포기한다
 
 
