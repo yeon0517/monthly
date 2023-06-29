@@ -29,7 +29,8 @@ public interface AdminMapper {
     //카테고리별 상품 검색
     List<ProductVo> searchProduct(SearchVo searchVo);
 
-
+    //판매자이동 후 해당 브랜드의 구독자 조회 #1
+    List<ProductVo> selectSubUser(Long sellerNumber);
 
     List<AdminChartVo> sellerApplication();
     List<AdminChartVo> paymentCount();

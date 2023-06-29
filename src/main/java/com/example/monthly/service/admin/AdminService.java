@@ -70,6 +70,10 @@ public Long findAdminNumber(String adminId, String adminPassword){
     public List<ProductVo> searchProduct(SearchVo searchVo) {
         return adminMapper.searchProduct(searchVo);
     }
+    //판매자에서 브랜드페이지로 이동 시 구독자 조회
+    public List<ProductVo> selectSubUser(Long sellerNumber) {
+        return adminMapper.selectSubUser(sellerNumber);
+    }
 
 
     //판매자 상태 변경

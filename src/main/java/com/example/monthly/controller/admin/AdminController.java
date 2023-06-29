@@ -3,6 +3,7 @@ package com.example.monthly.controller.admin;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.service.admin.AdminService;
 import com.example.monthly.vo.DeliveryVo;
+import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
@@ -56,7 +57,11 @@ public class AdminController {
 
 
     @GetMapping("/subMember")
-    public String subMember(Long sellerNumber , Model model){
+    public String subMember(Long sellerNumber,Model model){
+        adminService.selectSubUser(sellerNumber);
+        model.addAttribute("sellerNumber" ,sellerNumber);
+        System.out.println("==========================");
+        System.out.println(sellerNumber);
         return "admin/manager_seller_detail";}
 
     @GetMapping("/logout")

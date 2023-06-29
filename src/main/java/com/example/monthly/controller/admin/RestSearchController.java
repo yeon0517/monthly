@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/search/*")
-public class RestSellerSelectController {
+public class RestSearchController {
 
     private final AdminService adminService;
 //판매자 관리 페이지 기간별,조건별 전체 검색

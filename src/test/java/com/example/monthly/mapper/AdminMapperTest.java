@@ -60,6 +60,7 @@ class AdminMapperTest {
         productVo.setSellerPhoneNumber("010-2222-1111");
         productVo.setBrandNumber(1L);
         productVo.setSellerNumber(1L);
+        productVo.setUserNumber(1L);
     }
 
 
