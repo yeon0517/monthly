@@ -5,6 +5,7 @@ import com.example.monthly.dto.SellerDto;
 import com.example.monthly.mapper.AdminMapper;
 import com.example.monthly.mapper.SellerMapper;
 import com.example.monthly.vo.AdminChartVo;
+import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -61,7 +62,7 @@ public Long findAdminNumber(String adminId, String adminPassword){
 
 
 
-    //검색결과 조회 띄우기
+    //판매자 검색결과 조회 띄우기
     public List<SellerDto> selectSeller(SearchVo searchVo) {
         return adminMapper.selectSeller(searchVo);
 
@@ -76,5 +77,9 @@ public Long findAdminNumber(String adminId, String adminPassword){
         adminMapper.update(sellerDto);
     }
 
+    //상품 검색결과 조회 띄우기
+    public List<ProductVo> searchProduct(SearchVo searchVo) {
+        return adminMapper.searchProduct(searchVo);
+    }
 }
 

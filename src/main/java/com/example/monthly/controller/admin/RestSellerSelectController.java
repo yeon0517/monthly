@@ -3,6 +3,7 @@ package com.example.monthly.controller.admin;
 import com.example.monthly.dto.ReviewDto;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.service.admin.AdminService;
+import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,13 +30,23 @@ public class RestSellerSelectController {
         System.out.println(searchVo);
         return adminService.selectSeller(searchVo);
     }
-    //영업 상태 수정
+    //판매자 영업 상태 수정기능
     @PatchMapping("/{sellerStatus}")
     public void statusModify(@PathVariable("sellerStatus") int sellerStatus,
                             @RequestBody SellerDto sellerDto){
         sellerDto.setSellerStatus(sellerStatus);
         adminService.statusModify(sellerDto);
 
+    }
+    //상품 카테고리별 검색 기능
+    @GetMapping("/products")
+    public List<ProductVo> searchProduct(String searchSelect,String searchInput){
+        SearchVo searchVo = new SearchVo();
+        searchVo.setSearchSelect(searchSelect);
+        searchVo.setSearchInput(searchInput);
+        System.out.println("=============================");
+        System.out.println(searchVo);
+        return adminService.searchProduct(searchVo);
     }
 }
 
