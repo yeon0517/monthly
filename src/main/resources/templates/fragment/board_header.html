@@ -72,14 +72,26 @@
           </div>
 
           <!-- 검색하는 창 나오는 곳 -->
+<!--          <div class="search_btn">-->
+<!--          <form id="searchForm" action="/board/product" method="GET">-->
+<!--            <input id="search_id" type="hidden" />-->
+<!--            <div class="search_div">-->
+<!--              <fieldset>-->
+<!--                <span>검색</span>-->
+<!--                <input type="text" id="keyword" name="keyword" />-->
+<!--                <input type="image" th:src="@{/img/allImg/search.png}" id="search" onclick="submitSearchForm()" />-->
+<!--              </fieldset>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+
           <div class="search_btn">
-            <form action="">
-              <input id="search_id" type="hidden" />
+            <form id="searchForm" action="/board/product" method="GET">
               <div class="search_div">
                 <fieldset>
                   <span>검색</span>
-                  <input type="text" id="keyword" />
-                  <input type="image" th:src="@{/img/allImg/search.png}" id="search" />
+                  <input type="text" id="keyword" name="searchInput" />
+                  <input type="image" th:src="@{/img/allImg/search.png}" id="search" onclick="submitSearchForm()" />
                 </fieldset>
               </div>
             </form>

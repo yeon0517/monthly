@@ -14,30 +14,27 @@
 
 <header class="header" th:replace="fragment/admin_header::admin_header">
 </header>
-
-  <!-- 판매자 메인 주문관리 목록 검색창 -->
   <section class="main-section main-section1">
     <div class="main-container main-container1">
-      <!-- 판매자 브랜드이름띄우기 -->
+
       <h2><span class="brand-name">Monthly</span> 전체 (상품)서비스 검색</h2>
-      <!-- 검색 조건 form태그 -->
-      <form action="">
+
       <table class="main-section1-table">
         <tr>
           <th class="main-section1-th search">검색</th>
           <td>
-            <select name="search-select" id="" class="search-dropdown">
+            <select name="search-select" class="search-dropdown">
               <option value="brand-name">브랜드 명</option>
               <option value="goods-name">서비스 이름</option>
               <option value="goods-number">서비스 번호</option>
             </select>
-            <input type="text" placeholder="입력" class="search-input">
+            <input type="text" name="search-input" placeholder="입력" class="search-input">
           </td>
         </tr>
       </table>
       <!-- 검색버튼 누르면 상품관리리스트테이블 비동기로 띄움 -->
-      <div class="btn-box"><button type="submit" class="search-btn">검색</button></div>
-    </form>
+      <div class="btn-box"><button type="button" class="search-btn">검색</button></div>
+
     </div>
   </section>
   <!-- 상품관리 리스트테이블 -->
@@ -64,68 +61,26 @@
         </thead>
         <tbody class="goods-list-body">
         
-          <tr><form action="#"><!--상품관리 리스트 #1-->
-              <input type="hidden" value="?">
-              <td>1</td>
-              <td>[Cookpang]숲 키링</td>
-              <td>
-                <select name="parcel-status" id="" class="parcel-status">
-                  <option value="sell-ing">판매 중</option>
-                  <option value="sold-out">품절</option>
-                  <option value="sell-end">판매 종료</option>
-                </select>
-              </td>
-              <td>Cookpang</td>
-              <td>2020/02/21</td>
-              <td>010-1234-1234</td>
-              <td>nsoe12@naver.com</td>
-              <td>박은서</td>
-              <td><button type="submit" class="save-btn">save</button></td>
-            </form> 
-            <!-- 저장버튼 누르면 비동기로 저장 -->
-          </tr> <!--상품관리 리스트#1 끝-->
+<!--          <tr>&lt;!&ndash;상품관리 리스트 #1&ndash;&gt;-->
+<!--              <input type="hidden" value="?">-->
+<!--              <td>1</td>-->
+<!--              <td>[Cookpang]숲 키링</td>-->
+<!--              <td>-->
+<!--                <select name="parcel-status" id="" class="parcel-status">-->
+<!--                  <option value="sell-ing">판매 중</option>-->
+<!--                  <option value="sold-out">품절</option>-->
+<!--                  <option value="sell-end">판매 종료</option>-->
+<!--                </select>-->
+<!--              </td>-->
+<!--              <td>Cookpang</td>-->
+<!--              <td>2020/02/21</td>-->
+<!--              <td>010-1234-1234</td>-->
+<!--              <td>nsoe12@naver.com</td>-->
+<!--              <td>박은서</td>-->
+<!--              <td><button type="submit" class="save-btn">save</button></td>-->
+<!--            &lt;!&ndash; 저장버튼 누르면 비동기로 저장 &ndash;&gt;-->
+<!--          </tr> &lt;!&ndash;상품관리 리스트#1 끝&ndash;&gt;-->
 
-          <tr><form action="#"><!--상품관리 리스트 #2-->
-            <input type="hidden" value="?">
-            <td>2</td>
-            <td>[쏘왓]Y2K호보백</td>
-            <td>
-              <select name="parcel-status" id="" class="parcel-status">
-                <option value="sell-ing">판매 중</option>
-                <option value="sold-out">품절</option>
-                <option value="sell-end">판매 종료</option>
-              </select>
-            </td>
-            <td>쏘왓</td>
-            <td>2021/04/14</td>
-            <td>010-1234-1234</td>
-            <td>nsoe12@naver.com</td>
-            <td>뚱이</td>
-            <td><button type="submit" class="save-btn">save</button></td>
-          </form> 
-          <!-- 저장버튼 누르면 비동기로 저장 -->
-        </tr> <!--상품관리 리스트#2 끝-->
-    
-        <tr><form action="#"><!--상품관리 리스트 #3-->
-          <input type="hidden" value="?">
-          <td>3</td>
-          <td>[세이브제주바다]제주 하르방 키링</td>
-          <td>
-            <select name="parcel-status" id="" class="parcel-status">
-              <option value="sell-ing">판매 중</option>
-              <option value="sold-out">품절</option>
-              <option value="sell-end">판매 종료</option>
-            </select>
-          </td>
-          <td>세이브제주바다</td>
-          <td>2023/04/21</td>
-          <td>010-1234-1234</td>
-          <td>nsoe12@naver.com</td>
-          <td>맹구</td>
-          <td><button type="submit" class="save-btn">save</button></td>
-        </form> 
-        <!-- 저장버튼 누르면 비동기로 저장 -->
-      </tr> <!--상품관리 리스트#3 끝-->
       
         </tbody>
       </table>
@@ -136,6 +91,6 @@
 
 
   <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-
+  <script type="module" th:src="@{/js/admin/manager_product.js}"></script>
 </body>
 </html>

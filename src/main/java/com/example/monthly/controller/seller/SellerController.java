@@ -2,6 +2,7 @@ package com.example.monthly.controller.seller;
 
 import com.example.monthly.dto.BrandDto;
 import com.example.monthly.dto.BrandFileDto;
+import com.example.monthly.dto.ProductDto;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.service.board.BrandFileService;
 import com.example.monthly.service.board.BrandService;
@@ -37,10 +38,16 @@ public class SellerController {
         try {
             Long sellerNumber = sellerService.findSellerNumber(sellerId,sellerPassword);
             req.getSession().setAttribute("sellerNumber",sellerNumber);
+
+            Long brandNumber = brandService.checkBrandNumber(sellerNumber);
+            if(brandNumber != null){
+                req.getSession().setAttribute("brandNumber",brandNumber);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new RedirectView("/seller/login");
         }
+
         return new RedirectView("/seller/main");
     }
     @GetMapping("/main")
@@ -81,8 +88,32 @@ public class SellerController {
     @GetMapping("/modify")
     public String productModify(){return "seller/seller_product_modify";}
 
+    @GetMapping("/registerReady")
+    public String productRegisterReady(){
+        return "seller/seller_product_register";
+    }
+
     @GetMapping("/register")
-    public String productRegister(){return "seller/seller_product_register";}
+    public RedirectView productRegister(HttpServletRequest req){
+        Long brandNumber = (Long)req.getSession().getAttribute("brandNumber");
+        if(brandNumber == null){
+            return new RedirectView("/seller/brand");
+        }
+        System.out.println("=======$$$$$$$$$$$$$$$$"+brandNumber);
+        return new RedirectView("/seller/registerReady");
+    }
+
+    @PostMapping("/register")
+    public RedirectView productRegist(ProductDto productDto, HttpServletRequest req,
+                                @RequestParam("productFiles")List<MultipartFile> files,
+                                @RequestParam("productFile")MultipartFile mainfile){
+       Long brandNumber = (Long)req.getSession().getAttribute("brandNumber");
+       if(brandNumber == null){
+           return new RedirectView("/seller/brand");
+       }
+    return new RedirectView("/seller/list");
+    }
+
 
     @GetMapping("/logout")
     public RedirectView logout(HttpServletRequest req){

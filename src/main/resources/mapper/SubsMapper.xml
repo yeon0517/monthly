@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.monthly.mapper.SubsMapper">
+    <select id="subsSelect" resultType="subsVo">
+        SELECT MP.PRODUCT_NUMBER,MP.PRODUCT_PRICE,MP.PRODUCT_NAME, MP.PRODUCT_FILE_NUMBER, MP.PRODUCT_FILE_NAME, MP.PRODUCT_FILE_UPLOAD_PATH, MP.PRODUCT_FILE_UUID,
+               MS.SUBS_NUMBER, MS.SUBS_START_DATE, MS.SUBS_STATUS, MS.USER_NUMBER , MP2.PAYMENT_PRICE
+        FROM
+            (SELECT MP1.PRODUCT_PRICE,MP1.PRODUCT_NAME, MP1.PRODUCT_NUMBER,MPF.PRODUCT_FILE_NUMBER, MPF.PRODUCT_FILE_NAME, MPF.PRODUCT_FILE_UPLOAD_PATH, MPF.PRODUCT_FILE_UUID
+             FROM MONTHLY_PRODUCT MP1 JOIN MONTHLY_PRODUCT_FILE MPF ON MP1.PRODUCT_NUMBER = MPF.PRODUCT_NUMBER) MP
+                JOIN MONTHLY_SUBSCRIBE MS ON MP.PRODUCT_NUMBER = MS.PRODUCT_NUMBER
+                JOIN MONTHLY_USER MU ON MS.USER_NUMBER = MU.USER_NUMBER AND MS.USER_NUMBER =#{userNumber} join MONTHLY_PAYMENT MP2 ON MS.SUBS_NUMBER = MP2.SUBS_NUMBER
+    </select>
+
+<!--    외부 구독 추가-->
+    <insert id="exSubsInsert">
+        INSERT INTO MONTHLY_EXTERNAL_SUB (EX_SUBS_NUMBER, EX_SUBS_NAME, EX_SUBS_DATE, EX_SUBS_PRICE, USER_NUMBER)
+        VALUES (SEQ_EX_SUBS.nextval,#{exSubsNumber},#{exSubsDate},#{exSubsPrice},#{userNumber})
+    </insert>
+<!--    외부 구독 조회-->
+    <select id="exSubsSelect" resultType="exSubsDto">
+        SELECT EX_SUBS_NUMBER, EX_SUBS_NAME, EX_SUBS_DATE, EX_SUBS_PRICE, USER_NUMBER FROM MONTHLY_EXTERNAL_SUB
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+</mapper>

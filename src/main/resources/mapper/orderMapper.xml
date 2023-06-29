@@ -30,12 +30,12 @@
 
 <!--    카카오 결제 정보-->
     <insert id="kakaoPay">
-        <selectKey keyProperty="kakoNumber" order="BEFORE" resultType="long">
+        <selectKey keyProperty="kakaoNumber" order="BEFORE" resultType="long">
             SELECT SEQ_KAKAO.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO MONTHLY_KAKAO (KAKAO_NUMBER, KAKAO_MERCHANT, KAKAO_CUSTOMER_ID, KAKAO_PAY_DATE, KAKAO_CARD_NAME,
+        INSERT INTO MONTHLY_KAKAO (KAKAO_NUMBER, KAKAO_MERCHANT, KAKAO_CUSTOMER_ID, KAKAO_CARD_NAME,
                                    KAKAO_CARD_NUMBER, KAKAO_IMP_UID, KAKAO_PAID_AMOUNT, KAKAO_PG_TYPE, USER_NUMBER)
-        VALUES (SEQ_KAKAO.nextval,#{merchantId},#{customerId},#{payDate},#{cardName},#{cardNumber},#{impUid},#{paidAmount},#{pgType},#{userNumber})
+        VALUES (SEQ_KAKAO.nextval,#{merchantId},#{customerId},#{cardName},#{cardNumber},#{impUid},#{paidAmount},#{pgType},#{userNumber})
     </insert>
 
     <!--    카드 추가-->
@@ -58,10 +58,21 @@
 <!--    배송주문 추가-->
     <insert id="parcelInsert">
         INSERT INTO MONTHLY_PARCEL (PARCEL_NUMBER, PARCEL_DATE, PARCEL_INVOICE,
-                                    DELIVERY_POSTCODE, DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, PAYMENT_NUMBER,CARD_NUMBER)
-        VALUES (SEQ_PARCEL.nextval,#{parcelDate},#{parcelInvoice},#{deliveryPostcode},#{deliveryAddress1},#{deliveryAddress2},#{paymentNumber},#{cardNumber})
+                                    DELIVERY_POSTCODE, DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, PAYMENT_NUMBER)
+        VALUES (SEQ_PARCEL.nextval,#{parcelDate},#{parcelInvoice},#{deliveryPostcode},#{deliveryAddress1},#{deliveryAddress2},#{paymentNumber})
     </insert>
 
+<!--    구독 조회-->
+    <select id="subsSelect" resultType="subsDto">
+        SELECT SUBS_NUMBER, SUBS_START_DATE, SUBS_STATUS, USER_NUMBER, PRODUCT_NUMBER
+        FROM MONTHLY_SUBSCRIBE
+        WHERE USER_NUMBER = #{userNumber} AND PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+<!--    카드 조인 결제 정보 검색-->
+    <select id="payCardSelect" resultType="Long">
+        SELECT PAYMENT_NUMBER FROM MONTHLY_PAYMENT WHERE USER_NUMBER =#{userNumber}
+    </select>
 
 
 </mapper>

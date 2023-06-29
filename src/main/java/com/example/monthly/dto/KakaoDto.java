@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class KakaoDto {
-    Long kakaoNumber;
-    String merchantId;
-    String customerId;
-    String payDate;
-    String cardName;
-    String cardNumber;
-    String impUid;
-    String paidAmount;
-    String pgType;
-    Long userNumber;
+    private Long kakaoNumber;
+    private String merchantId;
+    private String customerId;
+    private String payDate;
+    private String cardName;
+    private String cardNumber;
+    private String impUid;
+    private String paidAmount;
+    private String pgType;
+    private Long userNumber;
 }

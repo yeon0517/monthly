@@ -2,9 +2,12 @@ package com.example.monthly.controller.admin;
 
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.service.admin.AdminService;
+import com.example.monthly.vo.AdminChartVo;
 import com.example.monthly.vo.DeliveryVo;
+import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/*")
@@ -38,7 +41,14 @@ public class AdminController {
     }
 
     @GetMapping("/main")
-    public String main(){
+    public String sellerStatus(Model model){
+        List<AdminChartVo> sellerStatus = adminService.getSellerStatusByDate();
+        List<AdminChartVo> sellerMonth = adminService.sellerMonth();
+        List<AdminChartVo> threeAverage = adminService.threeAverage();
+        log.info(sellerStatus.toString()); //log.info는 무조건  string값으로
+        model.addAttribute("sellerStatus", sellerStatus);
+        model.addAttribute("sellerMonth", sellerMonth);
+        model.addAttribute("threeAverage", threeAverage);
         return "admin/managerMain";}
 
     @GetMapping("/allMember")
@@ -56,7 +66,11 @@ public class AdminController {
 
 
     @GetMapping("/subMember")
-    public String subMember(Long sellerNumber , Model model){
+    public String subMember(Long sellerNumber,Model model){
+        adminService.selectSubUser(sellerNumber);
+        model.addAttribute("sellerNumber" ,sellerNumber);
+        System.out.println("==========================");
+        System.out.println(sellerNumber);
         return "admin/manager_seller_detail";}
 
     @GetMapping("/logout")

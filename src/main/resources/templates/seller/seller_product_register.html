@@ -18,7 +18,7 @@
     </section>
     <!-- 상품 내용 등록 구역 -->
     <section class="register-section">
-      <form action="">
+      <form th:action="@{/seller/register}" method="post" enctype="multipart/form-data">
         <table class="register-table">
           <colgroup>
             <col style="width: 180px" />
@@ -27,27 +27,27 @@
           <tr>
             <th scope="row">상품명</th>
             <td>
-              <input type="text" class="text-input">
+              <input type="text" class="text-input" name="productName">
               <span class="inner-info">구독서비스 상품명을 입력하세요</span>
             </td>
           </tr>
           <tr>
             <th >가격</th>
             <td>
-              <input type="text" class="text-input">
+              <input type="text" class="text-input" name="productPrice">
               <span class="inner-info">구독상품의 한 달 가격을 설정해주세요 ex. 16900</span>
             </td>
           </tr>
           <tr>
             <th>옵션</th>
             <td>
-              <input type="text" class="text-input">
+              <input type="text" class="text-input" name="productOption">
               <span class="inner-info">구독 상품의 구성을 알려주세요 ex.중목 3켤레 / 비누+샤워망 세트</span>
             </td>
           </tr>
           <tr>
             <th>재고</th>
-            <td><input type="text" class="text-input"></td>
+            <td><input type="text" class="text-input" name="productAmount"></td>
           </tr>
           <tr>
             <th>대표이미지</th>

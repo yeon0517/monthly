@@ -49,7 +49,7 @@
                 <input type="file" id="post-image" name="brandFileLong" accept="image/*" />
                 <!-- 이미지 등록시 미리보기 띄움 -->
                 <div class="brand-image img-long">
-                  <img src="" alt="">
+                  <img src="" alt="" data-size="long">
                 </div>
               </td>
             </tr>
@@ -61,7 +61,7 @@
                 <input type="file" id="post-image2" name="brandFileSq" accept="image/*" />
                 <!-- 이미지 등록시 미리보기 띄움 -->
                 <div class="brand-image img-sq">
-                  <img src="" alt="">
+                  <img src="" alt="" data-size="square">
                 </div>
               </td>
             </tr>
@@ -158,16 +158,18 @@
               <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
             </th>
             <td>
-              <input type="text" id="seller-phone-number" required th:value="${seller.sellerPhoneNumber}">
-              <p class="input-check"></p></td>
+              <input type="text" id="seller-phone-number" name="sellerPhoneNumber" th:value="${seller.sellerPhoneNumber}"maxlength="13" required>
+              <span class="inner-info">ex. 010-1234-5678</span>
+              <p class="input-check seller-phone-number-msg pwGroupMsg"></p></td>
           </tr>
           <tr>
             <th>이메일
               <img th:src="@{/img/seller/ico_required_blue.gif}" alt="">
             </th>
             <td>
-              <input type="text" id="seller-email" required th:value="${seller.sellerEmail}">
-              <p class="input-check"></p>
+              <input type="text" id="seller-email" name="sellerEmail" th:value="${seller.sellerEmail}" required>
+              <span class="inner-info">ex. monthly@gmail.com</span>
+              <p class="input-check seller-email-msg pwGroupMsg"></p>
             </td>
           </tr>
           <tr>

@@ -28,6 +28,7 @@ a {
   color: #353535;
   text-decoration: none !important;
   outline: none;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -181,7 +182,7 @@ table {
   border-color: inherit;
   display: flex;
   justify-content: space-around;
-  height: 100%;
+  height: 77px;
 }
 
 .extbody {
@@ -206,7 +207,9 @@ table {
 
 .productImg img {
   display: inline-block;
-  width: 100px;
+  width: 77px;
+  height: 77px;
+  background-repeat: round;
 }
 
 .productTitle {
@@ -287,3 +290,4 @@ table {
 .fc-col-header-cell {
   background-color: #cee5f1;
 }
+

@@ -42,29 +42,41 @@ function sample6_execDaumPostcode() {
       }
 
       // 우편번호와 주소 정보를 해당 필드에 넣는다.
-      document.getElementById("postAddress").value = data.zonecode;
-      document.getElementById("address1").value = addr;
+      document.getElementById("deliveryPostcode").value = data.zonecode;
+      document.getElementById("deliveryAddress1").value = addr;
       // 커서를 상세주소 필드로 이동한다.
-      document.getElementById("address2").focus();
+      document.getElementById("deliveryAddress2").focus();
     },
   }).open();
 }
 
-$(".payBtn").on("click", function () {
-  if ($(".check").is(":checked") == false) {
-    alert("체크 안 된 상태");
-    return false;
-  } else {
-    return true;
+// $(".payBtn").on("click", function () {
+//   if ($(".check").is(":checked") == false) {
+//     alert("동의 체크 해주세요");
+//     $('.pay').prop("disabled", false);
+//     return false;
+//   } else {
+//     $('.pay').prop("disabled", true);
+//     return true;
+//   }
+//   // document.getElementsByClassName('.payBtn').submit();
+// });
+
+$('.check').on('click',function (){
+  let tmp = $(this).prop('checked');
+  if(tmp){
+    $('.pay').prop("disabled", false);
+    alert("동의함을 체크해 주세요")
+  }else{
+    $('.pay').prop("disabled", true);
   }
-  // document.getElementsByClassName('.payBtn').submit();
 });
 
 
 $('#new').on('click',function (){
-  $('#postAddress').val("");
-  $('#address1').val("");
-  $('#address2').val("");
+  $('#deliveryPostcode').val("");
+  $('#deliveryAddress1').val("");
+  $('#deliveryAddress2').val("");
 });
 
 $('#same').on('click',function (){
@@ -84,6 +96,7 @@ let productTitle = $('.productTitle').val();
 let userPhoneNumber = $('#userPhoneNumber').val();
 let postAddress = $('#postAddress').val();
 let proDate = $('.productRegisterDate').val();
+
 $('.pay').on('click',function (){
   var IMP = window.IMP;
   IMP.init('imp25167604');
@@ -102,6 +115,7 @@ $('.pay').on('click',function (){
   }, function(rsp) {
     if ( rsp.success ) {
       console.log(rsp);
+      console.log(rsp.success);
       console.log(rsp.imp_uid );
       console.log(rsp.card_name);
       console.log(rsp.card_number);
@@ -109,30 +123,36 @@ $('.pay').on('click',function (){
       console.log(rsp.merchant_uid);
       console.log(rsp.paid_amount);
       console.log(rsp.pg_type);
+      $('#cardNumber').val(rsp.card_number);
+
+      let obj = {
+        merchantId : rsp.merchant_uid,
+        customerId : uuid,
+        impUid : rsp.imp_uid,
+        cardName: rsp.card_name,
+        cardNumber: rsp.card_number,
+        paidAmount: rsp.paid_amount,
+        pgType: rsp.pg_type
+      }
 
       $.ajax({
-        url : '/orders/payInfo/',
+        url : '/orders/payInfo',
         type: 'post',
-        data: {
-          merchant_uid : rsp.merchant_uid,
-          customer_id : uuid,
-          imp_uid : rsp.imp_uid,
-          card_name: rsp.card_name,
-          card_number: rsp.card_number,
-          paid_amount: rsp.paid_amount,
-          pg_type: rsp.pg_type
-        },
+        data: JSON.stringify(obj),
+        dataType:"json",
+        contentType : 'application/json; charset=utf-8',
         success : function (result){
+          console.log(result);
           alert("구독 완료");
-        } ,
-        error : error
+        }
       });
-      alert('빌링키 발급 성공');
+      alert('결제 성공');
+      $("form").submit();
     } else {
-      alert('빌링키 발급 실패');
+      alert('결제 실패');
     }
 
-    $(this).submit();
+
   });
 
 });

@@ -18,7 +18,7 @@
         </div>
 
         <!-- 결제창으로 -->
-        <form id="editForm" name="editForm" method="get" action="">
+        <form id="editForm" name="editForm" method="post" th:action="@{/order/subs}">
           <div class="mainInput">
             <h3>배송지 정보</h3>
             <p class="require">
@@ -54,10 +54,13 @@
                   </td>
                 </tr>
                 <input type="hidden" class="userNumber" th:value="${delivery.userNumber}">
-                <input type="hidden" class="userId" th:value="${delivery.userId}">
-                <input type="hidden" class="productRegisterDate" th:value="${product.productRegisterDate}">
+<!--                <input type="hidden" class="userId" th:value="${delivery.userId}">-->
+<!--                <input type="hidden" class="productRegisterDate" th:value="${product.productRegisterDate}">-->
                 <input type="hidden" class="productTitle" th:value="${product.productName}">
+                <input type="hidden" name ="productNumber" class="productNumber" th:value="${product.productNumber}">
                 <input type="hidden" id="customer_uid">
+                <input type="hidden" id="parcelDate" name="parcelDate" th:value="${parcelDate}">
+                <input type="hidden" name="cardNumber" id="cardNumber">
 
                 <!-- 이름 -->
                 <tr>
@@ -74,7 +77,7 @@
                 <tr>
                   <th>주소</th>
                   <td class="address">
-                    <input name="postAddress" id="postAddress" type="text"  th:value="${delivery.deliveryPostcode}" />
+                    <input name="deliveryPostcode" id="deliveryPostcode" type="text"  th:value="${delivery.deliveryPostcode}" />
 
                     <img
                       src="../img/btn_zipcode.gif"
@@ -83,9 +86,9 @@
                     />
 
                     <br />
-                    <input name="address1" id="address1" type="text" th:value="${delivery.deliveryAddress1}" /> 기본주소
+                    <input name="deliveryAddress1" id="deliveryAddress1" type="text" th:value="${delivery.deliveryAddress1}" /> 기본주소
                     <br />
-                    <input name="address2" id="address2" type="text" th:value="${delivery.deliveryAddress2}" /> 나머지주소(상세주소)
+                    <input name="deliveryAddress2" id="deliveryAddress2" type="text" th:value="${delivery.deliveryAddress2}" /> 나머지주소(상세주소)
                   </td>
                 </tr>
 
@@ -132,7 +135,7 @@
                 <div class="ecTable">
                   <p>
                     소액 결제시 의 경우 정책에 따라 결제 금액 제한이 있을수
-                    잇습니다.
+                    있습니다.
                   </p>
                 </div>
                 <div class="agree">
@@ -201,7 +204,7 @@
                   <span>원</span>
                 </p>
                 <div class="payBtn">
-                  <input class="pay" id="btn" type="button"  value="결제하기">
+                  <input class="pay" id="btn" type="button" disabled="disabled"  value="결제하기">
                     <!-- <span class="payText">결제하기</span> -->
                   </input>
                 </div>
@@ -216,11 +219,7 @@
     </div>
   </body>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script
-    src="https://code.jquery.com/jquery-3.6.3.js"
-    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-    crossorigin="anonymous"
-  ></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
   <script th:src="@{/js/order/order.js}"></script>
   <script th:src="@{/js/board/board_main.js}"></script>

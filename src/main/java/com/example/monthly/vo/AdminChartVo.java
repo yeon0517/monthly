@@ -12,8 +12,12 @@ import java.util.Date;
 public class AdminChartVo {
     private String sellerRegisterDate;
     private int registrationCount;
+    private int sellerStatus;
+    private int sellerStatusOneCount;
+    private int sellerStatusTwoCount;
+    private String brandRegisterDate;
 
-//    월간 매출 차트를 위한
+    //    월간 매출 차트를 위한
     private String paymentPrice;
     private String paymentDate;
     private int paymentStatus;

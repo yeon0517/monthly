@@ -5,6 +5,7 @@ import com.example.monthly.dto.SellerDto;
 import com.example.monthly.mapper.AdminMapper;
 import com.example.monthly.mapper.SellerMapper;
 import com.example.monthly.vo.AdminChartVo;
+import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,8 +52,8 @@ public Long findAdminNumber(String adminId, String adminPassword){
 
 // 월간 전체 매출액
     /**
-     * 차트 판매자 조회
-     * @return 판매자 정보 리스트
+     * 차트 매출액 조회
+     * @return 판매자 매출액 리스트
      */
     @Transactional(readOnly = true)
     public List<AdminChartVo> getPaymentCount() {
@@ -61,20 +62,48 @@ public Long findAdminNumber(String adminId, String adminPassword){
 
 
 
-    //검색결과 조회 띄우기
+    //판매자 검색결과 조회 띄우기
     public List<SellerDto> selectSeller(SearchVo searchVo) {
         return adminMapper.selectSeller(searchVo);
-
-
+    }
+    //상품 검색결과 조회 띄우기
+    public List<ProductVo> searchProduct(SearchVo searchVo) {
+        return adminMapper.searchProduct(searchVo);
+    }
+    //판매자에서 브랜드페이지로 이동 시 구독자 조회
+    public List<ProductVo> selectSubUser(Long sellerNumber) {
+        return adminMapper.selectSubUser(sellerNumber);
     }
 
-    //상태 변경
+
+    //판매자 상태 변경
     public void statusModify(SellerDto sellerDto){
         if (sellerDto == null) {
             throw new IllegalArgumentException("수정 정보 누락");
         }
         adminMapper.update(sellerDto);
     }
+    //상품 상태 변경
+    public void goodsStModify(ProductVo productVo){
+        if (productVo == null) {
+            throw new IllegalArgumentException("수정 정보 누락");
+        }
+        adminMapper.updateProduct(productVo);
+    }
+
+    // 판매자 신청 현황 날짜 별 처리 현황
+    @Transactional(readOnly = true)
+    public List<AdminChartVo> getSellerStatusByDate() {
+        return adminMapper.getSellerStatusByDate();
+    }
+    @Transactional(readOnly = true)
+    public List<AdminChartVo> sellerMonth() {
+        return adminMapper.sellerMonth();
+    }
+    @Transactional(readOnly = true)
+    public List<AdminChartVo> threeAverage() {
+        return adminMapper.threeAverage();
+    }
+
 
 }
-

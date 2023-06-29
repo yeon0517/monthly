@@ -1,8 +1,11 @@
 package com.example.monthly.mapper;
 
+import com.example.monthly.dto.BrandDto;
 import com.example.monthly.dto.PaymentDto;
+import com.example.monthly.dto.ProductDto;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.vo.AdminChartVo;
+import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,42 +33,34 @@ class AdminMapperTest {
     private AdminMapper adminMapper;
 
     @Autowired
-    private SellerMapper sellerMapper;
     private SearchVo searchVo;
     private SellerDto sellerDto;
     private AdminChartVo adminChartVo;
     private PaymentDto paymentDto;
+    private ProductDto productDto;
+    private BrandDto brandDto;
+    private ProductVo productVo;
 
     @BeforeEach
-    void setUp() throws ParseException {
+    void setUp(){
         sellerDto = new SellerDto();
-        adminChartVo = new AdminChartVo();
-        paymentDto = new PaymentDto();
-        sellerDto.setSellerName("테스트이름1");
-        sellerDto.setSellerStatus(1);
-        sellerDto.setSellerPassword("aaa");
-        sellerDto.setSellerId("test1");
-        sellerDto.setSellerPhoneNumber("010-9956-8026");
-        sellerDto.setSellerRegisterDate("2023-06-20");
-        sellerDto.setSellerCompanyRegisterNumber("1231212345");
-        sellerDto.setSellerEmail("nsoe12@naver.com");
-        sellerDto.setSellerContents("12341234");
-        sellerDto.setSellerPostcode("1234");
-        sellerDto.setSellerAddress1("서울특별시 서초구 반포대로 58. 101동 501호(서초동. 서초아파트)");
-        sellerDto.setSellerAddress2("1234주소2");
-       // adminChartVo.setSellerRegisterDate(sellerDto.getSellerRegisterDate());
-        paymentDto.setPaymentNumber(1L);
-        paymentDto.setPaymentPrice("9000");
-        paymentDto.setPaymentStatus(1);
-        paymentDto.setPaymentDate("2023-06-23");
-        paymentDto.setUserNumber(1L);
-        paymentDto.setProductNumber(1L);
-        adminChartVo.setPaymentPrice(paymentDto.getPaymentPrice());
-        adminChartVo.setPaymentStatus(paymentDto.getPaymentStatus());
-        adminChartVo.setPaymentDate(paymentDto.getPaymentDate());
-
-
-
+       productVo = new ProductVo();
+        productDto = new ProductDto();
+        brandDto = new BrandDto();
+        productVo.setProductName("상품11");
+        productVo.setProductAmount(1L);
+        productVo.setProductOption("ㅇㅁㄴㅇㄹ옵션");
+        productVo.setBrandName("브랜드이름");
+        productVo.setProductRegisterDate("2312-11-11");
+        productVo.setProductPrice("2000원");
+        productVo.setProductContents("콘텐츠다ㅏㅏㅏ");
+        productVo.setProductStatus(1);
+        productVo.setSellerName("판매자이름");
+        productVo.setSellerEmail("email.com");
+        productVo.setSellerPhoneNumber("010-2222-1111");
+        productVo.setBrandNumber(1L);
+        productVo.setSellerNumber(1L);
+        productVo.setUserNumber(1L);
     }
 
 
@@ -93,7 +88,19 @@ class AdminMapperTest {
         searchVo.setSearchInput("박은서5");
         List<SellerDto> list = adminMapper.selectSeller(searchVo);
         System.out.println(list);
+
     }
+    @Test
+    @DisplayName("상품검색 조회")
+    void searchProduct(){
+        adminMapper.insertProduct(productVo);
+        searchVo = new SearchVo();
+        searchVo.setSearchSelect("goods-name");
+        searchVo.setSearchInput("상품11");
+        List<ProductVo> list=adminMapper.searchProduct(searchVo);
+        System.out.println(list);
+    }
+
     @Test
     void update(){
         adminMapper.insert(sellerDto);

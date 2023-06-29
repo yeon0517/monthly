@@ -2,7 +2,9 @@ package com.example.monthly.mapper;
 
 import com.example.monthly.dto.BrandDto;
 import com.example.monthly.dto.ProductDto;
+import com.example.monthly.vo.ProductVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,6 +16,6 @@ public interface BoardMapper {
 
     List<ProductDto> productSelect();
 
-
+    List<ProductVo> searchProductList(@Param("searchSelect") String searchSelect, @Param("searchInput") String searchInput);
 
 }
