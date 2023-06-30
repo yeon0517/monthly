@@ -49,11 +49,12 @@
     width: 1400px;
     height: 100%;
     flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: row;
+    margin-left: 20px;
 }
 .column {
     width: 400px;
-    margin: 36px 15px;
+    margin: 20px 30px;
     height: 435px;
     display: flex;
     justify-content: center;
@@ -62,6 +63,7 @@
 .column-content {
     width: 400px;
     height: 400px;
+
 }
 
 /*column-img img {*/

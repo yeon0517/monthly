@@ -4,6 +4,8 @@ import com.example.monthly.dto.BrandDto;
 import com.example.monthly.dto.ProductDto;
 import com.example.monthly.mapper.BoardMapper;
 import com.example.monthly.mapper.BrandMapper;
+import com.example.monthly.vo.BrandFileVo;
+import com.example.monthly.vo.ProductFileVo;
 import com.example.monthly.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
@@ -18,14 +20,16 @@ import java.util.List;
 public class BoardService {
     private final BoardMapper boardMapper;
 
-    public List<BrandDto> brandSelect(){
-       return boardMapper.brandSelect();
-    };
-
+    public List<BrandFileVo> selectAllBrands() {
+        return boardMapper.selectAllBrands();
+    }
     public List<ProductDto> productSelect(){return boardMapper.productSelect(); };
 
     public List<ProductVo> searchProductList(String searchSelect, String searchInput){
         return boardMapper.searchProductList(searchSelect, searchInput);
     }
 
+    public List<ProductFileVo> mainAll() {
+        return boardMapper.mainAll();
+    }
 }
