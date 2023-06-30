@@ -2,6 +2,7 @@ package com.example.monthly.service.board;
 
 import com.example.monthly.dto.ProductDto;
 import com.example.monthly.mapper.ProductMapper;
+import com.example.monthly.vo.Criteria;
 import com.example.monthly.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.swing.plaf.multi.MultiInternalFrameUI;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ import java.util.Optional;
 @Transactional
 public class ProductService {
     private final ProductMapper productMapper;
+    private final ProductFileService productFileService;
 
     //조회
     @Transactional(readOnly = true)
@@ -29,17 +32,34 @@ public class ProductService {
     }
 
 //   상품등록
-    public void registProduct(ProductDto productDto){
+    public void registProduct(ProductDto productDto, List<MultipartFile>files, MultipartFile file){
         if(productDto == null){
             throw new IllegalArgumentException("상품정보 누락");
         }
         productMapper.insertProduct(productDto);
+        //       +파일등록추가
+        if(!files.isEmpty()){
+            try {
+                productFileService.registerAndSaveFiles(files,productDto.getProductNumber());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(!file.isEmpty()){
+            try {
+                productFileService.registerAndSaveMainFile(file,productDto.getProductNumber());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 //    상품삭제
     public void removeProduct(Long productNumber){
         if(productNumber== null){
             throw new IllegalArgumentException("상품번호 누락");
         }
+        productFileService.remove(productNumber);
         productMapper.deleteProduct(productNumber);
     }
 //    상품수정
@@ -50,17 +70,24 @@ public class ProductService {
         productMapper.updateProduct(productDto);
     }
 
-    public void modifyProduct(ProductDto productDto, List<MultipartFile>files, MultipartFile mainFile){
-        if(productDto==null||files==null||mainFile==null){
+    public void modifyProduct(ProductDto productDto, List<MultipartFile>files, MultipartFile file) throws IOException {
+        if(productDto==null || files==null || file==null){
             throw new IllegalArgumentException("제품 수정 매개변수 null체크");
         }
-//        productFileService.remove(productDto.getProductNumber());
-//        productFileService.registerAndSaveFiles(files, productDto.getProductNumber());
-//        productFileService.registerAndSaveFile(mainFile, productDto.getProductNumber());???
+        Long productNumber = productDto.getProductNumber();
+        productFileService.remove(productNumber); //원래있던 파일은 지우고
+        productFileService.registerAndSaveMainFile(file, productNumber); //대표사진다시저장
+        productFileService.registerAndSaveFiles(files, productNumber); //리스트다시저장
         productMapper.updateProduct(productDto);
     }
 
 
 //    상품리스트조회
+    @Transactional(readOnly = true)
+    public List<ProductVo> findAllProduct(Criteria criteria, Long sellerNumber){
+       return productMapper.selectAll(criteria, sellerNumber);
+    }
 
+    @Transactional(readOnly = true)
+    public int getTotal(Long sellerNumber){return productMapper.selectTotal(sellerNumber);}
 }

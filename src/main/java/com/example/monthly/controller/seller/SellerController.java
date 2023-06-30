@@ -6,7 +6,12 @@ import com.example.monthly.dto.ProductDto;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.service.board.BrandFileService;
 import com.example.monthly.service.board.BrandService;
+import com.example.monthly.service.board.ProductFileService;
+import com.example.monthly.service.board.ProductService;
 import com.example.monthly.service.seller.SellerService;
+import com.example.monthly.vo.Criteria;
+import com.example.monthly.vo.PageVo;
+import com.example.monthly.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 // 판매자 브랜드관리, 제품등록, 제품관리 등과 관련
@@ -29,6 +35,8 @@ public class SellerController {
     private final SellerService sellerService;
     private final BrandService brandService;
     private final BrandFileService brandFileService;
+    private final ProductService productService;
+    private final ProductFileService productFileService;
 
     @GetMapping("/login")
     public String login(){ return "seller/seller_login"; }
@@ -83,11 +91,19 @@ public class SellerController {
         return "seller/seller_brand";}
 
     @GetMapping("/list")
-    public String productList(){return "seller/seller_product_list";}
+    public String productList(HttpServletRequest req, /*Criteria criteria,*/ Model model){
+        Long sellerNumber = (Long)req.getSession().getAttribute("sellerNumber");
+        Criteria criteria = new Criteria(1,10);
+//        criteria.setAmount(10);
+        List<ProductVo> productVoList = productService.findAllProduct(criteria, sellerNumber);
+        model.addAttribute("productList", productVoList);
+        model.addAttribute("pageInfo", new PageVo(criteria, productService.getTotal(sellerNumber)));
+        return "seller/seller_product_list";}
 
     @GetMapping("/modify")
-    public String productModify(){return "seller/seller_product_modify";}
+    public String productModify(Long productNumber){return "seller/seller_product_modify";}
 
+//    브랜드번호가 있으면 제품등록하러갈 수 있음
     @GetMapping("/registerReady")
     public String productRegisterReady(){
         return "seller/seller_product_register";
@@ -95,7 +111,12 @@ public class SellerController {
 
     @GetMapping("/register")
     public RedirectView productRegister(HttpServletRequest req){
-        Long brandNumber = (Long)req.getSession().getAttribute("brandNumber");
+        Long brandNumber = null;
+        try {
+          brandNumber = (Long)req.getSession().getAttribute("brandNumber");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(brandNumber == null){
             return new RedirectView("/seller/brand");
         }
@@ -106,11 +127,11 @@ public class SellerController {
     @PostMapping("/register")
     public RedirectView productRegist(ProductDto productDto, HttpServletRequest req,
                                 @RequestParam("productFiles")List<MultipartFile> files,
-                                @RequestParam("productFile")MultipartFile mainfile){
+                                @RequestParam("productFile")MultipartFile file){
        Long brandNumber = (Long)req.getSession().getAttribute("brandNumber");
-       if(brandNumber == null){
-           return new RedirectView("/seller/brand");
-       }
+       productDto.setBrandNumber(brandNumber);
+       productService.registProduct(productDto, files, file);
+
     return new RedirectView("/seller/list");
     }
 

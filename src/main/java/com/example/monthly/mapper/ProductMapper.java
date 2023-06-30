@@ -5,6 +5,8 @@ import com.example.monthly.vo.Criteria;
 import com.example.monthly.vo.ProductVo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ProductMapper {
 
@@ -12,5 +14,6 @@ public interface ProductMapper {
     public void insertProduct(ProductDto productDto);
     public void updateProduct(ProductDto productDto);
     public void deleteProduct(Long productNumber);
-    ProductDto sellectAll(Criteria criteria);
+    public List<ProductVo> selectAll(Criteria criteria, Long sellerNumber);
+    public int selectTotal(Long sellerNumber);
 }

@@ -30,34 +30,34 @@
           <tr>
             <th scope="row">상품명</th>
             <td>
-              <input type="text" class="text-input">
+              <input type="text" name="productName" class="text-input">
               <span class="inner-info">구독서비스 상품명을 입력하세요</span>
             </td>
           </tr>
           <tr>
             <th>가격</th>
             <td>
-              <input type="text" class="text-input">
+              <input type="text" name="productPrice" class="text-input">
               <span class="inner-info">구독상품의 한 달 가격을 설정해주세요 ex. 16900</span>
             </td>
           </tr>
           <tr>
             <th>옵션</th>
             <td>
-              <input type="text" class="text-input">
+              <input type="text" name="productOption" class="text-input">
               <span class="inner-info">구독 상품의 구성을 알려주세요 ex.중목 3켤레 / 비누+샤워망 세트</span>
             </td>
           </tr>
           <tr>
             <th>재고</th>
-            <td><input type="text" class="text-input"></td>
+            <td><input type="text" name="productAmount" class="text-input"></td>
           </tr>
           <tr>
             <th>판매상태</th>
-            <td><select name="parcel-status" id="">
-              <option value="parcel-done">판매준비</option>
-              <option value="parcel-ready" selected>판매중</option>
-              <option value="parcel-ing">판매중지</option>
+            <td><select name="productStatus" id="">
+              <option value="0">판매준비</option>
+              <option value="1" selected>판매중</option>
+              <option value="2">판매중지</option>
             </select></td>
           </tr>
           <tr>
@@ -90,7 +90,7 @@
             <th>상품 설명</th>
             <!-- 썸머노트 추가 -->
             <td>
-              <div id="summernote"><p></p></div>
+              <textarea name="productContents" id="summernote"><p></p></textarea>
             </td>
           </tr>
         </table>
