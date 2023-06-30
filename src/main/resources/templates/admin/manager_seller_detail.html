@@ -16,26 +16,25 @@
 
 
 
-    <section class="main-section">
-      <div class="main-container">
-        <h2><span class="brand-name">쿡팡</span> 브랜드 관리</h2>
+    <section class="main-section" th:each="brand : ${product}">
+      <div class="main-container" >
+        <h2><span class="brand-name" th:text="${brand.brandName} "></span> 브랜드 관리</h2>
         <table>
           <thead class="brand-list-head">
             <tr>
+              <th>서비스 번호</th>
               <th>서비스 명</th>
-              <th>제품 설명</th>
               <th>구독자 수</th>
               <th>구독자 관리</th>
               <th>검색</th>
             </tr>
           </thead>
           <tbody> <!--서비스 목록 여러가지, ajax처리-->
-            
+
             <tr>
-                <input type="hidden" value="?" />
-                <td>[Cookpang]숲 키링</td>
-                <td>패션</td>
-                <td>40명</td>
+                <td th:text="${brand.productNumber}"></td>
+                <td th:text="${brand.productName}"></td>
+                <td th:text="${brand.userNumberCount}"></td>
                 <td>
                   <input
                     type="text"
