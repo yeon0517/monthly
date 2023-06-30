@@ -60,10 +60,11 @@ public class AdminController {
 
     @GetMapping("/subMember")
     public String subMember(Long sellerNumber,Model model){
-        adminService.selectSubUser(sellerNumber);
         model.addAttribute("sellerNumber" ,sellerNumber);
+        List<ProductVo> productVo  = adminService.selectSubUser(sellerNumber);
         System.out.println("==========================");
         System.out.println(sellerNumber);
+        model.addAttribute("product",productVo);
         return "admin/manager_seller_detail";}
 
     @GetMapping("/logout")

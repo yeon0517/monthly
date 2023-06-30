@@ -129,6 +129,7 @@
     SELECT
         MP.PRODUCT_NUMBER,
         MP.PRODUCT_NAME,
+       MB.BRAND_NAME,
         COUNT(MS.USER_NUMBER) AS USER_NUMBER_COUNT
     FROM
         MONTHLY_USER MU
@@ -140,7 +141,8 @@
         MSN.SELLER_NUMBER = #{sellerNumber}
     GROUP BY
         MP.PRODUCT_NUMBER,
-        MP.PRODUCT_NAME
+        MP.PRODUCT_NAME,
+        MB.BRAND_NAME
 </select>
 
 
