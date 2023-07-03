@@ -24,5 +24,4 @@ public class SellerDto {
     private int sellerStatus;
     private String sellerRegisterDate;
 
-
 }

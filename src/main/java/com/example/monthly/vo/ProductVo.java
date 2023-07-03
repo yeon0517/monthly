@@ -13,6 +13,7 @@ public class ProductVo {
     private Long sellerNumber;//판매자 번호 은서가 추가
     private Long userNumber;//유저 번호 은서가 추가
     private int userNumberCount;//구독자수 카운트 은서가 추가
+    private int subsNumberCount;//구독자수 카운트 은서가 추가
     private String productName;
     private String productPrice;
     private Long productAmount;

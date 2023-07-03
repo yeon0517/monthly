@@ -14,8 +14,14 @@ body{
 }
 
 /* 섹션2개 전체..레이아웃 */
+.brand-name-view{
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .main-section{
-  margin-top: 30px;
+  margin-top: 5px;
 }
 .main-container{
   width: 80%;
@@ -25,6 +31,7 @@ body{
   width: 80%;
   margin: 0 auto;
   margin-bottom: 100px;
+  margin-top: 5px;
 }
 .main-container3{
   width: 80%;
