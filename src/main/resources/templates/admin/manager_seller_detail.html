@@ -14,11 +14,12 @@
   <header class="header" th:replace="fragment/admin_header::admin_header">
   </header>
 
-
-
-    <section class="main-section" th:each="brand : ${product}">
-      <div class="main-container" >
-        <h2><span class="brand-name" th:text="${brand.brandName} "></span> 브랜드 관리</h2>
+<div th:each="brandName : ${brand}" class="brand-name-view">
+        <h2><span class="brand-name" th:text="${brandName.brandName}"></span> 브랜드 관리</h2>
+    <!--th:text="${brand.brandName}-->
+</div>
+  <section class="main-section">
+      <div class="main-container">
         <table>
           <thead class="brand-list-head">
             <tr>
@@ -31,10 +32,10 @@
           </thead>
           <tbody> <!--서비스 목록 여러가지, ajax처리-->
 
-            <tr>
+            <tr th:each="brand : ${product}" >
                 <td th:text="${brand.productNumber}"></td>
                 <td th:text="${brand.productName}"></td>
-                <td th:text="${brand.userNumberCount}"></td>
+                <td th:text="${brand.subsNumberCount}"></td>
                 <td>
                   <input
                     type="text"
@@ -88,7 +89,7 @@
             </tr>
           </thead>
 
-          <tbody><!-- 구독자 리스트 ajax로 띄움 시작 1번째 -->
+          <tbody class="sub-list-body"><!-- 구독자 리스트 ajax로 띄움 시작 1번째 -->
             <tr> <form action="#">
                 <input type="hidden" value="?">
                 <td>4231</td>
@@ -102,37 +103,8 @@
                 </td>
                 <td><button type="button" class="out-btn"> 구독 취소 </button></td>
               </form> </tr>
-            
-            <tr><!-- 구독자 리스트 ajax로 띄움 시작 2번째 -->
-              <form action="#">
-                <input type="hidden" value="?">
-                <td>4242</td>
-                <td>2</td>
-                <td>강승연2</td>
-                <td>kikiki772</td>
-                <td>2020/04/20</td>
-                <td>5일</td>
-                <td>
-                  <button type="button" class="message-submit-btn"> 전송 </button>   
-                </td>
-                <td><button type="button" class="out-btn"> 구독 취소 </button></td>
-              </form> </tr>
-        
-              <tr><!-- 구독자 리스트 ajax로 띄움 시작 3번째 -->
-                <form action="#">
-                  <input type="hidden" value="?">
-                  <td>5321</td>
-                  <td>3</td>
-                  <td>강승연3</td>
-                  <td>kikiki772</td>
-                  <td>2020/04/20</td>
-                  <td> 10일</td>
-                  <td>
-                    <button type="button" class="message-submit-btn"> 전송 </button>   
-                  </td>
-                  <td><button type="button" class="out-btn"> 구독 취소 </button></td>
-                </form> </tr>
-            </div> 
+
+
           </tbody>
         </table> <!-----판매자 관리 리스트 테이블 끝 -->
       </div>

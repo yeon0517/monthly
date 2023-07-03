@@ -31,6 +31,7 @@ public interface AdminMapper {
 
     //판매자이동 후 해당 브랜드의 구독자 조회 #1
     List<ProductVo> selectSubUser(Long sellerNumber);
+    List<ProductVo> brandName(Long sellerNumber);
 
     List<AdminChartVo> sellerApplication();
     List<AdminChartVo> paymentCount();

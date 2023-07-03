@@ -71,6 +71,8 @@ public Long findAdminNumber(String adminId, String adminPassword){
     public List<ProductVo> selectSubUser(Long sellerNumber) {
         return adminMapper.selectSubUser(sellerNumber);
     }
+    //브랜드 페이지 브랜드 명 띄우기
+    public List<ProductVo> brandName(Long sellerNumber){return adminMapper.brandName(sellerNumber); }
 
 
     //판매자 상태 변경
