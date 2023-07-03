@@ -42,8 +42,10 @@ public class BoardController {
 
     @GetMapping("/main")
     public String main(Model model){
-        List<ProductFileVo> mains = boardService.mainAll();
-        model.addAttribute("mainAll",boardService.mainAll());
+//        List<ProductFileVo> mains = boardService.mainAll();
+//        model.addAttribute("mainAll",boardService.mainAll());
+        model.addAttribute("brandSelect",boardService.selectAllBrands());
+        model.addAttribute("productSelect" , boardService.productSelect());
         return "board/board_main";
 
     }
