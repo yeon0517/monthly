@@ -13,4 +13,5 @@ public class ProductFileDto {
     private String productFileName;
     private String productFileUploadPath;
     private String productFileUuid;
+    private String productFileSize;
 }

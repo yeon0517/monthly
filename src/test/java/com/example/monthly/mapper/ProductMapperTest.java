@@ -1,6 +1,7 @@
 package com.example.monthly.mapper;
 
 import com.example.monthly.dto.ProductDto;
+import com.example.monthly.vo.Criteria;
 import com.example.monthly.vo.ProductVo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +24,7 @@ class ProductMapperTest {
     private ProductMapper productMapper;
     private ProductVo productVo;
     private ProductDto productDto;
+    private Criteria criteria;
 
     @BeforeEach
     void setUp(){
@@ -55,5 +60,12 @@ class ProductMapperTest {
         assertThat(productMapper.selectProduct(productDto.getProductNumber()).getProductName())
                 .isEqualTo("test2");
 
+    }
+
+    @Test
+    void selectAll(){
+        List<ProductVo> foundList =  productMapper.selectListPage(new Criteria(1,10),3L);
+        assertThat(productMapper.selectTotal(3L))
+                .isEqualTo(foundList.stream().count());
     }
 }
