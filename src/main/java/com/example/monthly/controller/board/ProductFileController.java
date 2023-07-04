@@ -34,3 +34,4 @@ public class ProductFileController {
         return FileCopyUtils.copyToByteArray(new File(fileDir,fileName));
     }
 }
+///upload/display?filename=${filename}

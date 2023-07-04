@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${file.dir}")
     private String fileDir;
 
-    @Value("{brand.file.dir}")
+    @Value("${brand.file.dir}")
     private String brandFileDir;
 
     @Override
@@ -22,6 +22,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:"+fileDir);
 //              로컬디스크 경로는 file: 을 반드시 사용해야 한다.
         registry.addResourceHandler("/brand/upload/**")
-                .addResourceLocations("brandFile:"+brandFileDir);
+                .addResourceLocations("file:"+brandFileDir);
     }
 }

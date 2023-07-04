@@ -22,15 +22,15 @@
       <div class="center">
         <div class="row">
           <!-- 하나의 컬럼 이게 반복된당-->
-          <div class="column" th:each="brand : ${brandSelect}">
+          <div class="column" th:each="brand : ${selectAllBrands}">
             <div class="column-content">
               <div class="column-img">
-                <img th:src="@{/img/boardImg/ho.jpg}" alt=""  style="width: 400px; height: 400px"/>
+<!--                /upload/' + board.fileUploadPath + '/th_' + board.fileUuid + '_' + board.fileName + ')-->
+                  <img th:src="'/brand/upload/'+ ${brand.brandFileUploadPath} + '/' + ${brand.brandFileUuid}+'_' + ${brand.brandFileName}" alt="" style="width: 400px; height: 400px; cursor:pointer;"/>
               </div>
               <div class="column-p">
                 <h4 th:text="${brand.brandName}"></h4>
-                <p th:text="${brand.brandContents}">
-                </p>
+                <p th:text="${brand.brandContents}"></p>
               </div>
             </div>
           </div>
