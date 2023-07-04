@@ -1,9 +1,7 @@
 package com.example.monthly.service.admin;
 
-import com.example.monthly.dto.ReviewDto;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.mapper.AdminMapper;
-import com.example.monthly.mapper.SellerMapper;
 import com.example.monthly.vo.AdminChartVo;
 import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
@@ -11,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

@@ -23,10 +23,11 @@
         <typeAlias type="com.example.monthly.vo.UserVo" alias="userVo"/>
         <typeAlias type="com.example.monthly.vo.ReviewVo" alias="reviewVo"/>
         <typeAlias type="com.example.monthly.vo.Criteria" alias="criteria"/>
-        <typeAlias type="com.example.monthly.vo.AdminChartVo" alias="AdminChartVo"/>
-        <typeAlias type="com.example.monthly.vo.SearchVo" alias="SearchVo"/>
+        <typeAlias type="com.example.monthly.vo.AdminChartVo" alias="adminChartVo"/>
+        <typeAlias type="com.example.monthly.vo.SearchVo" alias="searchVo"/>
         <typeAlias type="com.example.monthly.vo.BrandFileVo" alias="brandFileVo"/>
         <typeAlias type="com.example.monthly.vo.SubsVo" alias="subsVo"/>
+        <typeAlias type="com.example.monthly.vo.ProductFileVo" alias="productFileVo"/>
         <typeAlias type="com.example.monthly.vo.ProductFileListVo" alias="productFileListVo"/>
 
     </typeAliases>
