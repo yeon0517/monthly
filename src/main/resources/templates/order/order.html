@@ -110,7 +110,8 @@
                     <img src="../img/ico_required.gif" alt="" />
                   </th>
                   <td>
-                    <input  name = " userEmail" id="userEmail" type="text" th:value="${delivery.userEmail}" />
+                    <input  name = "userEmail" id="userEmail" type="text" th:value="${delivery.userEmail}" />
+                    <input type="hidden" name="productAmount" class="productAmount" th:value="${cnt}">
                   </td>
                 </tr>
 

@@ -43,20 +43,30 @@ public class UserController {
     private final MypageService mypageService;
 
     @GetMapping("/mypage")
-    public void mypage(HttpServletRequest req, Model model){
+    public String mypage(HttpServletRequest req, Model model){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         List<SubsVo> subs = mypageService.subsFindAll(userNumber);
         System.out.println("=====================================================");
-        System.out.println(subs.get(0).toString());
+        System.out.println(subs.toString());
         System.out.println("=====================================================");
-        String str = subs.get(0).getSubsStartDate().substring(0,10);
-        subs.get(0).setSubsStartDate(str);
-        model.addAttribute("subs",subs.get(0));
+        for(int i =0 ; i < subs.toArray().length; i++){
+            String str = subs.get(i).getSubsStartDate().substring(0,10);
+            subs.get(i).setSubsStartDate(str);
+        }
+        model.addAttribute("subs",subs);
 
 //        외부 구독
-        ExSubsDto exSubs = mypageService.exSubsFindAll(userNumber);
-        exSubs.setExSubsDate(exSubs.getExSubsDate().substring(0,10));
+        List<ExSubsDto> exSubs = mypageService.exSubsFindAll(userNumber);
+        for(int i =0 ; i < subs.toArray().length; i++){
+            //exSubs.get(i).setExSubsDate(exSubs.get(i).getExSubsDate().substring(0,10));
+        }
+
+        int subsCnt = mypageService.exSubsCnt(userNumber) +mypageService.subsCnt(userNumber);
+
+
         model.addAttribute("exSubs",exSubs);
+        model.addAttribute("subsCnt",subsCnt);
+        return "user/mypage";
     }
 
 

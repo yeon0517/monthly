@@ -25,7 +25,7 @@ q:after {
 }
 
 a {
-  color: #353535;
+  color: #555555;
   text-decoration: none !important;
   outline: none;
   text-decoration: none;
@@ -182,7 +182,8 @@ table {
   border-color: inherit;
   display: flex;
   justify-content: space-around;
-  height: 77px;
+  height: 90px;
+  border-bottom:1px solid #8eb4c8;
 }
 
 .extbody {
@@ -291,3 +292,6 @@ table {
   background-color: #cee5f1;
 }
 
+.fc-daygrid-dot-event .fc-event-title{
+  white-space: normal;
+}

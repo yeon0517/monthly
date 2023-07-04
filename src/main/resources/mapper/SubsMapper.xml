@@ -2,23 +2,87 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.SubsMapper">
     <select id="subsSelect" resultType="subsVo">
-        SELECT MP.PRODUCT_NUMBER,MP.PRODUCT_PRICE,MP.PRODUCT_NAME, MP.PRODUCT_FILE_NUMBER, MP.PRODUCT_FILE_NAME, MP.PRODUCT_FILE_UPLOAD_PATH, MP.PRODUCT_FILE_UUID,
-               MS.SUBS_NUMBER, MS.SUBS_START_DATE, MS.SUBS_STATUS, MS.USER_NUMBER , MP2.PAYMENT_PRICE
+        SELECT
+            MP.PRODUCT_NUMBER,
+            MP.PRODUCT_PRICE,
+            MP.PRODUCT_NAME,
+            MP.PRODUCT_FILE_NUMBER,
+            MP.PRODUCT_FILE_NAME,
+            MP.PRODUCT_FILE_UPLOAD_PATH,
+            MP.PRODUCT_FILE_UUID,
+            MS.SUBS_NUMBER,
+            MS.SUBS_START_DATE,
+            MS.SUBS_STATUS,
+            MS.USER_NUMBER,
+            MP2.PAYMENT_PRICE
         FROM
-            (SELECT MP1.PRODUCT_PRICE,MP1.PRODUCT_NAME, MP1.PRODUCT_NUMBER,MPF.PRODUCT_FILE_NUMBER, MPF.PRODUCT_FILE_NAME, MPF.PRODUCT_FILE_UPLOAD_PATH, MPF.PRODUCT_FILE_UUID
-             FROM MONTHLY_PRODUCT MP1 JOIN MONTHLY_PRODUCT_FILE MPF ON MP1.PRODUCT_NUMBER = MPF.PRODUCT_NUMBER) MP
+            (
+                SELECT
+                    MP1.PRODUCT_PRICE,
+                    MP1.PRODUCT_NAME,
+                    MP1.PRODUCT_NUMBER,
+                    MPF.PRODUCT_FILE_NUMBER,
+                    MPF.PRODUCT_FILE_NAME,
+                    MPF.PRODUCT_FILE_UPLOAD_PATH,
+                    MPF.PRODUCT_FILE_UUID
+                FROM
+                    MONTHLY_PRODUCT MP1
+                        JOIN (
+                        SELECT
+                            PRODUCT_NUMBER,
+                            MIN(PRODUCT_FILE_NUMBER) AS MIN_FILE_NUMBER
+                        FROM
+                            MONTHLY_PRODUCT_FILE
+                        GROUP BY
+                            PRODUCT_NUMBER
+                    ) MF ON MP1.PRODUCT_NUMBER = MF.PRODUCT_NUMBER
+                        JOIN MONTHLY_PRODUCT_FILE MPF ON MP1.PRODUCT_NUMBER = MPF.PRODUCT_NUMBER
+                        AND MF.MIN_FILE_NUMBER = MPF.PRODUCT_FILE_NUMBER
+            ) MP
                 JOIN MONTHLY_SUBSCRIBE MS ON MP.PRODUCT_NUMBER = MS.PRODUCT_NUMBER
-                JOIN MONTHLY_USER MU ON MS.USER_NUMBER = MU.USER_NUMBER AND MS.USER_NUMBER =#{userNumber} join MONTHLY_PAYMENT MP2 ON MS.SUBS_NUMBER = MP2.SUBS_NUMBER
+                JOIN MONTHLY_USER MU ON MS.USER_NUMBER = MU.USER_NUMBER AND MS.USER_NUMBER = #{userNumber}
+                JOIN MONTHLY_PAYMENT MP2 ON MS.SUBS_NUMBER = MP2.SUBS_NUMBER
     </select>
 
 <!--    외부 구독 추가-->
     <insert id="exSubsInsert">
         INSERT INTO MONTHLY_EXTERNAL_SUB (EX_SUBS_NUMBER, EX_SUBS_NAME, EX_SUBS_DATE, EX_SUBS_PRICE, USER_NUMBER)
-        VALUES (SEQ_EX_SUBS.nextval,#{exSubsNumber},#{exSubsDate},#{exSubsPrice},#{userNumber})
+        VALUES (SEQ_EX_SUBS.nextval,#{exSubsName},#{exSubsDate},#{exSubsPrice},#{userNumber})
     </insert>
 <!--    외부 구독 조회-->
     <select id="exSubsSelect" resultType="exSubsDto">
         SELECT EX_SUBS_NUMBER, EX_SUBS_NAME, EX_SUBS_DATE, EX_SUBS_PRICE, USER_NUMBER FROM MONTHLY_EXTERNAL_SUB
         WHERE USER_NUMBER = #{userNumber}
     </select>
+
+    <select id="subsCount" resultType="_int">
+        SELECT COUNT(SUBS_NUMBER)
+        FROM MONTHLY_SUBSCRIBE WHERE USER_NUMBER = #{userNumber}
+
+    </select>
+
+    <select id="exSubsCount" resultType="_int">
+        SELECT COUNT(EX_SUBS_NUMBER)
+        FROM MONTHLY_EXTERNAL_SUB WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+<!--    외부 구독 삭제-->
+    <delete id="exSubsDelete">
+        DELETE FROM MONTHLY_EXTERNAL_SUB WHERE EX_SUBS_NAME= #{exSubsName}
+    </delete>
+
+<!--    내부구독 삭제-->
+    <delete id="subsDelete">
+        DELETE
+        FROM MONTHLY_SUBSCRIBE
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </delete>
+
+<!--    내부구독 삭제를 위한 상품 번호 검색-->
+    <select id="productSubs" resultType="Long">
+        SELECT PRODUCT_NUMBER
+        FROM MONTHLY_PRODUCT WHERE PRODUCT_NAME = #{productName}
+    </select>
+
+
 </mapper>
