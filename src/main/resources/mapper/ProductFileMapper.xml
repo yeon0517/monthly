@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.ProductFileMapper">
+<!--    제품번호로 제품사진리스트 조회-->
     <select id="proFileSelect" resultType="productFileDto">
-        SELECT PRODUCT_FILE_NAME,PRODUCT_FILE_NUMBER,PRODUCT_FILE_UPLOAD_PATH,PRODUCT_FILE_UUID,PRODUCT_NUMBER FROM MONTHLY_PRODUCT_FILE
+        SELECT PRODUCT_FILE_NAME,PRODUCT_FILE_NUMBER,PRODUCT_FILE_UPLOAD_PATH,PRODUCT_FILE_UUID,PRODUCT_NUMBER, PRODUCT_FILE_SIZE FROM MONTHLY_PRODUCT_FILE
         WHERE PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+<!--    대표사진조회-->
+    <select id="selectMainProductFile" resultType="productFileDto">
+        SELECT PRODUCT_FILE_NAME,PRODUCT_FILE_NUMBER,PRODUCT_FILE_UPLOAD_PATH,PRODUCT_FILE_UUID,PRODUCT_NUMBER, PRODUCT_FILE_SIZE FROM MONTHLY_PRODUCT_FILE
+        WHERE PRODUCT_NUMBER = #{productNumber} AND PRODUCT_FILE_SIZE = 'm'
+    </select>
+<!--    상세사진리스트 조회-->
+    <select id="selectDetailProductFile" resultType="productFileDto">
+        SELECT PRODUCT_FILE_NAME,PRODUCT_FILE_NUMBER,PRODUCT_FILE_UPLOAD_PATH,PRODUCT_FILE_UUID,PRODUCT_NUMBER, PRODUCT_FILE_SIZE FROM MONTHLY_PRODUCT_FILE
+        WHERE PRODUCT_NUMBER = #{productNumber} AND PRODUCT_FILE_SIZE = 'd'
     </select>
 
     <insert id="insertProductFile">
@@ -12,8 +24,16 @@
         </selectKey>
         INSERT INTO MONTHLY_PRODUCT_FILE (
         PRODUCT_FILE_NUMBER, PRODUCT_FILE_NAME, PRODUCT_FILE_UPLOAD_PATH,
-        PRODUCT_FILE_UUID, PRODUCT_NUMBER
-        )VALUES (#{productFileNumber},#{productFileName},#{productFileUploadPath},#{productFileUuid},#{productNumber})
+        PRODUCT_FILE_UUID, PRODUCT_NUMBER, PRODUCT_FILE_SIZE
+        )VALUES (#{productFileNumber},#{productFileName},#{productFileUploadPath},#{productFileUuid},#{productNumber},#{productFileSize})
     </insert>
+
+    <!--  제품 이미지 ALL 삭제-->
+    <delete id="deleteProductFile">
+        DELETE FROM MONTHLY_PRODUCT_FILE
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </delete>
+
+
 
 </mapper>

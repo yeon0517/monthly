@@ -43,7 +43,7 @@
         WHERE BRAND_FILE_NUMBER = #{brandFileNumber}
     </select>
 
-<!--    판매자 번호로 브랜드 대표 이미지 수정-->
+<!--    브랜드 대표 이미지 수정-->
     <update id="updateBrandFile">
         UPDATE MONTHLY_BRAND_FILE
         SET BRAND_FILE_NAME =#{brandFileName},

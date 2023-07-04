@@ -8,6 +8,16 @@
         FROM MONTHLY_PRODUCT MP JOIN MONTHLY_BRAND MB on PRODUCT_NUMBER = #{productNumber} AND MP.BRAND_NUMBER = MB.BRAND_NUMBER
     </select>
 
+<!--   판매자번호로 판매제품리스트 조회-->
+    <select id="selectList" resultType="productVo">
+        SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+               PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+               B.BRAND_NUMBER, B.BRAND_NAME
+        FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
+                                    ON P.BRAND_NUMBER = B.BRAND_NUMBER AND SELLER_NUMBER= #{sellerNumber}
+        order by PRODUCT_NUMBER desc
+    </select>
+
 <!--제품등록-->
     <insert id="insertProduct">
         <selectKey keyProperty="productNumber" order="BEFORE" resultType="long">
@@ -31,8 +41,32 @@
         WHERE PRODUCT_NUMBER = #{productNumber}
     </delete>
 
-<!--제품리스트 조회-->
-    <select id="selectAll" resultType="productDto">
+<!-- 판매자 번호로 제품리스트 조회-->
+    <select id="selectListPage" resultType="productVo">
+        SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+               PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+               PRODUCT_CONTENTS, BRAND_NUMBER, BRAND_NAME
+        FROM(SELECT ROWNUM AS RNUM,PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+                    PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+                    PRODUCT_CONTENTS, BRAND_NUMBER, BRAND_NAME
+             FROM(
+                     SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+                            PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+                            PRODUCT_CONTENTS, B.BRAND_NUMBER, B.BRAND_NAME
+                     FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
+                                                 ON P.BRAND_NUMBER = B.BRAND_NUMBER AND SELLER_NUMBER= #{sellerNumber}
+                     order by PRODUCT_NUMBER desc) S1
+    <![CDATA[
+             WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
+    ]]>
+    )S2
+        WHERE RNUM > (#{criteria.page}-1)*#{criteria.amount}
+    </select>
 
+<!--    판매자 번호로 제품이 몇개인지 조회-->
+    <select id="selectTotal" resultType="_int">
+        SELECT COUNT(PRODUCT_NUMBER) FROM MONTHLY_PRODUCT WHERE BRAND_NUMBER IN (
+            SELECT BRAND_NUMBER FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
+        )
     </select>
 </mapper>

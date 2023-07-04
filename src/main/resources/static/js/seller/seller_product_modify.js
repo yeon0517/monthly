@@ -31,7 +31,7 @@ $inputR.on('change', function () {
   appendImgR(file);
 });
 
-// 대표이미지 미리보기 처리 함수
+// 이미지 미리보기 처리 함수
 function appendImgR(file){
   let src = URL.createObjectURL(file);
   $productImg.attr("src", src);
