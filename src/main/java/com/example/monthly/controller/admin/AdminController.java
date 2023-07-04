@@ -2,6 +2,7 @@ package com.example.monthly.controller.admin;
 
 import com.example.monthly.service.admin.AdminService;
 import com.example.monthly.vo.AdminChartVo;
+import com.example.monthly.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

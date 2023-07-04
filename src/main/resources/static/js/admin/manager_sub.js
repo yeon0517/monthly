@@ -29,11 +29,23 @@ function showError(a, b, c) {
     console.error(c);
 }
 
+let globalProductNumber = 0;
+let globalSearchInput = '';
+
 // 검색 조건에 따른 구독자 조회
 $('.search-btn-ct').on('click', '.search-btn',function (e){
     let productNumber = $(e.target).closest('tr').find('.product-number').text();
     let searchInput = $(e.target).closest('tr').find('.subscriber-input').text();
 
+    globalProductNumber = productNumber;
+    globalSearchInput = searchInput;
+
     sub.productSubsUserList({subscriberInput : searchInput, productNumber : productNumber}, showList, showError);
+
+})
+//기간 조건 클릭
+$('.period-input').on('click','.period', function (){
+    let searchPeriod = $('input[name=period]:checked').val();
+    sub.productSubsUserList({subscriberInput : globalSearchInput, productNumber : globalProductNumber, period : searchPeriod}, showList, showError);
 
 })
