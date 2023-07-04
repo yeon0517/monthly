@@ -1,6 +1,8 @@
 package com.example.monthly.controller.seller;
 
+import com.example.monthly.dto.ProductFileDto;
 import com.example.monthly.dto.SellerDto;
+import com.example.monthly.service.board.ProductFileService;
 import com.example.monthly.service.board.ProductService;
 import com.example.monthly.service.seller.SellerService;
 import com.example.monthly.vo.Criteria;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class SellerRestController {
     private final SellerService sellerService;
     private final ProductService productService;
+    private final ProductFileService productFileService;
 
 //  판매자아이디 중복검사
     @GetMapping("/checkId")
@@ -61,6 +64,12 @@ public class SellerRestController {
         productMap.put("pageVo", pageVo);
         productMap.put("productList", productList);
         return productMap;
+    }
+
+    @GetMapping("/modify")
+    public List<ProductFileDto> files(Long productNumber){
+        List<ProductFileDto> files = productFileService.getProductFileList(productNumber);
+        return files;
     }
 }
 //@PathVariable("sellerId")

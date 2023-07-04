@@ -3,6 +3,11 @@ $('.cancel-btn').on('click', function (){
     window.location.href = '/seller/list';
 });
 
+let productNumber = $('#productNumber').val();
+console.log(productNumber);
+
+
+//===========================================================================
 
 // 썸머노트 높이설정
 $(document).ready(function() {
@@ -17,6 +22,8 @@ $(document).ready(function() {
           
 	});
 });
+
+
 
 
 // ==========================
