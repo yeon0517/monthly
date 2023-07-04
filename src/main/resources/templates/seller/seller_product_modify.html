@@ -30,27 +30,27 @@
           <tr>
             <th scope="row">상품명</th>
             <td>
-              <input type="text" name="productName" class="text-input" th:text="${product.productName}">
+              <input type="text" name="productName" class="text-input" th:value="${product.productName}">
               <span class="inner-info">구독서비스 상품명을 입력하세요</span>
             </td>
           </tr>
           <tr>
             <th>가격</th>
             <td>
-              <input type="text" name="productPrice" class="text-input" th:text="${product.productPrice}">
+              <input type="text" name="productPrice" class="text-input" th:value="${product.productPrice}">
               <span class="inner-info">구독상품의 한 달 가격을 설정해주세요 ex. 16900</span>
             </td>
           </tr>
           <tr>
             <th>옵션</th>
             <td>
-              <input type="text" name="productOption" class="text-input" th:text="${product.productOption}">
+              <input type="text" name="productOption" class="text-input" th:value="${product.productOption}">
               <span class="inner-info">구독 상품의 구성을 알려주세요 ex.중목 3켤레 / 비누+샤워망 세트</span>
             </td>
           </tr>
           <tr>
             <th>재고</th>
-            <td><input type="text" name="productAmount" class="text-input" th:text="${product.productAmount}"></td>
+            <td><input type="text" name="productAmount" class="text-input" th:value="${product.productAmount}"></td>
           </tr>
           <tr>
             <th>판매상태</th>
@@ -66,7 +66,7 @@
               <p>권장 이미지 사이즈는 가로500px 세로 500px 입니다.</p>
               <input type="file"  id="post-image-rp" name="productFile" accept="image/*">
               <div class="product-image">
-                <img th:src="'/product/upload/'+${files.productFileUploadPath}+'/main_'+${files.productFileUuid}+'_'+${files.productFileName}" alt="">
+                <img th:src="'/product/upload/'+${file.productFileUploadPath}+'/th_'+${file.productFileUuid}+'_'+${file.productFileName}" alt="">
               </div>
             </td>
           </tr>
@@ -77,7 +77,7 @@
               <p>최대 4장까지 등록 가능합니다.</p>
               <input type="file" id="post-image" name="productFiles" accept="image/*" multiple />
               <div class="product-detail-image">
-                <ul class="product-detail-image-ul">
+                <ul class="product-detail-image-ul" th:each="product : ${files}">
                   <li class="img-list"></li>
                   <li class="img-list"></li>
                   <li class="img-list"></li>

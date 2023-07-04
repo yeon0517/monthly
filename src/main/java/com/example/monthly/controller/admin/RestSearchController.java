@@ -1,6 +1,5 @@
 package com.example.monthly.controller.admin;
 
-import com.example.monthly.dto.ReviewDto;
 import com.example.monthly.dto.SellerDto;
 import com.example.monthly.service.admin.AdminService;
 import com.example.monthly.vo.ProductVo;

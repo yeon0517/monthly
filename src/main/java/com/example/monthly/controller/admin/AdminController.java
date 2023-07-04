@@ -1,19 +1,12 @@
 package com.example.monthly.controller.admin;
 
-import com.example.monthly.dto.SellerDto;
 import com.example.monthly.service.admin.AdminService;
 import com.example.monthly.vo.AdminChartVo;
-import com.example.monthly.vo.DeliveryVo;
-import com.example.monthly.vo.ProductVo;
-import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;

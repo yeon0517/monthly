@@ -1,17 +1,11 @@
 package com.example.monthly.controller.admin;
 
-import com.example.monthly.dto.SellerDto;
 import com.example.monthly.service.admin.AdminService;
 import com.example.monthly.vo.AdminChartVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
