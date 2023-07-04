@@ -20,4 +20,7 @@ public class SubsVo {
     private String subsStartDate;
     private String paymentPrice;
     private int subsStatus;
+    private String userName; //구독자 이름 은서가 추가
+    private String userId; //구독자 id 은서가 추가
+    private Long brandNumber; //구독된 브랜드 불러오기 은서가 추가
 }
