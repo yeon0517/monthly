@@ -73,11 +73,11 @@ public class RestSearchController {
 //    }
 
     @GetMapping("/subs")
-    public List<SubsVo> productSubsUserList(String subscriberInput, Long productNumber) {
-        SearchVo searchVo = new SearchVo();
-        searchVo.setSubscriberInput(subscriberInput);
-        searchVo.setProductNumber(productNumber);
-        System.out.println("====================");
+    public List<SubsVo> productSubsUserList(SearchVo searchVo) {
+//        SearchVo searchVo = new SearchVo();
+//        searchVo.setSubscriberInput(subscriberInput);
+//        searchVo.setProductNumber(productNumber);
+        System.out.println("=========000000000===========");
         System.out.println(searchVo);
         return adminService.productSubsUserList(searchVo);
 

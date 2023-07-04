@@ -30,10 +30,10 @@
               <th>검색</th>
             </tr>
           </thead>
-          <tbody> <!--서비스 목록 여러가지, ajax처리-->
+          <tbody class="search-btn-ct"> <!--서비스 목록 여러가지, ajax처리-->
 
             <tr th:each="brand : ${product}" >
-                <td th:text="${brand.productNumber}"></td>
+                <td th:text="${brand.productNumber}" class="product-number"></td>
                 <td th:text="${brand.productName}"></td>
                 <td th:text="${brand.subsNumberCount}"></td>
                 <td>
@@ -44,7 +44,9 @@
 
                   />
                 </td>
-                <td><button type="button" class="search-btn">검색</button></td>
+                <td>
+                  <button type="button" class="search-btn">검색</button>
+                </td>
              </tr>
               <!--서비스 목록 ajax 처리 끝-->
           </tbody>
