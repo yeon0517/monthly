@@ -13,4 +13,5 @@ public interface ProductMapper {
     public void updateProduct(ProductDto productDto);
     public void deleteProduct(Long productNumber);
     ProductDto sellectAll(Criteria criteria);
+    void amountChange(ProductVo productVo);
 }

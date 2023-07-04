@@ -63,4 +63,13 @@ public class ProductService {
 
 //    상품리스트조회
 
+//    상품 수량 변경
+    public void amountChange(ProductVo productVo){
+        if (productVo == null) {
+            throw new IllegalArgumentException("상품 수량 등 정부 누락");
+        }
+
+        productMapper.amountChange(productVo);
+    }
+
 }

@@ -32,7 +32,13 @@
     </delete>
 
 <!--제품리스트 조회-->
-    <select id="selectAll" resultType="productDto">
+<!--    <select id="selectAll" resultType="productDto">-->
 
-    </select>
+<!--    </select>-->
+    <update id="amountChange">
+        UPDATE MONTHLY_PRODUCT
+        SET PRODUCT_AMOUNT = #{productAmount}
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </update>
+
 </mapper>

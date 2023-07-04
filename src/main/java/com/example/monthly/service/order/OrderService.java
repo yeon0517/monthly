@@ -91,12 +91,12 @@ public class OrderService {
     }
 
     //같은 회원 번호로 카드 번호 결제 번호 조회
-    public Long payCardFind(Long productNumber){
+    public Long payCardFind(Long productNumber,Long userNumber){
         if (productNumber == null) {
             throw new IllegalArgumentException("회원 번호 누락");
         }
 
-        return orderMapper.payCardSelect(productNumber);
+        return orderMapper.payCardSelect(productNumber,userNumber);
     }
 
 

@@ -111,7 +111,7 @@
                     <tbody class="option">
                       <tr>
                         <!-- 옵션 이름 -->
-                        <th scope="row">고체바</th>
+                        <th scope="row">option</th>
                         <td>
                           <div class="optName" th:text="${product.productOption}">에브리바디 올인원 바</div>
                           <!--옵션값 필요하면 넣으세요 -->
@@ -176,8 +176,12 @@
                     <div class="countResult" style="color: #8eb4c8"></div>
                   </div>
 
-                  <div class="payBtn">
+                  <div class="payBtn" th:if="${product.productAmount != 0}">
                     <input type="submit" class="buyBtn" value="BUY NOW" />
+                  </div>
+
+                  <div class="payBtn" th:if="${product.productAmount == 0}">
+                    <input type="button" class="buyBtn soldBtn" value="SOLD OUT" />
                   </div>
                 </div>
               </form>
@@ -199,12 +203,12 @@
                   <!-- 텝으로 배너 이동 -->
 
                   <div class="cont">
-                    <p class="detailinfo showstep1">
+                    <div class="detailinfo showstep1">
                       <img class="content" src="../img/proinfo.jpg" alt="" />
-                      <div style="text-align: center" th:text="${product.productContents}">안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</div>
-                    </p>
+                      <div style="text-align: center" th:text="${product.productContents}"></div>
+                    </div>
                     <button class="btn_open">더보기</button>
-                    <!-- <div class="btn_close hide">감추기</div> -->
+                     <button class="btn_close hide">감추기</button>
                   </div>
 
                   <div class="payInfo">
