@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -50,8 +51,8 @@ public class OrderController {
     }
 
     @PostMapping("/subs")
-    public String subs(@Param("productNumber") Long productNumber,HttpServletRequest req,@Param("inputPrice") String inputPrice,
-                            @Param("cardNumber") String cardNumber, String parcelDate, DeliveryVo deliveryVo){
+    public String subs(@Param("productNumber") Long productNumber, HttpServletRequest req, @Param("inputPrice") String inputPrice,
+                             @Param("cardNumber") String cardNumber, String parcelDate, DeliveryVo deliveryVo){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         //구독 추가
         subsDto.setProductNumber(productNumber);
@@ -77,12 +78,12 @@ public class OrderController {
         parcelDto.setDeliveryPostcode(deliveryVo.getDeliveryPostcode());
         parcelDto.setDeliveryAddress1(deliveryVo.getDeliveryAddress1());
         parcelDto.setDeliveryAddress2(deliveryVo.getDeliveryAddress2());
-        Long paymentNumber = orderService.payCardFind(userNumber);
+        Long paymentNumber = orderService.payCardFind(productNumber);
         parcelDto.setPaymentNumber(paymentNumber);
         parcelDto.setParcelInvoice(""+rand.nextInt(10000000));
         System.out.println(parcelDto.toString() +"배송주문장 풀력 ============================================");
         orderService.parcelRegister(parcelDto);
-        return "user/mypage";
+        return "redirect:/user/mypage";
     }
 
 }

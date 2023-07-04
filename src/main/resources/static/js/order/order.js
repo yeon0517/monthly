@@ -62,16 +62,22 @@ function sample6_execDaumPostcode() {
 //   // document.getElementsByClassName('.payBtn').submit();
 // });
 
-$('.check').on('click',function (){
-  let tmp = $(this).prop('checked');
-  if(tmp){
-    $('.pay').prop("disabled", false);
-    alert("동의함을 체크해 주세요")
-  }else{
-    $('.pay').prop("disabled", true);
+// $('.check').on('click',function (){
+//   let tmp = $(this).prop('checked');
+//   if(tmp){
+//     $('.pay').prop("disabled", false);
+//     alert("동의함을 체크해 주세요")
+//   }else{
+//     $('.pay').prop("disabled", true);
+//   }
+// });
+
+$('.pay').on('click', function() {
+  if (!$('.check').prop('checked')) {
+    alert('동의함을 체크해 주세요');
+    return;
   }
 });
-
 
 $('#new').on('click',function (){
   $('#deliveryPostcode').val("");

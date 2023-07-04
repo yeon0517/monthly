@@ -47,6 +47,8 @@ class SubsMapperTest {
     void exSubsInsert(){
         subsMapper.exSubsInsert(exSubsDto);
 
-        Assertions.assertThat(subsMapper.exSubsSelect(subsDto.getUserNumber()).getExSubsDate()).isEqualTo(exSubsDto.getExSubsDate());
+        Assertions.assertThat(subsMapper.exSubsSelect(subsDto.getUserNumber()).get(0).getExSubsDate()).isEqualTo(exSubsDto.getExSubsDate());
     }
+
+
 }

@@ -53,7 +53,7 @@
       
           <!-- modal 추가 -->
           <!-- 외부 구독 내용 보내기 -->
-          <form action="" method="get">
+<!--          <form action="" method="">-->
           <div
           class="modal fade"
           id="calendarModal"
@@ -84,28 +84,28 @@
                       type="text"
                       class="form-control"
                       id="calendar_content"
-                      name="calendar_content"
+                      name="exSubsName"
                     />
                     <label  class="col-form-label">시작 날짜</label>
                     <input
                       type="date"
                       class="form-control"
                       id="calendar_start_date"
-                      name="calendar_start_date"
+                      name="exSubsDate"
                     />
-                    <label  class="col-form-label">종료 날짜</label>
-                    <input
-                      type="date"
-                      class="form-control"
-                      id="calendar_end_date"
-                      name="calendar_end_date"
-                    />
+<!--                    <label  class="col-form-label">종료 날짜</label>-->
+<!--                    <input-->
+<!--                      type="date"-->
+<!--                      class="form-control"-->
+<!--                      id="calendar_end_date"-->
+<!--                      name="calendar_end_date"-->
+<!--                    />-->
                     <label  class="col-form-label">가격</label>
                     <input
                       type="text"
                       class="form-control"
                       id="calendar_price"
-                      name="calendar_price"
+                      name="exSubsPrice"
                     />
                   </div>
                 </div>
@@ -127,7 +127,7 @@
           </div>
 
         </div>
-        </form>
+<!--        </form>-->
       
       
 
@@ -145,8 +145,9 @@
             <h3>내부 구독 리스트</h3>
           </div>
           <div class="prolist">
-            <div class="exSubList" th:each="subs : ${subs}">
+            <div class="exSubList" >
               <table class="exTable" boarder="1">
+                <input type="hidden" class="subsCnt" th:value="${subsCnt}">
                 <thead class="exthead">
                   <tr>
                     <th>NO</th>
@@ -158,8 +159,8 @@
                 </thead>
 
                 <!-- 구독 정보 가져오기 -->
-                <tbody class="extbody">
-                  <tr style="background-color: #ffffff; color: #555555">
+                <tbody class="extbody" th:each="subs : ${subs}">
+                  <tr style="background-color: #ffffff; color: #555555" >
                     <td class="productNumber">
                       <span th:text="${subs.productNumber}">45234</span>
                     </td>
@@ -173,7 +174,7 @@
 
                     <td class="productTitle" style="font-weight: bolder">
                       <a th:href="@{/board/productInfo(productNumber=${subs.productNumber})}">
-                      <span th:text="${subs.productName}"></span>
+                      <span style="color: #555555;" th:text="${subs.productName}"></span>
                       </a>
                     </td>
 
@@ -194,7 +195,7 @@
             <h3>외부 구독 리스트</h3>
           </div>
           <div class="prolist">
-            <div class="exSubList" th:each="exSubs : ${exSubs}">
+            <div class="exSubList" >
               <table class="exTable" boarder="1">
                 <thead class="exthead">
                   <tr>
@@ -206,7 +207,7 @@
                 </thead>
 
                 <!-- 외부 구독 정보 가져오기 -->
-                <tbody class="extbody">
+                <tbody class="extbody" th:each="exSubs : ${exSubs}">
                   <tr style="background-color: #ffffff; color: #555555">
                     <td class="productNumber">
                       <span th:text="${exSubs.exSubsNumber}">45234</span>
