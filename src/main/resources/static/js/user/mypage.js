@@ -59,7 +59,7 @@ function calExSubList(callback){
       result.forEach(sub => {
         const startDate = new Date(sub.exSubsDate);
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 12; i++) {
           const recurringEvent = {
             title: sub.exSubsName + " " + sub.exSubsPrice + "원",
             start: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),

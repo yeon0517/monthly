@@ -50,32 +50,16 @@ function sample6_execDaumPostcode() {
   }).open();
 }
 
-// $(".payBtn").on("click", function () {
-//   if ($(".check").is(":checked") == false) {
-//     alert("동의 체크 해주세요");
-//     $('.pay').prop("disabled", false);
-//     return false;
-//   } else {
-//     $('.pay').prop("disabled", true);
-//     return true;
-//   }
-//   // document.getElementsByClassName('.payBtn').submit();
-// });
 
-// $('.check').on('click',function (){
-//   let tmp = $(this).prop('checked');
-//   if(tmp){
-//     $('.pay').prop("disabled", false);
-//     alert("동의함을 체크해 주세요")
-//   }else{
-//     $('.pay').prop("disabled", true);
-//   }
-// });
+const checkbox = document.querySelector('.check');
+const payButton = document.querySelector('.pay');
 
-$('.pay').on('click', function() {
-  if (!$('.check').prop('checked')) {
-    alert('동의함을 체크해 주세요');
-    return;
+checkbox.addEventListener('change', function() {
+
+  if (checkbox.checked) {
+    payButton.disabled = false;
+  } else {
+    payButton.disabled = true;
   }
 });
 

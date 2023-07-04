@@ -362,8 +362,7 @@
 
    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
     <script th:inline="javascript"> // 타임리프 문법을 자바스크립트에서 사용하기 위한 설정
-    // let loginNumber = [[${session.userNumber}]]; // 타임리프 문법은 [] 대괄호 2개로 감싸줘야 한다.
-    let loginNumber = 1;
+     let loginNumber = [[${session.userNumber}]]; // 타임리프 문법은 [] 대괄호 2개로 감싸줘야 한다.
     </script>
     <script type="module" th:src="@{/js/board/productInfoReview.js}"></script>
     <script th:src="@{/js/board/productInfo.js}"></script>
