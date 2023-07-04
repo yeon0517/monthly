@@ -60,3 +60,22 @@ export function productStatusAjax(pstObj,error){
         error:error
     });
 }
+
+
+//판매자의 구독자 페이지 검색 후 구독자 리스트 모듈
+export function productSubsUserList(psl,callback,error){
+    $.ajax({
+        url : '/search/subs',
+        type : 'get',
+        data :  psl,
+        dataType : 'json',
+        success : function(result){
+            console.log('검색~~~~~ 드러가기');
+            console.log(result);
+            if(callback){
+                callback(result);
+            }
+        },
+        error : error
+    });
+}

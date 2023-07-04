@@ -41,6 +41,7 @@
                     type="text"
                     placeholder="구독자 아이디를 입력하시오"
                     class="subscriber-input"
+
                   />
                 </td>
                 <td><button type="button" class="search-btn">검색</button></td>
@@ -62,14 +63,14 @@
               <label><input type="radio" name="period" value="all" checked><span>전체</span></label>
               <label><input type="radio" name="period" value="3day"><span>3일후</span></label>
             </td>
-            <td> <!--결제일 별 텍스트로 검색-->
-              <input
-              type="text"
-              placeholder="예시: 3일"
-              class="subscriber-input"
-            />
-            </td>
-            <td><button type="submit" class="search-btn">검색</button></td>
+<!--            <td> &lt;!&ndash;결제일 별 텍스트로 검색&ndash;&gt;-->
+<!--              <input-->
+<!--              type="text"-->
+<!--              placeholder="예시: 3일"-->
+<!--              class="subscriber-input"-->
+<!--            />-->
+<!--            </td>-->
+            <td style="width:120px"><button type="button" class="search-btn">검색</button></td>
           </form>    
           </tr>
             </table>
@@ -80,6 +81,7 @@
             <tr>
               <th>회원 번호</th>
               <th>구독 번호</th>
+                <th>구독 상품 명</th>
               <th>구독자 이름</th>
               <th>구독자 아이디</th>
               <th>구독 시작일</th>
@@ -90,23 +92,23 @@
           </thead>
 
           <tbody class="sub-list-body"><!-- 구독자 리스트 ajax로 띄움 시작 1번째 -->
-            <tr> <form action="#">
-                <input type="hidden" value="?">
-                <td>4231</td>
-                <td>1</td>
-                <td>강승연</td>
-                <td>kikiki772</td>
-                <td>2020/04/20</td>
-                <td>20일</td>
-                <td>
-                  <button type="button" class="message-submit-btn"> 전송 </button>   
-                </td>
-                <td><button type="button" class="out-btn"> 구독 취소 </button></td>
-              </form> </tr>
-
-
+<!--            <tr>-->
+<!--                <input type="hidden" value="?">-->
+<!--                <td>4231</td>-->
+<!--                <td>1</td>-->
+<!--                <td>헤어 드라이기</td>-->
+<!--                <td>강승연</td>-->
+<!--                <td>kikiki772</td>-->
+<!--                <td>2020/04/20</td>-->
+<!--                <td>20일</td>-->
+<!--                <td>-->
+<!--                  <button type="button" class="message-submit-btn"> 전송 </button>   -->
+<!--                </td>-->
+<!--                <td><button type="button" class="out-btn"> 구독 취소 </button></td>-->
+<!--              </form> </tr>-->
           </tbody>
         </table> <!-----판매자 관리 리스트 테이블 끝 -->
+
       </div>
     </section>
     <script
@@ -114,6 +116,6 @@
       integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
       crossorigin="anonymous"
     ></script>
-
+  <script type="module" th:src="@{/js/admin/manager_sub.js}"></script>
   </body>
 </html>
