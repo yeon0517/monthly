@@ -17,7 +17,7 @@ function kakaoLogin() {
             Kakao.API.request({
                 url: '/v2/user/me',
                 success: function (response) {
-                    // window.location.href = 'http://localhost:10000/board/main';
+                    window.location.href = 'http://localhost:10000/board/main';
                     console.log(response)
                 },
                 fail: function (error) {

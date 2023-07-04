@@ -90,4 +90,26 @@ public class UserService {
         userMapper.userWithdraw(userNumber);
     }
 
+    // 네이버 회원 등록
+    public void registerNaverUser(UserVo userVo) {
+        if (userVo == null) {
+            throw new IllegalArgumentException("네이버 회원 정보가 없습니다.");
+        }
+
+        // 서버로부터 받은 네이버 사용자 정보를 UserService를 통해 처리
+        System.out.println("Received Naver User Info:");
+        System.out.println("ID: " + userVo.getUserId());
+        System.out.println("Name: " + userVo.getUserName());
+        System.out.println("Email: " + userVo.getUserEmail());
+        System.out.println("Mobile: " + userVo.getUserPhoneNumber());
+        System.out.println("Gender: " + userVo.getUserGender());
+        System.out.println("Birthday: " + userVo.getUserBirthday());
+
+        // 사용자 정보 처리 후, 필요한 로직을 수행하거나 적절한 응답을 반환합니다.
+        try {
+            userMapper.insertNaver(userVo);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Failed to process Naver login information.");
+        }
+    }
 }

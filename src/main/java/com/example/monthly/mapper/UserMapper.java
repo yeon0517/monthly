@@ -15,6 +15,9 @@ public interface UserMapper {
     public void insert(UserVo userVo);
     public void insertAddress(UserVo userVo);
 
+    // 네이버 로그인
+    public void insertNaver(UserVo userVo);
+
     // 회원가입 아이디 중복 검사
     public int checkId(String userId);
 
