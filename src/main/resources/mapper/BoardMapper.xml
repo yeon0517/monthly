@@ -2,19 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.monthly.mapper.BoardMapper">
 
+<!--    브랜드 all-->
     <select id="selectAllBrands" resultType="brandFileVo">
-        SELECT MB.BRAND_NAME, MB.BRAND_CONTENTS, MBF.BRAND_FILE_UPLOAD_PATH, MBF.BRAND_FILE_UUID, MBF.BRAND_FILE_NAME
+        SELECT MB.BRAND_NAME, MB.BRAND_CONTENTS, MBF.BRAND_FILE_UPLOAD_PATH, MBF.BRAND_FILE_UUID, MBF.BRAND_FILE_NAME,MBF.BRAND_NUMBER
         FROM MONTHLY_BRAND MB
                  JOIN MONTHLY_BRAND_FILE MBF ON MB.BRAND_NUMBER = MBF.BRAND_NUMBER
         WHERE MBF.BRAND_FILE_SIZE LIKE '%square%'
     </select>
 
-    <select id="productSelect" resultType="productDto">
-        SELECT *
-        FROM MONTHLY_PRODUCT
-        ORDER BY PRODUCT_NUMBER
+    <!--    제품 all-->
+    <select id="productSelect" resultType="productFileVo">
+        SELECT B.BRAND_NAME, P.PRODUCT_NAME, P.PRODUCT_PRICE, PF.PRODUCT_FILE_NAME, PF.PRODUCT_FILE_UPLOAD_PATH, PF.PRODUCT_FILE_UUID, P.BRAND_NUMBER,P.PRODUCT_NUMBER
+        FROM MONTHLY_PRODUCT P
+                 JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
+                 JOIN MONTHLY_PRODUCT_FILE PF ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
+        WHERE PF.PRODUCT_FILE_SIZE = 'm'
+          AND P.PRODUCT_STATUS = 1
     </select>
 
+    <!--    제품 all로 들어가서 검색기능-->
     <select id="searchAll" resultType="productVo">
         SELECT P.PRODUCT_NUMBER, P.PRODUCT_NAME, B.BRAND_NAME, S.SELLER_NAME, P.PRODUCT_PRICE
         FROM MONTHLY_PRODUCT P
@@ -23,15 +29,19 @@
         WHERE (P.PRODUCT_NAME LIKE '%' || #{productName} || '%' OR B.BRAND_NAME LIKE '%' || #{brandName} || '%')
     </select>
 
-    <select id="mainAll" resultType="productFileVo">
-            SELECT MB.BRAND_NAME, MB.BRAND_CONTENTS, MBF.BRAND_FILE_NAME, MBF.BRAND_FILE_UPLOAD_PATH, MBF.BRAND_FILE_UUID,
-    MPF.PRODUCT_FILE_UPLOAD_PATH, MPF.PRODUCT_FILE_UUID, MB.BRAND_NUMBER, MPF.PRODUCT_FILE_NAME,  MBF.BRAND_FILE_SIZE
-    FROM MONTHLY_BRAND MB
-    JOIN MONTHLY_BRAND_FILE MBF ON MB.BRAND_NUMBER = MBF.BRAND_NUMBER
-    JOIN MONTHLY_PRODUCT MP ON MB.BRAND_NUMBER = MP.BRAND_NUMBER
-    JOIN MONTHLY_PRODUCT_FILE MPF ON MP.PRODUCT_NUMBER = MPF.PRODUCT_NUMBER
-    WHERE MBF.BRAND_FILE_SIZE LIKE '%square%'
-    </select>
+
+<!--    main-->
+<!--    <select id="mainAll" resultType="productFileVo">-->
+<!--        SELECT  P.PRODUCT_NAME, P.PRODUCT_PRICE, BF.BRAND_FILE_UPLOAD_PATH, BF.BRAND_FILE_UUID,BF.BRAND_FILE_NAME, PF.PRODUCT_FILE_UPLOAD_PATH-->
+<!--             ,PF.PRODUCT_FILE_UUID,PF.PRODUCT_FILE_NAME, B.BRAND_NUMBER-->
+<!--        FROM MONTHLY_PRODUCT P-->
+<!--                 JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER-->
+<!--                 JOIN MONTHLY_PRODUCT_FILE PF ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER-->
+<!--                 JOIN MONTHLY_BRAND_FILE BF ON B.BRAND_NUMBER = BF.BRAND_NUMBER-->
+<!--        WHERE BF.BRAND_FILE_SIZE = 'square'-->
+<!--          AND PF.PRODUCT_FILE_SIZE = 'm'-->
+<!--          AND P.PRODUCT_STATUS = 1-->
+<!--    </select>-->
 
 
 

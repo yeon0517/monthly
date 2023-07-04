@@ -25,18 +25,18 @@
           <div class="product-column" th:each="product : ${productSelect}">
             <div class="product-content" >
               <div class="product-img">
-                <img th:src="@{/img/boardImg/ho.jpg}" alt="" />
+                <img th:src="'/product/upload/' + ${product.productFileUploadPath} + '/' + ${product.productFileUuid}+'_' + ${product.productFileName}" alt="" />
               </div>
               <div class="product-info">
                 <div class="brand">
-                  <h4 th:text="${product.productName}"></h4>
+                  <h4 th:text="${product.brandName}"></h4>
                 </div>
                 <div class="product-name">
                   <p th:text="${product.productName}"></p>
                 </div>
               </div>
               <div class="product-price">
-                <p th:text="${product.productPrice}"></p>
+                <p th:text="${product.productPrice}+'원' "></p>
               </div>
             </div>
           </div>
