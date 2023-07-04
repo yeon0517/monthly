@@ -8,7 +8,9 @@ const subList = Array.from(Array(50), () => new Array(2));
 
 
 
-let i = 0;
+// subList[i].title = sub.productName +" "+ sub.productPrice +"원";
+// subList[i].start = sub.subsStartDate;
+// i++;
 
 function calSubList(callback){
 
@@ -20,15 +22,20 @@ function calSubList(callback){
       async : false,
       success : function (result){
         console.log(result);
-
         result.forEach(sub => {
+          const startDate = new Date(sub.subsStartDate);
 
-          subList[i].title = sub.productName +" "+ sub.productPrice +"원";
-          subList[i].start = sub.subsStartDate;
-          subList[i].extendedProps = {
-            recurringMonthly: true, // 매달 반복
-          };
-          i++;
+          for (let i = 0; i < 3; i++) {
+            const recurringEvent = {
+              title: sub.productName + " " + sub.productPrice + "원",
+              start: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
+              end: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
+            };
+
+            subList.push(recurringEvent);
+          }
+
+
         });
         callback();
       },
@@ -45,16 +52,23 @@ function calExSubList(callback){
     url: '/calender/exSubsList',
     type:'post',
     dataType : 'json',
+    async : false,
     success : function (result){
       console.log(result);
 
       result.forEach(sub => {
+        const startDate = new Date(sub.exSubsDate);
 
-        subList[i].title = sub.exSubsName +" "+ sub.exSubsPrice +"원";
-        subList[i].start = sub.exSubsDate;
-        subList[i].color = "#FF0000";
-        subList[i].recurring = true; // 매달 반복
-        i++;
+        for (let i = 0; i < 3; i++) {
+          const recurringEvent = {
+            title: sub.exSubsName + " " + sub.exSubsPrice + "원",
+            start: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
+            end: new Date(startDate.getFullYear(), startDate.getMonth() + i, startDate.getDate()+1),
+            color:"#FF0000",
+          };
+
+          subList.push(recurringEvent);
+        }
       });
       callback();
     },
@@ -71,20 +85,7 @@ function calenderStart(){
     var calendar = new FullCalendar.Calendar(calendarEl, {
       timeZone: "UTC",
       initialView: "dayGridMonth", // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
-      events:
-      //     [
-      //   // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
-      //   {
-      //     title: "일정2" + "30000원",
-      //     start: "2023-06-29 00:00:00",
-      //     //end: "2023-06-30 00:00:00",
-      //     // color 값을 추가해 색상도 변경 가능 자세한 내용은 하단의 사이트 참조
-      //   },
-      //   subList,
-      // ],
-
-      subList,
-
+      events: subList,
       headerToolbar: {
         center: "addEventButton", // headerToolbar에 버튼을 추가
       },
@@ -199,6 +200,25 @@ function calenderStart(){
       },
       editable: true, // false로 변경 시 draggable 작동 x
       displayEventTime: false, // 시간 표시 x
+      datesSet: function (info) {
+        var currentMonth = info.view.currentStart.getMonth();
+        var currentYear = info.view.currentStart.getFullYear();
+        var currentMonthFirstDate = new Date(currentYear, currentMonth, 1);
+        var currentMonthLastDate = new Date(currentYear, currentMonth + 1, 0);
+
+        calendar.getEvents().forEach(function (event) {
+          var eventStart = event.start;
+
+          if (
+              eventStart < currentMonthFirstDate ||
+              eventStart > currentMonthLastDate
+          ) {
+            event.setProp("display", "none");
+          } else {
+            event.setProp("display", "auto");
+          }
+        });
+      },
     });
     calendar.render();
   });
@@ -207,6 +227,6 @@ function calenderStart(){
 
 calSubList(function() {
   calExSubList(function() {
-    calenderStart();
-  });
-});
+     calenderStart();
+   });
+ });
