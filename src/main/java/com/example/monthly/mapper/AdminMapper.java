@@ -6,6 +6,7 @@ import com.example.monthly.dto.SellerDto;
 import com.example.monthly.vo.AdminChartVo;
 import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
+import com.example.monthly.vo.SubsVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,9 +30,14 @@ public interface AdminMapper {
     //카테고리별 상품 검색
     List<ProductVo> searchProduct(SearchVo searchVo);
 
-    //판매자이동 후 해당 브랜드의 구독자 조회 #1
+    //판매자이동 후 해당 브랜드의 상품들, 구독자 수만 조회 #1
     List<ProductVo> selectSubUser(Long sellerNumber);
     List<ProductVo> brandName(Long sellerNumber);
+
+    //판매자 이동 후 브랜드의 모든 구독자 정보 가져오기 #2
+//    List<SubsVo> brandSubsUserList(SearchVo searchVo);
+    //판매자 이동 후 상품별 구독자 정보 가져오기 #3
+    List<SubsVo> productSubsUserList(SearchVo searchVo);
 
     List<AdminChartVo> sellerApplication();
     List<AdminChartVo> paymentCount();

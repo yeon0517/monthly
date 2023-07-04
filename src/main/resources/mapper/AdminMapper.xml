@@ -131,10 +131,33 @@
             WHERE PRODUCT_NUMBER = MP.PRODUCT_NUMBER) AS SUBS_NUMBER_COUNT
     FROM MONTHLY_PRODUCT MP JOIN MONTHLY_BRAND MB on MP.BRAND_NUMBER = MB.BRAND_NUMBER
     WHERE SELLER_NUMBER =#{sellerNumber} ORDER BY PRODUCT_NUMBER
-</select>
+</select><!--판매자의 브랜드페이지 이름만 띄우기-->
     <select id="brandName" resultType="productVo">
    SELECT BRAND_NAME FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
     </select>
+
+<!--상품별 구독자 검색-->
+    <select id="productSubsUserList" resultType="subsVo">
+        SELECT U.USER_NUMBER, U.USER_NAME, U.USER_ID, S.SUBS_NUMBER, S.SUBS_START_DATE, B.BRAND_NUMBER, P.PRODUCT_NUMBER
+        FROM MONTHLY_SUBSCRIBE S
+        LEFT OUTER JOIN MONTHLY_USER U ON U.USER_NUMBER = S.USER_NUMBER
+        LEFT OUTER JOIN MONTHLY_PRODUCT P ON S.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
+        <where>
+                S.PRODUCT_NUMBER = #{productNumber}
+            <if test="!''.equals(subscriberInput)">
+              AND U.USER_ID LIKE '%' || #{subscriberInput} || '%'
+            </if>
+
+<!--            <trim prefix="and">-->
+<!--                  <if test="'3day'.equals(searchVo.period)">-->
+<!--                         EXTRACT(DAY FROM S.SUBS_START_DATE) = EXTRACT(DAY FROM LAST_DAY(SYSDATE)) - 3&ndash;&gt;-->
+<!--                 </if>-->
+<!--            </trim>-->
+      </where>
+
+        </select>
+
 
 
 
@@ -188,6 +211,34 @@
 
 
 </mapper>
+
+
+
+        <!--브랜드페이지에서 모든상품 구독자 전체 불러오기-->
+        <!--    <select id="brandSubsUserList" resultType="subsVo">-->
+        <!--        SELECT U.USER_NUMBER, U.USER_NAME, U.USER_ID, S.SUBS_NUMBER, S.SUBS_START_DATE, B.BRAND_NUMBER, P.PRODUCT_NAME-->
+        <!--        FROM MONTHLY_SUBSCRIBE S-->
+        <!--        LEFT OUTER JOIN MONTHLY_USER U ON U.USER_NUMBER = S.USER_NUMBER-->
+        <!--        LEFT OUTER JOIN MONTHLY_PRODUCT P ON S.PRODUCT_NUMBER = P.PRODUCT_NUMBER-->
+        <!--        LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER-->
+        <!--        <where>-->
+        <!--            <if test="subscriberInput != null and subscriberInput != ''">-->
+        <!--                U.USER_ID LIKE '%' || #{subscriberInput} || '%'-->
+        <!--            </if>-->
+        <!--            <if test="brandNumber != null">-->
+        <!--                AND B.BRAND_NUMBER = #{brandNumber}-->
+        <!--            </if>-->
+        <!--        </where>-->
+        <!--    </select>-->
+
+
+
+
+
+
+
+
+
 
 
 
