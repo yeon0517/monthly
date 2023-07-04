@@ -1,9 +1,6 @@
 package com.example.monthly.controller.seller;
 
-import com.example.monthly.dto.BrandDto;
-import com.example.monthly.dto.BrandFileDto;
-import com.example.monthly.dto.ProductDto;
-import com.example.monthly.dto.SellerDto;
+import com.example.monthly.dto.*;
 import com.example.monthly.service.board.BrandFileService;
 import com.example.monthly.service.board.BrandService;
 import com.example.monthly.service.board.ProductFileService;
@@ -11,21 +8,22 @@ import com.example.monthly.service.board.ProductService;
 import com.example.monthly.service.seller.SellerService;
 import com.example.monthly.vo.Criteria;
 import com.example.monthly.vo.PageVo;
+import com.example.monthly.vo.ProductFileListVo;
 import com.example.monthly.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // 판매자 브랜드관리, 제품등록, 제품관리 등과 관련
 @Controller
@@ -50,6 +48,8 @@ public class SellerController {
             Long brandNumber = brandService.checkBrandNumber(sellerNumber);
             if(brandNumber != null){
                 req.getSession().setAttribute("brandNumber",brandNumber);
+                String brandName = brandService.findBrandInfo(sellerNumber).getBrandName();
+                req.getSession().setAttribute("brandName", brandName);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,7 +59,14 @@ public class SellerController {
         return new RedirectView("/seller/main");
     }
     @GetMapping("/main")
-    public String main(){
+    public String main(HttpServletRequest req, Model model){
+
+        try {
+            String brandName = (String) req.getSession().getAttribute("brandName");
+            model.addAttribute("brandName", brandName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "seller/seller_main"; }
 
     @GetMapping("/apply")
@@ -91,21 +98,42 @@ public class SellerController {
         return "seller/seller_brand";}
 
     @GetMapping("/list")
-    public String productList(HttpServletRequest req, /*Criteria criteria,*/ Model model){
-        Long sellerNumber = (Long)req.getSession().getAttribute("sellerNumber");
-        Criteria criteria = new Criteria(1,10);
-//        criteria.setAmount(10);
-        List<ProductVo> productVoList = productService.findAllProduct(criteria, sellerNumber);
-        model.addAttribute("productList", productVoList);
-        model.addAttribute("pageInfo", new PageVo(criteria, productService.getTotal(sellerNumber)));
-        return "seller/seller_product_list";}
-
+    public String product(HttpServletRequest req, Model model){
+        try {
+            String brandName = (String) req.getSession().getAttribute("brandName");
+            model.addAttribute("brandName", brandName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "seller/seller_product_list";
+    }
     @GetMapping("/modify")
-    public String productModify(Long productNumber){return "seller/seller_product_modify";}
+    public String productModify(Long productNumber, Model model){
+        ProductVo productVo = productService.productView(productNumber);
+
+//        List<ProductFileDto> productFileDtoList= productFileService.proFileList(productNumber);
+//        ProductFileListVo files =  productFileService.getSeperatedList(productFileDtoList);
+//        model.addAttribute("mainFile", files.getMainFile());
+//        model.addAttribute("files", files.getFiles());
+
+        List<ProductFileDto> files = productFileService.getProductFileList(productNumber);
+        ProductFileDto file = productFileService.getMainFile(productNumber);
+
+        model.addAttribute("files", files);
+        model.addAttribute("file", file);
+        model.addAttribute("product", productVo);
+
+        return "seller/seller_product_modify";}
 
 //    브랜드번호가 있으면 제품등록하러갈 수 있음
     @GetMapping("/registerReady")
-    public String productRegisterReady(){
+    public String productRegisterReady(HttpServletRequest req, Model model){
+        try {
+            String brandName = (String) req.getSession().getAttribute("brandName");
+            model.addAttribute("brandName", brandName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "seller/seller_product_register";
     }
 

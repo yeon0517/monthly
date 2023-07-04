@@ -16,7 +16,7 @@
     
     <!-- 검색 section -->
     <section class="product-list-section">
-      <h2><span class="brand-name">미하이삭스</span> 상품 검색</h2>
+      <h2><span class="brand-name" th:text="${brandName}"></span> 상품 검색</h2>
       <form action="">
         <table class="product-list-search-table">
           <tr>
@@ -65,16 +65,16 @@
               <th>저장</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="product-list-body">
             <!-- 주문관리 리스트 띄움 tr부분이 추가됨-->
-            <tr th:each="product : ${productList}">
-              <!-- 주문처리, 택배사, 운송장번호선택 -->
+            <!--<tr th:each="product : ${productList}">
+              &lt;!&ndash; 주문처리, 택배사, 운송장번호선택 &ndash;&gt;
               <form action="#">
                 <input type="hidden" value="${}">
                 <td th:text="${product.productNumber}"></td>
                 <td>2023-06-08</td>
                 <td>
-                  <select name="productStatus" id=""}">
+                  <select name="productStatus" id="">
                     <option value="0" th:selected="${product.productStatus}==0">판매준비</option>
                     <option value="1" th:selected="${product.productStatus}==1">판매중</option>
                     <option value="2" th:selected="${product.productStatus}==2">판매중지</option>
@@ -84,19 +84,19 @@
                 <td th:text="${product.productPrice}"></td>
                 <td th:text="${product.productOption}"></td>
                 <td th:text="${product.productAmount}"></td>
-                <!-- 해당상품수정페이지로 이동 -->
+                &lt;!&ndash; 해당상품수정페이지로 이동 &ndash;&gt;
                 <td><a th:href="@{/seller/modify(productNumber = ${product.productNumber})}" class="save-btn to-modify">상품 상세페이지로 이동</a></td>
                 <td><button type="button" class="save-btn product-save">save</button></td>
-              </form>
+              </form>-->
               <!-- 저장버튼 누르면 비동기로 저장 -->
-            </tr>
+<!--            </tr>-->
           </tbody>
         </table>
       </div>
     </section>
-    <div class="page-container">
+<!--    <div class="page-container">
       <ul class="page-box">
-        <a th:href="@{/product/list(page=${pageInfo.startPage -1})}" class="page-a" th:if="${pageInfo.prev}">
+        <a href="#" class="page-a" th:if="${pageInfo.prev}">
           <li class="page-num prev">&lt</li>
         </a>
 
@@ -112,7 +112,7 @@
         </a>
       </ul>
     </div>
-  </div>
+  </div>-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script th:src="@{/js/admin/admin_header.js}"></script>
   <script>
@@ -120,6 +120,7 @@
     $(".header-nav-item>a").removeClass("header-active");
     $head.addClass("header-active");
   </script>
+  <script type="module" th:src="@{/js/seller/seller_product.js}"></script>
 </body>
 
 </html>

@@ -40,14 +40,16 @@ public class ProductService {
         //       +파일등록추가
         if(!files.isEmpty()){
             try {
-                productFileService.registerAndSaveFiles(files,productDto.getProductNumber());
+//                상세사진리스트등록
+                productFileService.registerAndSaveFiles(files, "d", productDto.getProductNumber());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         if(!file.isEmpty()){
             try {
-                productFileService.registerAndSaveMainFile(file,productDto.getProductNumber());
+//                대표사진등록
+                productFileService.registerAndSaveMainFile(file,"m", productDto.getProductNumber());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -76,18 +78,28 @@ public class ProductService {
         }
         Long productNumber = productDto.getProductNumber();
         productFileService.remove(productNumber); //원래있던 파일은 지우고
-        productFileService.registerAndSaveMainFile(file, productNumber); //대표사진다시저장
-        productFileService.registerAndSaveFiles(files, productNumber); //리스트다시저장
+        productFileService.registerAndSaveMainFile(file, "m",productNumber); //대표사진다시저장
+        productFileService.registerAndSaveFiles(files, "d",productNumber); //리스트다시저장
         productMapper.updateProduct(productDto);
     }
 
 
 //    상품리스트조회
     @Transactional(readOnly = true)
-    public List<ProductVo> findAllProduct(Criteria criteria, Long sellerNumber){
-       return productMapper.selectAll(criteria, sellerNumber);
+    public List<ProductVo> findAllProduct(Long sellerNumber){
+        if(sellerNumber==null){throw new IllegalArgumentException("판매자번호 누락");}
+       return productMapper.selectList(sellerNumber);
     }
 
     @Transactional(readOnly = true)
-    public int getTotal(Long sellerNumber){return productMapper.selectTotal(sellerNumber);}
+    public int getTotal(Long sellerNumber){
+        if(sellerNumber==null){throw new IllegalArgumentException("판매자번호 누락");}
+        return productMapper.selectTotal(sellerNumber);}
+
+    public List<ProductVo> findListPage(Criteria criteria, Long sellerNumber){
+        if(criteria==null || sellerNumber ==null){
+            throw new IllegalArgumentException("페이징 정보 누락");
+        }
+        return productMapper.selectListPage(criteria, sellerNumber);
+    }
 }

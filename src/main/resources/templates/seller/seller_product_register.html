@@ -14,7 +14,7 @@
   <div class="register-wrap">
     <section class="register-section register-title">
       <!-- 판매자 브랜드 이름 띄우기 -->
-      <h2><span class="brand-name">미하이삭스</span> 구독서비스 상품등록</h2>
+      <h2><span class="brand-name" th:text="${brandName}"></span> 구독서비스 상품등록</h2>
     </section>
     <!-- 상품 내용 등록 구역 -->
     <section class="register-section">
@@ -60,7 +60,7 @@
             </td>
           </tr>
           <tr>
-            <th>상세이미지</th>
+            <th>제품이미지</th>
             <td class="product-image-td">
               <p>권장 이미지 사이즈는 가로500px 세로 500px 입니다.</p>
               <p>최대 4장까지 등록 가능합니다.</p>
