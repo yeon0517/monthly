@@ -15,7 +15,12 @@ public interface ProductMapper {
     public void insertProduct(ProductDto productDto);
     public void updateProduct(ProductDto productDto);
     public void deleteProduct(Long productNumber);
+
     public List<ProductVo> selectList(Long sellerNumber);
     public List<ProductVo> selectListPage(@Param("criteria") Criteria criteria, Long sellerNumber);
     public int selectTotal(Long sellerNumber);
+
+    ProductDto sellectAll(Criteria criteria);
+    void amountChange(ProductVo productVo);
+
 }

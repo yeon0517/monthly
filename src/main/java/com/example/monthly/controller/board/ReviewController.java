@@ -61,9 +61,9 @@ public class ReviewController {
     public Map<String, Object> replyListPage(@PathVariable("productNumber") Long productNumber,
                                              @PathVariable("page") int page){
         Criteria criteria = new Criteria(page,5);
-        PageVo pageVo = new PageVo(criteria,reviewService.findTotal(1L));
+        PageVo pageVo = new PageVo(criteria,reviewService.findTotal(productNumber));
 
-        List<ReviewVo> reviewList = reviewService.findListPage(criteria,1L);
+        List<ReviewVo> reviewList = reviewService.findListPage(criteria,productNumber);
         Map<String,Object> replyMap = new HashMap<>();
 
         replyMap.put("pageInfo",pageVo);

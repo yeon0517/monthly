@@ -69,4 +69,15 @@
             SELECT BRAND_NUMBER FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
         )
     </select>
+
+<!--제품리스트 조회-->
+<!--    <select id="selectAll" resultType="productDto">-->
+
+<!--    </select>-->
+    <update id="amountChange">
+        UPDATE MONTHLY_PRODUCT
+        SET PRODUCT_AMOUNT = #{productAmount}
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </update>
+
 </mapper>

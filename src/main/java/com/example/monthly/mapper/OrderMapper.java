@@ -37,5 +37,5 @@ public interface OrderMapper {
     SubsDto subsSelect(@Param("userNumber") Long userNumber, @Param("productNumber") Long productNumber);
 
     //조인 카드 결제 번호 조회
-    Long payCardSelect(Long userNumber);
+    Long payCardSelect(Long productNumber,Long userNumber);
 }

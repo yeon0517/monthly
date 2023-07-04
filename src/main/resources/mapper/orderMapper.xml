@@ -71,7 +71,7 @@
 
 <!--    카드 조인 결제 정보 검색-->
     <select id="payCardSelect" resultType="Long">
-        SELECT PAYMENT_NUMBER FROM MONTHLY_PAYMENT WHERE USER_NUMBER =#{userNumber}
+        SELECT PAYMENT_NUMBER FROM MONTHLY_PAYMENT WHERE PRODUCT_NUMBER=#{productNumber} AND USER_NUMBER = #{userNumber}
     </select>
 
 
