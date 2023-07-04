@@ -38,10 +38,11 @@ function sendKakaoUserInfoToServer(userInfo) {
         nickname: userInfo.properties.nickname,
         email: userInfo.kakao_account.email,
         birthday: userInfo.kakao_account.birthday,
+        gender: userInfo.kakao_account.gender
         // 추가 필요한 정보가 있다면 여기에 추가
     };
 
-    fetch('/api/register/kakao', {
+    fetch('/users/registerKakao', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

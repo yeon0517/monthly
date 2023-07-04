@@ -36,6 +36,5 @@ public interface UserMapper {
     void userWithdraw(Long userNumber);
 
 
-
-
+    void insertKakaoUser(UserVo userVo);
 }

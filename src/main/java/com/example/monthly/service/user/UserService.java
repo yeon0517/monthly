@@ -23,7 +23,7 @@ public class UserService {
         }
         userMapper.insert(userVo);
 
-    // 주소 입력란이 공백이 아닐 때만 주소를 추가
+        // 주소 입력란이 공백이 아닐 때만 주소를 추가
         if (!userVo.getUserPostcode().isEmpty() && !userVo.getUserAddress2().isEmpty()) {
             userMapper.insertAddress(userVo);
         }
@@ -31,25 +31,30 @@ public class UserService {
 
 
     // 회원 가입 아이디 중복 검사
-    public int checkId(String userId){
+    public int checkId(String userId) {
         return userMapper.checkId(userId);
     }
 
 
     //  아이디 찾기
-    public UserVo findId(UserVo userVo){
-        if (userVo == null){ throw new IllegalArgumentException("입력란 누락이나 조건이 충족되지 않음"); }
+    public UserVo findId(UserVo userVo) {
+        if (userVo == null) {
+            throw new IllegalArgumentException("입력란 누락이나 조건이 충족되지 않음");
+        }
         return userMapper.findId(userVo);
     }
 
     //  비밀번호 찾기
-    public UserVo findPw(UserVo userVo){
-        if (userVo == null){ throw new IllegalArgumentException("입력란 누락이나 조건이 충족되지 않음"); }
-       return userMapper.findPw(userVo);
+    public UserVo findPw(UserVo userVo) {
+        if (userVo == null) {
+            throw new IllegalArgumentException("입력란 누락이나 조건이 충족되지 않음");
+        }
+        return userMapper.findPw(userVo);
     }
 
     /**
      * 회원 번호 조회, 로그인(아이디, 패스워드)
+     *
      * @param userId
      * @param userPassword
      * @return
@@ -67,7 +72,7 @@ public class UserService {
     }
 
     //회원번호로 회원 전체 조회
-    public DeliveryVo findAll(Long userNumber){
+    public DeliveryVo findAll(Long userNumber) {
         if (userNumber == null) {
             throw new IllegalArgumentException("회원 번호 누락");
         }
@@ -75,7 +80,7 @@ public class UserService {
     }
 
     //비밀번호 수정
-    public void updatePassword(UserDto userDto){
+    public void updatePassword(UserDto userDto) {
         if (userDto == null) {
             throw new IllegalArgumentException("비밀번호, 회원 번호 누락");
         }
@@ -83,11 +88,25 @@ public class UserService {
     }
 
     //회원 상태 변경
-    public void changeStatus(Long userNumber){
+    public void changeStatus(Long userNumber) {
         if (userNumber == null) {
             throw new IllegalArgumentException("회원 번호 누락");
         }
         userMapper.userWithdraw(userNumber);
     }
 
+    // 카카오 로그인 정보를 받아서 DB에 저장
+    public void registerKakao(UserVo userVo) {
+        // 받아온 카카오 로그인 정보를 UserVo에 맞게 설정
+        userVo.setUserId(userVo.getUserId());
+        userVo.setUserName(userVo.getUserName());
+        userVo.setUserEmail(userVo.getUserEmail());
+        userVo.setUserGender(userVo.getUserGender());
+        userVo.setUserPhoneNumber(userVo.getUserPhoneNumber());
+        userVo.setUserBirthday(userVo.getUserBirthday());
+
+        // DB에 UserVo를 저장하는 로직을 구현
+        // 예시로는 userMapper를 사용하여 UserVo를 DB에 저장하는 것으로 가정
+        userMapper.insertKakaoUser(userVo);
+    }
 }

@@ -39,6 +39,12 @@
         WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
 
+
+    <insert id="insertKakaoUser" parameterType="com.example.monthly.vo.UserVo">
+        INSERT INTO MONTHLY_USERy (userId, userName, userEmail, userBirthday)
+        VALUES (#{userId}, #{userName}, #{userEmail}, #{userBirthday})
+    </insert>
+
     <!--아이디 찾기-->
     <select id="findId" resultType="userVo">
         SELECT USER_NAME, USER_EMAIL, USER_ID FROM MONTHLY_USER
