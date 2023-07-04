@@ -62,21 +62,9 @@ public class RestSearchController {
 
     //===========구독자 페이지===============
 
-//    @GetMapping("/subsUsers")
-//    public List<SubsVo> brandSubsUserList(String subscriberInput, Long brandNumber) {
-//        SearchVo searchVo = new SearchVo();
-//        searchVo.setSubscriberInput(subscriberInput);
-//        searchVo.setBrandNumber(brandNumber);
-//        System.out.println("====================");
-//        System.out.println(searchVo);
-//        return adminService.brandSubsUserList(searchVo);
-//    }
-
     @GetMapping("/subs")
     public List<SubsVo> productSubsUserList(SearchVo searchVo) {
-//        SearchVo searchVo = new SearchVo();
-//        searchVo.setSubscriberInput(subscriberInput);
-//        searchVo.setProductNumber(productNumber);
+
         System.out.println("=========000000000===========");
         System.out.println(searchVo);
         return adminService.productSubsUserList(searchVo);
