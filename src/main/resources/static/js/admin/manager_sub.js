@@ -7,7 +7,6 @@ function showList(map){
     map.forEach(i =>{
         list +=`
           <tr> 
-          <input type="hidden" value="${i.productNumber}">
                 <td>${i.userNumber}</td>
                 <td>${i.subsNumber}</td>
                 <td>${i.productName}</td>
@@ -20,7 +19,7 @@ function showList(map){
                 </td>
                 <td><button type="button" class="out-btn"> 구독 취소 </button></td>
              </tr>
-        `
+        `;
     });
     $('.sub-list-body').html(list);
 }
@@ -30,15 +29,10 @@ function showError(a, b, c) {
     console.error(c);
 }
 
-sub.productSubsUserList({subscriberInput:'',productNumber:''},showList,showError);
-
-
 // 검색 조건에 따른 구독자 조회
-$('.search-btn').on('click', function (){
-    let searchInput = $('.subscriber-input').val();
-    // let productNumber = $('.subscriber-input').val();
-    console.log(searchInput);
-    console.log(productNumber);
+$('.search-btn-ct').on('click', '.search-btn',function (e){
+    let productNumber = $(e.target).closest('tr').find('.product-number').text();
+    let searchInput = $(e.target).closest('tr').find('.subscriber-input').text();
 
     sub.productSubsUserList({subscriberInput : searchInput, productNumber : productNumber}, showList, showError);
 
