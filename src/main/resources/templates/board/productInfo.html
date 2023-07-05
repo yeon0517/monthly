@@ -176,8 +176,12 @@
                     <div class="countResult" style="color: #8eb4c8"></div>
                   </div>
 
-                  <div class="payBtn" th:if="${product.productAmount != 0}">
+                  <div class="payBtn" th:if="${product.productAmount != 0 && subsNumber == null}">
                     <input type="submit" class="buyBtn" value="BUY NOW" />
+                  </div>
+
+                  <div class="payBtn" th:if="${product.productAmount != 0 && subsNumber != null}">
+                    <input type="button" class="buyBtn subsBtn" value="구독중" />
                   </div>
 
                   <div class="payBtn" th:if="${product.productAmount == 0}">
