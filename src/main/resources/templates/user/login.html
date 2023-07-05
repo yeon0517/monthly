@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>로그인 | monthly.</title>
     <link rel="stylesheet" th:href="@{/css/user/login.css}">
-    <meta name ="google-signin-client_id" content="471441247283-2v8f06cq7u45d7cmc9ifh0c3hkhp0n94.apps.googleusercontent.com">
   </head>
   <body>
     <div id="page">
@@ -80,13 +79,6 @@
                   alt="네이버로 로그인"
                 />
               </button>
-              <button type="button" id="GgCustomLogin" href="javascript:void(0)">
-                <img
-                  class="google"
-                  th:src="@{https://d3udu241ivsax2.cloudfront.net/v3/images/login/google-icon.4f89e46a7f4be2551c6b2ab781be474d.svg}"
-                  alt="Google로 로그인"
-                />
-              </button>
             </div>
           </div>
         </div>
@@ -97,11 +89,9 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <script th:src="@{/js/user/kakao.js}"></script>
     <script th:src="@{/js/user/naver.js}"></script>
     <script th:src="@{/js/user/login.js}"></script>
-    <script th:src="@{/js/user/google.js}"></script>
     <script th:inline="javascript">
       /* 로그인 실패 시 경고문구 */
       var loginError = /*[[${loginError}]]*/ false;

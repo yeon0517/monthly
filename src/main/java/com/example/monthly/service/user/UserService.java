@@ -103,13 +103,34 @@ public class UserService {
         System.out.println("Email: " + userVo.getUserEmail());
         System.out.println("Mobile: " + userVo.getUserPhoneNumber());
         System.out.println("Gender: " + userVo.getUserGender());
-        System.out.println("Birthday: " + userVo.getUserBirthday());
+//        System.out.println("Birthday: " + userVo.getUserBirthday());
 
         // 사용자 정보 처리 후, 필요한 로직을 수행하거나 적절한 응답을 반환합니다.
         try {
             userMapper.insertNaver(userVo);
         } catch (Exception e) {
             throw new IllegalArgumentException("Failed to process Naver login information.");
+        }
+    }
+
+    public void registerKakaoUser(UserVo userVo) {
+        if (userVo == null) {
+            throw new IllegalArgumentException("카카오 회원 정보가 없습니다.");
+        }
+
+        // 받은 사용자 정보를 처리하는 로직을 구현합니다.
+        // 이 예시에서는 간단히 콘솔에 출력하는 것으로 대체하였습니다.
+        System.out.println("Received Kakao user information:");
+        System.out.println("ID: " + userVo.getUserId());
+        System.out.println("Email: " + userVo.getUserEmail());
+        System.out.println("Gender: " + userVo.getUserGender());
+        System.out.println("Nickname: " + userVo.getUserName());
+
+        // 사용자 정보 처리 후, 필요한 로직을 수행하거나 적절한 응답을 반환합니다.
+        try {
+            userMapper.insertKakao(userVo);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Failed to process Kakao login information.");
         }
     }
 }

@@ -23,6 +23,15 @@
         VALUES (#{userNumber}, #{userId}, #{userName}, #{userPhoneNumber}, #{userEmail}, #{userGender})
     </insert>
 
+    <!--카카오 회원 등록-->
+    <insert id="insertKakao">
+        <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_USER.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MONTHLY_USER (USER_NUMBER, USER_ID, USER_NAME, USER_EMAIL, USER_GENDER)
+        VALUES (#{userNumber}, #{userId}, #{userName}, #{userEmail}, #{userGender})
+    </insert>
+
     <!-- 구매자 회원가입 주소-->
     <insert id="insertAddress">
     <selectKey keyProperty="deliveryNumber" order="BEFORE" resultType="long">

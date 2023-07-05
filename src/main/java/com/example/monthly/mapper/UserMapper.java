@@ -18,6 +18,9 @@ public interface UserMapper {
     // 네이버 로그인
     public void insertNaver(UserVo userVo);
 
+    // 카카오 로그인
+    public void insertKakao(UserVo userVo);
+
     // 회원가입 아이디 중복 검사
     public int checkId(String userId);
 
@@ -37,8 +40,4 @@ public interface UserMapper {
     void updatePassword(UserDto userDto);
 
     void userWithdraw(Long userNumber);
-
-
-
-
 }
