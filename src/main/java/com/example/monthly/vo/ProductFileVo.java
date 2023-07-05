@@ -31,5 +31,6 @@ public class ProductFileVo {
     private Long productAmount;
     private String productContents;
 
+    private int sellerStatus;
 
 }

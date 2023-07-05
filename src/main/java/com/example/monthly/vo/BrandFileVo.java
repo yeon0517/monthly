@@ -18,6 +18,7 @@ public class BrandFileVo {
 
     private String brandName; //브랜드 이름
     private String brandContents; //브랜드 내용
+    private int sellerStatus;
 
 
 }
