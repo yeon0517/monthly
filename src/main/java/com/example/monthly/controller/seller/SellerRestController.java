@@ -73,11 +73,11 @@ public class SellerRestController {
         return files;
     }
     @GetMapping("/searchP")
-    public Map<String, Object> searchProduct(HttpServletRequest req, SearchVo searchVo){
+    public Map<String, Object> searchProduct(HttpServletRequest req, SearchVo searchVo, @PathVariable("page")int page){
         System.out.println("===============검색 restController진입=====================");
         System.out.println(searchVo);
         Long sellerNumber = (Long) req.getSession().getAttribute("sellerNumber");
-        Criteria criteria = new Criteria(searchVo.getPage(), 10);
+        Criteria criteria = new Criteria(page, 10);
         PageVo pageVo = new PageVo(criteria, productService.getTotal(sellerNumber)); // 이거를 조건에 맞춰서 바꿔줘야함
         List<ProductVo> productList = productService.searhProduct(sellerNumber, searchVo);
         Map<String, Object> productMap = new HashMap<>();

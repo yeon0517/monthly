@@ -89,6 +89,8 @@ $(window).on('scroll', function(){
     }
 });
 
+
+//===================검색=================
 let $search = $('.search-btn');
 $search.on('click', function (){
     console.log('클릭할게요');
@@ -99,6 +101,7 @@ $search.on('click', function (){
         searchInput ='';
         searchSelect ='';
     }
+
     let searchVo ={
         "page":page,
         "searchInput":searchInput,
@@ -108,6 +111,7 @@ $search.on('click', function (){
     console.log(searchVo);
 
     product.searchProduct(searchVo,showProduct);
+
     if(searchInput == null){
         $('input[name=product-status]:checked').val('');
     }else{
