@@ -88,3 +88,28 @@ $(window).on('scroll', function(){
         product.getListPage({page:page}, appendProduct, showError);
     }
 });
+
+
+//===================검색=================
+let $search = $('.search-btn');
+$search.on('click', function (){
+    console.log('클릭할게요');
+    let searchInput = $('.search-input').val();
+    let searchSelect = $('.search-dropdown').val();
+    let productStatus = $('input[name="product-status"]:checked').val();
+    console.log(productStatus);
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "productStatus":productStatus
+    }
+    console.log(searchVo);
+
+    product.searchProduct(searchVo,showProduct);
+    $('.search-input').val('');
+    $('input[name=product-status]').removeAttr('checked');
+    $('input[name=product-status]').filter("[value=all]").prop("checked", true);
+
+});
+

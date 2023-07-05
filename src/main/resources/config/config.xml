@@ -29,6 +29,7 @@
         <typeAlias type="com.example.monthly.vo.SubsVo" alias="subsVo"/>
         <typeAlias type="com.example.monthly.vo.ProductFileVo" alias="productFileVo"/>
         <typeAlias type="com.example.monthly.vo.ProductFileListVo" alias="productFileListVo"/>
+        <typeAlias type="com.example.monthly.vo.PageVo" alias="pageVo"/>
 
     </typeAliases>
 

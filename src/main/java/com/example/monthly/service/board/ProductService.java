@@ -4,6 +4,7 @@ import com.example.monthly.dto.ProductDto;
 import com.example.monthly.mapper.ProductMapper;
 import com.example.monthly.vo.Criteria;
 import com.example.monthly.vo.ProductVo;
+import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,14 +57,7 @@ public class ProductService {
         }
 
     }
-//    상품삭제
-    public void removeProduct(Long productNumber){
-        if(productNumber== null){
-            throw new IllegalArgumentException("상품번호 누락");
-        }
-        productFileService.remove(productNumber);
-        productMapper.deleteProduct(productNumber);
-    }
+
 //    상품수정
     public void modifyProduct(ProductDto productDto){
         if(productDto == null){
@@ -72,14 +66,29 @@ public class ProductService {
         productMapper.updateProduct(productDto);
     }
 
-    public void modifyProduct(ProductDto productDto, List<MultipartFile>files, MultipartFile file) throws IOException {
+    public void modifyProduct(ProductDto productDto, List<MultipartFile>files, MultipartFile file){
         if(productDto==null || files==null || file==null){
             throw new IllegalArgumentException("제품 수정 매개변수 null체크");
         }
         Long productNumber = productDto.getProductNumber();
+        System.out.println(productNumber);
+        if(!files.isEmpty()){
         productFileService.remove(productNumber); //원래있던 파일은 지우고
-        productFileService.registerAndSaveMainFile(file, "m",productNumber); //대표사진다시저장
-        productFileService.registerAndSaveFiles(files, "d",productNumber); //리스트다시저장
+            try {
+                productFileService.registerAndSaveFiles(files, "d",productNumber); //리스트다시저장
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(!file.isEmpty()){
+            productFileService.removeMainFile(productNumber);
+            try {
+                productFileService.registerAndSaveMainFile(file, "m",productNumber); //대표사진다시저장
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
         productMapper.updateProduct(productDto);
     }
 
@@ -95,6 +104,12 @@ public class ProductService {
     public int getTotal(Long sellerNumber){
         if(sellerNumber==null){throw new IllegalArgumentException("판매자번호 누락");}
         return productMapper.selectTotal(sellerNumber);}
+
+    @Transactional(readOnly = true)
+    public int getSearchTotal(Long sellerNumber, SearchVo searchVo){
+        if(sellerNumber==null||searchVo ==null){throw new IllegalArgumentException("검색정보누락");}
+        return productMapper.selectSearchTotal(sellerNumber,searchVo);
+    }
 
     public List<ProductVo> findListPage(Criteria criteria, Long sellerNumber){
         if(criteria==null || sellerNumber ==null){
@@ -112,5 +127,11 @@ public class ProductService {
         productMapper.amountChange(productVo);
     }
 
+    @Transactional(readOnly = true)
+    public List<ProductVo> searhProduct(Long sellerNumber, SearchVo searchVo){
+        System.out.println("===============검색 productService진입==================");
+        if(sellerNumber==null || searchVo==null){throw new IllegalArgumentException("검색정보누락");}
+        return productMapper.selectSearchProduct(sellerNumber, searchVo);
+    }
 
 }

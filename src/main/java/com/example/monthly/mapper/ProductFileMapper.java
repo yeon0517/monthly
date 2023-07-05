@@ -20,5 +20,8 @@ public interface ProductFileMapper {
 //    제품이미지파일등록
     public void insertProductFile(ProductFileDto productFileDto);
 
-    public void deleteProductFile(Long productNumber);
+//    대표이미지 삭제
+    public void deleteMainFile(Long productNumber);
+
+    public void deleteProductFiles(Long productNumber);
 }

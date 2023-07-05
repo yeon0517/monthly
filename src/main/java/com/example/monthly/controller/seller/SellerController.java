@@ -125,6 +125,19 @@ public class SellerController {
 
         return "seller/seller_product_modify";}
 
+    @PostMapping("/modify")
+    public RedirectView modifyProduct(ProductDto productDto,
+                                      @RequestParam("productFiles")List<MultipartFile> files,
+                                      @RequestParam("productFile")MultipartFile file){
+        productService.modifyProduct(productDto);
+            try {
+                productService.modifyProduct(productDto, files, file);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        return new RedirectView("/seller/list");
+    }
+
 //    브랜드번호가 있으면 제품등록하러갈 수 있음
     @GetMapping("/registerReady")
     public String productRegisterReady(HttpServletRequest req, Model model){

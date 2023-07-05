@@ -1,11 +1,14 @@
 package com.example.monthly.controller.seller;
 
+import com.example.monthly.dto.ProductFileDto;
 import com.example.monthly.dto.SellerDto;
+import com.example.monthly.service.board.ProductFileService;
 import com.example.monthly.service.board.ProductService;
 import com.example.monthly.service.seller.SellerService;
 import com.example.monthly.vo.Criteria;
 import com.example.monthly.vo.PageVo;
 import com.example.monthly.vo.ProductVo;
+import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,7 @@ import java.util.Map;
 public class SellerRestController {
     private final SellerService sellerService;
     private final ProductService productService;
+    private final ProductFileService productFileService;
 
 //  판매자아이디 중복검사
     @GetMapping("/checkId")
@@ -57,9 +61,31 @@ public class SellerRestController {
         Criteria criteria = new Criteria(page, 10);
         PageVo pageVo = new PageVo(criteria, productService.getTotal(sellerNumber));
         List<ProductVo> productList = productService.findListPage(criteria, sellerNumber);
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(productList);
+        System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
         Map<String, Object> productMap = new HashMap<>();
         productMap.put("pageVo", pageVo);
         productMap.put("productList", productList);
+        return productMap;
+    }
+
+    @GetMapping("/modify")
+    public List<ProductFileDto> files(Long productNumber){
+        List<ProductFileDto> files = productFileService.getProductFileList(productNumber);
+        return files;
+    }
+    @GetMapping("/searchP/{page}")
+    public Map<String, Object> searchProduct(HttpServletRequest req, SearchVo searchVo, @PathVariable("page")int page){
+        System.out.println("===============검색 restController진입=====================");
+        System.out.println(searchVo);
+        Long sellerNumber = (Long) req.getSession().getAttribute("sellerNumber");
+        Criteria criteria = new Criteria(page, 10);
+        PageVo pageVo = new PageVo(criteria, productService.getSearchTotal(sellerNumber,searchVo)); // 이거를 조건에 맞춰서 바꿔줘야함
+        List<ProductVo> productList = productService.searhProduct(sellerNumber, searchVo);
+        Map<String, Object> productMap = new HashMap<>();
+        productMap.put("pageVo",pageVo);
+        productMap.put("productList",productList);
         return productMap;
     }
 }
