@@ -84,5 +84,11 @@
         FROM MONTHLY_PRODUCT WHERE PRODUCT_NAME = #{productName}
     </select>
 
+<!--    구독중인 상품을 다시 구독 못하게 하기위한 구독 여부 검색-->
+    <select id="reSubsSelect" resultType="Long">
+        SELECT SUBS_NUMBER
+        FROM MONTHLY_SUBSCRIBE
+        WHERE PRODUCT_NUMBER = #{productNumber} AND USER_NUMBER = #{userNumber}
+    </select>
 
 </mapper>

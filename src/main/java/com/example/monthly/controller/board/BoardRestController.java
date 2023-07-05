@@ -24,4 +24,6 @@ public class BoardRestController {
      return boardService.searchProductList(searchSelect, searchInput);
  }
 
+
+
 }

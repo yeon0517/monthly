@@ -783,11 +783,10 @@ p {
   width: 100%;
   cursor: pointer;
   display: block;
-  background-color: white;
-  border: 2px solid #8eb4c8;
+  background-color: black;
   font-family: "SUIT-Regular";
   font-weight: 600;
-  color: #060606;
+  color: white;
   margin: 0 1px 10px 0;
   padding: 17px 30px;
   font-size: 16px;

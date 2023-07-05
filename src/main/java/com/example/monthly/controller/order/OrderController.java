@@ -1,5 +1,6 @@
 package com.example.monthly.controller.order;
 
+import com.example.monthly.dto.DeliveryDto;
 import com.example.monthly.dto.ParcelDto;
 import com.example.monthly.dto.PaymentDto;
 import com.example.monthly.dto.SubsDto;
@@ -52,7 +53,8 @@ public class OrderController {
 
     @PostMapping("/subs")
     public String subs(@Param("productNumber") Long productNumber, HttpServletRequest req, @Param("inputPrice") String inputPrice,
-                             @Param("cardNumber") String cardNumber, String parcelDate, DeliveryVo deliveryVo, String productAmount){
+                             @Param("cardNumber") String cardNumber, String parcelDate,
+                       DeliveryVo deliveryVo, String productAmount, String deilvery){
 
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         //구독 추가
@@ -68,6 +70,23 @@ public class OrderController {
         System.out.println("남은 재고 수량++++++++++++++++++="+amount);
         productVo.setProductAmount(amount);
         productService.amountChange(productVo);
+
+
+//       배송지 저장
+        DeliveryDto deliveryDto = new DeliveryDto();
+        deliveryDto.setDeliveryPostcode(deliveryVo.getDeliveryPostcode());
+        deliveryDto.setDeliveryAddress1(deliveryVo.getDeliveryAddress1());
+        deliveryDto.setDeliveryAddress2(deliveryVo.getDeliveryAddress2());
+        deliveryDto.setUserNumber(userNumber);
+        System.out.println(deilvery+"라이도버튼 값==================================");
+        System.out.println(deliveryDto+"===============배송지 저장================");
+        if(deilvery.equals("new")) {
+            if (userService.findAll(userNumber).getDeliveryPostcode() != null) {
+                orderService.changeDelivery(deliveryDto);
+            } else {
+                orderService.registerDelivery(deliveryDto);
+            }
+        }
 
         //결제 정보
         SubsDto subs = orderService.subsFindAll(userNumber,productNumber);
@@ -92,6 +111,8 @@ public class OrderController {
         parcelDto.setParcelInvoice(""+rand.nextInt(10000000));
         System.out.println(parcelDto.toString() +"배송주문장 풀력 ============================================");
         orderService.parcelRegister(parcelDto);
+
+
         return "redirect:/user/mypage";
     }
 

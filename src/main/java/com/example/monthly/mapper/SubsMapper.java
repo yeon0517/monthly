@@ -31,4 +31,6 @@ public interface SubsMapper {
     void subsDelete(Long productNumber);
 
     Long productSubs(ProductDto productDto);
+
+    Long reSubsSelect(Long productNumber,Long userNumber);
 }

@@ -151,6 +151,23 @@ $('.pay').on('click',function (){
 
 
 
+$("input:radio[name=deilvery]").on('click',function (){
+  console.log($("input:radio[name=deilvery]:checked").val());
+  if($(this).val()=="new"){
+    $("#deliveryPostcode").removeAttr("readonly");       // readonly 삭제
+    $("#deliveryAddress1").removeAttr("readonly");       // readonly 삭제
+    $("#deliveryAddress2").removeAttr("readonly");
+  }
+
+});
+
+
+$("#postBtn").on("click", function (){
+  console.log("클릭");
+  if($("input:radio[name=deilvery]:checked").val() =="new"){
+    sample6_execDaumPostcode();
+  }
+});
 
 
 
