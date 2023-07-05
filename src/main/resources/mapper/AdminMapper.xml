@@ -131,6 +131,7 @@
             WHERE PRODUCT_NUMBER = MP.PRODUCT_NUMBER) AS SUBS_NUMBER_COUNT
     FROM MONTHLY_PRODUCT MP JOIN MONTHLY_BRAND MB on MP.BRAND_NUMBER = MB.BRAND_NUMBER
     WHERE SELLER_NUMBER =#{sellerNumber} ORDER BY PRODUCT_NUMBER
+
 </select><!--판매자의 브랜드페이지 이름만 띄우기-->
     <select id="brandName" resultType="productVo">
    SELECT BRAND_NAME FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
@@ -153,7 +154,6 @@
         </if>
 
         </select>
-
 
 
 
@@ -248,6 +248,26 @@
 
 <!--</select>-->
 
+
+
+<!--    SELECT
+        MP.PRODUCT_NUMBER,
+        MP.PRODUCT_NAME,
+       MB.BRAND_NAME,
+        COUNT(MS.USER_NUMBER) AS USER_NUMBER_COUNT
+    FROM
+        MONTHLY_USER MU
+            JOIN MONTHLY_SUBSCRIBE MS ON MU.USER_NUMBER = MS.USER_NUMBER
+            JOIN MONTHLY_PRODUCT MP ON MS.PRODUCT_NUMBER = MP.PRODUCT_NUMBER
+            JOIN MONTHLY_BRAND MB ON MP.BRAND_NUMBER = MB.BRAND_NUMBER
+            JOIN MONTHLY_SELLER MSN ON MB.SELLER_NUMBER = MSN.SELLER_NUMBER
+    WHERE
+        MSN.SELLER_NUMBER = #{sellerNumber}
+    GROUP BY
+        MP.PRODUCT_NUMBER,
+        MP.PRODUCT_NAME,
+        MB.BRAND_NAME
+        -->
 
 
 
