@@ -8,6 +8,7 @@ import com.example.monthly.service.seller.SellerService;
 import com.example.monthly.vo.Criteria;
 import com.example.monthly.vo.PageVo;
 import com.example.monthly.vo.ProductVo;
+import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,6 +71,19 @@ public class SellerRestController {
     public List<ProductFileDto> files(Long productNumber){
         List<ProductFileDto> files = productFileService.getProductFileList(productNumber);
         return files;
+    }
+    @GetMapping("/searchP")
+    public Map<String, Object> searchProduct(HttpServletRequest req, SearchVo searchVo){
+        System.out.println("===============검색 restController진입=====================");
+        System.out.println(searchVo);
+        Long sellerNumber = (Long) req.getSession().getAttribute("sellerNumber");
+        Criteria criteria = new Criteria(searchVo.getPage(), 10);
+        PageVo pageVo = new PageVo(criteria, productService.getTotal(sellerNumber)); // 이거를 조건에 맞춰서 바꿔줘야함
+        List<ProductVo> productList = productService.searhProduct(sellerNumber, searchVo);
+        Map<String, Object> productMap = new HashMap<>();
+        productMap.put("pageVo",pageVo);
+        productMap.put("productList",productList);
+        return productMap;
     }
 }
 //@PathVariable("sellerId")

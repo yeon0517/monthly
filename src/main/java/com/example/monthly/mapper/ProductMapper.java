@@ -3,6 +3,7 @@ package com.example.monthly.mapper;
 import com.example.monthly.dto.ProductDto;
 import com.example.monthly.vo.Criteria;
 import com.example.monthly.vo.ProductVo;
+import com.example.monthly.vo.SearchVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,4 +19,5 @@ public interface ProductMapper {
     public List<ProductVo> selectList(Long sellerNumber);
     public List<ProductVo> selectListPage(@Param("criteria") Criteria criteria, Long sellerNumber);
     public int selectTotal(Long sellerNumber);
+    public List<ProductVo> selectSearchProduct(Long sellerNumber, SearchVo searchVo);
 }

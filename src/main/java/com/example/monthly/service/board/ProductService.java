@@ -4,6 +4,7 @@ import com.example.monthly.dto.ProductDto;
 import com.example.monthly.mapper.ProductMapper;
 import com.example.monthly.vo.Criteria;
 import com.example.monthly.vo.ProductVo;
+import com.example.monthly.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,5 +110,12 @@ public class ProductService {
             throw new IllegalArgumentException("페이징 정보 누락");
         }
         return productMapper.selectListPage(criteria, sellerNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductVo> searhProduct(Long sellerNumber, SearchVo searchVo){
+        System.out.println("===============검색 productService진입==================");
+        if(sellerNumber==null || searchVo==null){throw new IllegalArgumentException("검색정보누락");}
+        return productMapper.selectSearchProduct(sellerNumber, searchVo);
     }
 }

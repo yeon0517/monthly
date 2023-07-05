@@ -11,4 +11,7 @@ public class SearchVo {
     private String period;
     private String searchSelect;
     private String searchInput;
+    private String productStatus; //우정 추가
+    private int page; //우정추가
+
 }

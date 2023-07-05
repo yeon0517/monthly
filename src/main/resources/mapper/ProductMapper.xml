@@ -69,4 +69,47 @@
             SELECT BRAND_NUMBER FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
         )
     </select>
+
+<!--   판매자번호로 검색 조회 (상품번호/상품명)(판매상태:전체/판매준비/판매중/판매중지)-->
+    <select id="selectSearchProduct" resultType="productVo">
+        SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+        PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+        B.BRAND_NUMBER, B.BRAND_NAME
+        FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
+        ON P.BRAND_NUMBER = B.BRAND_NUMBER AND SELLER_NUMBER= #{sellerNumber}
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="searchVo.searchInput != ''">
+                    <if test="'searchVo.searchSelect'.equals('product-number')">
+                        PRODUCT_NUMBER = #{searchVo.searchInput}
+                    </if>
+                    <if test="'searchVo.searchSelect'.equals('product-name')">
+                        PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                    </if>
+                </if>
+                <trim prefix="AND">
+                    <if test="'prepared'.equals(searchVo.productStatus)">
+                        PRODUCT_STATUS = 0
+                    </if>
+                    <if test="'selling'.equals(searchVo.productStatus)">
+                        PRODUCT_STATUS = 1
+                    </if>
+                    <if test="'stop'.equals(searchVo.productStatus)">
+                        PRODUCT_STATUS = 2
+                    </if>
+                </trim>
+            </trim>
+        </where>
+
+    </select>
+<!--    <trim prefix="and">
+        <if test='"today".equals(period)'>
+            TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE)
+        </if>
+        <if test='"yesterday".equals(period)'>
+            TRUNC(SELLER_REGISTER_DATE) = TRUNC(SYSDATE) - 1
+        </if>
+    </trim>-->
+
+
 </mapper>
