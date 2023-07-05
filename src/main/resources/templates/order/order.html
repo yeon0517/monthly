@@ -69,7 +69,7 @@
                     <img src="../img/ico_required.gif" alt="" />
                   </th>
                   <td>
-                    <input name="userName" id="userName" type="text" th:value="${delivery.userName}" />
+                    <input name="userName" id="userName" type="text" th:value="${delivery.userName}" required readonly />
                   </td>
                 </tr>
 
@@ -77,18 +77,17 @@
                 <tr>
                   <th>주소</th>
                   <td class="address">
-                    <input name="deliveryPostcode" id="deliveryPostcode" type="text"  th:value="${delivery.deliveryPostcode}" />
+                    <input name="deliveryPostcode" id="deliveryPostcode" type="text"  th:value="${delivery.deliveryPostcode}" readonly />
 
-                    <img
+                    <img id="postBtn"
                       src="../img/btn_zipcode.gif"
-                      onclick="sample6_execDaumPostcode()"
                       style="vertical-align: middle"
                     />
 
                     <br />
-                    <input name="deliveryAddress1" id="deliveryAddress1" type="text" th:value="${delivery.deliveryAddress1}" /> 기본주소
+                    <input name="deliveryAddress1" id="deliveryAddress1" type="text" th:value="${delivery.deliveryAddress1}" readonly/> 기본주소
                     <br />
-                    <input name="deliveryAddress2" id="deliveryAddress2" type="text" th:value="${delivery.deliveryAddress2}" /> 나머지주소(상세주소)
+                    <input name="deliveryAddress2" id="deliveryAddress2" type="text" th:value="${delivery.deliveryAddress2}" readonly/> 나머지주소(상세주소)
                   </td>
                 </tr>
 
@@ -99,7 +98,7 @@
                     <img src="../img/ico_required.gif" alt="" />
                   </th>
                   <td>
-                    <input name="userPhoneNumber" id="userPhoneNumber" type="text" th:value="${delivery.userPhoneNumber}" />
+                    <input name="userPhoneNumber" id="userPhoneNumber" type="text" th:value="${delivery.userPhoneNumber}" required readonly />
                   </td>
                 </tr>
 
@@ -110,7 +109,7 @@
                     <img src="../img/ico_required.gif" alt="" />
                   </th>
                   <td>
-                    <input  name = "userEmail" id="userEmail" type="text" th:value="${delivery.userEmail}" />
+                    <input  name = "userEmail" id="userEmail" type="text" th:value="${delivery.userEmail}" required readonly />
                     <input type="hidden" name="productAmount" class="productAmount" th:value="${cnt}">
                   </td>
                 </tr>

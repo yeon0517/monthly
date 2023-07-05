@@ -293,6 +293,10 @@ function displayAjax(){
   });
 }
 
+$('.subsBtn').on('click',function (){
+  alert("이미 구독중인 상품입니다.");
+})
+
 
 // document.addEventListener("DOMContentLoaded", function () {
 //   //DOM 생성 후 이벤트 리스너 등록

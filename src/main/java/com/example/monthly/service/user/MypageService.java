@@ -82,4 +82,16 @@ public class MypageService {
         }
         return subsMapper.productSubs(productDto);
     }
+
+    //내부구독 검색
+    public Long reSubs(Long productNumber, Long userNumber){
+        if (productNumber == null) {
+            throw new IllegalArgumentException("상품번호 누락");
+        }
+
+        if (userNumber == null) {
+            throw new IllegalArgumentException("회원번호 누락");
+        }
+        return subsMapper.reSubsSelect(productNumber,userNumber);
+    }
 }
