@@ -29,7 +29,7 @@ public class BoardService {
         return boardMapper.searchProductList(searchSelect, searchInput);
     }
 
-//    public List<ProductFileVo> mainAll() {
-//        return boardMapper.mainAll();
-//    }
+    public List<ProductFileVo> brandDetail(Long brandNumber) {
+        return boardMapper.brandDetail(brandNumber);
+    }
 }

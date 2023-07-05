@@ -17,6 +17,7 @@
                  JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
                  JOIN MONTHLY_PRODUCT_FILE PF ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
         WHERE PF.PRODUCT_FILE_SIZE = 'm'
+
           AND P.PRODUCT_STATUS = 1
     </select>
 
@@ -27,6 +28,14 @@
                  LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
                  LEFT OUTER JOIN MONTHLY_SELLER S ON B.SELLER_NUMBER = S.SELLER_NUMBER
         WHERE (P.PRODUCT_NAME LIKE '%' || #{productName} || '%' OR B.BRAND_NAME LIKE '%' || #{brandName} || '%')
+    </select>
+
+    <select id="brandDetail" resultType="productFileVo" parameterType="long">
+        SELECT MB.BRAND_NAME, MB.BRAND_CONTENTS, MBF.BRAND_FILE_UPLOAD_PATH, MBF.BRAND_FILE_UUID, MBF.BRAND_FILE_NAME,MBF.BRAND_NUMBER
+        FROM MONTHLY_BRAND MB
+                 JOIN MONTHLY_BRAND_FILE MBF ON MB.BRAND_NUMBER = MBF.BRAND_NUMBER
+        WHERE MBF.BRAND_FILE_SIZE LIKE '%long%'
+          AND MB.BRAND_NUMBER =#{brandNumber}
     </select>
 
 

@@ -78,8 +78,14 @@
 }
 
 .column-p h4 {
-    color: #000000;
+    color: #1e4a53;
+    font-size: 17px;
 }
 .column-p p {
     color: #8eb4c8;
+}
+
+a{
+    text-decoration: none;
+    color: #1e4a53;
 }

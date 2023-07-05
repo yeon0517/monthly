@@ -1,3 +1,16 @@
+let brandNumber = $('#productNumber').val(); // 제품 번호 대신 브랜드 번호를 가져옵니다.
+let page = 1;
+console.log("브랜드 번호:" + brandNumber);
+
+getListPage({ brandNumber: brandNumber, page: page }, showReply, showError);
+
+function showError(a, b, c) {
+    console.error(c);
+}
+
+
+
+
 // $(document).ready(function () {
 //     let brands = [
 //         {

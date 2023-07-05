@@ -24,7 +24,7 @@ public interface BoardMapper {
 
     List<ProductVo> searchProductList(@Param("searchSelect") String searchSelect, @Param("searchInput") String searchInput);
 
-    //메인
-//    List<ProductFileVo> mainAll();
+    //브랜드 디테일
+    List<ProductFileVo> brandDetail(Long brandNumber);
 
 }

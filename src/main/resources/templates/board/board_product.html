@@ -25,11 +25,13 @@
           <div class="product-column" th:each="product : ${productSelect}">
             <div class="product-content" >
               <div class="product-img">
+                <a th:href="@{/board/productInfo(productNumber=${product.productNumber})}">
                 <img th:src="'/product/upload/' + ${product.productFileUploadPath} + '/' + ${product.productFileUuid}+'_' + ${product.productFileName}" alt="" />
+                </a>
               </div>
               <div class="product-info">
                 <div class="brand">
-                  <h4 th:text="${product.brandName}"></h4>
+                  <h4 th:text="'['+${product.brandName}+']'"></h4>
                 </div>
                 <div class="product-name">
                   <p th:text="${product.productName}"></p>
