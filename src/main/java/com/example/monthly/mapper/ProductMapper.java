@@ -19,5 +19,6 @@ public interface ProductMapper {
     public List<ProductVo> selectList(Long sellerNumber);
     public List<ProductVo> selectListPage(@Param("criteria") Criteria criteria, Long sellerNumber);
     public int selectTotal(Long sellerNumber);
+    public int selectSearchTotal(Long sellerNumber, SearchVo searchVo);
     public List<ProductVo> selectSearchProduct(Long sellerNumber, SearchVo searchVo);
 }

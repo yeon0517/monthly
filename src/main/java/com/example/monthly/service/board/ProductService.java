@@ -105,6 +105,12 @@ public class ProductService {
         if(sellerNumber==null){throw new IllegalArgumentException("판매자번호 누락");}
         return productMapper.selectTotal(sellerNumber);}
 
+    @Transactional(readOnly = true)
+    public int getSearchTotal(Long sellerNumber, SearchVo searchVo){
+        if(sellerNumber==null||searchVo ==null){throw new IllegalArgumentException("검색정보누락");}
+        return productMapper.selectSearchTotal(sellerNumber,searchVo);
+    }
+
     public List<ProductVo> findListPage(Criteria criteria, Long sellerNumber){
         if(criteria==null || sellerNumber ==null){
             throw new IllegalArgumentException("페이징 정보 누락");
