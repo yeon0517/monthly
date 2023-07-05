@@ -68,6 +68,5 @@ public class RestSearchController {
         System.out.println("=========000000000===========");
         System.out.println(searchVo);
         return adminService.productSubsUserList(searchVo);
-
     }
 }

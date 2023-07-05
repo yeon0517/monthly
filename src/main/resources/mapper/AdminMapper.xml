@@ -151,9 +151,6 @@
             AND EXTRACT(DAY FROM S.SUBS_START_DATE) = EXTRACT(DAY FROM SYSDATE + 3)
         </if>
         </select>
-    <select id="productNameView" resultType="subsVo">
-        SELECT PRODUCT_NAME FROM MONTHLY_PRODUCT WHERE PRODUCT_NUMBER = #{productNumber}
-    </select>
 
 
 
