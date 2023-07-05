@@ -26,10 +26,13 @@
             <div class="column-content">
               <div class="column-img">
 <!--                /upload/' + board.fileUploadPath + '/th_' + board.fileUuid + '_' + board.fileName + ')-->
+                  <a th:href="@{/board/brandDetail(brandNumber=${brand.brandNumber})}">
                   <img th:src="'/brand/upload/'+ ${brand.brandFileUploadPath} + '/' + ${brand.brandFileUuid}+'_' + ${brand.brandFileName}" alt="" style="width: 400px; height: 400px; cursor:pointer;"/>
+                  </a>
               </div>
               <div class="column-p">
-                <h4 th:text="${brand.brandName}"></h4>
+                  <a th:href="@{/board/brandDetail(brandNumber=${brand.brandNumber})}">
+                <h4 th:text="'['+${brand.brandName}+']'"></h4></a>
                 <p th:text="${brand.brandContents}"></p>
               </div>
             </div>

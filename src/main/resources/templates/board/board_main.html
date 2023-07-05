@@ -15,32 +15,32 @@
   <div class="allContainer">
     <!-- wrap이 반복 -->
 
-    <div class="wrap">
+    <div class="wrap" th:each="brand : ${selectAllBrands}">
       <div class="whole">
         <div class="whole-box">
           <div class="wrap_div">
-            <a th:href="@{/board/brandDetail}">
-              <img th:src="@{/img/boardImg/main.jpg}" alt="메인이미지" />
+            <a th:href="@{/board/brandDetail(brandNumber=${brand.brandNumber})}">
+              <img th:src="'/brand/upload/' + ${brand.brandFileUploadPath} + '/' + ${brand.brandFileUuid} + '_' + ${brand.brandFileName}" alt="메인이미지" />
             </a>
           </div>
           <div class="wrap_list">
             <ul class="wrap_ul">
-              <!-- 최대 3개의 상품 -->
-              <li class="wrap_il" th:each="product, index : ${productSelect}" th:if="${product.brandNumber == brandSelect[0].brandNumber && index.index < 3}">
+              <li th:each="product, index : ${productSelect}" class="wrap_il" th:if="${product.brandNumber == brand.brandNumber}">
                 <div class="box">
-                  <a th:href="@{/board/productInfo(productNumber=${product.productNumber})}"><img th:src="@{/img/boardImg/ho.jpg}" alt="호" /></a>
+                  <a th:href="@{/board/productInfo(productNumber=${product.productNumber})}">
+                    <img th:src="'/product/upload/' + ${product.productFileUploadPath} + '/' + ${product.productFileUuid} + '_' + ${product.productFileName}" alt="" />
+                  </a>
                   <p class="box_name">
                     <span th:text="${product.productName}"></span>
                   </p>
-                  <p class="price" th:text="${product.productPrice}"></p>
+                  <p class="price" th:text="${product.productPrice}+'원'"></p>
                 </div>
               </li>
             </ul>
-         </div>
+          </div>
         </div>
       </div>
     </div>
-
 
 
 

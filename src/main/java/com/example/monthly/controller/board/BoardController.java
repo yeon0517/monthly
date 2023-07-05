@@ -42,9 +42,7 @@ public class BoardController {
 
     @GetMapping("/main")
     public String main(Model model){
-//        List<ProductFileVo> mains = boardService.mainAll();
-//        model.addAttribute("mainAll",boardService.mainAll());
-        model.addAttribute("brandSelect",boardService.selectAllBrands());
+        model.addAttribute("selectAllBrands", boardService.selectAllBrands());
         model.addAttribute("productSelect" , boardService.productSelect());
         return "board/board_main";
 
@@ -64,8 +62,9 @@ public class BoardController {
     }
 
     @GetMapping("/brandDetail")
-    public String brandDetail(Model model){
-        model.addAttribute("brandSelect",boardService.selectAllBrands());
+    public String brandDetail(Model model,Long brandNumber){
+       List<ProductFileVo> productFileVo = boardService.brandDetail(brandNumber);
+        model.addAttribute("brandDetail",productFileVo);
         model.addAttribute("productSelect" , boardService.productSelect());
         return "board/board_branddetail";
     }

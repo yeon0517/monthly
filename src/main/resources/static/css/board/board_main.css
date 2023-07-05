@@ -73,11 +73,14 @@
     flex-direction: column;
 }
 .box_name {
-    font-size: 15px;
+    font-size: 18px;
+    color: #1e4a53;
     margin-top: 15px;
+    font-weight: bold;
 }
 .price {
-    margin-top: 5px;
+    margin-top: 10px;
+    font-weight: bold;
 }
 .box img {
     width: 200px;

@@ -16,32 +16,47 @@
 
 <!-- main -->
 <div class="wrap">
-<!--  <div class="wrap-container">-->
-<!--    <div class="main">-->
-<!--      <div class="title">-->
-<!--        <h2 th:text="${brand.brandName}"></h2>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="main-img">-->
-<!--      <img th:src="@{/img/boardImg/detail.jpg}" alt="" />-->
-<!--    </div>-->
-<!--    <div class="center">-->
-<!--      <div class="brand-wrap" th:each="brand : ${brandSelect}">-->
-<!--        <div class="brand-list">-->
-<!--          <div class="list-img">-->
-<!--            <img th:src="@{/img/boardImg/ho.jpg}" alt="" />-->
-<!--          </div>-->
-<!--          <div class="list-p" th:each="product : ${productSelect}">-->
-<!--            <h4 th:text="${brand.brandName}"></h4>-->
-<!--            <p th:text="${product.productContents}"></p>-->
-<!--          </div>-->
-<!--          <div class="list-price">-->
-<!--            <p  th:text="${product.productPrice}"></p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div th:each="detail : ${brandDetail}" class="wrap-container">
+    <div class="main">
+      <div class="title">
+        <h2 th:text="${detail.brandName}"></h2>
+      </div>
+    </div>
+    <div class="main-img">
+      <img
+              th:src="'/brand/upload/' + ${detail.brandFileUploadPath} + '/' + ${detail.brandFileUuid} + '_' + ${detail.brandFileName}"
+              alt=""
+      />
+
+    </div>
+    <div class="center">
+      <div class="brand-wrap">
+        <div
+                class="brand-list"
+                th:each="product : ${productSelect}"
+                th:if="${product.brandNumber == detail.brandNumber}"
+        >
+          <div class="list-img">
+            <a th:href="@{/board/productInfo(productNumber=${product.productNumber})}">
+            <img
+                    th:src="'/product/upload/' + ${product.productFileUploadPath} + '/' + ${product.productFileUuid} + '_' + ${product.productFileName}"
+                    alt=""
+            />
+            </a>
+          </div>
+          <div class="list-p">
+            <a th:href="@{/board/productInfo(productNumber=${product.productNumber})}"><h4 th:text="${product.productName}"></h4></a>
+            <p th:text="${product.productContents}"></p>
+          </div>
+          <div class="list-price">
+            <p th:text="${product.productPrice}+'원'"></p>
+          </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- footer-->
 <div class="allfooter" th:replace="fragment/board_footer :: board_footer"></div>

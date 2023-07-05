@@ -23,13 +23,13 @@ public class BoardService {
     public List<BrandFileVo> selectAllBrands() {
         return boardMapper.selectAllBrands();
     }
-    public List<ProductDto> productSelect(){return boardMapper.productSelect(); };
+    public List<ProductFileVo> productSelect(){return boardMapper.productSelect(); }
 
     public List<ProductVo> searchProductList(String searchSelect, String searchInput){
         return boardMapper.searchProductList(searchSelect, searchInput);
     }
 
-    public List<ProductFileVo> mainAll() {
-        return boardMapper.mainAll();
+    public List<ProductFileVo> brandDetail(Long brandNumber) {
+        return boardMapper.brandDetail(brandNumber);
     }
 }
