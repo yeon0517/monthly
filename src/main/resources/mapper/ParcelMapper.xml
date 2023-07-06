@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.monthly.mapper.ParcelMapper">
+    <select id="selectParcelList" resultType="parcelVo">
+    SELECT PARCEL_NUMBER, PARCEL_DATE, PARCEL_STATUS, PARCEL_INVOICE, PARCEL_COMPANY,
+        DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, DELIVERY_POSTCODE, PAYMENT_PRICE, PAYMENT_STATUS,
+        PRODUCT_NAME, PRODUCT_OPTION, USER_NAME, USER_PHONE_NUMBER
+        FROM(SELECT ROWNUM AS RNUM, PARCEL_NUMBER, PARCEL_DATE, PARCEL_STATUS, PARCEL_INVOICE, PARCEL_COMPANY,
+        DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, DELIVERY_POSTCODE, PAYMENT_PRICE, PAYMENT_STATUS,
+        PRODUCT_NAME, PRODUCT_OPTION, USER_NAME, USER_PHONE_NUMBER
+
+        FROM(SELECT PARCEL_NUMBER, PARCEL_DATE, PARCEL_STATUS, PARCEL_INVOICE, PARCEL_COMPANY,
+               DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, DELIVERY_POSTCODE, PAYMENT_PRICE, PAYMENT_STATUS,
+               PRODUCT_NAME, PRODUCT_OPTION, USER_NAME, USER_PHONE_NUMBER
+                FROM MONTHLY_PARCEL P
+                 LEFT JOIN MONTHLY_PAYMENT PM on P.PAYMENT_NUMBER = PM.PAYMENT_NUMBER
+                 LEFT JOIN MONTHLY_PRODUCT PR ON PM.PRODUCT_NUMBER = PR.PRODUCT_NUMBER AND BRAND_NUMBER = #{searchVo.brandNumber}
+                 LEFT JOIN MONTHLY_USER U on PM.USER_NUMBER = U.USER_NUMBER
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="searchVo.searchInput != ''">
+                    <if test="searchVo.searchSelect.equals('parcel-number')">
+                        PARCEL_NUMBER = #{parcelNumber}
+                    </if>
+                    <if test="searchVo.searchSelect.equals('user-name')">
+                        USER_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                    </if>
+                    <if test="searchVo.searchSelect.equals('product-name')">
+                        PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                    </if>
+                </if>
+                <trim prefix="AND">
+                    <if test="'today'.equals(searchVo.period)">
+                        TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)
+                    </if>
+                    <if test="'yesterday'.equals(searchVo.period)">
+                        TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)-1
+                    </if>
+                    <if test="'1month'.equals(searchVo.period)">
+                        P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '1' MONTH
+                    </if>
+                    <if test="'3month'.equals(searchVo.period)">
+                        P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '3' MONTH
+                    </if>
+                </trim>
+            </trim>
+        </where>
+        ORDER BY PARCEL_NUMBER DESC) S1
+        <![CDATA[
+             WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
+    ]]>
+        )S2
+        WHERE RNUM > (#{criteria.page}-1)*#{criteria.amount}
+    </select>
+
+</mapper>

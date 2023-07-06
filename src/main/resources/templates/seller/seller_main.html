@@ -80,7 +80,7 @@
             <td>1</td>
             <td>2023-06-08</td>
             <td>
-              <select name="parcel-status" id="">
+              <select name="parcel-status" id="parcel-status">
                 <option value="parcel-ready">배송준비</option>
                 <option value="parcel-ing">배송중</option>
                 <option value="parcel-done">배송완료</option>
@@ -93,36 +93,22 @@
             <td>010-1234-1234</td>
             <td>경기도 포천시 삼육사로 2135-13 대진아트빌 다동 402호</td>
             <td>
-                <select name="" id="">
-                  <option value="">우체국</option>
-                  <option value="">CJ</option>
-                  <option value="">한진택배</option>
+                <select name="parcel-company" id="parcel-company">
+                  <option value="epost">우체국</option>
+                  <option value="cj">CJ대한통운</option>
+                  <option value="hanjin">한진택배</option>
                 </select>
               </td>
-              <td><input type="text" placeholder="운송장" class="search-input"></td>
-              <td><button type="submit" class="save-btn">save</button></td>
+              <td><input type="text" placeholder="운송장" class="search-input" name="search-input"></td>
+              <td><button type="button" class="save-btn">save</button></td>
             </form>
-            <!-- 저장버튼 누르면 비동기로 저장 -->
           </tr>
+            <!-- 저장버튼 누르면 비동기로 저장 -->
         </tbody>
       </table>
       <div class="page-container">
         <ul class="page-box">
-          <a href="#">
-            <li class="page-num prev">&lt</li>
-          </a>
-          <a href="#">
-            <li class="page-num active">1</li>
-          </a>
-          <a href="#">
-            <li class="page-num">2</li>
-          </a>
-          <a href="#">
-            <li class="page-num">3</li>
-          </a>
-          <a>
-            <li class="page-num next">&gt</li>
-          </a>
+
         </ul>
       </div>
 
