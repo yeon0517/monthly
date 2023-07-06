@@ -35,14 +35,16 @@ public class BoardController {
 
     @GetMapping("/productInfo")
     public String productInfo(Long productNumber, Model model, Criteria criteria, HttpServletRequest req){
-//        productMain에서 productNumber을 get 형식으로 넘겨주고 나는 그걸 받아서  넣어준다.
-        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+//        로그인 없이 들어갈 수 있게 , 로그인시 구독중인지 아닌지 확인 하기 위해
+        if(req.getSession().getAttribute("userNumber") != null){
+            Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+            Long subsNumber = mypageService.reSubs(productNumber,userNumber);
+            model.addAttribute("subsNumber",subsNumber);
+        }
         ProductVo productVo = productService.productView(productNumber);
         int reviewCnt = reviewService.findTotal(productNumber);
-        Long subsNumber = mypageService.reSubs(productNumber,userNumber);
         model.addAttribute("pageInfo",new PageVo(criteria,reviewCnt));
         model.addAttribute("reviewCnt",reviewCnt);
-        model.addAttribute("subsNumber",subsNumber);
         model.addAttribute("product",productVo);
         return "board/productInfo";
     }

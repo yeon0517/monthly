@@ -57,9 +57,9 @@
 
 <!--    배송주문 추가-->
     <insert id="parcelInsert">
-        INSERT INTO MONTHLY_PARCEL (PARCEL_NUMBER, PARCEL_DATE, PARCEL_INVOICE,
+        INSERT INTO MONTHLY_PARCEL (PARCEL_NUMBER, PARCEL_DATE,
                                     DELIVERY_POSTCODE, DELIVERY_ADDRESS1, DELIVERY_ADDRESS2, PAYMENT_NUMBER)
-        VALUES (SEQ_PARCEL.nextval,#{parcelDate},#{parcelInvoice},#{deliveryPostcode},#{deliveryAddress1},#{deliveryAddress2},#{paymentNumber})
+        VALUES (SEQ_PARCEL.nextval,#{parcelDate},#{deliveryPostcode},#{deliveryAddress1},#{deliveryAddress2},#{paymentNumber})
     </insert>
 
 <!--    구독 조회-->

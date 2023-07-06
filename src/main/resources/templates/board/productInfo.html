@@ -20,28 +20,14 @@
               <div class="imgArea">
                 <div class="thuImg">
                   <div class="thumbnail">
-                    <img
-                      src="../img/5e3eebd9f16e87a1d2898e229a8e69f7.jpg"
-                      alt=""
-                    />
+
                   </div>
                 </div>
 
                 <!-- 옆에 작은 이미지 -->
                 <div class="ImgList">
                   <ul>
-                    <li class="list">
-                      <img src="../img/1.jpg" alt="" />
-                    </li>
-                    <li class="list">
-                      <img src="../img/2.jpg" alt="" />
-                    </li>
-                    <li class="list">
-                      <img src="../img/3.jpg" alt="" />
-                    </li>
-                    <li class="list">
-                      <img src="../img/4.jpg" alt="" />
-                    </li>
+
                   </ul>
                 </div>
               </div>
@@ -55,7 +41,7 @@
                   <div class="supply">
                     <span>
                       <!--브랜드 주소 이동할때 브랜드 번호도 같이 보내면 될듯 th:href="@{/board/brandDetail(brandNumber=${product.brandNumber})}"-->
-                      <a th:href="@{/board/brandDetail}" style="color: #8eb4c8">
+                      <a th:href="@{/board/brandDetail(brandNumber=${product.brandNumber})}" style="color: #8eb4c8">
                         <div th:text="${product.brandName}+ '>'">브랜드 이름></div>
                       </a>
                     </span>
@@ -138,6 +124,7 @@
                           <td>
                             <span class="countBtn" style="width: 65px;">
                               <!-- 수량 -->
+                              <input type="hidden" class="amount" th:value="${product.productAmount}">
                               <input name="cnt" id="cnt" type="text" />
                               <img
                                 class="up"
@@ -208,11 +195,11 @@
 
                   <div class="cont">
                     <div class="detailinfo showstep1">
-                      <img class="content" src="../img/proinfo.jpg" alt="" />
-                      <div style="text-align: center" th:text="${product.productContents}"></div>
+<!--                      <img class="content" src="../img/proinfo.jpg" alt="" />-->
+                      <div style="text-align: center" th:utext="${product.productContents}"></div>
                     </div>
                     <button class="btn_open">더보기</button>
-                     <button class="btn_close hide">감추기</button>
+                     <button class="btn_close hide">닫기</button>
                   </div>
 
                   <div class="payInfo">
