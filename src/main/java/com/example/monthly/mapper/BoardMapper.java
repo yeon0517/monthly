@@ -23,7 +23,7 @@ public interface BoardMapper {
     List<ProductFileVo> productSelect();
 
     //검색
-    List<ProductVo> searchProductList(@Param("brandName") String brandName, @Param("productName") String productName);
+    List<ProductFileVo> searchProductList(@Param("searchInput") String searchInput);
 
     //브랜드 디테일
     List<ProductFileVo> brandDetail(Long brandNumber);

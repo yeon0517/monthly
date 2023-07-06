@@ -42,12 +42,15 @@ ORDER BY P.PRODUCT_NUMBER DESC
     </select>
 
     <!--    제품 all로 들어가서 검색기능-->
-    <select id="searchAll" resultType="productVo">
-        SELECT P.PRODUCT_NUMBER, P.PRODUCT_NAME, B.BRAND_NAME, S.SELLER_NAME, P.PRODUCT_PRICE
+    <select id="searchProductList" resultType="productFileVo">
+        SELECT P.PRODUCT_NUMBER, P.PRODUCT_NAME, B.BRAND_NAME, S.SELLER_NAME, P.PRODUCT_PRICE,  PF.PRODUCT_FILE_NAME, PF.PRODUCT_FILE_UPLOAD_PATH, PF.PRODUCT_FILE_UUID
+             ,PF.PRODUCT_FILE_SIZE
         FROM MONTHLY_PRODUCT P
                  LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
                  LEFT OUTER JOIN MONTHLY_SELLER S ON B.SELLER_NUMBER = S.SELLER_NUMBER
-        WHERE (P.PRODUCT_NAME LIKE '%' || #{productName} || '%' OR B.BRAND_NAME LIKE '%' || #{brandName} || '%')
+                 LEFT OUTER JOIN MONTHLY_PRODUCT_FILE PF ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
+        WHERE (P.PRODUCT_NAME LIKE '%' || '꽃' || '%' OR B.BRAND_NAME LIKE '%' || '꽃' || '%')
+          AND PF.PRODUCT_FILE_SIZE  LIKE '%m%'
     </select>
 
 

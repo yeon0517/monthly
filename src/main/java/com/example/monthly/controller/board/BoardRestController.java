@@ -21,13 +21,13 @@ public class BoardRestController {
     private final BoardService boardService;
 
 
- @GetMapping("/search")
-    public List<ProductVo> boardSearch(String brandName, String productName){
-     ProductVo productVo = new ProductVo();
-     productVo.setBrandName(brandName);
-     productVo.setProductName(productName);
-     return boardService.searchProductList(brandName,productName);
- }
+// @GetMapping("/search")
+//    public List<ProductVo> boardSearch(String brandName, String productName){
+//     ProductVo productVo = new ProductVo();
+//     productVo.setBrandName(brandName);
+//     productVo.setProductName(productName);
+//     return boardService.searchProductList(brandName,productName);
+// }
 
 
 

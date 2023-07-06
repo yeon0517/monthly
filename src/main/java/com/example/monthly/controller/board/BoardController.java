@@ -9,6 +9,7 @@ import com.example.monthly.mapper.BoardMapper;
 import com.example.monthly.service.board.BoardService;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,6 +66,12 @@ public class BoardController {
     @GetMapping("/product")
     public String product(Model model){
         model.addAttribute("productSelect" , boardService.productSelect());
+        return "board/board_product";
+    }
+
+    @GetMapping("/productSearch")
+    public String productSearch(Model model, @Param("searchInput") String searchInput){
+        model.addAttribute("productSelect", boardService.searchProductList(searchInput));
         return "board/board_product";
     }
 

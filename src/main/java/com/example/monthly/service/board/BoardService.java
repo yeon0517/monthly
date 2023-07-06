@@ -32,9 +32,9 @@ public class BoardService {
 //    }
 
 
-    public List<ProductVo> searchProductList(String brandName, String productName){
+    public List<ProductFileVo> searchProductList(String searchInput){
 
-        return boardMapper.searchProductList(brandName,productName );
+        return boardMapper.searchProductList(searchInput);
 
     }
 
