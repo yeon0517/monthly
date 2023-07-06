@@ -126,24 +126,34 @@
 
     <!--판매자의 브랜드,구독자 조회-->
 <select id="selectSubUser" resultType="productVo">
-    SELECT
-        MP.PRODUCT_NUMBER,
-        MP.PRODUCT_NAME,
-        COUNT(MS.USER_NUMBER) AS USER_NUMBER_COUNT
-    FROM
-        MONTHLY_USER MU
-            JOIN MONTHLY_SUBSCRIBE MS ON MU.USER_NUMBER = MS.USER_NUMBER
-            JOIN MONTHLY_PRODUCT MP ON MS.PRODUCT_NUMBER = MP.PRODUCT_NUMBER
-            JOIN MONTHLY_BRAND MB ON MP.BRAND_NUMBER = MB.BRAND_NUMBER
-            JOIN MONTHLY_SELLER MSN ON MB.SELLER_NUMBER = MSN.SELLER_NUMBER
-    WHERE
-        MSN.SELLER_NUMBER = #{sellerNumber}
-    GROUP BY
-        MP.PRODUCT_NUMBER,
-        MP.PRODUCT_NAME
-</select>
+    SELECT MP.PRODUCT_NUMBER,MP.PRODUCT_NAME ,MB.BRAND_NAME,
+           (SELECT COUNT(SUBS_NUMBER) FROM MONTHLY_SUBSCRIBE MS
+            WHERE PRODUCT_NUMBER = MP.PRODUCT_NUMBER) AS SUBS_NUMBER_COUNT
+    FROM MONTHLY_PRODUCT MP JOIN MONTHLY_BRAND MB on MP.BRAND_NUMBER = MB.BRAND_NUMBER
+    WHERE SELLER_NUMBER =#{sellerNumber} ORDER BY PRODUCT_NUMBER
 
+</select><!--판매자의 브랜드페이지 이름만 띄우기-->
+    <select id="brandName" resultType="productVo">
+   SELECT BRAND_NAME FROM MONTHLY_BRAND WHERE SELLER_NUMBER = #{sellerNumber}
+    </select>
 
+<!--상품별 구독자 검색-->
+    <select id="productSubsUserList" resultType="subsVo">
+        SELECT U.USER_NUMBER, U.USER_NAME, U.USER_ID, S.SUBS_NUMBER, S.SUBS_START_DATE, B.BRAND_NUMBER, P.PRODUCT_NUMBER,P.PRODUCT_NAME
+        FROM MONTHLY_SUBSCRIBE S
+        LEFT OUTER JOIN MONTHLY_USER U ON U.USER_NUMBER = S.USER_NUMBER
+        LEFT OUTER JOIN MONTHLY_PRODUCT P ON S.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
+
+        WHERE S.PRODUCT_NUMBER = #{productNumber}
+        <if test="subscriberInput != null">
+            AND U.USER_ID LIKE '%' || #{subscriberInput} || '%'
+        </if>
+        <if test="'3day'.equals(period)">
+            AND EXTRACT(DAY FROM S.SUBS_START_DATE) = EXTRACT(DAY FROM SYSDATE + 3)
+        </if>
+
+        </select>
 
 
 
@@ -192,14 +202,115 @@
     WHERE m.BRAND_REGISTER_DATE >= TRUNC(ADD_MONTHS(SYSDATE, -3), 'MM')
 </select>
 
-
+    <!--강제구독취소 기능-->
+    <delete id="deleteSubs">
+        DELETE FROM MONTHLY_SUBSCRIBE
+        WHERE SUBS_NUMBER = #{subsNumber}
+    </delete>
 
 
 </mapper>
 
 
 
+        <!--브랜드페이지에서 모든상품 구독자 전체 불러오기-->
+        <!--    <select id="brandSubsUserList" resultType="subsVo">-->
+        <!--        SELECT U.USER_NUMBER, U.USER_NAME, U.USER_ID, S.SUBS_NUMBER, S.SUBS_START_DATE, B.BRAND_NUMBER, P.PRODUCT_NAME-->
+        <!--        FROM MONTHLY_SUBSCRIBE S-->
+        <!--        LEFT OUTER JOIN MONTHLY_USER U ON U.USER_NUMBER = S.USER_NUMBER-->
+        <!--        LEFT OUTER JOIN MONTHLY_PRODUCT P ON S.PRODUCT_NUMBER = P.PRODUCT_NUMBER-->
+        <!--        LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER-->
+        <!--        <where>-->
+        <!--            <if test="subscriberInput != null and subscriberInput != ''">-->
+        <!--                U.USER_ID LIKE '%' || #{subscriberInput} || '%'-->
+        <!--            </if>-->
+        <!--            <if test="brandNumber != null">-->
+        <!--                AND B.BRAND_NUMBER = #{brandNumber}-->
+        <!--            </if>-->
+        <!--        </where>-->
+        <!--    </select>-->
 
+<!--<select id="productSubsUserList" resultType="subsVo">-->
+<!--SELECT U.USER_NUMBER, U.USER_NAME, U.USER_ID, S.SUBS_NUMBER, S.SUBS_START_DATE, B.BRAND_NUMBER, P.PRODUCT_NUMBER-->
+<!--FROM MONTHLY_SUBSCRIBE S-->
+<!--LEFT OUTER JOIN MONTHLY_USER U ON U.USER_NUMBER = S.USER_NUMBER-->
+<!--LEFT OUTER JOIN MONTHLY_PRODUCT P ON S.PRODUCT_NUMBER = P.PRODUCT_NUMBER-->
+<!--LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER-->
+<!--<where>-->
+<!--    S.PRODUCT_NUMBER = #{productNumber}-->
+<!--    <if test="!''.equals(subscriberInput)">-->
+<!--        AND U.USER_ID LIKE '%' || #{subscriberInput} || '%'-->
+<!--    </if>-->
+
+<!--    &lt;!&ndash;            <trim prefix="and">&ndash;&gt;-->
+<!--    &lt;!&ndash;                  <if test="'3day'.equals(searchVo.period)">&ndash;&gt;-->
+<!--    &lt;!&ndash;                         EXTRACT(DAY FROM S.SUBS_START_DATE) = EXTRACT(DAY FROM LAST_DAY(SYSDATE)) - 3&ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;                 </if>&ndash;&gt;-->
+<!--    &lt;!&ndash;            </trim>&ndash;&gt;-->
+<!--</where>-->
+
+<!--</select>-->
+
+
+
+<!--    SELECT
+        MP.PRODUCT_NUMBER,
+        MP.PRODUCT_NAME,
+       MB.BRAND_NAME,
+        COUNT(MS.USER_NUMBER) AS USER_NUMBER_COUNT
+    FROM
+        MONTHLY_USER MU
+            JOIN MONTHLY_SUBSCRIBE MS ON MU.USER_NUMBER = MS.USER_NUMBER
+            JOIN MONTHLY_PRODUCT MP ON MS.PRODUCT_NUMBER = MP.PRODUCT_NUMBER
+            JOIN MONTHLY_BRAND MB ON MP.BRAND_NUMBER = MB.BRAND_NUMBER
+            JOIN MONTHLY_SELLER MSN ON MB.SELLER_NUMBER = MSN.SELLER_NUMBER
+    WHERE
+        MSN.SELLER_NUMBER = #{sellerNumber}
+    GROUP BY
+        MP.PRODUCT_NUMBER,
+        MP.PRODUCT_NAME,
+        MB.BRAND_NAME
+        -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    SELECT
+        MP.PRODUCT_NUMBER,
+        MP.PRODUCT_NAME,
+       MB.BRAND_NAME,
+        COUNT(MS.USER_NUMBER) AS USER_NUMBER_COUNT
+    FROM
+        MONTHLY_USER MU
+            JOIN MONTHLY_SUBSCRIBE MS ON MU.USER_NUMBER = MS.USER_NUMBER
+            JOIN MONTHLY_PRODUCT MP ON MS.PRODUCT_NUMBER = MP.PRODUCT_NUMBER
+            JOIN MONTHLY_BRAND MB ON MP.BRAND_NUMBER = MB.BRAND_NUMBER
+            JOIN MONTHLY_SELLER MSN ON MB.SELLER_NUMBER = MSN.SELLER_NUMBER
+    WHERE
+        MSN.SELLER_NUMBER = #{sellerNumber}
+    GROUP BY
+        MP.PRODUCT_NUMBER,
+        MP.PRODUCT_NAME,
+        MB.BRAND_NAME
+        -->
 
 
 

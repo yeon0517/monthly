@@ -5,6 +5,7 @@ import com.example.monthly.mapper.AdminMapper;
 import com.example.monthly.vo.AdminChartVo;
 import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
+import com.example.monthly.vo.SubsVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,6 +72,11 @@ public Long findAdminNumber(String adminId, String adminPassword){
     public List<ProductVo> selectSubUser(Long sellerNumber) {
         return adminMapper.selectSubUser(sellerNumber);
     }
+    //브랜드 페이지 브랜드 명 띄우기
+    public List<ProductVo> brandName(Long sellerNumber){return adminMapper.brandName(sellerNumber); }
+
+    //브랜드 페이지 모든 구독자 리스트 띄우기
+     public List<SubsVo> productSubsUserList(SearchVo searchVo){return adminMapper.productSubsUserList(searchVo);}
 
 
     //판매자 상태 변경
@@ -86,6 +92,10 @@ public Long findAdminNumber(String adminId, String adminPassword){
             throw new IllegalArgumentException("수정 정보 누락");
         }
         adminMapper.updateProduct(productVo);
+    }
+    //구독 상태 변경
+    public void remove(Long subsNumber){
+        adminMapper.deleteSubs(subsNumber);
     }
 
     // 판매자 신청 현황 날짜 별 처리 현황
