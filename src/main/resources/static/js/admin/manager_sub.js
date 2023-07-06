@@ -6,9 +6,9 @@ function showList(map){
 
     map.forEach(i =>{
         list +=`
-          <tr> 
+          <tr class="subsNumber" data-num="${i.subsNumber}"> 
                 <td>${i.userNumber}</td>
-                <td>${i.subsNumber}</td>
+                <td >${i.subsNumber}</td>
                 <td>${i.productName}</td>
                 <td>${i.userName}</td>
                 <td>${i.userId}</td>
@@ -50,3 +50,16 @@ $('.period-input').on('click','.period', function (){
     sub.productSubsUserList({subscriberInput : globalSearchInput, productNumber : globalProductNumber, period : searchPeriod}, showList, showError);
 
 })
+
+
+//강제 구독 취소
+$('.sub-list-body').on('click','.out-btn',function (){
+   let subsNumber = $(this).closest('.subsNumber').data('num');
+    let searchPeriod = $('input[name=period]:checked').val();
+    console.log(subsNumber);
+    console.log(subsNumber+"번 구독자 삭제 완료====================");
+    sub.removeSubs(subsNumber, function (){
+        sub.productSubsUserList({subscriberInput : globalSearchInput, productNumber : globalProductNumber, period : searchPeriod}, showList, showError);
+    },showError);
+
+});

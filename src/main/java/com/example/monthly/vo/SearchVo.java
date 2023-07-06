@@ -14,4 +14,5 @@ public class SearchVo {
     private String subscriberInput;
     private Long brandNumber;
     private Long productNumber;
+    private Long productName;
 }

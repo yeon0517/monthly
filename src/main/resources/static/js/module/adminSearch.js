@@ -79,3 +79,20 @@ export function productSubsUserList(psl,callback,error){
         error : error
     });
 }
+
+//강제 구독 취소
+export function removeSubs(subsNumber,callback,error){
+    $.ajax({
+        url: `/search/subs/${subsNumber}`,
+        type: 'delete',
+        success: function(){
+            console.log('구독상태변경 ajax연결 성공');
+            if (callback){
+                callback();
+            }
+        },
+        error:error
+    });
+}
+
+

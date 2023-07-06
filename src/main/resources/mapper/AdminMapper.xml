@@ -139,7 +139,7 @@
 
 <!--상품별 구독자 검색-->
     <select id="productSubsUserList" resultType="subsVo">
-        SELECT U.USER_NUMBER, U.USER_NAME, U.USER_ID, S.SUBS_NUMBER, S.SUBS_START_DATE, B.BRAND_NUMBER, P.PRODUCT_NUMBER
+        SELECT U.USER_NUMBER, U.USER_NAME, U.USER_ID, S.SUBS_NUMBER, S.SUBS_START_DATE, B.BRAND_NUMBER, P.PRODUCT_NUMBER,P.PRODUCT_NAME
         FROM MONTHLY_SUBSCRIBE S
         LEFT OUTER JOIN MONTHLY_USER U ON U.USER_NUMBER = S.USER_NUMBER
         LEFT OUTER JOIN MONTHLY_PRODUCT P ON S.PRODUCT_NUMBER = P.PRODUCT_NUMBER
@@ -154,7 +154,6 @@
         </if>
 
         </select>
-
 
 
 
@@ -203,7 +202,11 @@
     WHERE m.BRAND_REGISTER_DATE >= TRUNC(ADD_MONTHS(SYSDATE, -3), 'MM')
 </select>
 
-
+    <!--강제구독취소 기능-->
+    <delete id="deleteSubs">
+        DELETE FROM MONTHLY_SUBSCRIBE
+        WHERE SUBS_NUMBER = #{subsNumber}
+    </delete>
 
 
 </mapper>

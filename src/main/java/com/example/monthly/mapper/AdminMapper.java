@@ -22,8 +22,7 @@ public interface AdminMapper {
 
     public void update(SellerDto sellerDto); //판매자 상태변경
     public void updateProduct(ProductVo productVo); //상품 판매상태 변경
-
-
+   public void deleteSubs(Long subsNumber);//구독취소
     //카테고리별 판매자 조회 검색
     List<SellerDto> selectSeller(SearchVo searchVo);
 
