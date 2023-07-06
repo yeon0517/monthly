@@ -2,6 +2,7 @@ package com.example.monthly.controller.admin;
 
 import com.example.monthly.service.admin.AdminService;
 import com.example.monthly.vo.AdminChartVo;
+import com.example.monthly.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ import java.util.List;
 @RequestMapping("/admin/*")
 public class AdminController {
     private final AdminService adminService;
+
+    @GetMapping("/login")
+    public String login(){return "seller/seller/login";}
 
     @PostMapping("/login")
     public RedirectView login(String adminId, String adminPassword, HttpServletRequest req){
@@ -60,10 +64,13 @@ public class AdminController {
 
     @GetMapping("/subMember")
     public String subMember(Long sellerNumber,Model model){
-        adminService.selectSubUser(sellerNumber);
         model.addAttribute("sellerNumber" ,sellerNumber);
+        List<ProductVo> productVo  = adminService.selectSubUser(sellerNumber);
+        List<ProductVo> brandName = adminService.brandName(sellerNumber);
         System.out.println("==========================");
         System.out.println(sellerNumber);
+        model.addAttribute("product",productVo);
+        model.addAttribute("brand",brandName);
         return "admin/manager_seller_detail";}
 
     @GetMapping("/logout")

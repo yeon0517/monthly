@@ -6,6 +6,7 @@ import com.example.monthly.dto.SellerDto;
 import com.example.monthly.vo.AdminChartVo;
 import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
+import com.example.monthly.vo.SubsVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,16 +22,20 @@ public interface AdminMapper {
 
     public void update(SellerDto sellerDto); //판매자 상태변경
     public void updateProduct(ProductVo productVo); //상품 판매상태 변경
-
-
+   public void deleteSubs(Long subsNumber);//구독취소
     //카테고리별 판매자 조회 검색
     List<SellerDto> selectSeller(SearchVo searchVo);
 
     //카테고리별 상품 검색
     List<ProductVo> searchProduct(SearchVo searchVo);
 
-    //판매자이동 후 해당 브랜드의 구독자 조회 #1
+    //판매자이동 후 해당 브랜드의 상품들, 구독자 수만 조회 #1
     List<ProductVo> selectSubUser(Long sellerNumber);
+    List<ProductVo> brandName(Long sellerNumber);
+
+    //판매자 이동 후 상품별 구독자 정보 가져오기 #3
+    List<SubsVo> productSubsUserList(SearchVo searchVo);
+
 
     List<AdminChartVo> sellerApplication();
     List<AdminChartVo> paymentCount();
