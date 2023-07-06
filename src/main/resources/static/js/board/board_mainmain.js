@@ -1,6 +1,5 @@
 
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const wrapLists = document.querySelectorAll('.wrap_list');
 
@@ -14,8 +13,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-
-
-
-
