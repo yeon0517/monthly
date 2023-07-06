@@ -25,4 +25,4 @@ public class ProductVo {
     private String sellerPhoneNumber; //판매자 연락처 은서가 추가
     private String sellerEmail; //판매자 이메일 은서가 추가
     private String sellerName; //판매자 이름 은서가 추가
-}
+    }
