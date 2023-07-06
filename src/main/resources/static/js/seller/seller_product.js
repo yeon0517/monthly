@@ -1,11 +1,33 @@
 import  * as product from '../module/product.js';
 
 let page = 1;
+let searchInput = '';
+let searchSelect = '';
+let productStatus = '';
 
-product.getListPage({page : page}, showProduct, showError);
+$(function (){
+    // product.getListPage({page : page}, showProduct, showError);
+    searchInput = $('.search-input').val();
+    searchSelect = $('.search-dropdown').val();
+    productStatus = $('input[name="product-status"]:checked').val();
+    console.log(productStatus);
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "productStatus":productStatus
+    }
+    console.log(searchVo);
+
+    product.searchProduct(searchVo,showProduct);
+})
+
+
+
 
 function showError(a,b,c){ console.error(c);}
 
+//제품리스트 띄우기 + 페이징버튼 처리
 function showProduct(map){
   let text = '';
   map.productList.forEach(product =>{
@@ -36,13 +58,110 @@ function showProduct(map){
 <tr>
 `;
   });
+  //페이지버튼
+  let pageBox ='';
+  if(map.pageVo.prev==true){
+      pageBox +=`
+      <a>
+          <li class="page-num prev" value="${map.pageVo.startPage -1}>&lt</li>
+        </a>
+      `;
+  }
+  for(let i=map.pageVo.startPage; i<=map.pageVo.endPage; i++){
+      if(i==map.pageVo.criteria.page){
+          pageBox +=`
+          <a>
+          <li class="page-num active">${i}</li>
+          </a>
+          `;
+      }else{
+          pageBox +=`
+          <a><li class="page-num">${i}</li></a>
+          `;
+      }
+  }
+  if(map.pageVo.next==true){
+      pageBox +=`
+      <a><li class="page-num next" value="${map.pageVo.endPage +1}">&gt</li></a>
+      `;
+  }
     $('.product-list-body').html(text);
+    $('.page-box').html(pageBox);
+
 }
+
+//페이지버튼을 눌렀을 때
+$('.page-box').on('click','.page-num',function(){
+
+   if($(this).hasClass('next')){
+       return;
+   }
+   if($(this).hasClass('prev')){
+       return;
+   }
+   let page = $(this).text();
+
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "productStatus":productStatus
+    }
+    product.searchProduct(searchVo,showProduct);
+
+});
+// 이전버튼 눌렀을 때
+$('.page-box').on('click','.prev',function(){
+   let page=$(this).val();
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "productStatus":productStatus
+    }
+    product.searchProduct(searchVo,showProduct);
+});
+//다음버튼 눌렀을 때
+$('.page-box').on('click','.next',function(e){
+    e.preventDefault();
+    let page=$(this).val();
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "productStatus":productStatus
+    }
+    product.searchProduct(searchVo,showProduct);
+});
+
+//===================검색=================
+let $search = $('.search-btn');
+$search.on('click', function (){
+    console.log('클릭할게요');
+    searchInput = $('.search-input').val();
+    searchSelect = $('.search-dropdown').val();
+    productStatus = $('input[name="product-status"]:checked').val();
+    console.log(productStatus);
+    let searchVo ={
+        "page":page,
+        "searchInput":searchInput,
+        "searchSelect":searchSelect,
+        "productStatus":productStatus
+    }
+    console.log(searchVo);
+
+    product.searchProduct(searchVo,showProduct);
+    $('.search-input').val('');
+    $('input[name=product-status]').removeAttr('checked');
+    $('input[name=product-status]').filter("[value=all]").prop("checked", true);
+});
+
 
 // <!--            @{/seller/modify(productNumber = ${product.productNumber})}-->
 // <!--            <option value="2" th:selected="${product.productStatus}==2">판매중지</option> -->
 
-function appendProduct(map){
+//무한스크롤페이징을 안할거라 어펜드는 필요없다.
+/*function appendProduct(map){
     let text = '';
 
     map.productList.forEach(product =>{
@@ -50,6 +169,7 @@ function appendProduct(map){
             <tr>
       <form action="#">
           <td>${product.productNumber}</td>
+          <input type="hidden" value="${product.productRegisterDate}">
           <td>${product.productRegisterDate}</td>
           <td>
             <select name="productStatus">
@@ -74,10 +194,9 @@ function appendProduct(map){
         `;
     });
         $('.product-list-body').append(text);
-}
+}*/
 
-
-//무한스크롤페이징
+/*//무한스크롤페이징
 $(window).on('scroll', function(){
     console.log($(window).scrollTop());
     console.log(`document :${$(document).height()}`);
@@ -87,29 +206,8 @@ $(window).on('scroll', function(){
         console.log(++page);
         product.getListPage({page:page}, appendProduct, showError);
     }
-});
+});*/
 
 
-//===================검색=================
-let $search = $('.search-btn');
-$search.on('click', function (){
-    console.log('클릭할게요');
-    let searchInput = $('.search-input').val();
-    let searchSelect = $('.search-dropdown').val();
-    let productStatus = $('input[name="product-status"]:checked').val();
-    console.log(productStatus);
-    let searchVo ={
-        "page":page,
-        "searchInput":searchInput,
-        "searchSelect":searchSelect,
-        "productStatus":productStatus
-    }
-    console.log(searchVo);
 
-    product.searchProduct(searchVo,showProduct);
-    $('.search-input').val('');
-    $('input[name=product-status]').removeAttr('checked');
-    $('input[name=product-status]').filter("[value=all]").prop("checked", true);
-
-});
 

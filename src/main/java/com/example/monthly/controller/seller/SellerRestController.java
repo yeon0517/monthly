@@ -48,45 +48,50 @@ public class SellerRestController {
         return sellerService.findSellerInfo(sellerNumber);
     }
 
-//    제품리스트
-    @GetMapping("/list")
+//    상품전체리스트
+/*    @GetMapping("/list")
     public List<ProductVo> list(HttpServletRequest req){
+        System.out.println("===============$$$$$$$/list/");
         Long sellerNumber = (Long) req.getSession().getAttribute("sellerNumber");
-        return productService.findAllProduct(sellerNumber);}
+        return productService.findAllProduct(sellerNumber);}*/
 
-//      제품리스트 페이징처리
+//      제품리스트조회+ 페이징처리
     @GetMapping("/list/{page}")
     public Map<String, Object> productListPage(HttpServletRequest req, @PathVariable("page")int page) {
         Long sellerNumber = (Long) req.getSession().getAttribute("sellerNumber");
         Criteria criteria = new Criteria(page, 10);
         PageVo pageVo = new PageVo(criteria, productService.getTotal(sellerNumber));
         List<ProductVo> productList = productService.findListPage(criteria, sellerNumber);
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++");
-        System.out.println(productList);
-        System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
         Map<String, Object> productMap = new HashMap<>();
+        System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
         productMap.put("pageVo", pageVo);
+        System.out.println("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+        System.out.println(pageVo);
         productMap.put("productList", productList);
         return productMap;
     }
 
-    @GetMapping("/modify")
-    public List<ProductFileDto> files(Long productNumber){
-        List<ProductFileDto> files = productFileService.getProductFileList(productNumber);
-        return files;
-    }
+//    검색조건넣어서 제품조회
     @GetMapping("/searchP/{page}")
     public Map<String, Object> searchProduct(HttpServletRequest req, SearchVo searchVo, @PathVariable("page")int page){
         System.out.println("===============검색 restController진입=====================");
         System.out.println(searchVo);
         Long sellerNumber = (Long) req.getSession().getAttribute("sellerNumber");
         Criteria criteria = new Criteria(page, 10);
-        PageVo pageVo = new PageVo(criteria, productService.getSearchTotal(sellerNumber,searchVo)); // 이거를 조건에 맞춰서 바꿔줘야함
-        List<ProductVo> productList = productService.searhProduct(sellerNumber, searchVo);
+        PageVo pageVo = new PageVo(criteria, productService.getSearchTotal(sellerNumber,searchVo));
+        List<ProductVo> productList = productService.searhProduct(sellerNumber, searchVo, criteria);
         Map<String, Object> productMap = new HashMap<>();
         productMap.put("pageVo",pageVo);
         productMap.put("productList",productList);
         return productMap;
     }
+
+//  제품 정보수정-어디서쓴거징??
+    @GetMapping("/modify")
+    public List<ProductFileDto> files(Long productNumber){
+        List<ProductFileDto> files = productFileService.getProductFileList(productNumber);
+        return files;
+    }
 }
+
 //@PathVariable("sellerId")

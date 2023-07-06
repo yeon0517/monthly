@@ -191,8 +191,9 @@ $sellerInfoSave.on("click", function() {
     "sellerPhoneNumber" : $('#seller-phone-number').val(),
     "sellerEmail" : $('#seller-email').val(),
     "sellerCompanyRegisterNumber" : $('#seller-company-register-number').val(),
-    "sellerContents" : $('#seller-contents').text()
+    "sellerContents" : $('#seller-contents').val()
   }
+  console.log(sellerDto.sellerContents);
 
   let cuPwMsg = $cuPwMsg.text();
   let userPwMsg = $userPwMsg.text();

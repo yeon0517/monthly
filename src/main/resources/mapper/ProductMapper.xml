@@ -50,12 +50,12 @@
                     PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
                      BRAND_NUMBER, BRAND_NAME
              FROM(
-                     SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
-                            PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
-                             B.BRAND_NUMBER, B.BRAND_NAME
-                     FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
-                                                 ON P.BRAND_NUMBER = B.BRAND_NUMBER AND SELLER_NUMBER= #{sellerNumber}
-                     order by PRODUCT_NUMBER desc) S1
+                 SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+                 PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+                 B.BRAND_NUMBER, B.BRAND_NAME
+                 FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
+                 ON P.BRAND_NUMBER = B.BRAND_NUMBER AND SELLER_NUMBER= #{sellerNumber}
+                 order by PRODUCT_NUMBER desc) S1
     <![CDATA[
              WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
     ]]>
@@ -76,6 +76,7 @@
         WHERE PRODUCT_NUMBER = #{productNumber}
     </update>
 
+<!--    검색조건 넣어서 판매자 번호로 제품이 몇개인지 조회-->
     <select id="selectSearchTotal" resultType="_int">
         SELECT COUNT(PRODUCT_NUMBER)
         FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
@@ -108,7 +109,13 @@
 
 <!--   판매자번호로 검색 조회 (상품번호/상품명)(판매상태:전체/판매준비/판매중/판매중지)-->
     <select id="selectSearchProduct" resultType="productVo">
-        SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+        PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+        BRAND_NUMBER, BRAND_NAME
+FROM(SELECT ROWNUM AS RNUM, PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+        PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+        BRAND_NUMBER, BRAND_NAME
+FROM(SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
         PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
         B.BRAND_NUMBER, B.BRAND_NAME
         FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
@@ -136,7 +143,12 @@
                 </trim>
             </trim>
         </where>
-        order by PRODUCT_NUMBER desc
+        order by PRODUCT_NUMBER desc) S1
+        <![CDATA[
+             WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
+    ]]>
+        )S2
+        WHERE RNUM > (#{criteria.page}-1)*#{criteria.amount}
     </select>
 
 

@@ -94,25 +94,28 @@
         </table>
       </div>
     </section>
+        <div class="page-container">
+          <ul class="page-box">
+          <!--페이징버튼이 추가될 부분-->
+          </ul>
+        </div>
 <!--    <div class="page-container">
       <ul class="page-box">
-        <a href="#" class="page-a" th:if="${pageInfo.prev}">
+        <a th:href="@{/sellers/list(page=${pageVo.startPage -1})}" th:if="${pageVo.prev}">
           <li class="page-num prev">&lt</li>
         </a>
-
-        <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-          <a th:href="@{/product/list(page=${i})}" class="page-a">
-            <li class="page-num active" th:text="${i}" th:if="${i==pageInfo.criteria.page}"></li>
-            <li class="page-num" th:text="${i}" th:unless="${i==pageInfo.criteria.page}"></li>
-          </a>
+        <th:block th:each="i:${#numbers.sequence(pageVo.startPage, pageVo.endPage)}">
+        <a th:href="@{/sellers/list(page=${i})}">
+          <li class="page-num active" th:text="${i}" th:if="${i==pageVo.criteria.page}"></li>
+          <li class="page-num" th:text="${i}" th:unless="${i==pageVo.criteria.page}"></li>
+        </a>
         </th:block>
-
-        <a th:href="@{/product/list(page=${pageInfo.startPage +1})}" class="page-a">
-          <li class="page-num next" th:if="${pageInfo.next}">&gt</li>
+        <a th:href="@{/sellers/list(page=${pageVo.endPage +1})}">
+          <li class="page-num next" th:if="${pageVo.next}">&gt</li>
         </a>
       </ul>
-    </div>
-  </div>-->
+    </div>-->
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script th:src="@{/js/admin/admin_header.js}"></script>
   <script>

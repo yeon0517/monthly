@@ -93,24 +93,24 @@ public class ProductService {
     }
 
 
-//    상품리스트조회
+//    상품전체리스트조회
     @Transactional(readOnly = true)
     public List<ProductVo> findAllProduct(Long sellerNumber){
         if(sellerNumber==null){throw new IllegalArgumentException("판매자번호 누락");}
        return productMapper.selectList(sellerNumber);
     }
-
+//      상품 전체갯수조회
     @Transactional(readOnly = true)
     public int getTotal(Long sellerNumber){
         if(sellerNumber==null){throw new IllegalArgumentException("판매자번호 누락");}
         return productMapper.selectTotal(sellerNumber);}
-
+//      검색조건 넣어서 상품 갯수조회
     @Transactional(readOnly = true)
     public int getSearchTotal(Long sellerNumber, SearchVo searchVo){
         if(sellerNumber==null||searchVo ==null){throw new IllegalArgumentException("검색정보누락");}
         return productMapper.selectSearchTotal(sellerNumber,searchVo);
     }
-
+//      상품전체리스트 페이징처리 조회
     public List<ProductVo> findListPage(Criteria criteria, Long sellerNumber){
         if(criteria==null || sellerNumber ==null){
             throw new IllegalArgumentException("페이징 정보 누락");
@@ -127,11 +127,14 @@ public class ProductService {
         productMapper.amountChange(productVo);
     }
 
+//    검색조건 넣어서 상품 전체리스트 조회
     @Transactional(readOnly = true)
-    public List<ProductVo> searhProduct(Long sellerNumber, SearchVo searchVo){
+    public List<ProductVo> searhProduct(Long sellerNumber, SearchVo searchVo,Criteria criteria){
         System.out.println("===============검색 productService진입==================");
         if(sellerNumber==null || searchVo==null){throw new IllegalArgumentException("검색정보누락");}
-        return productMapper.selectSearchProduct(sellerNumber, searchVo);
+        return productMapper.selectSearchProduct(sellerNumber, searchVo, criteria);
     }
+//    검색조건 넣어서 상품 전체리스트 + 페이징처리 조회?
+
 
 }
