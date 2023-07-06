@@ -57,6 +57,12 @@
         WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
 
+    <!--api 로그인-->
+    <select id="apiUserLogin" resultType="long">
+        SELECT USER_NUMBER FROM MONTHLY_USER
+        WHERE USER_ID = #{userId}
+    </select>
+
     <!--아이디 찾기-->
     <select id="findId" resultType="userVo">
         SELECT USER_NAME, USER_EMAIL, USER_ID FROM MONTHLY_USER

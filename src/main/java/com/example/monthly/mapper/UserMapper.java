@@ -28,7 +28,10 @@ public interface UserMapper {
     public Long userLogin(@Param("userId")String userId,
                                  @Param("userPassword")String userPassword);
 
-    // 아이디 찾기
+    // api 로그인
+    public Long apiUserLogin(@Param("userId") String userId);
+
+   // 아이디 찾기
     public UserVo findId(UserVo userVo);
 
     // 비밀번호 찾기
