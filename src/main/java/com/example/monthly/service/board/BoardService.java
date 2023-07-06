@@ -2,6 +2,7 @@ package com.example.monthly.service.board;
 
 import com.example.monthly.dto.BrandDto;
 import com.example.monthly.dto.ProductDto;
+import com.example.monthly.dto.SubsDto;
 import com.example.monthly.mapper.BoardMapper;
 import com.example.monthly.mapper.BrandMapper;
 import com.example.monthly.vo.BrandFileVo;
@@ -25,9 +26,19 @@ public class BoardService {
     }
     public List<ProductFileVo> productSelect(){return boardMapper.productSelect(); }
 
-    public List<ProductVo> searchProductList(String searchSelect, String searchInput){
-        return boardMapper.searchProductList(searchSelect, searchInput);
+//    public List<ProductVo> searchProductList(String brandName, String productName){
+//        ProductVo productVo = new ProductVo();
+//        return boardMapper.searchProductList(productVo);
+//    }
+
+
+    public List<ProductVo> searchProductList(String brandName, String productName){
+
+        return boardMapper.searchProductList(brandName,productName );
+
     }
+
+
 
     public List<ProductFileVo> brandDetail(Long brandNumber) {
         return boardMapper.brandDetail(brandNumber);
