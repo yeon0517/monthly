@@ -90,8 +90,8 @@
               <div class="search_div">
                 <fieldset>
                   <span>검색</span>
-                  <input type="text" id="keyword" name="searchInput" />
-                  <input type="image" th:src="@{/img/allImg/search.png}" id="search" onclick="submitSearchForm()" />
+                  <input type="text" id="keyword" class="keyword" name="searchInput" />
+                  <input type="image" th:src="@{/img/allImg/search.png}" id="search" class="imgBtn" onclick="submitSearchForm()" />
                 </fieldset>
               </div>
             </form>
@@ -147,5 +147,7 @@
 </header>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src="@{/js/board/board_main.js}"></script>
+<script type="module" th:src="@{/js/board/boardproductSearch.js}"></script>
+
 </body>
 </html>
