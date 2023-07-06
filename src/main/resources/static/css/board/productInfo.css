@@ -94,7 +94,7 @@ div {
 }
 
 .thumbnail img {
-  width: 400px;
+  width: 515px;
 }
 
 .ImgList {
@@ -363,6 +363,11 @@ div {
   background: rgb(242 242 242);
 }
 
+.current.click{
+  border-bottom: 5px solid #8eb4c8;
+  color: #8eb4c8;
+}
+
 .sec_cal .cal_wrap .dates {
   display: flex;
   flex-flow: wrap;
@@ -381,10 +386,12 @@ div {
   color: #ddd;
 }
 
-.sec_cal .cal_wrap .day:hover {
+.sec_cal .cal_wrap .able:hover {
   border-bottom: 5px solid #8eb4c8;
   color: #8eb4c8;
 }
+
+
 
 .dates {
   cursor: pointer;
@@ -703,7 +710,7 @@ p {
 .btn_open {
   height: 66px;
   border: 1.5px solid #8eb4c8;
-  background-color: #6fa4bf;
+  background-color: #8eb4c8;
   font-size: 22px;
   line-height: 57px;
   width: 100%;
@@ -716,7 +723,7 @@ p {
 .btn_close {
   height: 66px;
   border: 1.5px solid #8eb4c8;
-  background-color: #6fa4bf;
+  background-color: #8eb4c8;
   font-size: 22px;
   line-height: 57px;
   width: 100%;
