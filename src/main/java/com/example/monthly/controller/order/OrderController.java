@@ -108,7 +108,6 @@ public class OrderController {
         parcelDto.setDeliveryAddress2(deliveryVo.getDeliveryAddress2());
         Long paymentNumber = orderService.payCardFind(productNumber,userNumber);
         parcelDto.setPaymentNumber(paymentNumber);
-        parcelDto.setParcelInvoice(""+rand.nextInt(10000000));
         System.out.println(parcelDto.toString() +"배송주문장 풀력 ============================================");
         orderService.parcelRegister(parcelDto);
 

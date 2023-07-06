@@ -25,7 +25,7 @@ public class CalenderRestController {
         return subList;
     }
 
-//    내부 구독 정보 출력
+//    외부 구독 정보 출력
     @PostMapping("/exSubsList")
     public List<ExSubsDto> calExSubsList(HttpServletRequest req){
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
