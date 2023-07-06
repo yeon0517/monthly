@@ -200,7 +200,11 @@
     WHERE m.BRAND_REGISTER_DATE >= TRUNC(ADD_MONTHS(SYSDATE, -3), 'MM')
 </select>
 
-
+    <!--강제구독취소 기능-->
+    <delete id="deleteSubs">
+        DELETE FROM MONTHLY_SUBSCRIBE
+        WHERE SUBS_NUMBER = #{subsNumber}
+    </delete>
 
 
 </mapper>

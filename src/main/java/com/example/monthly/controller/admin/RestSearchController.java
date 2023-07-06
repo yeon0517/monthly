@@ -69,4 +69,11 @@ public class RestSearchController {
         System.out.println(searchVo);
         return adminService.productSubsUserList(searchVo);
     }
+
+    //구독자 삭제
+    @DeleteMapping("/subs/{subsNumber}")
+    public void subsModify(@PathVariable("subsNumber") Long subsNumber) {
+        adminService.remove(subsNumber);
+    }
+
 }

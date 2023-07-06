@@ -21,6 +21,9 @@ import java.util.List;
 public class AdminController {
     private final AdminService adminService;
 
+    @GetMapping("/login")
+    public String login(){return "seller/seller/login";}
+
     @PostMapping("/login")
     public RedirectView login(String adminId, String adminPassword, HttpServletRequest req){
         try {

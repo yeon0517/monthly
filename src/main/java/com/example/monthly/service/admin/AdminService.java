@@ -92,6 +92,10 @@ public Long findAdminNumber(String adminId, String adminPassword){
         }
         adminMapper.updateProduct(productVo);
     }
+    //구독 상태 변경
+    public void remove(Long subsNumber){
+        adminMapper.deleteSubs(subsNumber);
+    }
 
     // 판매자 신청 현황 날짜 별 처리 현황
     @Transactional(readOnly = true)
