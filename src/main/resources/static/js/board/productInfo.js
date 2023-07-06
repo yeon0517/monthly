@@ -90,6 +90,7 @@ function calendarInit() {
       todayDate = today.getDate();
       var currentMonthDate = document.querySelectorAll(".dates .current");
       currentMonthDate[todayDate - 1].classList.add("today");
+      currentMonthDate[todayDate - 1].classList.add("click");
     }
   }
 
@@ -126,7 +127,9 @@ $(".countResult").text("(" + count + "개)");
 $(".up").on("click", function () {
   // let price = $(".price").data("price");
   let price = $("#price").val();
-  count++;
+  if($('.amount').val() > count){
+    count++;
+  }
   $(".price").text(Math.round(price) * count + "원");
   $(".pay").text(Math.round(price) * count + "원");
   console.log(count);
@@ -265,14 +268,6 @@ function displayAjax(){
     success : function(files){
       console.log("성공");
       let text = '';
-      let thum = '';
-      let thufileName = files[0].productFileUploadPath + '/th_' + files[0].productFileUuid + '_' + files[0].productFileName;
-      thum += `
-
-                <img
-                 src="/profiles/display?fileName=${thufileName}" data-number="${files[0].productFileNumber}" data-name="${thufileName}"
-                />
-`;
 
 
       files.forEach(file => {
@@ -287,15 +282,57 @@ function displayAjax(){
 `;
       });
 
-      $('.thumbnail').html(thum);
       $('.ImgList >ul').html(text);
     }
   });
 }
 
+
+
+
+displayAjaxMain();
+
+function displayAjaxMain(){
+  let productNumber = $('#productNumber').val();
+  console.log(productNumber);
+
+  $.ajax({
+    url : '/profiles/imgMain',
+    type : 'get',
+    data : {productNumber : productNumber},
+    success : function(files){
+      console.log("성공");
+      let thum = '';
+      let thufileName = files.productFileUploadPath + '/th_' + files.productFileUuid + '_' + files.productFileName;
+      thum += `
+
+                <img
+                 src="/profiles/display?fileName=${thufileName}" data-number="${files.productFileNumber}" data-name="${thufileName}"
+                />
+`;
+
+      $('.thumbnail').html(thum);
+    }
+  });
+}
+
+
+
+
+
 $('.subsBtn').on('click',function (){
   alert("이미 구독중인 상품입니다.");
 })
+
+
+
+//클릭하면 사진 바꾸기
+$('.ImgList').on('click','.list > img' ,function (){
+  console.log("클릭했습니다.");
+  console.log($(this).attr("src"));
+  let img = $(this).attr("src");
+  $('.thumbnail > img').attr("src",img);
+});
 
 
 // document.addEventListener("DOMContentLoaded", function () {

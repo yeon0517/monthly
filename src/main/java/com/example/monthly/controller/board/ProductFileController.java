@@ -20,12 +20,17 @@ import java.util.List;
 public class ProductFileController {
     private final ProductFileService productFileService;
 
-    @Value("${file.dir}")
+    @Value("${product.file.dir}")
     private String fileDir;
 
     @GetMapping("/imgList")
     public List<ProductFileDto> imgList(Long productNumber){
-        return productFileService.proFileList(productNumber);
+        return productFileService.getProductFileList(productNumber);
+    }
+
+    @GetMapping("/imgMain")
+    public ProductFileDto imgMain(Long productNumber){
+        return productFileService.getMainFile(productNumber);
     }
 
     //    서버 컴퓨터에 저장된 파일을 복사하여 넘겨주는 핸들러
