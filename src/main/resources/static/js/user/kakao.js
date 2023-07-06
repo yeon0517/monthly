@@ -26,10 +26,9 @@ function kakaoLogin() {
                         userGender: userGender,
                         userName: userVo.properties.nickname
                     };
-
                     // 서버로 userInfo 객체를 전송하는 로직을 구현
                     sendUserInfoToServer(data);
-
+                    window.location.href = "http://localhost:10000/board/main"
                 },
                 fail: function (error) {
                     console.log(error);

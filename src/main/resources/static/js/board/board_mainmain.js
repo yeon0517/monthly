@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    let brands = [[${brandSelect}]];
-    let products = [[${productSelect}]];
-
-    addBrands(brands, products);
+    // let brands = [[${brandSelect}]];
+    // let products = [[${productSelect}]];
+    //
+    // addBrands(brands, products);
 });
 
 function addBrands(brands, products) {
