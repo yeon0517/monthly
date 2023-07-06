@@ -20,11 +20,17 @@ import java.util.Optional;
 public class ParcelService {
     private final ParcelMapper parcelMapper;
 
-    //  sellerNumber로 브랜드 정보 조회
+    //  검색포함 - 주문리스트조회
     @Transactional(readOnly = true)
-    public List<ParcelVo> findParcelList(SearchVo searchVo, Criteria criteria){
+    public List<ParcelVo> findParcelList(SearchVo searchVo, Criteria criteria, Long brandNumber){
         System.out.println("===============검색 productService진입==================");
         if(criteria==null || searchVo==null){throw new IllegalArgumentException("주문-검색정보누락");}
-        return parcelMapper.selectParcelList(searchVo, criteria);
+        return parcelMapper.selectParcelList(searchVo,criteria, brandNumber);
+    }
+//    주문리스트갯수조회
+    @Transactional(readOnly = true)
+    public int findParcelTotal(Long brandNumber, SearchVo searchVo){
+        if(brandNumber==null||searchVo==null){throw new IllegalArgumentException("주문-갯수검색 정보누락");}
+        return parcelMapper.selectParcelTotal(brandNumber, searchVo);
     }
 }

@@ -134,7 +134,4 @@ public class ProductService {
         if(sellerNumber==null || searchVo==null){throw new IllegalArgumentException("검색정보누락");}
         return productMapper.selectSearchProduct(sellerNumber, searchVo, criteria);
     }
-//    검색조건 넣어서 상품 전체리스트 + 페이징처리 조회?
-
-
 }

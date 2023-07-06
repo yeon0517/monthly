@@ -2,13 +2,11 @@ package com.example.monthly.controller.seller;
 
 import com.example.monthly.dto.ProductFileDto;
 import com.example.monthly.dto.SellerDto;
+import com.example.monthly.service.board.ParcelService;
 import com.example.monthly.service.board.ProductFileService;
 import com.example.monthly.service.board.ProductService;
 import com.example.monthly.service.seller.SellerService;
-import com.example.monthly.vo.Criteria;
-import com.example.monthly.vo.PageVo;
-import com.example.monthly.vo.ProductVo;
-import com.example.monthly.vo.SearchVo;
+import com.example.monthly.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +22,7 @@ public class SellerRestController {
     private final SellerService sellerService;
     private final ProductService productService;
     private final ProductFileService productFileService;
+    private final ParcelService parcelService;
 
 //  판매자아이디 중복검사
     @GetMapping("/checkId")
@@ -92,6 +91,21 @@ public class SellerRestController {
         List<ProductFileDto> files = productFileService.getProductFileList(productNumber);
         return files;
     }
+
+    @GetMapping("/main/{page}")
+    public Map<String, Object> findParcelList(HttpServletRequest req, SearchVo searchVo, @PathVariable("page")int page) {
+        System.out.println("===============검색 restController진입=====================");
+        System.out.println(searchVo);
+        Long brandNumber = (Long) req.getSession().getAttribute("brandNumber");
+        Criteria criteria = new Criteria(page, 15);
+        PageVo pageVo = new PageVo(criteria, parcelService.findParcelTotal(brandNumber, searchVo));
+        List<ParcelVo> parcelList = parcelService.findParcelList(searchVo, criteria, brandNumber);
+        Map<String, Object> parcelMap = new HashMap<>();
+        parcelMap.put("pageVo", pageVo);
+        parcelMap.put("parcelList", parcelList);
+        return parcelMap;
+    }
+
 }
 
 //@PathVariable("sellerId")
