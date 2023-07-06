@@ -90,7 +90,7 @@ function calendarInit() {
       todayDate = today.getDate();
       var currentMonthDate = document.querySelectorAll(".dates .current");
       currentMonthDate[todayDate - 1].classList.add("today");
-      currentMonthDate[todayDate - 1].classList.add("click");
+      // currentMonthDate[todayDate - 1].classList.add("click");
     }
   }
 
@@ -107,9 +107,13 @@ function calendarInit() {
   });
 }
 
+
+
 //날짜 넣기
 $(".dates").on("click", ".able", function (event) {
   event.preventDefault();
+  $('.able').removeClass('click');
+  $(this).addClass('click');
   let year = $(".year-month").text();
   let day = $(this).text();
   $(".result").text(year + "-" + day);

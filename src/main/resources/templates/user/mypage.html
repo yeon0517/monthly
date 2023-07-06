@@ -143,6 +143,7 @@
 
           <div class="listTitle">
             <h3>내부 구독 리스트</h3>
+            <h3 style="margin-right: 10px;" th:text="'내부 구독 총 액수 : '+${subsPrice} +'원'">내부 구독 총 액수 : 20000원</h3>
           </div>
           <div class="prolist">
             <div class="exSubList" >
@@ -193,6 +194,7 @@
           <!-- 외부 구독 테이블에서 정보 가져오기 -->
           <div class="listTitle">
             <h3>외부 구독 리스트</h3>
+            <h3 style="margin-right: 10px;" th:text="'외부 구독 총 액수 : '+${exPrice} +'원'">외부 구독 총 액수 : 20000원</h3>
           </div>
           <div class="prolist">
             <div class="exSubList" >
@@ -235,6 +237,7 @@
         <!-- 옵션 버튼 -->
         <div class="optionBtn">
           <div class="userModify">
+            <div th:text="'총 구독 금액 :' +${subsPrice+exPrice} +'원'">총 구독 액수 : 40000원</div>
             <a
               class="modBtn"
               style="background-color: #8eb4c8; color: #f8f9fa;"

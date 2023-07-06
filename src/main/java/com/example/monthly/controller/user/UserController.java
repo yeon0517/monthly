@@ -45,6 +45,8 @@ public class UserController {
     @GetMapping("/mypage")
     public String mypage(HttpServletRequest req, Model model){
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
+        int subsPrice = 0;
+        int exPrice = 0;
         List<SubsVo> subs = mypageService.subsFindAll(userNumber);
         System.out.println("=====================================================");
         System.out.println(subs.toString());
@@ -52,18 +54,20 @@ public class UserController {
         for(int i =0 ; i < subs.toArray().length; i++){
             String str = subs.get(i).getSubsStartDate().substring(0,10);
             subs.get(i).setSubsStartDate(str);
+            subsPrice += Integer.valueOf(subs.get(i).getPaymentPrice());
         }
         model.addAttribute("subs",subs);
 
 //        외부 구독
         List<ExSubsDto> exSubs = mypageService.exSubsFindAll(userNumber);
         for(int i =0 ; i < subs.toArray().length; i++){
-            //exSubs.get(i).setExSubsDate(exSubs.get(i).getExSubsDate().substring(0,10));
+            exPrice += Integer.valueOf(exSubs.get(i).getExSubsPrice());
         }
 
         int subsCnt = mypageService.exSubsCnt(userNumber) +mypageService.subsCnt(userNumber);
 
-
+        model.addAttribute("subsPrice",subsPrice);
+        model.addAttribute("exPrice",exPrice);
         model.addAttribute("exSubs",exSubs);
         model.addAttribute("subsCnt",subsCnt);
         return "user/mypage";

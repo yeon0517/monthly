@@ -93,18 +93,21 @@ a {
 }
 
 .listTitle {
+  display: flex;
   height: 38px;
   padding: 0 0 0 9px;
   border-bottom: 1px solid #8eb4c8;
   border-bottom: 0;
   line-height: 38px;
   background: #cbe0ec;
+  justify-content: space-between;
 }
 
 .listTitle h3 {
   color: #353535;
   font-size: 15px;
   padding-top: 12px;
+  font-family: "SUIT-Regular";
 }
 
 .product {
@@ -245,7 +248,12 @@ table {
 
 .userModify {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+.userModify > div{
+  font-size: x-large;
+  font-family: "SUIT-Regular";
 }
 
 .fc-day-sun a {
