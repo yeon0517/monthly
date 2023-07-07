@@ -32,4 +32,6 @@ public class UserVo {
     private String userBirthdayM;
     private String userBirthdayD;
     private int userStatus;
+    private String subsStartDate; //관리자 전체 회원검색 은서가 추가
+    private String productName; //관리자 전체 회원검색 은서가 추가
 }

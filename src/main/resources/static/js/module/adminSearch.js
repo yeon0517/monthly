@@ -47,6 +47,30 @@ export function getProductList(pdl, callback,error){
         error : error
     });
 }
+//전체 회원 페이지 검색 모듈
+export function getUserList(ul, callback,error){
+    $.ajax({
+        url : '/search/users',
+        type : 'get',
+        data :  ul,
+        dataType : 'json',
+        // contentType : 'application/json; charset=utf-8',
+        success : function(result){
+            console.log('ㄹㄴㅇㄹㄴㄹㅇㄹㅇㄴㄹㅋㄹㅋㄴㅇㄹ');
+            console.log(result);
+            if(callback){
+                callback(result);
+            }
+        },
+        error : error
+    });
+}
+
+
+
+
+
+
 //상품 상태변경
 export function productStatusAjax(pstObj,error){
     $.ajax({
@@ -94,5 +118,9 @@ export function removeSubs(subsNumber,callback,error){
         error:error
     });
 }
+
+
+
+
 
 

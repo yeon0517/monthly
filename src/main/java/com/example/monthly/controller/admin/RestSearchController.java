@@ -5,6 +5,7 @@ import com.example.monthly.service.admin.AdminService;
 import com.example.monthly.vo.ProductVo;
 import com.example.monthly.vo.SearchVo;
 import com.example.monthly.vo.SubsVo;
+import com.example.monthly.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
@@ -74,6 +75,15 @@ public class RestSearchController {
     @DeleteMapping("/subs/{subsNumber}")
     public void subsModify(@PathVariable("subsNumber") Long subsNumber) {
         adminService.remove(subsNumber);
+    }
+
+
+    //==============전체 회원================
+    @GetMapping("/users")
+    public List<UserVo> searchUser(SearchVo searchVo, Model model) {
+        System.out.println("==============회원검색드러가기===============");
+        System.out.println(searchVo);
+        return adminService.searchUser(searchVo);
     }
 
 }
