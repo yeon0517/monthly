@@ -73,8 +73,8 @@
         </thead>
         <tbody>
           <!-- 주문관리 리스트 띄움 tr부분이 추가됨-->
-          <tr>
-            <!-- 주문처리, 택배사, 운송장번호선택 -->
+         <!-- <tr>
+            &lt;!&ndash; 주문처리, 택배사, 운송장번호선택 &ndash;&gt;
             <form action="#">
               <input type="hidden" value="?">
             <td>1</td>
@@ -102,7 +102,7 @@
               <td><input type="text" placeholder="운송장" class="search-input" name="search-input"></td>
               <td><button type="button" class="save-btn">save</button></td>
             </form>
-          </tr>
+          </tr>-->
             <!-- 저장버튼 누르면 비동기로 저장 -->
         </tbody>
       </table>
@@ -121,5 +121,6 @@
   $(".header-nav-item>a").removeClass("header-active");
   $head.addClass("header-active");
 </script>
+<script type="module" th:src="@{/js/seller/seller_main.js}"></script>
 </body>
 </html>
