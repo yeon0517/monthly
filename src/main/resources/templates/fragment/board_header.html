@@ -72,26 +72,13 @@
           </div>
 
           <!-- 검색하는 창 나오는 곳 -->
-<!--          <div class="search_btn">-->
-<!--          <form id="searchForm" action="/board/product" method="GET">-->
-<!--            <input id="search_id" type="hidden" />-->
-<!--            <div class="search_div">-->
-<!--              <fieldset>-->
-<!--                <span>검색</span>-->
-<!--                <input type="text" id="keyword" name="keyword" />-->
-<!--                <input type="image" th:src="@{/img/allImg/search.png}" id="search" onclick="submitSearchForm()" />-->
-<!--              </fieldset>-->
-<!--            </div>-->
-<!--          </form>-->
-<!--        </div>-->
-
           <div class="search_btn">
             <form id="searchForm" th:action="@{/board/productSearch}" method="GET">
               <div class="search_div">
                 <fieldset>
                   <span>검색</span>
                   <input type="text" id="keyword" class="keyword" name="searchInput" />
-                  <button type="submit">
+                  <button type="submit" style="border: none; background-color: #fff;" onclick="enter()" id="enterBtn">
                   <input type="image" th:src="@{/img/allImg/search.png}" id="search" class="imgBtn" /></button>
                 </fieldset>
               </div>
@@ -141,12 +128,12 @@
           <div class="sidenav_down_f" th:unless="${session.userNumber == null}">
             <a th:href="@{/user/mypage}">나의 monthly</a>
           </div>
-          <div class="sidenav_down_s" th:if="${session.userNumber == null}">
-            <a th:href="@{/user/login}">주문/배송조회</a>
-          </div>
-          <div class="sidenav_down_s" th:unless="${session.userNumber == null}">
-            <a href="">주문/배송조회</a>
-          </div>
+<!--          <div class="sidenav_down_s" th:if="${session.userNumber == null}">-->
+<!--            <a th:href="@{/user/login}">주문/배송조회</a>-->
+<!--          </div>-->
+<!--          <div class="sidenav_down_s" th:unless="${session.userNumber == null}">-->
+<!--            <a href="">주문/배송조회</a>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
