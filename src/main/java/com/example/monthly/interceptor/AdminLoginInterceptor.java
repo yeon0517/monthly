@@ -11,6 +11,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws Exception {
     Object adminNumber = request.getSession().getAttribute("adminNumber");
+        System.out.println("========================="+adminNumber);
     if(adminNumber==null){
         response.sendRedirect("/seller/login");
         return false;
