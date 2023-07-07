@@ -28,3 +28,19 @@ export function getListPage(pageInfo, callback, error){
         error : error
     });
 }
+
+export function searchProduct(searchVo,callback){
+    $.ajax({
+        url : `/sellers/searchP/${searchVo.page}`,
+        type : 'get',
+        data : searchVo,
+        dataType : 'json',
+        success : function(result){
+            if(callback){
+                console.log(result);
+                callback(result)
+            }
+        },
+        error : function(a,b,c,){console.error(c)}
+    });
+}

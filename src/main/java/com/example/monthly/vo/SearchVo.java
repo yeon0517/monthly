@@ -15,4 +15,7 @@ public class SearchVo {
     private Long brandNumber;
     private Long productNumber;
     private Long productName;
+    private String productStatus; //우정 추가
+    private int page; //우정추가
+
 }
