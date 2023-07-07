@@ -72,7 +72,11 @@ public class ProductService {
         }
         Long productNumber = productDto.getProductNumber();
         System.out.println(productNumber);
-        if(!files.isEmpty()){
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.println(files.get(0));
+        if(!files.get(0).isEmpty()){
+            System.out.println("==============================================");
+            System.out.println(files);
         productFileService.remove(productNumber); //원래있던 파일은 지우고
             try {
                 productFileService.registerAndSaveFiles(files, "d",productNumber); //리스트다시저장
@@ -87,7 +91,6 @@ public class ProductService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
         productMapper.updateProduct(productDto);
     }
