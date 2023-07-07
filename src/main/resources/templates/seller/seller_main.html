@@ -21,11 +21,11 @@
         <tr>
           <th class="main-section1-th period">기간</th>
           <td class="period-input">
-            <label><input type="radio" name="period" value="today" checked><span>오늘</span></label>
+            <label><input type="radio" name="period" value="All" checked><span>전체</span></label>
+            <label><input type="radio" name="period" value="today"><span>오늘</span></label>
             <label><input type="radio" name="period" value="yesterday"><span>어제</span></label>
             <label><input type="radio" name="period" value="1month"><span>1개월</span></label>
             <label><input type="radio" name="period" value="3month"><span>3개월</span></label>
-            <label><input type="radio" name="period" value="all"><span>전체</span></label>
           </td>
         </tr>
         <tr>
@@ -41,7 +41,7 @@
         </tr>
       </table>
       <!-- 검색버튼 누르면 주문관리리스트테이블 비동기로 띄움 -->
-      <div class="btn-box"><button type="submit" class="search-btn">검색</button></div>
+      <div class="btn-box"><button type="button" class="search-btn">검색</button></div>
     </form>
     </div>
   </section>
@@ -49,7 +49,7 @@
   <section class="main-section main-section2">
     <div class="main-container main-container2">
       <!-- 검색 기간 조건에 따라 오늘/어제/1개월/3개월/전체로 span안에 텍스트변경 -->
-      <h2><span class="selected-period">오늘</span> 주문관리</h2>
+      <h2><span class="selected-period"></span> 주문관리</h2>
       <!-- 검색 결과가 없는 경우 table 태그에 none class를 주고 empty div를 보여준다 -->
       <div class="empty none">
         <p>주문이 없습니다.</p>
@@ -71,10 +71,10 @@
             <th>저장</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="parcel-list-body">
           <!-- 주문관리 리스트 띄움 tr부분이 추가됨-->
-         <!-- <tr>
-            &lt;!&ndash; 주문처리, 택배사, 운송장번호선택 &ndash;&gt;
+            <!-- 주문처리, 택배사, 운송장번호선택 -->
+          <!--<tr>
             <form action="#">
               <input type="hidden" value="?">
             <td>1</td>

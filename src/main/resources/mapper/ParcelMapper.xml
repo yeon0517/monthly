@@ -19,13 +19,13 @@
         <where>
             <trim prefixOverrides="AND">
                 <if test="searchVo.searchInput != ''">
-                    <if test="searchVo.searchSelect.equals('parcel-number')">
-                        PARCEL_NUMBER = #{parcelNumber}
+                    <if test="'parcel-number'.equals(searchVo.searchSelect)">
+                        PARCEL_NUMBER = #{searchVo.searchInput}
                     </if>
-                    <if test="searchVo.searchSelect.equals('user-name')">
+                    <if test="'user-name'.equals(searchVo.searchSelect)">
                         USER_NAME LIKE '%' || #{searchVo.searchInput} || '%'
                     </if>
-                    <if test="searchVo.searchSelect.equals('product-name')">
+                    <if test="'product-name'.equals(searchVo.searchSelect)">
                         PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
                     </if>
                 </if>
@@ -45,7 +45,7 @@
                 </trim>
             </trim>
         </where>
-        ORDER BY PARCEL_NUMBER DESC) S1
+        ORDER BY PARCEL_DATE) S1
         <![CDATA[
              WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
     ]]>
@@ -62,13 +62,13 @@
         <where>
             <trim prefixOverrides="AND">
                 <if test="searchVo.searchInput != ''">
-                    <if test="searchVo.searchSelect.equals('parcel-number')">
-                        PARCEL_NUMBER = #{parcelNumber}
+                    <if test="'parcel-number'.equals(searchVo.searchSelect)">
+                        PARCEL_NUMBER = #{searchVo.searchInput}
                     </if>
-                    <if test="searchVo.searchSelect.equals('user-name')">
+                    <if test="'user-name'.equals(searchVo.searchSelect)">
                         USER_NAME LIKE '%' || #{searchVo.searchInput} || '%'
                     </if>
-                    <if test="searchVo.searchSelect.equals('product-name')">
+                    <if test="'product-name'.equals(searchVo.searchSelect)">
                         PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
                     </if>
                 </if>
@@ -88,7 +88,7 @@
                 </trim>
             </trim>
         </where>
-        ORDER BY PARCEL_NUMBER DESC
+        ORDER BY PARCEL_DATE
     </select>
 
 </mapper>

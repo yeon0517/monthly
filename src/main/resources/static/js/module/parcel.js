@@ -1,37 +1,10 @@
-// 여기는 제품 모듈!
+// 여기는 주문 모듈!
 
-// 제품 띄우기 위해 리스트 가져오기
-export function getList(callback, error){
-    $.ajax({
-        url : `/sellers/list/`,
-        type : 'get',
-        success : function(result){
-            if(callback){
-                callback(result);
-            }
-        },
-        error : error
-    });
-}
+// 주문 띄우기 위해 리스트 가져오기
 
-export function getListPage(pageInfo, callback, error){
+export function findParcelList(searchVo,callback){
     $.ajax({
-       url : `/sellers/list/${pageInfo.page}`,
-       type : 'get',
-       dataType : 'json',
-       success : function (result){
-           if(callback){
-               console.log(result);
-               callback(result)
-           }
-       },
-        error : error
-    });
-}
-
-export function searchProduct(searchVo,callback){
-    $.ajax({
-        url : `/sellers/searchP/${searchVo.page}`,
+        url : `/sellers/main/${searchVo.page}`,
         type : 'get',
         data : searchVo,
         dataType : 'json',
