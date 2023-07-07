@@ -52,7 +52,7 @@ public class OrderController {
     }
 
     @PostMapping("/subs")
-    public String subs(@Param("productNumber") Long productNumber, HttpServletRequest req, @Param("inputPrice") String inputPrice,
+    public RedirectView subs(@Param("productNumber") Long productNumber, HttpServletRequest req, @Param("inputPrice") String inputPrice,
                              @Param("cardNumber") String cardNumber, String parcelDate,
                        DeliveryVo deliveryVo, String productAmount, String deilvery){
 
@@ -112,7 +112,8 @@ public class OrderController {
         orderService.parcelRegister(parcelDto);
 
 
-        return "redirect:/user/mypage";
+//        "redirect:/user/mypage";
+        return new RedirectView("/user/mypage");
     }
 
 }
