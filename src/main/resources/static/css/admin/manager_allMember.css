@@ -39,14 +39,18 @@ th:nth-child(1){
 th:nth-child(2){
   width: 30px;
 }
+th:nth-child(6){
+  width: 70px;
+}
 th:nth-child(7){
-  width: 80px;
+  width: 50px;
 }
 th:nth-child(8){
-  width: 170px;
+  width: 80px;
 }
+
 th:nth-child(9){
-  width: 220px;
+  width: 250px;
 }
 th:nth-child(10){
   width: 30px;

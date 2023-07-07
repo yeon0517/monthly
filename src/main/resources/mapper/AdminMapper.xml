@@ -124,6 +124,34 @@
         </where>
     </select>
 
+
+    <!--전체 회원 조회-->
+    <select id="searchUser" resultType="userVo">
+        SELECT U.USER_NUMBER,U.USER_NAME,U.USER_STATUS,U.USER_ID,U.USER_PHONE_NUMBER,S.SUBS_START_DATE,U.USER_BIRTHDAY,U.USER_EMAIL,P.PRODUCT_NAME
+        FROM MONTHLY_USER U
+        LEFT OUTER JOIN MONTHLY_SUBSCRIBE S ON S.USER_NUMBER =U.USER_NUMBER
+        LEFT OUTER JOIN MONTHLY_PRODUCT P ON P.PRODUCT_NUMBER= S.PRODUCT_NUMBER
+--         WHERE U.USER_NUMBER = 61
+        <where>
+            <if test="searchInput != ''">
+                <choose>
+                    <when test="searchSelect == 'member-number'">
+                        U.USER_NUMBER = #{searchInput}
+                    </when>
+                    <when test="searchSelect == 'member-name'">
+                        U.USER_NAME LIKE '%' ||#{searchInput}|| '%'
+                    </when>
+                    <when test="searchSelect == 'member-id'">
+                        U.USER_ID LIKE '%' || #{searchInput} || '%'
+                    </when>
+                </choose>
+            </if>
+        </where>
+        ORDER BY U.USER_NUMBER DESC
+    </select>
+
+
+
     <!--판매자의 브랜드,구독자 조회-->
 <select id="selectSubUser" resultType="productVo">
     SELECT MP.PRODUCT_NUMBER,MP.PRODUCT_NAME ,MB.BRAND_NAME,
@@ -212,23 +240,6 @@
 </mapper>
 
 
-
-        <!--브랜드페이지에서 모든상품 구독자 전체 불러오기-->
-        <!--    <select id="brandSubsUserList" resultType="subsVo">-->
-        <!--        SELECT U.USER_NUMBER, U.USER_NAME, U.USER_ID, S.SUBS_NUMBER, S.SUBS_START_DATE, B.BRAND_NUMBER, P.PRODUCT_NAME-->
-        <!--        FROM MONTHLY_SUBSCRIBE S-->
-        <!--        LEFT OUTER JOIN MONTHLY_USER U ON U.USER_NUMBER = S.USER_NUMBER-->
-        <!--        LEFT OUTER JOIN MONTHLY_PRODUCT P ON S.PRODUCT_NUMBER = P.PRODUCT_NUMBER-->
-        <!--        LEFT OUTER JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER-->
-        <!--        <where>-->
-        <!--            <if test="subscriberInput != null and subscriberInput != ''">-->
-        <!--                U.USER_ID LIKE '%' || #{subscriberInput} || '%'-->
-        <!--            </if>-->
-        <!--            <if test="brandNumber != null">-->
-        <!--                AND B.BRAND_NUMBER = #{brandNumber}-->
-        <!--            </if>-->
-        <!--        </where>-->
-        <!--    </select>-->
 
 <!--<select id="productSubsUserList" resultType="subsVo">-->
 <!--SELECT U.USER_NUMBER, U.USER_NAME, U.USER_ID, S.SUBS_NUMBER, S.SUBS_START_DATE, B.BRAND_NUMBER, P.PRODUCT_NUMBER-->
