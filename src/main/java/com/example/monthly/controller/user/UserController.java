@@ -60,10 +60,11 @@ public class UserController {
 
 //        외부 구독
         List<ExSubsDto> exSubs = mypageService.exSubsFindAll(userNumber);
-        for(int i =0 ; i < subs.toArray().length; i++){
-            exPrice += Integer.valueOf(exSubs.get(i).getExSubsPrice());
+        if (!exSubs.isEmpty()) {
+            for (int i = 0; i < exSubs.size(); i++) {
+                exPrice += Integer.valueOf(exSubs.get(i).getExSubsPrice());
+            }
         }
-
         int subsCnt = mypageService.exSubsCnt(userNumber) +mypageService.subsCnt(userNumber);
 
         model.addAttribute("subsPrice",subsPrice);
@@ -85,7 +86,7 @@ public class UserController {
     }
 
     @PostMapping("/userModify")
-    public String userModify(UserDto userDto, DeliveryDto deliveryDto, @Param("checkPassword") String checkPassword, HttpServletRequest req){
+    public RedirectView userModify(UserDto userDto, DeliveryDto deliveryDto, @Param("checkPassword") String checkPassword, HttpServletRequest req){
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
        userDto.setUserNumber(userNumber);
        userDto.setUserPassword(checkPassword);
@@ -104,7 +105,7 @@ public class UserController {
 
        }
 
-        return "user/mypage";
+        return new RedirectView("/user/mypage");
 
     }
 

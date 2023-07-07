@@ -1,16 +1,8 @@
 
 let cnt = $('.subsCnt').val();
 
-//console.log(cnt);
-
-
 const subList = Array.from(Array(50), () => new Array(2));
 
-
-
-// subList[i].title = sub.productName +" "+ sub.productPrice +"원";
-// subList[i].start = sub.subsStartDate;
-// i++;
 
 function calSubList(callback){
 
@@ -92,7 +84,7 @@ function calenderStart(){
       customButtons: {
         addEventButton: {
           // 추가한 버튼 설정
-          text: "일정 추가", // 버튼 내용
+          text: "구독 추가", // 버튼 내용
           click: function () {
             // 버튼 클릭 시 이벤트 추가
             $("#calendarModal").modal("show"); // modal 나타내기
