@@ -50,9 +50,12 @@
           <li class="allbar"></li>
 
           <li class="login_li">
-          <a class="login_a" th:href="@{/user/login}">
+          <a class="login_a" th:if="${session.userNumber == null}" th:href="@{/user/login}">
             로그인
           </a>
+            <a class="login_a" th:unless="${session.userNumber == null}" th:href="@{/user/logout}">
+              로그아웃
+            </a>
           </li>
         </ul>
       </div>

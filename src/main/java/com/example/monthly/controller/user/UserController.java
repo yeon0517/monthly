@@ -181,5 +181,10 @@ public class UserController {
         }
         return "user/find_pw_ok"; }
 
-
+    // 로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest req){
+        req.getSession().invalidate(); //세션 초기화
+        return "user/login";
+    }
 }
