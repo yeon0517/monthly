@@ -1,7 +1,7 @@
 var naverLogin = new naver.LoginWithNaverId(
     {
         clientId: "ZyZIG611nSR6a00ApfSc", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-        callbackUrl: "http://localhost:10000/user/login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+        callbackUrl: "http://localhost:10000/board/main", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
         isPopup: false,
         callbackHandle: true
     }
