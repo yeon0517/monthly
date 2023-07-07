@@ -29,11 +29,15 @@
     </insert>
 
     <!--  제품 이미지 ALL 삭제-->
-    <delete id="deleteProductFile">
+    <delete id="deleteProductFiles">
         DELETE FROM MONTHLY_PRODUCT_FILE
-        WHERE PRODUCT_NUMBER = #{productNumber}
+        WHERE PRODUCT_NUMBER = #{productNumber} AND PRODUCT_FILE_SIZE='d'
     </delete>
-
+<!--    대표이미지삭제-->
+    <delete id="deleteMainFile">
+        DELETE FROM MONTHLY_PRODUCT_FILE
+        WHERE PRODUCT_NUMBER = #{productNumber} AND PRODUCT_FILE_SIZE='m'
+    </delete>
 
 
 </mapper>

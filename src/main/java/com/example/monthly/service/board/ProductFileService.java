@@ -69,17 +69,28 @@ public class ProductFileService {
         if(productFileDto==null){throw new IllegalArgumentException("제품파일정보누락");}
         productFileMapper.insertProductFile(productFileDto);
     }
-//   제품번호로 파일정보All 삭제
+
+//    제품번호로 대표사진삭제
+    public void removeMainFile(Long productNumber){
+        if(productNumber == null){ throw new IllegalArgumentException("제품번호누락(file)"); }
+        ProductFileDto file = productFileMapper.selectMainProductFile(productNumber);
+        File target = new File(productFileDir, file.getProductFileUploadPath()+"/"+file.getProductFileUuid()+"_"+file.getProductFileName());
+        File thumbnail = new File(productFileDir, file.getProductFileUuid()+"/th_"+file.getProductFileUuid()+"_"+file.getProductFileName());
+        if(target.exists()){target.delete();}
+        if(thumbnail.exists()){thumbnail.delete();}
+        productFileMapper.deleteMainFile(productNumber);
+    }
+//   제품번호로 상세이미지 파일정보All 삭제
     public void remove(Long productNumber){
         if(productNumber == null){ throw new IllegalArgumentException("제품번호누락(file)"); }
-        List<ProductFileDto> fileDtoList = proFileList(productNumber);
+        List<ProductFileDto> fileDtoList = productFileMapper.selectDetailProductFile(productNumber);
         for(ProductFileDto file : fileDtoList){
            File target = new File(productFileDir, file.getProductFileUploadPath()+"/"+file.getProductFileUuid()+"_"+file.getProductFileName());
            File thumbnail = new File(productFileDir, file.getProductFileUuid()+"/th_"+file.getProductFileUuid()+"_"+file.getProductFileName());
            if(target.exists()){target.delete();}
            if(thumbnail.exists()){thumbnail.delete();}
         }
-           productFileMapper.deleteProductFile(productNumber);
+           productFileMapper.deleteProductFiles(productNumber);
     }
 //    실제파일 1개 저장처리 - 무슨파일을 받든 일단 저장한다
     public ProductFileDto saveFile(MultipartFile file) throws IOException{

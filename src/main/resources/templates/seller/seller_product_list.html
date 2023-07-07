@@ -26,18 +26,18 @@
                 <option value="product-number">상품번호</option>
                 <option value="product-name">상품명</option>
               </select>
-              <input type="text" placeholder="입력" class="search-input">
+              <input type="text" placeholder="입력" name="search-input" class="search-input">
               <span class="product-status-p">판매상태 : </span>
-              <label><input type="radio" name="status" value="all" checked><span>전체</span></label>
-              <label><input type="radio" name="status" value="pre-selling"><span>판매준비</span></label>
-              <label><input type="radio" name="status" value="selling"><span>판매중</span></label>
-              <label><input type="radio" name="status" value="stop-selling"><span>판매중지</span></label>
+              <label><input type="radio" name="product-status" value="all" checked><span>전체</span></label>
+              <label><input type="radio" name="product-status" value="prepared"><span>판매준비</span></label>
+              <label><input type="radio" name="product-status" value="selling"><span>판매중</span></label>
+              <label><input type="radio" name="product-status" value="stop"><span>판매중지</span></label>
             </td>
           </tr>
         </table>
         <!-- 검색버튼 누르면 상품관리리스트테이블 비동기로 띄움 -->
         <div class="btn-box">
-          <button type="submit" class="search-btn">검색</button>
+          <button type="button" class="search-btn">검색</button>
         </div>
       </form>
     </section>
@@ -94,25 +94,28 @@
         </table>
       </div>
     </section>
+        <div class="page-container">
+          <ul class="page-box">
+          <!--페이징버튼이 추가될 부분-->
+          </ul>
+        </div>
 <!--    <div class="page-container">
       <ul class="page-box">
-        <a href="#" class="page-a" th:if="${pageInfo.prev}">
+        <a th:href="@{/sellers/list(page=${pageVo.startPage -1})}" th:if="${pageVo.prev}">
           <li class="page-num prev">&lt</li>
         </a>
-
-        <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-          <a th:href="@{/product/list(page=${i})}" class="page-a">
-            <li class="page-num active" th:text="${i}" th:if="${i==pageInfo.criteria.page}"></li>
-            <li class="page-num" th:text="${i}" th:unless="${i==pageInfo.criteria.page}"></li>
-          </a>
+        <th:block th:each="i:${#numbers.sequence(pageVo.startPage, pageVo.endPage)}">
+        <a th:href="@{/sellers/list(page=${i})}">
+          <li class="page-num active" th:text="${i}" th:if="${i==pageVo.criteria.page}"></li>
+          <li class="page-num" th:text="${i}" th:unless="${i==pageVo.criteria.page}"></li>
+        </a>
         </th:block>
-
-        <a th:href="@{/product/list(page=${pageInfo.startPage +1})}" class="page-a">
-          <li class="page-num next" th:if="${pageInfo.next}">&gt</li>
+        <a th:href="@{/sellers/list(page=${pageVo.endPage +1})}">
+          <li class="page-num next" th:if="${pageVo.next}">&gt</li>
         </a>
       </ul>
-    </div>
-  </div>-->
+    </div>-->
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script th:src="@{/js/admin/admin_header.js}"></script>
   <script>

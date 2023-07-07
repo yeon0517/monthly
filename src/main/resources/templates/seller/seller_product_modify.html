@@ -21,7 +21,7 @@
     <!-- 상품 내용 등록 구역 -->
     <!-- 상품 내용 미리 꽂아둔다 -->
     <section class="register-section">
-      <form action="">
+      <form th:action="@{/seller/modify}" method="post" enctype="multipart/form-data">
         <table class="register-table">
           <colgroup>
             <col style="width: 180px" />
@@ -30,6 +30,7 @@
           <tr>
             <th scope="row">상품명</th>
             <td>
+              <input type="hidden" name="productNumber" id="productNumber" th:value="${product.productNumber}">
               <input type="text" name="productName" class="text-input" th:value="${product.productName}">
               <span class="inner-info">구독서비스 상품명을 입력하세요</span>
             </td>
@@ -71,13 +72,23 @@
             </td>
           </tr>
           <tr>
+            <th>현재 상세이미지</th>
+            <td class="product-image-td">
+              <div class="product-detail-image">
+                <ul class="product-detail-image-ul">
+                  <li th:each="file:${files}"><img th:src="'/product/upload/'+${file.productFileUploadPath}+'/th_'+${file.productFileUuid}+'_'+${file.productFileName}"></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          <tr>
             <th>상세이미지</th>
             <td class="product-image-td">
               <p>권장 이미지 사이즈는 가로500px 세로 500px 입니다.</p>
               <p>최대 4장까지 등록 가능합니다.</p>
               <input type="file" id="post-image" name="productFiles" accept="image/*" multiple />
               <div class="product-detail-image">
-                <ul class="product-detail-image-ul" th:each="product : ${files}">
+                <ul class="product-detail-image-ul">
                   <li class="img-list"></li>
                   <li class="img-list"></li>
                   <li class="img-list"></li>
@@ -90,7 +101,7 @@
             <th>상품 설명</th>
             <!-- 썸머노트 추가 -->
             <td>
-              <textarea name="productContents" id="summernote"><p></p></textarea>
+              <textarea name="productContents" id="summernote" th:text="${product.productContents}"><p></p></textarea>
             </td>
           </tr>
         </table>
@@ -99,7 +110,7 @@
           <!-- 저장 시 비동기로 저장? -->
           <button class="cancel-btn" type="button">취소</button>
 <!-- 일단 둬보고 안되면 미리보기 지워버린다-->
-          <button class="preview-btn" type="button">미리보기</button>
+<!--          <button class="preview-btn" type="button">미리보기</button>-->
           <button class="save-btn" type="submit">저장</button>
         </div>
       </form>

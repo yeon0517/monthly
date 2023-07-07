@@ -27,33 +27,33 @@
           <tr>
             <th scope="row">상품명</th>
             <td>
-              <input type="text" class="text-input" name="productName">
+              <input type="text" class="text-input" name="productName" required>
               <span class="inner-info">구독서비스 상품명을 입력하세요</span>
             </td>
           </tr>
           <tr>
             <th >가격</th>
             <td>
-              <input type="text" class="text-input" name="productPrice">
+              <input type="text" class="text-input" name="productPrice" required>
               <span class="inner-info">구독상품의 한 달 가격을 설정해주세요 ex. 16900</span>
             </td>
           </tr>
           <tr>
             <th>옵션</th>
             <td>
-              <input type="text" class="text-input" name="productOption">
+              <input type="text" class="text-input" name="productOption" required>
               <span class="inner-info">구독 상품의 구성을 알려주세요 ex.중목 3켤레 / 비누+샤워망 세트</span>
             </td>
           </tr>
           <tr>
             <th>재고</th>
-            <td><input type="text" class="text-input" name="productAmount"></td>
+            <td><input type="text" class="text-input" name="productAmount" required></td>
           </tr>
           <tr>
             <th>대표이미지</th>
             <td class="product-image-td">
               <p>권장 이미지 사이즈는 가로500px 세로 500px 입니다.</p>
-              <input type="file"  id="post-image-rp" name="productFile" accept="image/*">
+              <input type="file"  id="post-image-rp" name="productFile" accept="image/*" required>
               <div class="product-image">
                 <img src="" alt="">
               </div>
@@ -64,7 +64,7 @@
             <td class="product-image-td">
               <p>권장 이미지 사이즈는 가로500px 세로 500px 입니다.</p>
               <p>최대 4장까지 등록 가능합니다.</p>
-              <input type="file" id="post-image" name="productFiles" accept="image/*" multiple />
+              <input type="file" id="post-image" name="productFiles" accept="image/*" multiple required/>
               <div class="product-detail-image">
                 <ul class="product-detail-image-ul">
                   <li class="img-list"></li>
@@ -77,14 +77,13 @@
           </tr>
           <tr>
             <th>상품 설명</th>
-            <td><textarea id="summernote" name="productContents"><p></p></textarea></td>
+            <td><textarea id="summernote" name="productContents" required><p></p></textarea></td>
           </tr>
         </table>
         <div class="btn-box">
           <!-- 취소 시 원래 있던 데이터로 초기화 -->
-          <!-- 저장 시 비동기로 저장? -->
           <button class="cancel-btn" type="button">취소</button>
-          <button class="preview-btn" type="button">미리보기</button>
+<!--          <button class="preview-btn" type="button">미리보기</button>-->
           <button class="save-btn" type="submit">저장</button>
         </div>
       </form>

@@ -45,17 +45,17 @@
     <select id="selectListPage" resultType="productVo">
         SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
                PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
-               PRODUCT_CONTENTS, BRAND_NUMBER, BRAND_NAME
+               BRAND_NUMBER, BRAND_NAME
         FROM(SELECT ROWNUM AS RNUM,PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
                     PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
-                    PRODUCT_CONTENTS, BRAND_NUMBER, BRAND_NAME
+                     BRAND_NUMBER, BRAND_NAME
              FROM(
-                     SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
-                            PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
-                            PRODUCT_CONTENTS, B.BRAND_NUMBER, B.BRAND_NAME
-                     FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
-                                                 ON P.BRAND_NUMBER = B.BRAND_NUMBER AND SELLER_NUMBER= #{sellerNumber}
-                     order by PRODUCT_NUMBER desc) S1
+                 SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+                 PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+                 B.BRAND_NUMBER, B.BRAND_NAME
+                 FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
+                 ON P.BRAND_NUMBER = B.BRAND_NUMBER AND SELLER_NUMBER= #{sellerNumber}
+                 order by PRODUCT_NUMBER desc) S1
     <![CDATA[
              WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
     ]]>
@@ -70,14 +70,86 @@
         )
     </select>
 
-<!--제품리스트 조회-->
-<!--    <select id="selectAll" resultType="productDto">-->
-
-<!--    </select>-->
     <update id="amountChange">
         UPDATE MONTHLY_PRODUCT
         SET PRODUCT_AMOUNT = #{productAmount}
         WHERE PRODUCT_NUMBER = #{productNumber}
     </update>
+
+<!--    검색조건 넣어서 판매자 번호로 제품이 몇개인지 조회-->
+    <select id="selectSearchTotal" resultType="_int">
+        SELECT COUNT(PRODUCT_NUMBER)
+        FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
+            AND SELLER_NUMBER= #{sellerNumber}
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="searchVo.searchInput != ''">
+                    <if test="searchVo.searchSelect.equals('product-number')">
+                        PRODUCT_NUMBER = #{searchVo.searchInput}
+                    </if>
+                    <if test="searchVo.searchSelect.equals('product-name')">
+                        PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                    </if>
+                </if>
+                <trim prefix="AND">
+                    <if test="'prepared'.equals(searchVo.productStatus)">
+                        PRODUCT_STATUS = 0
+                    </if>
+                    <if test="'selling'.equals(searchVo.productStatus)">
+                        PRODUCT_STATUS = 1
+                    </if>
+                    <if test="'stop'.equals(searchVo.productStatus)">
+                        PRODUCT_STATUS = 2
+                    </if>
+                </trim>
+            </trim>
+        </where>
+        order by PRODUCT_NUMBER desc
+    </select>
+
+<!--   판매자번호로 검색 조회 (상품번호/상품명)(판매상태:전체/판매준비/판매중/판매중지)-->
+    <select id="selectSearchProduct" resultType="productVo">
+SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+        PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+        BRAND_NUMBER, BRAND_NAME
+FROM(SELECT ROWNUM AS RNUM, PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+        PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+        BRAND_NUMBER, BRAND_NAME
+FROM(SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
+        PRODUCT_AMOUNT, PRODUCT_REGISTER_DATE, PRODUCT_STATUS,
+        B.BRAND_NUMBER, B.BRAND_NAME
+        FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
+        ON P.BRAND_NUMBER = B.BRAND_NUMBER AND SELLER_NUMBER= #{sellerNumber}
+        <where>
+            <trim prefixOverrides="AND">
+                <if test="searchVo.searchInput != ''">
+                    <if test="'product-number'.equals(searchVo.searchSelect)">
+                        PRODUCT_NUMBER = #{searchVo.searchInput}
+                    </if>
+                    <if test="'product-name'.equals(searchVo.searchSelect)">
+                        PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                    </if>
+                </if>
+                <trim prefix="AND">
+                    <if test="'prepared'.equals(searchVo.productStatus)">
+                        PRODUCT_STATUS = 0
+                    </if>
+                    <if test="'selling'.equals(searchVo.productStatus)">
+                        PRODUCT_STATUS = 1
+                    </if>
+                    <if test="'stop'.equals(searchVo.productStatus)">
+                        PRODUCT_STATUS = 2
+                    </if>
+                </trim>
+            </trim>
+        </where>
+        order by PRODUCT_NUMBER desc) S1
+        <![CDATA[
+             WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
+    ]]>
+        )S2
+        WHERE RNUM > (#{criteria.page}-1)*#{criteria.amount}
+    </select>
+
 
 </mapper>
