@@ -60,8 +60,10 @@ public class UserController {
 
 //        외부 구독
         List<ExSubsDto> exSubs = mypageService.exSubsFindAll(userNumber);
-        for(int i =0 ; i < subs.toArray().length; i++){
-            exPrice += Integer.valueOf(exSubs.get(i).getExSubsPrice());
+        if(exSubs.size() != 0){
+            for(int i =0 ; i < subs.toArray().length; i++){
+             exPrice += Integer.valueOf(exSubs.get(i).getExSubsPrice());
+             }
         }
 
         int subsCnt = mypageService.exSubsCnt(userNumber) +mypageService.subsCnt(userNumber);
