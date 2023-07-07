@@ -3,10 +3,7 @@ package com.example.monthly.mapper;
 import com.example.monthly.dto.AdminDto;
 import com.example.monthly.dto.ProductDto;
 import com.example.monthly.dto.SellerDto;
-import com.example.monthly.vo.AdminChartVo;
-import com.example.monthly.vo.ProductVo;
-import com.example.monthly.vo.SearchVo;
-import com.example.monthly.vo.SubsVo;
+import com.example.monthly.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,6 +25,10 @@ public interface AdminMapper {
 
     //카테고리별 상품 검색
     List<ProductVo> searchProduct(SearchVo searchVo);
+
+    //카테고리별 유저 검색
+    List<UserVo> searchUser(SearchVo searchVo);
+
 
     //판매자이동 후 해당 브랜드의 상품들, 구독자 수만 조회 #1
     List<ProductVo> selectSubUser(Long sellerNumber);
