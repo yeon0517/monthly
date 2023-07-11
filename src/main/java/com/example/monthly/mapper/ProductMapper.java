@@ -23,6 +23,6 @@ public interface ProductMapper {
     void amountChange(ProductVo productVo);
     public int selectSearchTotal(Long sellerNumber, SearchVo searchVo);
     public List<ProductVo> selectSearchProduct(Long sellerNumber, @Param("searchVo") SearchVo searchVo,@Param("criteria")Criteria criteria);
-
+    public void updateStatus(ProductDto productDto);
 
 }

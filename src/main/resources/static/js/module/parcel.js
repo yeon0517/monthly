@@ -17,3 +17,16 @@ export function findParcelList(searchVo,callback){
         error : function(a,b,c,){console.error(c)}
     });
 }
+
+export function modifyParcel(parcelVo){
+    $.ajax({
+        url : `/sellers/mParcel`,
+        type : 'patch',
+        data : JSON.stringify(parcelVo),
+        contentType : 'application/json;charset=utf-8',
+        success : function(){
+            console.log('주문상태 변경완료')
+        },
+        error : function (a,b,c){console.error(c)}
+    });
+}

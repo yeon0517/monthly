@@ -139,6 +139,12 @@ $('.page-box').on('click','.next',function(e){
     $('.selected-period').text(period);
 });
 
+// 주문정보 변경하고 저장버튼 눌렀을 때
+
+
+
+
+
 //===================검색=================
 let $search = $('.search-btn');
 $search.on('click', function (){

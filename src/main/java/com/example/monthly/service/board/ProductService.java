@@ -66,6 +66,13 @@ public class ProductService {
         productMapper.updateProduct(productDto);
     }
 
+    public void modifyStatus(ProductDto productDto){
+        if(productDto == null){
+            throw new IllegalArgumentException("상품 판매상태 정보 누락");
+        }
+        productMapper.updateStatus(productDto);
+    }
+
     public void modifyProduct(ProductDto productDto, List<MultipartFile>files, MultipartFile file){
         if(productDto==null || files==null || file==null){
             throw new IllegalArgumentException("제품 수정 매개변수 null체크");

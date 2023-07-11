@@ -35,6 +35,12 @@
         WHERE PRODUCT_NUMBER = #{productNumber}
     </update>
 
+    <update id="updateStatus">
+        UPDATE MONTHLY_PRODUCT
+        SET PRODUCT_STATUS = #{productStatus}
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </update>
+
 <!--제품삭제-->
     <delete id="deleteProduct">
         DELETE FROM MONTHLY_PRODUCT

@@ -1,4 +1,5 @@
 import  * as product from '../module/product.js';
+import {modifyPStatus} from "../module/product.js";
 
 let page = 1;
 let searchInput = '';
@@ -32,12 +33,12 @@ function showProduct(map){
   let text = '';
   map.productList.forEach(product =>{
     text += `
-    <tr>
+    <tr class="list">
       <form action="#">
-          <td>${product.productNumber}</td>
+          <td class="product-number">${product.productNumber}</td>
           <td>${product.productRegisterDate}</td>
           <td>
-            <select name="productStatus">
+            <select name="productStatus" class="product-status">
                 ${product.productStatus == 0 ? '<option value="0" selected> 판매준비 </option>' : '<option value="0"> 판매준비 </option>'}
                 ${product.productStatus == 1 ? '<option value="1" selected>판매중</option>' : '<option value="1">판매중</option>'}
                 ${product.productStatus == 2 ? '<option value="2" selected>판매중지</option>' : '<option value="2">판매중지</option>' }
@@ -52,8 +53,8 @@ function showProduct(map){
             상품 상세페이지로 이동</a>
           </td>
           <td>
-    <button type="button" class="save-btn product-save">save</button>
-  </td>
+            <button type="button" class="save-btn product-save">save</button>
+          </td>
 </form>
 <tr>
 `;
@@ -133,6 +134,21 @@ $('.page-box').on('click','.next',function(e){
     }
     product.searchProduct(searchVo,showProduct);
 });
+
+// 제품 상태 변경 저장버튼 눌렀을 떄
+$(".product-list-body").on('click','.product-save',function(){
+    // console.log(this);
+    // console.log($(this).parents('.list'));
+    let $list = $(this).parents('.list');
+    // console.log($list.find('.product-status').val());
+    // console.log($list.find('.product-number').text());
+    let productDto = {
+        "productNumber": $list.find('.product-number').text(),
+        "productStatus": $list.find('.product-status').val()
+    }
+    console.log(productDto);
+    product.modifyPStatus(productDto);
+})
 
 //===================검색=================
 let $search = $('.search-btn');
