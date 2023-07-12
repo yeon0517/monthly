@@ -27,10 +27,9 @@ function showParcel(map){
   let text = '';
   map.parcelList.forEach(parcel =>{
     text += `
-     <tr>
+     <tr class="list">
             <form action="#">
-              <input type="hidden" value="?">
-            <td>${parcel.parcelNumber}</td>
+            <td class="parcel-number">${parcel.parcelNumber}</td>
             <td>${parcel.parcelDate}</td>
             <td>
               <select name="parcel-status" id="parcel-status">
@@ -54,8 +53,8 @@ function showParcel(map){
                 ${parcel.parcelCompany == 'logen' ? '<option value="logen" selected>로젠택배</option>' : '<option value="logen">로젠택배</option>'}
                 </select>
               </td>
-              <td><input type="text" placeholder="운송장" class="search-input" name="search-input" value="${parcel.parcelInvoice}"></td>
-              <td><button type="button" class="save-btn">save</button></td>
+              <td><input type="text" placeholder="운송장" class="search-input parcel-invoice" name="search-input" value="${parcel.parcelInvoice}"></td>
+              <td><button type="button" class="save-btn parcel-save">save</button></td>
             </form>
           </tr>
 `;
@@ -139,8 +138,25 @@ $('.page-box').on('click','.next',function(e){
     $('.selected-period').text(period);
 });
 
-// 주문정보 변경하고 저장버튼 눌렀을 때
+// 주문상태를 변경하고 저장버튼을 누르기 전
+$('.parcel-list-body').on('change', '.list', function(){
+    console.log(this);
+    $(this).find('.parcel-save').css("background-color","#c88e8e");
+});
 
+// 주문정보 변경하고 저장버튼 눌렀을 때
+$('.parcel-list-body').on('click','.parcel-save',function(){
+    let $list = $(this).parents('.list');
+    let parcelDto = {
+        "parcelNumber":$list.find('.parcel-number').text(),
+        "parcelStatus":$list.find('#parcel-status').val(),
+        "parcelCompany":$list.find('#parcel-company').val(),
+        "parcelInvoice":$list.find('.parcel-invoice').val()
+    }
+    console.log(parcelDto);
+    parcel.modifyParcel(parcelDto);
+    $(this).css("background-color","#8eb4c8")
+});
 
 
 

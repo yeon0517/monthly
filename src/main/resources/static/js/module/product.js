@@ -53,6 +53,7 @@ export function modifyPStatus(productDto){
         contentType : 'application/json;charset=utf-8',
         success : function(){
             console.log('상품판매상태 변경완료')
+            alert("수정되었습니다.")
         },
         error : function (a,b,c){console.error(c)}
     });

@@ -66,6 +66,7 @@ public class ProductService {
         productMapper.updateProduct(productDto);
     }
 
+//    리스트에서 상품상태수정
     public void modifyStatus(ProductDto productDto){
         if(productDto == null){
             throw new IllegalArgumentException("상품 판매상태 정보 누락");

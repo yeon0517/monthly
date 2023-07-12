@@ -1,5 +1,6 @@
 package com.example.monthly.controller.seller;
 
+import com.example.monthly.dto.ParcelDto;
 import com.example.monthly.dto.ProductDto;
 import com.example.monthly.dto.ProductFileDto;
 import com.example.monthly.dto.SellerDto;
@@ -115,5 +116,8 @@ public class SellerRestController {
     }
 
 //    메인리스트에서 주문배송정보등수정
-
+    @PatchMapping("/mParcel")
+    public void modifyParcel(@RequestBody ParcelDto parcelDto){
+        parcelService.modifyParcel(parcelDto);
+    }
 }

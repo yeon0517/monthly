@@ -1,6 +1,7 @@
 package com.example.monthly.service.board;
 
 import com.example.monthly.dto.BrandDto;
+import com.example.monthly.dto.ParcelDto;
 import com.example.monthly.mapper.BrandMapper;
 import com.example.monthly.mapper.ParcelMapper;
 import com.example.monthly.vo.Criteria;
@@ -32,5 +33,12 @@ public class ParcelService {
     public int findParcelTotal(Long brandNumber, SearchVo searchVo){
         if(brandNumber==null||searchVo==null){throw new IllegalArgumentException("주문-갯수검색 정보누락");}
         return parcelMapper.selectParcelTotal(brandNumber, searchVo);
+    }
+
+    public void modifyParcel(ParcelDto parcelDto){
+        if(parcelDto == null){
+            throw new IllegalArgumentException("주문상태정보누락");
+        }
+        parcelMapper.updateParcel(parcelDto);
     }
 }

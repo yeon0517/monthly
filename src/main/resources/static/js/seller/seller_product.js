@@ -135,6 +135,10 @@ $('.page-box').on('click','.next',function(e){
     product.searchProduct(searchVo,showProduct);
 });
 
+// 제품상태를 변경하고 세이브 버튼을 누르기 전
+$('.product-list-body').on('change', '.product-status', function(){
+    $(this).parents('.list').find('.product-save').css("background-color","#c88e8e");
+});
 // 제품 상태 변경 저장버튼 눌렀을 떄
 $(".product-list-body").on('click','.product-save',function(){
     // console.log(this);
@@ -148,7 +152,8 @@ $(".product-list-body").on('click','.product-save',function(){
     }
     console.log(productDto);
     product.modifyPStatus(productDto);
-})
+    $(this).css("background-color","#8eb4c8");
+});
 
 //===================검색=================
 let $search = $('.search-btn');
