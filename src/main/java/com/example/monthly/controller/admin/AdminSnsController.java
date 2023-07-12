@@ -25,7 +25,8 @@ public class AdminSnsController {
 
     @PostMapping("/send")
     public Mono<Map> sendMsg(@RequestBody Map<String, String> body){             //get이면 RequestbodyTmausdksehla json 형식으ㅢ body
-        String phoneNumber = body.get("phoneNumber");
+        String phoneNumber = body.get("to");
+        System.out.println(phoneNumber+"========================");
         return adminSnsService.sendMessage(phoneNumber);
     }
 }
