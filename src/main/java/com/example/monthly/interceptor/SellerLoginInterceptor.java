@@ -15,6 +15,7 @@ public class SellerLoginInterceptor implements HandlerInterceptor {
         response.sendRedirect("/seller/login");
         return false;
     }
+
     return true;
     }
 }

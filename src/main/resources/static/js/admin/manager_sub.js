@@ -15,7 +15,7 @@ function showList(map){
                 <td>${i.subsStartDate}</td>
                 <td>20일</td>
                 <td>
-                  <button type="button" class="message-submit-btn"> 전송 </button>   
+                  <button type="button" class="message-submit-btn" data-phone="${i.userPhoneNumber}"> 전송 </button>   
                 </td>
                 <td><button type="button" class="out-btn"> 구독 취소 </button></td>
              </tr>
@@ -63,3 +63,61 @@ $('.sub-list-body').on('click','.out-btn',function (){
     },showError);
 
 });
+
+
+
+
+$('.sub-list-body').on('click','.message-submit-btn',function (){
+    let phoneNumber = $('.message-submit-btn').data('phone'); // 전화번호 가져오기
+    console.log(phoneNumber+"============");
+    sendSMS(phoneNumber);
+});
+
+//버튼 클릭 시 문자 보내기
+// $(document).ready(function() {
+//     $('.message-submit-btn').click(function() {
+//         let phoneNumber = $(this).data('phone'); // 전화번호 가져오기
+//         sendSMS(phoneNumber);
+//     });
+// });
+function sendSMS(phoneNumber) {
+    // 암호화된 accessKey와 secretKey
+    let accessKey = 'accessKey';
+    let secretKey = 'secretKey';
+
+    // 네이버 클라우드 SMS API 설정
+    let serviceId = "ncp:sms:kr:311302469407:monthly";
+    let message = {
+        content: "[Monthly.] \n" +
+            "안녕하세요.\n\n " +
+            "회원님의 상품 구독 재결제일까지 \n" +
+            "3일 남았습니다.\n" +
+            "\n 알고있으삼^^;"
+    };
+
+    // SMS API 호출
+    $.ajax({
+        type: 'POST',
+        // url: '/sms/v2/services/' + serviceId + '/messages',
+        url:'/sms/v1/send',
+        data: JSON.stringify({
+            type: 'SMS',
+            contentType: 'COMM',
+            countryCode: '82',
+            // from: phoneNumber,
+            to: phoneNumber,
+            content: message.content
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-NCP-auth-key': accessKey,
+            'X-NCP-service-secret': secretKey
+        },
+        success: function(data) {
+            console.log('SMS 전송 성공');
+        },
+        error: function(error) {
+            console.log('SMS 전송 실패:', error);
+        }
+    });
+}
