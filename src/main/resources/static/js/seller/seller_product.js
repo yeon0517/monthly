@@ -30,6 +30,10 @@ function showError(a,b,c){ console.error(c);}
 
 //제품리스트 띄우기 + 페이징버튼 처리
 function showProduct(map){
+    if (map.productList.length == 0) {
+        $('.empty').removeClass('none');
+    } else {
+        $('.empty').addClass('none');}
   let text = '';
   map.productList.forEach(product =>{
     text += `
