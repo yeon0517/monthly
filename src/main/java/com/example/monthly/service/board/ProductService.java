@@ -66,13 +66,25 @@ public class ProductService {
         productMapper.updateProduct(productDto);
     }
 
+//    리스트에서 상품상태수정
+    public void modifyStatus(ProductDto productDto){
+        if(productDto == null){
+            throw new IllegalArgumentException("상품 판매상태 정보 누락");
+        }
+        productMapper.updateStatus(productDto);
+    }
+
     public void modifyProduct(ProductDto productDto, List<MultipartFile>files, MultipartFile file){
         if(productDto==null || files==null || file==null){
             throw new IllegalArgumentException("제품 수정 매개변수 null체크");
         }
         Long productNumber = productDto.getProductNumber();
         System.out.println(productNumber);
-        if(!files.isEmpty()){
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.println(files.get(0));
+        if(!files.get(0).isEmpty()){
+            System.out.println("==============================================");
+            System.out.println(files);
         productFileService.remove(productNumber); //원래있던 파일은 지우고
             try {
                 productFileService.registerAndSaveFiles(files, "d",productNumber); //리스트다시저장
@@ -87,7 +99,6 @@ public class ProductService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
         productMapper.updateProduct(productDto);
     }

@@ -86,7 +86,7 @@ public class ProductFileService {
         List<ProductFileDto> fileDtoList = productFileMapper.selectDetailProductFile(productNumber);
         for(ProductFileDto file : fileDtoList){
            File target = new File(productFileDir, file.getProductFileUploadPath()+"/"+file.getProductFileUuid()+"_"+file.getProductFileName());
-           File thumbnail = new File(productFileDir, file.getProductFileUuid()+"/th_"+file.getProductFileUuid()+"_"+file.getProductFileName());
+           File thumbnail = new File(productFileDir, file.getProductFileUploadPath()+"/th_"+file.getProductFileUuid()+"_"+file.getProductFileName());
            if(target.exists()){target.delete();}
            if(thumbnail.exists()){thumbnail.delete();}
         }

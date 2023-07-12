@@ -44,3 +44,17 @@ export function searchProduct(searchVo,callback){
         error : function(a,b,c,){console.error(c)}
     });
 }
+
+export function modifyPStatus(productDto){
+    $.ajax({
+        url : `/sellers/pStatus`,
+        type : 'patch',
+        data : JSON.stringify(productDto),
+        contentType : 'application/json;charset=utf-8',
+        success : function(){
+            console.log('상품판매상태 변경완료')
+            alert("수정되었습니다.")
+        },
+        error : function (a,b,c){console.error(c)}
+    });
+}

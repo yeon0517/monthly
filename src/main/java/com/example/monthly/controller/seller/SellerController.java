@@ -129,6 +129,7 @@ public class SellerController {
     public RedirectView modifyProduct(ProductDto productDto,
                                       @RequestParam("productFiles")List<MultipartFile> files,
                                       @RequestParam("productFile")MultipartFile file){
+        System.out.println(files);
         productService.modifyProduct(productDto);
             try {
                 productService.modifyProduct(productDto, files, file);
