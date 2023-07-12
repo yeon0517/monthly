@@ -22,7 +22,7 @@ public class AdminController {
     private final AdminService adminService;
 
     @GetMapping("/login")
-    public String login(){return "seller/seller/login";}
+    public String login(){return "/seller/login";}
 
     @PostMapping("/login")
     public RedirectView login(String adminId, String adminPassword, HttpServletRequest req){
@@ -38,7 +38,10 @@ public class AdminController {
     }
 
     @GetMapping("/main")
-    public String sellerStatus(Model model){
+    public String sellerStatus(Model model,HttpServletRequest req){
+
+
+
         List<AdminChartVo> sellerStatus = adminService.getSellerStatusByDate();
         List<AdminChartVo> sellerMonth = adminService.sellerMonth();
         List<AdminChartVo> threeAverage = adminService.threeAverage();
