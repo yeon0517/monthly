@@ -87,30 +87,27 @@
         SELECT COUNT(PRODUCT_NUMBER)
         FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B ON P.BRAND_NUMBER = B.BRAND_NUMBER
             AND SELLER_NUMBER= #{sellerNumber}
-        <where>
-            <trim prefixOverrides="AND">
-                <if test="searchVo.searchInput != ''">
-                    <if test="searchVo.searchSelect.equals('product-number')">
-                        PRODUCT_NUMBER = #{searchVo.searchInput}
-                    </if>
-                    <if test="searchVo.searchSelect.equals('product-name')">
-                        PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
-                    </if>
-                </if>
-                <trim prefix="AND">
-                    <if test="'prepared'.equals(searchVo.productStatus)">
-                        PRODUCT_STATUS = 0
-                    </if>
-                    <if test="'selling'.equals(searchVo.productStatus)">
-                        PRODUCT_STATUS = 1
-                    </if>
-                    <if test="'stop'.equals(searchVo.productStatus)">
-                        PRODUCT_STATUS = 2
-                    </if>
-                </trim>
-            </trim>
-        </where>
-        order by PRODUCT_NUMBER desc
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <choose>
+                <when test="'product-number'.equals(searchVo.searchSelect) and !''.equals(searchVo.searchInput)">
+                    PRODUCT_NUMBER = #{searchVo.searchInput}
+                </when>
+                <when test="'product-name'.equals(searchVo.searchSelect)">
+                    PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                </when>
+            </choose>
+            <choose>
+                <when test="'prepared'.equals(searchVo.productStatus)">
+                    AND PRODUCT_STATUS = 0
+                </when>
+                <when test="'selling'.equals(searchVo.productStatus)">
+                    AND PRODUCT_STATUS = 1
+                </when>
+                <when test="'stop'.equals(searchVo.productStatus)">
+                    AND PRODUCT_STATUS = 2
+                </when>
+            </choose>
+        </trim>
     </select>
 
 <!--   판매자번호로 검색 조회 (상품번호/상품명)(판매상태:전체/판매준비/판매중/판매중지)-->
@@ -126,29 +123,27 @@ FROM(SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
         B.BRAND_NUMBER, B.BRAND_NAME
         FROM MONTHLY_PRODUCT P JOIN MONTHLY_BRAND B
         ON P.BRAND_NUMBER = B.BRAND_NUMBER AND SELLER_NUMBER= #{sellerNumber}
-        <where>
-            <trim prefixOverrides="AND">
-                <if test="searchVo.searchInput != ''">
-                    <if test="'product-number'.equals(searchVo.searchSelect)">
-                        PRODUCT_NUMBER = #{searchVo.searchInput}
-                    </if>
-                    <if test="'product-name'.equals(searchVo.searchSelect)">
-                        PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
-                    </if>
-                </if>
-                <trim prefix="AND">
-                    <if test="'prepared'.equals(searchVo.productStatus)">
-                        PRODUCT_STATUS = 0
-                    </if>
-                    <if test="'selling'.equals(searchVo.productStatus)">
-                        PRODUCT_STATUS = 1
-                    </if>
-                    <if test="'stop'.equals(searchVo.productStatus)">
-                        PRODUCT_STATUS = 2
-                    </if>
-                </trim>
-            </trim>
-        </where>
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <choose>
+                <when test="'product-number'.equals(searchVo.searchSelect) and !''.equals(searchVo.searchInput)">
+                    PRODUCT_NUMBER = #{searchVo.searchInput}
+                </when>
+                <when test="'product-name'.equals(searchVo.searchSelect)">
+                    PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                </when>
+            </choose>
+            <choose>
+                <when test="'prepared'.equals(searchVo.productStatus)">
+                    AND PRODUCT_STATUS = 0
+                </when>
+                <when test="'selling'.equals(searchVo.productStatus)">
+                    AND PRODUCT_STATUS = 1
+                </when>
+                <when test="'stop'.equals(searchVo.productStatus)">
+                    AND PRODUCT_STATUS = 2
+                </when>
+            </choose>
+        </trim>
         order by PRODUCT_NUMBER desc) S1
         <![CDATA[
              WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
@@ -159,3 +154,27 @@ FROM(SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_OPTION,
 
 
 </mapper>
+
+        <!--        <where>-->
+        <!--            <trim prefixOverrides="AND">-->
+        <!--                <if test="searchVo.searchInput != ''">-->
+        <!--                    <if test="'product-number'.equals(searchVo.searchSelect)">-->
+        <!--                        PRODUCT_NUMBER = #{searchVo.searchInput}-->
+        <!--                    </if>-->
+        <!--                    <if test="'product-name'.equals(searchVo.searchSelect)">-->
+        <!--                        PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'-->
+        <!--                    </if>-->
+        <!--                </if>-->
+        <!--                <trim prefix="AND">-->
+        <!--                    <if test="'prepared'.equals(searchVo.productStatus)">-->
+        <!--                        PRODUCT_STATUS = 0-->
+        <!--                    </if>-->
+        <!--                    <if test="'selling'.equals(searchVo.productStatus)">-->
+        <!--                        PRODUCT_STATUS = 1-->
+        <!--                    </if>-->
+        <!--                    <if test="'stop'.equals(searchVo.productStatus)">-->
+        <!--                        PRODUCT_STATUS = 2-->
+        <!--                    </if>-->
+        <!--                </trim>-->
+        <!--            </trim>-->
+        <!--        </where>-->
