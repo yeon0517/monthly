@@ -30,13 +30,18 @@
         </tr>
         <tr>
           <th class="main-section1-th search">검색</th>
-          <td>
+          <td class="status-input">
             <select name="search-select" id="" class="search-dropdown">
               <option value="parcel-number">주문번호</option>
               <option value="user-name">회원이름</option>
               <option value="product-name">상품명</option>
             </select>
             <input type="text" placeholder="입력" class="search-input">
+            <span class="parcel-status-s">처리상태 : </span>
+            <label><input type="radio" name="product-status" value="all" checked><span>전체</span></label>
+            <label><input type="radio" name="product-status" value="0"><span>배송준비</span></label>
+            <label><input type="radio" name="product-status" value="1"><span>배송중</span></label>
+            <label><input type="radio" name="product-status" value="2"><span>배송완료</span></label>
           </td>
         </tr>
       </table>
@@ -51,9 +56,7 @@
       <!-- 검색 기간 조건에 따라 오늘/어제/1개월/3개월/전체로 span안에 텍스트변경 -->
       <h2><span class="selected-period"></span> 주문관리</h2>
       <!-- 검색 결과가 없는 경우 table 태그에 none class를 주고 empty div를 보여준다 -->
-      <div class="empty none">
-        <p>주문이 없습니다.</p>
-      </div>
+
       <table class="">
         <thead class="order-list-head">
           <tr>
@@ -106,6 +109,9 @@
             <!-- 저장버튼 누르면 비동기로 저장 -->
         </tbody>
       </table>
+      <div class="empty none">
+        <p>주문이 없습니다.</p>
+      </div>
       <div class="page-container">
         <ul class="page-box">
 

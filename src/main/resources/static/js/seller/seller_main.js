@@ -4,6 +4,7 @@ let page = 1;
 let searchInput = '';
 let searchSelect = '';
 let period = '';
+let productStatus ='';
 
 $(function (){
     searchInput = $('.search-input').val();
@@ -13,7 +14,8 @@ $(function (){
         "page":page,
         "searchInput":searchInput,
         "searchSelect":searchSelect,
-        "period":period
+        "period":period,
+        "productStatus":productStatus
     }
     console.log(searchVo);
     $('.selected-period').text(period);
@@ -22,28 +24,33 @@ $(function (){
 
 function showError(a,b,c){ console.error(c);}
 
-//제품리스트 띄우기 + 페이징버튼 처리
-function showParcel(map){
-  let text = '';
-  map.parcelList.forEach(parcel =>{
-    text += `
+//주문리스트 띄우기 + 페이징버튼 처리
+function showParcel(map) {
+    if (map.parcelList.length == 0) {
+        $('.empty').removeClass('none');
+    } else {
+        $('.empty').addClass('none');}
+
+    let text = '';
+    map.parcelList.forEach(parcel => {
+            text += `
      <tr class="list">
             <form action="#">
             <td class="parcel-number">${parcel.parcelNumber}</td>
             <td>${parcel.parcelDate}</td>
             <td>
               <select name="parcel-status" id="parcel-status">
-              ${parcel.parcelStatus == 0 ? '<option value="parcel-ready" selected>배송준비</option>':'<option value="0">배송준비</option>'}  
-              ${parcel.parcelStatus == 1 ? '<option value="parcel-ing" selected>배송중</option>':'<option value="0">배송중</option>'}  
-              ${parcel.parcelStatus == 2 ? '<option value="parcel-done" selected>배송완료</option>':'<option value="0">배송완료</option>'}  
+              ${parcel.parcelStatus == 0 ? '<option value="0" selected>배송준비</option>' : '<option value="0">배송준비</option>'}  
+              ${parcel.parcelStatus == 1 ? '<option value="1" selected>배송중</option>' : '<option value="1">배송중</option>'}  
+              ${parcel.parcelStatus == 2 ? '<option value="2" selected>배송완료</option>' : '<option value="2">배송완료</option>'}  
               </select>
             </td>
             <td>${parcel.productName}<br>옵션 : ${parcel.productOption}</td>
             <td>${parcel.paymentPrice}</td>
-            ${parcel.paymentStatus ==0?'<td>미결제</td>':'<td>결제완료</td>'}
+            ${parcel.paymentStatus == 0 ? '<td>미결제</td>' : '<td>결제완료</td>'}
             <td>${parcel.userName}</td>
             <td>${parcel.userPhoneNumber}</td>
-            <td>${parcel.deliveryAddress1+parcel.deliveryAddress2+parcel.deliveryPostcode}</td>
+            <td>${parcel.deliveryAddress1 + parcel.deliveryAddress2 + parcel.deliveryPostcode}</td>
             <td>
                 <select name="parcel-company" id="parcel-company">
                 ${parcel.parcelCompany == 'epost' ? '<option value="epost" selected>우체국</option>' : '<option value="epost">우체국</option>>'}
@@ -58,38 +65,38 @@ function showParcel(map){
             </form>
           </tr>
 `;
-  });
-  //페이지버튼
-  let pageBox ='';
-  if(map.pageVo.prev==true){
-      pageBox +=`
+        });
+        //페이지버튼
+        let pageBox = '';
+        if (map.pageVo.prev == true) {
+            pageBox += `
       <a>
-          <li class="page-num prev" value="${map.pageVo.startPage -1}>&lt</li>
+          <li class="page-num prev" value="${map.pageVo.startPage - 1}>&lt</li>
         </a>
       `;
-  }
-  for(let i=map.pageVo.startPage; i<=map.pageVo.endPage; i++){
-      if(i==map.pageVo.criteria.page){
-          pageBox +=`
+        }
+        for (let i = map.pageVo.startPage; i <= map.pageVo.endPage; i++) {
+            if (i == map.pageVo.criteria.page) {
+                pageBox += `
           <a>
           <li class="page-num active">${i}</li>
           </a>
           `;
-      }else{
-          pageBox +=`
+            } else {
+                pageBox += `
           <a><li class="page-num">${i}</li></a>
           `;
-      }
-  }
-  if(map.pageVo.next==true){
-      pageBox +=`
-      <a><li class="page-num next" value="${map.pageVo.endPage +1}">&gt</li></a>
+            }
+        }
+        if (map.pageVo.next == true) {
+            pageBox += `
+      <a><li class="page-num next" value="${map.pageVo.endPage + 1}">&gt</li></a>
       `;
-  }
-    $('.parcel-list-body').html(text);
-    $('.page-box').html(pageBox);
-    $('.selected-period').text(period);
-}
+        }
+        $('.parcel-list-body').html(text);
+        $('.page-box').html(pageBox);
+        $('.selected-period').text(period);
+    }
 
 //페이지버튼을 눌렀을 때
 $('.page-box').on('click','.page-num',function(){
@@ -106,7 +113,8 @@ $('.page-box').on('click','.page-num',function(){
         "page":page,
         "searchInput":searchInput,
         "searchSelect":searchSelect,
-        "period":period
+        "period":period,
+        "productStatus":productStatus
     }
     parcel.findParcelList(searchVo,showParcel);
     $('.selected-period').text(period);
@@ -119,7 +127,8 @@ $('.page-box').on('click','.prev',function(){
         "page":page,
         "searchInput":searchInput,
         "searchSelect":searchSelect,
-        "period":period
+        "period":period,
+        "productStatus":productStatus
     }
     parcel.findParcelList(searchVo,showParcel);
     $('.selected-period').text(period);
@@ -132,7 +141,8 @@ $('.page-box').on('click','.next',function(e){
         "page":page,
         "searchInput":searchInput,
         "searchSelect":searchSelect,
-        "period":period
+        "period":period,
+        "productStatus":productStatus
     }
     parcel.findParcelList(searchVo,showParcel);
     $('.selected-period').text(period);
@@ -168,11 +178,13 @@ $search.on('click', function (){
     searchInput = $('.search-input').val();
     searchSelect = $('.search-dropdown').val();
     period = $('input[name="period"]:checked').val();
+    productStatus = $('input[name="product-status"]:checked').val();
     let searchVo ={
         "page":page,
         "searchInput":searchInput,
         "searchSelect":searchSelect,
-        "period":period
+        "period":period,
+        "productStatus":productStatus
     }
     console.log(searchVo);
 

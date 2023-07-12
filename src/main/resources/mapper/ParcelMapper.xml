@@ -18,35 +18,37 @@
                  LEFT JOIN MONTHLY_PAYMENT PM on P.PAYMENT_NUMBER = PM.PAYMENT_NUMBER
                  LEFT JOIN MONTHLY_PRODUCT PR ON PM.PRODUCT_NUMBER = PR.PRODUCT_NUMBER AND BRAND_NUMBER = #{brandNumber}
                  LEFT JOIN MONTHLY_USER U on PM.USER_NUMBER = U.USER_NUMBER
-        <where>
-            <trim prefixOverrides="AND">
-                <if test="searchVo.searchInput != ''">
-                    <if test="'parcel-number'.equals(searchVo.searchSelect)">
-                        PARCEL_NUMBER = #{searchVo.searchInput}
-                    </if>
-                    <if test="'user-name'.equals(searchVo.searchSelect)">
-                        USER_NAME LIKE '%' || #{searchVo.searchInput} || '%'
-                    </if>
-                    <if test="'product-name'.equals(searchVo.searchSelect)">
-                        PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
-                    </if>
-                </if>
-                <trim prefix="AND">
-                    <if test="'today'.equals(searchVo.period)">
-                        TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)
-                    </if>
-                    <if test="'yesterday'.equals(searchVo.period)">
-                        TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)-1
-                    </if>
-                    <if test="'1month'.equals(searchVo.period)">
-                        P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '1' MONTH
-                    </if>
-                    <if test="'3month'.equals(searchVo.period)">
-                        P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '3' MONTH
-                    </if>
-                </trim>
-            </trim>
-        </where>
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <choose>
+                <when test="'parcel-number'.equals(searchVo.searchSelect) and !''.equals(searchVo.searchInput)">
+                    PARCEL_NUMBER = #{searchVo.searchInput}
+                </when>
+                <when test="'user-name'.equals(searchVo.searchSelect)">
+                    USER_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                </when>
+                <when test="'product-name'.equals(searchVo.searchSelect)">
+                    PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
+                </when>
+            </choose>
+            <choose>
+                <when test="'today'.equals(searchVo.period)">
+                    AND TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)
+                </when>
+                <when test="'yesterday'.equals(searchVo.period)">
+                    AND TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)-1
+                </when>
+                <when test="'1month'.equals(searchVo.period)">
+                    AND P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '1' MONTH
+                </when>
+                <when test="'3month'.equals(searchVo.period)">
+                    AND P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '3' MONTH
+                </when>
+            </choose>
+
+            <if test="!'all'.equals(searchVo.productStatus) and !''.equals(searchVo.productStatus)">
+                AND PARCEL_STATUS = TO_NUMBER(#{searchVo.productStatus})
+            </if>
+        </trim>
         ORDER BY PARCEL_DATE) S1
         <![CDATA[
              WHERE ROWNUM <= #{criteria.page}*#{criteria.amount}
@@ -61,36 +63,36 @@
         LEFT JOIN MONTHLY_PAYMENT PM on P.PAYMENT_NUMBER = PM.PAYMENT_NUMBER
         LEFT JOIN MONTHLY_PRODUCT PR ON PM.PRODUCT_NUMBER = PR.PRODUCT_NUMBER AND BRAND_NUMBER = #{brandNumber}
         LEFT JOIN MONTHLY_USER U on PM.USER_NUMBER = U.USER_NUMBER
-        <where>
-            <trim prefixOverrides="AND">
-                <if test="searchVo.searchInput != ''">
-                    <if test="'parcel-number'.equals(searchVo.searchSelect)">
+            <trim prefix="WHERE" prefixOverrides="AND">
+                <choose>
+                    <when test="'parcel-number'.equals(searchVo.searchSelect) and !''.equals(searchVo.searchInput)">
                         PARCEL_NUMBER = #{searchVo.searchInput}
-                    </if>
-                    <if test="'user-name'.equals(searchVo.searchSelect)">
+                    </when>
+                    <when test="'user-name'.equals(searchVo.searchSelect)">
                         USER_NAME LIKE '%' || #{searchVo.searchInput} || '%'
-                    </if>
-                    <if test="'product-name'.equals(searchVo.searchSelect)">
+                    </when>
+                    <when test="'product-name'.equals(searchVo.searchSelect)">
                         PRODUCT_NAME LIKE '%' || #{searchVo.searchInput} || '%'
-                    </if>
+                    </when>
+                </choose>
+                <choose>
+                    <when test="'today'.equals(searchVo.period)">
+                        AND TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)
+                    </when>
+                    <when test="'yesterday'.equals(searchVo.period)">
+                        AND TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)-1
+                    </when>
+                    <when test="'1month'.equals(searchVo.period)">
+                        AND P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '1' MONTH
+                    </when>
+                    <when test="'3month'.equals(searchVo.period)">
+                        AND P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '3' MONTH
+                    </when>
+                </choose>
+                <if test="!'all'.equals(searchVo.productStatus) and !''.equals(searchVo.productStatus)">
+                    AND PARCEL_STATUS = TO_NUMBER(#{searchVo.productStatus})
                 </if>
-                <trim prefix="AND">
-                    <if test="'today'.equals(searchVo.period)">
-                        TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)
-                    </if>
-                    <if test="'yesterday'.equals(searchVo.period)">
-                        TRUNC(PARCEL_DATE) = TRUNC(SYSDATE)-1
-                    </if>
-                    <if test="'1month'.equals(searchVo.period)">
-                        P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '1' MONTH
-                    </if>
-                    <if test="'3month'.equals(searchVo.period)">
-                        P.PARCEL_DATE >= TRUNC(SYSDATE) - INTERVAL '3' MONTH
-                    </if>
-                </trim>
             </trim>
-        </where>
-        ORDER BY PARCEL_DATE
     </select>
 
 <!--    리스트에서 배송정보 수정저장-->
