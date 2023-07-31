@@ -29,7 +29,7 @@ SpringProject
 구독서비스를 기반으로 추후 플랫폼의 사업 확장 가능성
 
 ## ERD구성
-![monthly ERD 구성](https://github.com/yeon0517/monthly/assets/112221690/22469ab7-a55e-4a83-a9b2-287d54a1cbf2)
+![monthly ERD 구성](https://github.com/yeon0517/monthly/assets/112221690/729c11d3-08b9-4ecd-be1b-ae06f1b25c47)
 
 
 ### 😉 나의 역할 <br/>
@@ -61,7 +61,7 @@ ORM : Mybatis
 ● 장바구니 재료 선택 <br/>
 ● 선택한 재료 총 결제 금액 알려주기 <br/>
 
-### 메인페이지  [회원가입 WIKI 이동](https://github.com/yeon0517/yumyumgood2/wiki/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85)  <br/>
+### 메인페이지  [회원가입 WIKI 이동](여기에 링크 넣기)  <br/>
 ● 브랜드 및 브랜드의 제품리스트 <br/>
 ● 사이드바<br/>
 ● 제품 검색 기능 <br/>
