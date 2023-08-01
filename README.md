@@ -66,7 +66,7 @@ ORM : Mybatis
 ● 사이드바<br/>
 ● 제품 검색 기능 <br/>
 
-### 브랜드 ALL, LIST 페이지<br/>
+### 브랜드 ALL, LIST 페이지 [브랜드 ALL, LIST 페이지](https://github.com/yeon0517/monthly/wiki/%EB%B8%8C%EB%9E%9C%EB%93%9C-All,-List%ED%8E%98%EC%9D%B4%EC%A7%80)<br/> 
 ● 모든 브랜드 
 ● 대표 브랜드 이미지 및 제품 리스트
 
