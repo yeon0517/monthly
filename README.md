@@ -89,7 +89,7 @@ ORM : Mybatis
 ● 관리자 로그인 <br/>
 ● 회원관리, 게시글 관리, 결제 관리<br/>
 ● 구독 문자 알림 서비스
-##### ● 판매 매출, 판매자등록, 회원 증가 차트
+##### ● 판매 매출, 판매자등록, 회원 증가 차트 [관리자 WIKI 이동](https://github.com/yeon0517/monthly/wiki/%EA%B4%80%EB%A6%AC%EC%9E%90-%EC%B0%A8%ED%8A%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)
 
 
 
