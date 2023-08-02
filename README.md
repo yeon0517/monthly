@@ -61,7 +61,7 @@ ORM : Mybatis
 ● 장바구니 재료 선택 <br/>
 ● 선택한 재료 총 결제 금액 알려주기 <br/>
 
-### 메인페이지 #### [main WIKI 이동](https://github.com/yeon0517/monthly/wiki/%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)  <br/>
+### 메인페이지 [main WIKI 이동](https://github.com/yeon0517/monthly/wiki/%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)  <br/>
 ● 브랜드 및 브랜드의 제품리스트 <br/>
 ● 사이드바<br/>
 ● 제품 검색 기능 <br/>
